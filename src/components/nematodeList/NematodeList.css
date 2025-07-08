@@ -1,0 +1,34 @@
+.nematode-list {
+  margin-bottom: 48px;
+}
+
+.nematode-list__letter {
+  font-size: 24px;
+  color: #ff6161;
+  margin-bottom: 16px;
+}
+
+.nematode-list__list,
+.nematode-list__sublist {
+  list-style-type: disc;
+  padding-left: 24px;
+  margin: 8px 0;
+}
+
+.nematode-list__sublist {
+  list-style-type: circle;
+  margin-top: 4px;
+}
+
+.nematode-list__item,
+.nematode-list__subitem {
+  margin-bottom: 8px;
+  color: #004f72;
+  font-size: 16px;
+}
+
+.nematode-list__count {
+  color: #888;
+  font-size: 14px;
+  margin-left: 4px;
+}
