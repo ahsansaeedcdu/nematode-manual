@@ -1,180 +1,62 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import './NematodeGeoMap.css';
+.leaflet-tooltip.custom-tooltip {
+  background-color: white;
+  color: black;
+  border: 1px solid #333;
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  max-width: 200px;
+  line-height: 1.4;
+}
 
-const NematodeGeoMap = () => {
-  const [geoData, setGeoData] = useState(null);
-  const [nematodeMap, setNematodeMap] = useState({});
-  const [selectedLGA, setSelectedLGA] = useState(null);
-  const lgaLayersRef = useRef({});
-  const prevSelectedLgaRef = useRef(null);
-  const mapRef = useRef(); // New: To store the map instance for reset view
+.map-legend {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: white;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.2);
+  font-size: 12px;
+}
+.color-box {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+}
+.red { background: #ff4d4d; }
+.gray { background: #e0e0e0; }
 
-  useEffect(() => {
-    fetch('/data/LGA_2024_AUST_GDA2020.json')
-      .then(res => res.json())
-      .then(setGeoData);
+/* Remove default focus outline from Leaflet interactive elements */
+.leaflet-pane.leaflet-overlay-pane svg path.leaflet-interactive:focus {
+    outline: none !important; /* Use !important if necessary to override browser defaults or other styles */
+}
 
-    fetch('/data/lga_nematode_map.json')
-      .then(res => res.json())
-      .then(setNematodeMap);
-  }, []);
+/* Also consider for any potential divs that get focus within Leaflet */
+.leaflet-container *:focus {
+    outline: none;
+}
 
-  const getFeatureBaseStyle = useCallback((feature) => {
-    const lgaName = feature.properties?.LGA_NAME24?.trim();
-    const hasData = lgaName && Array.isArray(nematodeMap[lgaName]) && nematodeMap[lgaName].length > 0;
+/* Sometimes a very faint border can appear on active states */
+.leaflet-interactive:active {
+    border: none !important;
+    outline: none !important;
+}
 
-    return {
-      fillColor: hasData ? '#ff4d4d' : '#e0e0e0',
-      color: '#555',
-      weight: 1,
-      fillOpacity: 0.6
-    };
-  }, [nematodeMap]);
+.leaflet-interactive {
+  transition: fill 0.3s ease-in-out,        /* <-- COMMA here */
+              stroke 0.3s ease-in-out,       /* <-- COMMA here */
+              stroke-width 0.3s ease-in-out, /* <-- COMMA here */
+              fill-opacity 0.3s ease-in-out; /* <-- SEMICOLON only at the very end of the entire 'transition' declaration */
+}
 
-  const selectedLGAStyle = {
-    fillColor: '#6a0dad',
-    color: '#333',
-    weight: 2,
-    fillOpacity: 0.8
-  };
+/* Optional: Keep focus outline removal if it was causing issues */
+.leaflet-pane.leaflet-overlay-pane svg path.leaflet-interactive:focus {
+  outline: none !important;
+}
 
-  useEffect(() => {
-    if (prevSelectedLgaRef.current && lgaLayersRef.current[prevSelectedLgaRef.current]) {
-      const prevLayer = lgaLayersRef.current[prevSelectedLgaRef.current];
-      prevLayer.setStyle(getFeatureBaseStyle({ properties: { LGA_NAME24: prevSelectedLgaRef.current } }));
-    }
-
-    if (selectedLGA && lgaLayersRef.current[selectedLGA]) {
-      const currentLayer = lgaLayersRef.current[selectedLGA];
-      currentLayer.setStyle(selectedLGAStyle);
-    }
-
-    prevSelectedLgaRef.current = selectedLGA;
-  }, [selectedLGA, getFeatureBaseStyle]);
-
-  // New function to reset map view and clear selection
-  const resetMap = useCallback(() => {
-    if (mapRef.current) {
-      mapRef.current.setView([-25.2744, 133.7751], 5); // Set to initial center and zoom
-    }
-    // Explicitly reset style of the previously selected LGA if any
-    if (prevSelectedLgaRef.current && lgaLayersRef.current[prevSelectedLgaRef.current]) {
-      const prevLayer = lgaLayersRef.current[prevSelectedLgaRef.current];
-      prevLayer.setStyle(getFeatureBaseStyle({ properties: { LGA_NAME24: prevSelectedLgaRef.current } }));
-    }
-    setSelectedLGA(null); // Clear selected LGA state
-    prevSelectedLgaRef.current = null; // Also clear the previous ref
-  }, [getFeatureBaseStyle]); // getFeatureBaseStyle is a dependency because it's used to reset style
-
-
-  const GeoJSONLayerWithInteractions = ({ geoData, nematodeMap, getFeatureBaseStyle, selectedLGA, setSelectedLGA, lgaLayersRef, selectedLGAStyle }) => {
-    const map = useMap(); // Get the map instance here (for internal use)
-
-    const onEachFeature = (feature, layer) => {
-      const lgaName = feature.properties?.LGA_NAME24?.trim();
-      lgaLayersRef.current[lgaName] = layer;
-
-      if (lgaName === selectedLGA) {
-        layer.setStyle(selectedLGAStyle);
-      } else {
-        layer.setStyle(getFeatureBaseStyle(feature));
-      }
-
-      const species = nematodeMap[lgaName] || [];
-      const tooltipContent = `
-        <strong>${lgaName}</strong><br/>
-        ${species.length > 0 ? species.join(', ') : 'No nematodes found'}
-      `;
-
-      layer.bindTooltip(tooltipContent, {
-        direction: 'center',
-        sticky: true,
-        opacity: 0.9,
-        className: 'custom-tooltip'
-      });
-
-      layer.on({
-        mouseover: (e) => {
-          if (lgaName === selectedLGA) return;
-          e.target.setStyle({
-            weight: 2,
-            color: '#000',
-            fillOpacity: 0.8,
-          });
-        },
-        mouseout: (e) => {
-          if (lgaName === selectedLGA) return;
-          e.target.setStyle(getFeatureBaseStyle(feature));
-        },
-        click: () => {
-          setSelectedLGA(lgaName);
-          const bounds = layer.getBounds();
-          if (map) { // Use the map instance from useMap
-            map.fitBounds(bounds, {
-              padding: [50, 50],
-              maxZoom: 12,
-            });
-          }
-        }
-      });
-    };
-
-    if (!geoData) return null;
-
-    return (
-      <GeoJSON
-        data={geoData}
-        onEachFeature={onEachFeature}
-      />
-    );
-  };
-
-  return (
-    <div style={{ position: 'relative', width: '100vw', height: '90vh' }}> {/* Wrapper div for positioning button */}
-      <MapContainer
-        center={[-25.2744, 133.7751]}
-        zoom={5}
-        style={{ height: '100%', width: '100%' }} {/* Map fills the wrapper div */}
-        doubleClickZoom={false}
-        whenCreated={(mapInstance) => { mapRef.current = mapInstance; }} // Store map instance here
-      >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="&copy; OpenStreetMap contributors"
-        />
-        <GeoJSONLayerWithInteractions
-          geoData={geoData}
-          nematodeMap={nematodeMap}
-          getFeatureBaseStyle={getFeatureBaseStyle}
-          selectedLGA={selectedLGA}
-          setSelectedLGA={setSelectedLGA}
-          lgaLayersRef={lgaLayersRef}
-          selectedLGAStyle={selectedLGAStyle}
-        />
-      </MapContainer>
-      {/* New: Clear Selection Button */}
-      <button
-        onClick={resetMap}
-        style={{
-          position: 'absolute',
-          bottom: '20px',
-          left: '20px',
-          zIndex: 1000, // Ensure it's above the map
-          padding: '10px 15px',
-          backgroundColor: '#007bff',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
-        }}
-      >
-        Reset Map / Clear Selection
-      </button>
-    </div>
-  );
-};
-
-export default NematodeGeoMap;
+.leaflet-container *:focus {
+  outline: none;
+}
