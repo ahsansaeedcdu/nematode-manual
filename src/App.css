@@ -5,8 +5,8 @@
   text-align: start;
   background-color:white;
   /* width: 100vw;
-  height: 100%;
-} */
+  height: 100%; */
+}
 .main {
   /* keep the vertical sizing if you need it */
   height: calc(100vh - 80px);
