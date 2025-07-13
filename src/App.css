@@ -7,13 +7,13 @@
 }
 
 .main {
-  min-height: calc(100vh - 80px); /* ensures it fills the screen at minimum */
+  min-height: calc(100vh - 80px); 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* keep content starting at the top */
+  justify-content: flex-start; 
   align-items: start;
-  padding-bottom: 40px; /* optional, adds spacing if content is less */
-  background: white; /* or whatever your default background is */
+  padding-bottom: 40px;
+  background: white; 
 }
 
 
