@@ -5,18 +5,18 @@
   text-align: start;
   background-color:white;
 }
+
 .main {
-  /* keep the vertical sizing if you need it */
-  height: calc(100vh - 80px);
-  
-  /* make it a column wrapper that stretches children */
+  min-height: calc(100vh - 80px); /* ensures it fills the screen at minimum */
   display: flex;
   flex-direction: column;
-  align-items:start    /* children (your list) fill 100% width */
-
-  /* optional padding to match header */
-  padding: 0 16px;
+  justify-content: flex-start; /* keep content starting at the top */
+  align-items: start;
+  padding-bottom: 40px; /* optional, adds spacing if content is less */
+  background: white; /* or whatever your default background is */
 }
+
+
 
 h1{
 color: blue;
