@@ -1,9 +1,14 @@
 #root{
+<<<<<<< HEAD
   max-width: 100%;
+=======
+  max-width: 1280px;
+>>>>>>> 1e552616982b36716c5a0279c116973e6ed421ed
   margin: 0 auto;
   padding: 2rem;
   text-align: start;
   background-color:white;
+<<<<<<< HEAD
   /* width: 100vw; 
   height: 100%; */
 }
@@ -21,6 +26,22 @@
   padding: 0 16px;
 }
 
+=======
+}
+
+.main {
+  min-height: calc(100vh - 80px); /* ensures it fills the screen at minimum */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* keep content starting at the top */
+  align-items: start;
+  padding-bottom: 40px; /* optional, adds spacing if content is less */
+  background: white; /* or whatever your default background is */
+}
+
+
+
+>>>>>>> 1e552616982b36716c5a0279c116973e6ed421ed
 h1{
 color: blue;
 }
