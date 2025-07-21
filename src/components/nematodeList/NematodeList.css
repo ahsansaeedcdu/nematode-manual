@@ -1,20 +1,11 @@
 .nematode-list {
-<<<<<<< HEAD
   margin-bottom: 48px;
-=======
-  margin-bottom: 10px;
-  cursor: pointer;
->>>>>>> bf4577e9c82e59973c10a714d353526f73ca8107
 }
 
 .nematode-list__letter {
   font-size: 24px;
   color: #ff6161;
-<<<<<<< HEAD
   margin-bottom: 16px;
-=======
-  margin-bottom: 8px;
->>>>>>> bf4577e9c82e59973c10a714d353526f73ca8107
 }
 
 .nematode-list__list,

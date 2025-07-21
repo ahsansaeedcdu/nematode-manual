@@ -15,16 +15,5 @@ export default {
     { name: 'Banana aphid', count: 103 },
     { name: 'Banana black Sigatoka', count: 235 }
   ],
-<<<<<<< HEAD
-=======
-  C: [
-    { name: 'Chamaleon ', count: 103 },
-    { name: 'Cats black Sigatoka', count: 235 }
-  ],
-  D: [
-    { name: 'Dolphin aphid', count: 103 },
-    { name: 'Dragon black Sigatoka', count: 235 }
-  ],
->>>>>>> bf4577e9c82e59973c10a714d353526f73ca8107
   
 };
