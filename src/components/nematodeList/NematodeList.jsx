@@ -1,6 +1,4 @@
-// src/components/NematodeList.jsx
-import React from 'react';
-import { FaArrowRight } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import './NematodeList.css';
 
 export default function NematodeList({ letter, items }) {
@@ -10,15 +8,19 @@ export default function NematodeList({ letter, items }) {
       <ul className="nematode-list__list">
         {items.map(item => (
           <li key={item.name} className="nematode-list__item">
-            {/* name + count */}
-            {item.name} <span className="nematode-list__count">({item.count})</span>
+            <Link to={`/nematode/${encodeURIComponent(item.name)}`}>
+              {item.name}
+            </Link>
+            <span className="nematode-list__count">({item.count})</span>
 
-            {/* if this item has children, render a nested UL */}
             {item.children && item.children.length > 0 && (
               <ul className="nematode-list__sublist">
                 {item.children.map(child => (
                   <li key={child.name} className="nematode-list__subitem">
-                    {child.name} <span className="nematode-list__count">({child.count})</span>
+                    <Link to={`/nematode/${encodeURIComponent(child.name)}`}>
+                      {child.name}
+                    </Link>
+                    <span className="nematode-list__count">({child.count})</span>
                   </li>
                 ))}
               </ul>
