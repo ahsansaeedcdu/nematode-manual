@@ -1,32 +1,9 @@
 #root{
-<<<<<<< HEAD
-  max-width: 100%;
-=======
   max-width: 1280px;
->>>>>>> 1e552616982b36716c5a0279c116973e6ed421ed
   margin: 0 auto;
   padding: 2rem;
   text-align: start;
   background-color:white;
-<<<<<<< HEAD
-  /* width: 100vw; 
-  height: 100%; */
-}
-
-.main {
-  /* keep the vertical sizing if you need it */
-  height: calc(100vh - 80px);
-  
-  /* make it a column wrapper that stretches children */
-  display: flex;
-  flex-direction: column;
-  align-items:start;    /* children (your list) fill 100% width */
-
-  /* optional padding to match header */
-  padding: 0 16px;
-}
-
-=======
 }
 
 .main {
@@ -41,7 +18,6 @@
 
 
 
->>>>>>> 1e552616982b36716c5a0279c116973e6ed421ed
 h1{
 color: blue;
 }
