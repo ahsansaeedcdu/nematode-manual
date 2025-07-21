@@ -1,17 +1,13 @@
 #root{
-<<<<<<< HEAD
   max-width: 100%;
-=======
-  max-width: 1280px;
->>>>>>> bf4577e9c82e59973c10a714d353526f73ca8107
   margin: 0 auto;
   padding: 2rem;
   text-align: start;
   background-color:white;
-<<<<<<< HEAD
-  /* width: 100vw;
+  /* width: 100vw; 
   height: 100%; */
 }
+
 .main {
   /* keep the vertical sizing if you need it */
   height: calc(100vh - 80px);
@@ -25,22 +21,6 @@
   padding: 0 16px;
 }
 
-=======
-}
-
-.main {
-  min-height: calc(100vh - 80px); /* ensures it fills the screen at minimum */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* keep content starting at the top */
-  align-items: start;
-  padding-bottom: 40px; /* optional, adds spacing if content is less */
-  background: white; /* or whatever your default background is */
-}
-
-
-
->>>>>>> bf4577e9c82e59973c10a714d353526f73ca8107
 h1{
 color: blue;
 }
