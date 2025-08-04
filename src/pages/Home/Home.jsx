@@ -22,7 +22,7 @@ function Home() {
   return (
     <main className="main">
       <header className="header">
-        <h1>NEMATODE</h1>
+        
         <SearchBar
           value={query}
           onChange={setQuery}

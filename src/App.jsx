@@ -5,13 +5,15 @@ import Home from './pages/Home/Home';
 import NematodeMap from './pages/NematodeMap/NematodeMap';
 import NematodeDetail from './pages/NematodeDetail/NematodeDetail';
 import Navbar from './components/Navbar/navBar';
+import Introduction from './components/introduction/introduction';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={ <> <Navbar /><Home /> </>} />
-      <Route path="/nematodes/map" element={<NematodeMap />} />
-      <Route path="/nematode/:name" element={<NematodeDetail />} />
+      <Route path="/introduction" element={ <> <Navbar /><Introduction/> </>} />
+      <Route path="/nematodes/map" element={ <> <Navbar/> <NematodeMap /> </> } />
+      <Route path="/nematode/:name" element={ <> <Navbar/> <NematodeDetail /> </>} />
     </Routes>
   );
 }
