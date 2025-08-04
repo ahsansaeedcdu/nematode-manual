@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // ✅ Import Link for navigation
 import "./Navbar.css";
 
 export default function Navbar() {
@@ -8,17 +9,30 @@ export default function Navbar() {
     setIsOpen(!isOpen);
   };
 
+  // Close menu after clicking a link (for mobile)
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
     <nav className="navbar">
       <div className="nav-container">
         {/* Logo */}
-        <div className="nav-logo">MyLogo</div>
+        <div className="nav-logo">
+          <Link to="/" onClick={closeMenu}>Nematode</Link>
+        </div>
 
-        {/* Desktop Links */}
+        {/* Desktop & Mobile Links */}
         <ul className={`nav-links ${isOpen ? "active" : ""}`}>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">Introduction</a></li>
-          
+          <li>
+            <Link to="/" onClick={closeMenu}>Home</Link>
+          </li>
+          <li>
+            <Link to="/introduction" onClick={closeMenu}>Introduction</Link>
+          </li>
+          <li>
+            <Link to="/nematodes/map" onClick={closeMenu}>Map</Link>
+          </li>
         </ul>
 
         {/* Hamburger Icon */}
