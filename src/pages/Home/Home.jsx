@@ -4,8 +4,10 @@ import SearchBar from '../../components/searchbar/SearchBar';
 import AZFilter from '../../components/A-Zfilter/AZFilter';
 import NematodeList from '../../components/nematodeList/NematodeList';
 import nematodeData from '../../data/nematodeData';
+// import HomePage  from '../../components/HomePage/HomePage';
 import { Link } from 'react-router-dom';
 import '../../App.css';
+import HomePage from '../../components/HomePage/HomePage';
 
 function Home() {
   const [query, setQuery] = useState('');
@@ -21,7 +23,7 @@ function Home() {
 
   return (
     <main className="main">
-      <header className="header">
+      {/* <header className="header">
         
         <SearchBar
           value={query}
@@ -39,9 +41,9 @@ function Home() {
             🌍 View Nematode Map
           </Link>
         </div>
-      </header>
-
-      {Object.entries(nematodeData)
+      </header> */}
+      <HomePage />
+      {/* {Object.entries(nematodeData)
       .filter(([letter]) => !selectedLetter || letter === selectedLetter)
       .map(([letter, items]) => {
         const filteredItems = items.filter(item =>
@@ -57,7 +59,7 @@ function Home() {
             items={filteredItems}
           />
         );
-      })}
+      })} */}
     </main>
   );
 }

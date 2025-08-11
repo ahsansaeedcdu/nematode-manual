@@ -5307,6 +5307,15 @@
       "Meloidogyne sp.",
       "Meloidogyne thamesi"
     ],
+    "data": {
+      "Common Name": "Root-knot nematodes",
+      "Scientific Name": "Meloidogyne spp.",
+      "Distribution": "Five species confirmed in the region: M. arenaria, M. incognita, M. javanica, M. thamesi, and M. enterolobii.",
+      "Crops at Risk": "Tomato, capsicum, watermelon, peanut, mungbean, cucumber, sweetpotato, eggplant, cotton, etc.",
+      "Symptoms": "Roots: Galling, swelling, rotting. Aboveground: Stunting, wilting, uneven growth.",
+      "Life Cycle": "4–6 weeks at 24–28°C; females lay up to 1,000 eggs.",
+      "Why They Matter": "Yield loss of 5–20% or more; M. enterolobii can overcome resistance genes."
+    },
     "Entries": {
       "Meloidogyne arenaria": [
         {
@@ -8043,6 +8052,15 @@
       "Pratylenchus sp.",
       "Pratylenchus zeae"
     ],
+    "data": {
+      "Common Name": "Cyst nematodes",
+      "Scientific Name": "Globodera spp. & Heterodera spp.",
+      "Distribution": "Limited detections in Northern Australia.",
+      "Crops at Risk": "Potato, sugarcane, cereals, legumes.",
+      "Symptoms": "Stunted roots, visible cysts; aboveground yellowing, patchy growth.",
+      "Life Cycle": "5–8 weeks; cysts survive for years without a host.",
+      "Management": "Resistant varieties, crop rotation, biosecurity controls."
+    },
     "Entries": {
       "Pratylenchus brachyurus": [
         {
@@ -8980,6 +8998,15 @@
       "Rotylenchulus sp.",
       "Rotylenchus brevicaudatus"
     ],
+    "data": {
+      "Common Name": "Reniform nematodes",
+      "Scientific Name": "Rotylenchulus spp.",
+      "Distribution": "Widespread across NT, Nth QLD, and Nth WA.",
+      "Crops at Risk": "Cotton, pineapple, capsicum, tomato, mungbean, sweetpotato, soybean.",
+      "Symptoms": "Reduced root volume, stunted growth, yellowing, wilting.",
+      "Life Cycle": "Under 3 weeks; females lay 40–100 eggs.",
+      "Why They Matter": "High reproductive potential, broad host range, subtle symptoms."
+    },
     "Entries": {
       "Rotylenchulus reniformis": [
         {

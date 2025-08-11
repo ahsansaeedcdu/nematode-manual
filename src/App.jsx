@@ -11,9 +11,9 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={ <> <Navbar /><Home /> </>} />
-      <Route path="/introduction" element={ <> <Navbar /><Introduction/> </>} />
+      {/* <Route path="/introduction" element={ <> <Navbar /><Introduction/> </>} /> */}
       <Route path="/nematodes/map" element={ <> <Navbar/> <NematodeMap /> </> } />
-      <Route path="/nematode/:name" element={ <> <Navbar/> <NematodeDetail /> </>} />
+      <Route path="/details/:commonName" element={ <> <Navbar/> <NematodeDetail /> </>} />
     </Routes>
   );
 }
