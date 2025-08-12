@@ -189,7 +189,7 @@ export default function NematodeDetail({
         <section className="bg-white rounded-2xl shadow p-6 md:p-8 border border-blue-100">
           <h2 className="text-xl md:text-2xl font-semibold text-blue-800">Images</h2>
           <p className="text-blue-900/80 mb-4">
-            Add reference photos or diagnostic images here (galls, lesions, adults/juveniles, etc.).
+            {/* Add reference photos or diagnostic images here (galls, lesions, adults/juveniles, etc.). */}
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {imageDetails.map(({ path, name }, i) => {
@@ -284,7 +284,7 @@ export default function NematodeDetail({
           </h2>
           <p className="text-blue-900/80 mb-4">
             Each card represents a recorded occurrence for this nematode group. Click a card to open
-            details (e.g., show on map, expand metadata). We’ll wire the click next.
+            details.
           </p>
 
           {loading ? (
