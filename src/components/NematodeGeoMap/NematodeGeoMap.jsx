@@ -412,11 +412,25 @@ const NematodeGeoMap = () => {
             <div className="bg-white rounded-2xl shadow p-4 sticky top-[84px]">
               <h2 className="text-lg font-semibold mb-2">About this view</h2>
               <p className="text-sm text-slate-600">
-                This map highlights LGAs with recorded nematode presence (red) and those without (gray).
+                This map highlights LGAs with recorded nematode presence and those without.
               </p>
+              <div className="mt-4">
+                <ul className="space-y-2 text-sm text-slate-700">
+                  <li className="flex items-center gap-3">
+                    <span className="inline-block h-4 w-4 rounded-full bg-[#f87171] ring-1 ring-[#f87171]/40" />
+                    <span>Nematodes found</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <span className="inline-block h-4 w-4 rounded-full bg-[#e5e7eb] ring-1 ring-[#e5e7eb]/60" />
+                    <span>Not found / no record</span>
+                  </li>
+                </ul>
+              </div>
               <div className="mt-4 p-3 rounded-lg bg-slate-50 border text-sm">
                 Tip: Zoom or pan to focus on specific regions.
               </div>
+
+             
             </div>
           ) : (
             <div className="bg-white rounded-2xl shadow p-4 sticky top-[84px] max-h-[calc(100vh-120px)] flex flex-col">
@@ -478,6 +492,7 @@ const NematodeGeoMap = () => {
                 <div className="mt-3 text-xs text-slate-600">
                   Markers are colored by Common name. Multiple points at the same
                   location are gently offset so each remains clickable.
+                 
                 </div>
               )}
             </div>
