@@ -478,6 +478,7 @@ const NematodeGeoMap = () => {
                 <div className="mt-3 text-xs text-slate-600">
                   Markers are colored by Common name. Multiple points at the same
                   location are gently offset so each remains clickable.
+                  <h1>few</h1>
                 </div>
               )}
             </div>
