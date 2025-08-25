@@ -6,41 +6,44 @@ export default function Navbar() {
 
   const linkClass = ({ isActive }) =>
     [
-      "px-4 py-2 rounded-full text-sm font-medium transition",
+      "px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200",
       isActive
-        ? "text-white bg-white/15 ring-1 ring-white/20"
-        : "text-slate-200 hover:text-white hover:bg-white/10",
+        ? "text-white bg-cyan-600/30 ring-1 ring-cyan-300/40"
+        : "text-white hover:bg-cyan-500/20 hover:text-cyan-100",
     ].join(" ");
-
+  
   return (
-    <nav className="w-full bg-slate-900">
+    <nav className="w-full bg-slate-800 fixed top-0 left-0 w-full z-50 px-[30px]">
       {/* Desktop / tablet */}
-      <div className="mx-auto max-w-none px-4">
-        <div className="hidden md:flex h-16 items-center justify-center gap-6">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="h-8 w-8 rounded-xl bg-blue-600 grid place-items-center text-white font-bold ring-2 ring-blue-400/40 group-hover:ring-blue-300/60 transition">
-              N
-            </div>
-            <span className="text-white/90 group-hover:text-white text-lg font-semibold tracking-tight">
-              Nematode
-            </span>
-          </Link>
+      <div className="w-full px-4">
+        {/* 3-column grid: left logo / center nav / right actions (optional) */}
+        <div className="hidden md:grid h-16 items-center grid-cols-3">
+          {/* Left: Logo */}
+          <div className="flex items-center justify-start">
+            <Link to="/" className="flex items-center gap-2 group">
+              
+              <span className="text-white/90 group-hover:text-white text-lg font-semibold tracking-tight">
+                Nematode
+              </span>
+            </Link>
+          </div>
 
-          {/* Separator dot */}
-          <span className="text-white/25 select-none">•</span>
-
-          {/* Centered links */}
-          <div className="flex items-center gap-2">
+          {/* Center: Nav links */}
+          <div className="flex items-center justify-center gap-8">
             <NavLink to="/" end className={linkClass}>
               Home
             </NavLink>
-            {/* <NavLink to="/introduction" className={linkClass}>
-              Introduction
-            </NavLink> */}
+            {/* <NavLink to="/introduction" className={linkClass}>Introduction</NavLink> */}
             <NavLink to="/nematodes/map" className={linkClass}>
               Map
             </NavLink>
+          </div>
+
+          {/* Right: Placeholder for actions (optional). Keeps center perfectly centered */}
+          <div className="flex items-center justify-end gap-2">
+            {/* Example:
+            <Link to="/profile" className="text-slate-200 hover:text-white">Profile</Link>
+            */}
           </div>
         </div>
       </div>
@@ -50,9 +53,7 @@ export default function Navbar() {
         <div className="h-14 px-4 flex items-center justify-center relative">
           {/* Logo centered */}
           <Link to="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
-            <div className="h-8 w-8 rounded-xl bg-blue-600 grid place-items-center text-white font-bold">
-              N
-            </div>
+            
             <span className="text-white text-lg font-semibold tracking-tight">Nematode</span>
           </Link>
 

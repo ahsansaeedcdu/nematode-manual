@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-// You can keep your CSS too if you like, but Tailwind handles most styling now.
+
 // import './NematodeGeoMap.css';
 import L from 'leaflet';
 
@@ -387,7 +387,7 @@ const NematodeGeoMap = () => {
       {/* Header */}
       <header className="w-full border-b bg-white/90 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-[1400px] mx-auto px-4 py-3 flex items-center justify-between">
-          <h1 className="text-xl md:text-2xl font-semibold tracking-tight">Nematode Distribution Maps</h1>
+        <h1 className="text-xl md:text-2xl font-semibold tracking-tight !text-blue-600">Plant-parasitic Nematodes Distribution Maps</h1>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowHistoricalMap(true)}
@@ -412,8 +412,22 @@ const NematodeGeoMap = () => {
             <div className="bg-white rounded-2xl shadow p-4 sticky top-[84px]">
               <h2 className="text-lg font-semibold mb-2">About this view</h2>
               <p className="text-sm text-slate-600">
-                This map highlights LGAs with recorded nematode presence (red) and those without (gray).
+                This map highlights LGAs with recorded nematode presence  and those without .
               </p>
+              <div className="mt-4">
+                <ul className="space-y-2 text-sm text-slate-700">
+                  <li className="flex items-center gap-3">
+                    <span className="inline-block h-4 w-4 rounded-full bg-[#f87171] ring-1 ring-[#f87171]/40" />
+                    <span>Confirmed presence of plant-parasitic nematodes (PPN)
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <span className="inline-block h-4 w-4 rounded-full bg-[#e5e7eb] ring-1 ring-[#e5e7eb]/60" />
+                    <span>Unconfirmed presence of plant-parasitic nematodes (PPN)
+                    </span>
+                  </li>
+                </ul>
+              </div>
               <div className="mt-4 p-3 rounded-lg bg-slate-50 border text-sm">
                 Tip: Zoom or pan to focus on specific regions.
               </div>
