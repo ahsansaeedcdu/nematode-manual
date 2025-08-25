@@ -202,16 +202,16 @@ const GeoJSONLayerWithInteractions = ({
           >
             <Popup>
               <div className="font-semibold text-slate-800">
-                <p className="mb-1"><strong>Common name:</strong> {record.common_nematode_name}</p>
-                <p className="mb-1"><strong>Nematode taxa:</strong> {record.nematode || 'N/A'}</p>
-                <p className="mb-1"><strong>Associated plant:</strong> {plantClean}</p>
-                <p className="mb-1"><strong>Region:</strong> {record['Sampling Region'] || 'N/A'}</p>
-                <p className="mb-1"><strong>State:</strong> {record['Sampling State'] || 'N/A'}</p>
+                {/* <p className="mb-1"><strong>Common name:</strong> {record.common_nematode_name}</p> */}
+                <p className="mb-1"><strong>Nematode Taxa:</strong> {record.nematode || 'N/A'}</p>
+                <p className="mb-1"><strong>Associated Plant(s):</strong> {plantClean}</p>
+                <p className="mb-1"><strong>Region:</strong> {([record['Sampling Region'], record['Sampling State']].filter(v => v && String(v).trim()).join(', ')) || 'N/A'}</p>
+                {/* <p className="mb-1"><strong>State:</strong> {record['Sampling State'] || 'N/A'}</p> */}
                 {record.sample_size != null && (
-                  <p className="mb-1"><strong>Sample Size:</strong> {Math.round(Number(record.sample_size))} nematodes/200 mL soil</p>
+                  <p className="mb-1"><strong>Highest Recorded Density:</strong> {Math.round(Number(record.sample_size))} nematodes/200 mL soil</p>
                 )}
-                {record['Site Description'] && <p className="mb-1"><strong>Site:</strong> {record['Site Description']}</p>}
-                {record.reference && <p className="mb-1"><strong>Reference:</strong> {record.reference}</p>}
+                {/* {record['Site Description'] && <p className="mb-1"><strong>Site:</strong> {record['Site Description']}</p>}
+                {record.reference && <p className="mb-1"><strong>Reference:</strong> {record.reference}</p>} */}
               </div>
             </Popup>
           </Marker>

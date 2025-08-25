@@ -6,64 +6,62 @@ export default function Navbar() {
 
   const linkClass = ({ isActive }) =>
     [
-      "px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200",
+      "px-5 py-2 rounded-full text-xl font-semibold transition", // bigger text
       isActive
-        ? "text-white bg-cyan-600/30 ring-1 ring-cyan-300/40"
-        : "text-white hover:bg-cyan-500/20 hover:text-cyan-100",
+        ? "text-blue-700 bg-blue-200 ring-1 ring-blue-300"
+        : "text-blue-600 hover:text-blue-800 hover:bg-blue-100/60",
     ].join(" ");
-  
-  return (
-    <nav className="w-full bg-slate-800 fixed top-0 left-0 w-full z-50 px-[30px]">
-      {/* Desktop / tablet */}
-      <div className="w-full px-4">
-        {/* 3-column grid: left logo / center nav / right actions (optional) */}
-        <div className="hidden md:grid h-16 items-center grid-cols-3">
-          {/* Left: Logo */}
-          <div className="flex items-center justify-start">
-            <Link to="/" className="flex items-center gap-2 group">
-              
-              <span className="text-white/90 group-hover:text-white text-lg font-semibold tracking-tight">
-                Nematode
-              </span>
-            </Link>
-          </div>
 
-          {/* Center: Nav links */}
-          <div className="flex items-center justify-center gap-8">
+  return (
+    <nav className="w-full bg-[#f1faee] shadow-sm">
+      {/* Desktop / tablet */}
+      <div className="mx-auto max-w-none px-6">
+        <div className="hidden md:flex h-20 items-center justify-center gap-6">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="h-10 w-10 rounded-xl bg-blue-600 grid place-items-center text-white font-bold ring-2 ring-blue-400/40 group-hover:ring-blue-300/60 transition">
+              N
+            </div>
+            <span className="text-blue-800 group-hover:text-blue-900 text-2xl font-bold tracking-tight">
+              Plant-parasitic Nematodes in Northern Australia
+            </span>
+          </Link>
+
+          {/* Separator dot */}
+          <span className="text-blue-400 text-xl select-none">•</span>
+
+          {/* Centered links */}
+          <div className="flex items-center gap-3">
             <NavLink to="/" end className={linkClass}>
               Home
             </NavLink>
-            {/* <NavLink to="/introduction" className={linkClass}>Introduction</NavLink> */}
             <NavLink to="/nematodes/map" className={linkClass}>
               Map
             </NavLink>
-          </div>
-
-          {/* Right: Placeholder for actions (optional). Keeps center perfectly centered */}
-          <div className="flex items-center justify-end gap-2">
-            {/* Example:
-            <Link to="/profile" className="text-slate-200 hover:text-white">Profile</Link>
-            */}
           </div>
         </div>
       </div>
 
       {/* Mobile */}
       <div className="md:hidden">
-        <div className="h-14 px-4 flex items-center justify-center relative">
+        <div className="h-16 px-4 flex items-center justify-center relative">
           {/* Logo centered */}
           <Link to="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
-            
-            <span className="text-white text-lg font-semibold tracking-tight">Nematode</span>
+            <div className="h-9 w-9 rounded-xl bg-blue-600 grid place-items-center text-white font-bold">
+              N
+            </div>
+            <span className="text-blue-800 text-lg font-bold tracking-tight">
+              Plant-parasitic Nematodes
+            </span>
           </Link>
 
-          {/* Toggle at right (doesn't break centering) */}
+          {/* Toggle at right */}
           <button
             onClick={() => setOpen(v => !v)}
             aria-label="Toggle menu"
-            className="absolute right-4 inline-flex items-center justify-center rounded-md p-2 text-slate-200 hover:text-white hover:bg-white/10"
+            className="absolute right-4 inline-flex items-center justify-center rounded-md p-2 text-blue-700 hover:text-blue-900 hover:bg-blue-100"
           >
-            <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               {open ? (
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               ) : (
@@ -80,7 +78,7 @@ export default function Navbar() {
           }`}
         >
           <div className="px-4 pb-4">
-            <div className="rounded-2xl bg-slate-800/70 ring-1 ring-white/10 backdrop-blur-sm p-2 flex flex-col gap-2">
+            <div className="rounded-2xl bg-blue-100 ring-1 ring-blue-200 backdrop-blur-sm p-3 flex flex-col gap-3">
               <NavLink to="/" end className={linkClass} onClick={() => setOpen(false)}>
                 Home
               </NavLink>

@@ -1,8 +1,7 @@
 // NematodeDetail.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import MapPreviewModal from "../../components/MapPreviewModal/MapPreviewModal"; // adjust path
-
+// import MapPreviewModal from "../../components/MapPreviewModal/MapPreviewModal"; // optional
 
 /** --- helpers --- */
 const getGenusLabelFromTaxaArray = (scientificTaxa) => {
@@ -28,17 +27,32 @@ const flattenEntriesFromTaxaMap = (taxaMap) => {
   return out;
 };
 
-/** Preferred display order if "data" exists */
-const ABOUT_FIELD_ORDER = [
+// Preferred 1-column details to show in the “Overview” section
+const OVERVIEW_ORDER = [
   "Common Name",
   "Scientific Name",
   "Distribution",
   "Crops at Risk",
-  "Symptoms",
   "Life Cycle",
   "Why They Matter",
-  "Management"
 ];
+
+// robust array parser
+const toArray = (val) => {
+  if (Array.isArray(val)) return val.filter(Boolean).map(String);
+  if (typeof val === "string") {
+    const parts = val.split(/\n|;|,/).map((s) => s.trim()).filter(Boolean);
+    return parts.length ? parts : [val].filter(Boolean);
+  }
+  return [];
+};
+
+// split a sentence-ish string into gentle bullet points
+const splitToBullets = (text) =>
+  String(text || "")
+    .split(/(?:\.\s+|;\s+|,\s+)(?=[A-Z(])/)
+    .map((s) => s.trim().replace(/[.;,]$/, ""))
+    .filter(Boolean);
 
 export default function NematodeDetail({
   datasetUrl = "/data/combined_nematodes_grouped_by_taxa.json",
@@ -49,8 +63,8 @@ export default function NematodeDetail({
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
-  const [mapModalOpen, setMapModalOpen] = useState(false);
-  const [selectedEntry, setSelectedEntry] = useState(null);
+  // const [mapModalOpen, setMapModalOpen] = useState(false);
+  // const [selectedEntry, setSelectedEntry] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -82,9 +96,7 @@ export default function NematodeDetail({
     return k ? grouped[k] : null;
   }, [grouped, commonName]);
 
-  // Entries map (historical/new combined format)
-  const taxaMap = group?.Entries || {}; // { taxonName: [entries] }
-
+  const taxaMap = group?.Entries || {};
   const taxaList = useMemo(
     () =>
       Object.keys(taxaMap)
@@ -103,7 +115,6 @@ export default function NematodeDetail({
     [taxaMap]
   );
 
-  // About section data (if provided under group.data)
   const aboutData = group?.data && typeof group.data === "object" ? group.data : null;
 
   // Genus label priority: Scientific taxa array -> Scientific Name in aboutData
@@ -113,23 +124,115 @@ export default function NematodeDetail({
     const fromData = getGenusLabelFromScientificName(aboutData?.["Scientific Name"]);
     return fromData || null;
   }, [group, aboutData]);
-// Put this near the top of NematodeDetail.jsx (inside the component or module)
+
+  // demo images (replace with actual images if available)
   const imageDetails = [
-    { path: '/data/RKN Juvenile Under Microscope.jpg', name: 'RKN Juvenile Under Microscope.jpg' },
-    { path: '/data/Root Galls on Tomato Caused by RKN.jpg', name: 'Root Galls on Tomato Caused by RKN.jpg' },
-    { path: '/data/RKN Juvenile Under Microscope.jpg', name: 'RKN Juvenile Under Microscope.jpg' },
-    { path: '/data/Root Galls on Tomato Caused by RKN.jpg', name: 'Root Galls on Tomato Caused by RKN.jpg' },
+    { path: "/data/RKN Juvenile Under Microscope.jpg", name: "RKN Juvenile Under Microscope.jpg" },
+    { path: "/data/Root Galls on Tomato Caused by RKN.jpg", name: "Root Galls on Tomato Caused by RKN.jpg" },
+    { path: "/data/RKN Juvenile Under Microscope.jpg", name: "RKN Juvenile Under Microscope.jpg" },
+    { path: "/data/Root Galls on Tomato Caused by RKN.jpg", name: "Root Galls on Tomato Caused by RKN.jpg" },
   ];
 
+  /** --- renderers (STRICT single-column) --- */
+
+  // Symptoms can be:
+  // 1) object like { Roots: "...", Aboveground: "..." }
+  // 2) array of strings
+  // 3) single string
+  const renderSymptoms = (val) => {
+    const isObj = val && typeof val === "object" && !Array.isArray(val);
+    if (isObj) {
+      const preferred = ["Roots", "Belowground", "Aboveground", "Leaves", "Stems", "Fruits", "General"];
+      const keys = Object.keys(val || {});
+      const order = [...preferred.filter((k) => keys.includes(k)), ...keys.filter((k) => !preferred.includes(k))];
+
+      return (
+        <section className="rounded-2xl border border-sky-200 bg-white p-6 shadow-sm">
+          <h2 className="text-xl md:text-2xl font-semibold text-slate-800">Symptoms</h2>
+          <div className="mt-4 space-y-4">
+            {order.map((k) => {
+              const v = val[k];
+              const bullets = Array.isArray(v) ? v : splitToBullets(v);
+              return (
+                <div key={k}>
+                  <div className="text-sm font-semibold uppercase tracking-wide text-sky-700/90">{k}</div>
+                  {bullets.length > 1 ? (
+                    <ul className="mt-1 list-disc pl-6 text-slate-800 space-y-1">
+                      {bullets.map((b, i) => <li key={i}>{b}</li>)}
+                    </ul>
+                  ) : (
+                    <p className="mt-1 text-slate-800">{String(v)}</p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      );
+    }
+
+    const items = Array.isArray(val) ? val : toArray(val);
+    return (
+      <section className="rounded-2xl border border-sky-200 bg-white p-6 shadow-sm">
+        <h2 className="text-xl md:text-2xl font-semibold text-slate-800">Symptoms</h2>
+        {items?.length ? (
+          <ul className="mt-3 list-disc pl-6 text-slate-800 space-y-1">
+            {items.map((it, i) => <li key={i}>{it}</li>)}
+          </ul>
+        ) : (
+          <p className="mt-3 text-slate-600">No symptoms listed.</p>
+        )}
+      </section>
+    );
+  };
+
+  const renderManagement = (val) => {
+    const items = Array.isArray(val) ? val : toArray(val);
+    return (
+      <section className="rounded-2xl border border-emerald-200 bg-white p-6 shadow-sm">
+        <h2 className="text-xl md:text-2xl font-semibold text-slate-800">Management Options</h2>
+        {items?.length ? (
+          <ul className="mt-3 list-disc pl-6 text-slate-800 space-y-1">
+            {items.map((it, i) => <li key={i}>{it}</li>)}
+          </ul>
+        ) : (
+          <p className="mt-3 text-slate-600">No management options listed.</p>
+        )}
+      </section>
+    );
+  };
+
+  // Show references as clean modern text (no links), in its own section
+  const renderFurtherInformation = (val) => {
+    const items = Array.isArray(val) ? val : toArray(val);
+    return (
+      <section className="rounded-2xl border border-violet-200 bg-white p-6 shadow-sm">
+        <h2 className="text-xl md:text-2xl font-semibold text-slate-800">Further Information</h2>
+        {items?.length ? (
+          <ol className="mt-3 list-decimal pl-6 space-y-3">
+            {items.map((it, i) => (
+              <li key={i} className="text-slate-800 leading-relaxed">
+                {/* If item is object, try a readable fallback; else show string */}
+                {typeof it === "object" ? JSON.stringify(it) : String(it)}
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <p className="mt-3 text-slate-600">No references provided.</p>
+        )}
+      </section>
+    );
+  };
+
   return (
-    <div className="min-h-screen w-screen bg-blue-50">
-      <main className="max-w-[1200px] mx-auto w-full px-4 py-6 space-y-6">
-        {/* Hero */}
-        <section className="bg-white rounded-2xl shadow p-6 md:p-8 border-l-4 border-blue-600">
+    <div className="min-h-screen w-screen bg-white">
+      <main className="max-w-[1200px] mx-auto w-full px-6 md:px-8 py-8 space-y-8">
+        {/* Header / Hero */}
+        <section className="rounded-3xl bg-white/90 backdrop-blur-sm shadow-md ring-1 ring-slate-200 p-7 md:p-9">
           {loading ? (
             <div className="animate-pulse">
-              <div className="h-6 w-1/3 bg-blue-100 rounded mb-2" />
-              <div className="h-10 w-2/3 bg-blue-100 rounded" />
+              <div className="h-5 w-1/3 bg-slate-100 rounded mb-3" />
+              <div className="h-9 w-2/3 bg-slate-100 rounded" />
             </div>
           ) : err ? (
             <div className="text-rose-700">
@@ -137,252 +240,130 @@ export default function NematodeDetail({
             </div>
           ) : group ? (
             <>
-              <div className="text-sm uppercase tracking-wide text-blue-700/80">
-                Common name
-              </div>
-              <h1 className="text-2xl md:text-3xl font-semibold text-blue-900">
-                {group["Common name"] || commonName}
+              {/* STRICT single-column labels */}
+              {/* <div className="text-xs uppercase tracking-wider text-slate-500">Common name</div> */}
+              <h1 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
+                {aboutData?.Title || group["Common name"] || commonName}
               </h1>
-              {genusLabel && (
-                <div className="mt-2 text-blue-800/80 italic">
-                  Likely genus: {genusLabel}
-                </div>
-              )}
-              {/* About text */}
-              <div className="mt-4 text-blue-900/90 leading-relaxed">
-                {aboutData ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {ABOUT_FIELD_ORDER.filter((k) => aboutData[k])
-                      .concat(
-                        Object.keys(aboutData).filter(
-                          (k) => !ABOUT_FIELD_ORDER.includes(k) && aboutData[k]
-                        )
-                      )
-                      .map((k) => (
-                        <div key={k} className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                          <div className="text-xs uppercase tracking-wide text-blue-700/80">
-                            {k}
-                          </div>
-                          <div className="mt-1 text-sm whitespace-pre-line">
-                            {String(aboutData[k])}
-                          </div>
-                        </div>
-                      ))}
+
+              {/* {aboutData?.["Scientific Name"] && (
+                <div className="mt-4">
+                  <div className="text-xs uppercase tracking-wider text-slate-500">
+                    Scientific name
                   </div>
-                ) : (
-                  <p>
-                    This section provides an overview of{" "}
-                    <strong>{group["Common name"] || commonName}</strong>. When structured
-                    details are added to the dataset, they’ll appear here.
-                  </p>
-                )}
-              </div>
+                  <div className="text-lg md:text-xl text-slate-800 italic">
+                    {aboutData["Scientific Name"]}
+                  </div>
+                </div>
+              )} */}
+
+              {/* Genus label */}
+              {/* {genusLabel && (
+                <div className="mt-3">
+                  <div className="text-xs uppercase tracking-wider text-slate-500">Likely genus</div>
+                  <div className="text-slate-800 italic">{genusLabel}</div>
+                </div>
+              )} */}
             </>
           ) : (
-            <div className="text-blue-900/90">
+            <div className="text-slate-800">
               No data found for <strong>{commonName}</strong>.
             </div>
           )}
         </section>
 
-        {/* Images */}
-        <section className="bg-white rounded-2xl shadow p-6 md:p-8 border border-blue-100">
-          <h2 className="text-xl md:text-2xl font-semibold text-blue-800">Images</h2>
-          <p className="text-blue-900/80 mb-4">
-            {/* Add reference photos or diagnostic images here (galls, lesions, adults/juveniles, etc.). */}
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-            {imageDetails.map(({ path, name }, i) => {
-              const title = name; // or strip extension: name.replace(/\.[^.]+$/, '')
-              return (
-                <figure
-                  key={`${name}-${i}`}
-                  className="rounded-xl overflow-hidden border border-blue-200 bg-blue-50"
-                >
-                  <div className="aspect-video">
-                    <img
-                      src={encodeURI(path)}            // handles spaces in file names
-                      alt={title}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
-                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                    />
+        {/* Overview section (single column cards) */}
+        {aboutData && (
+          <section className="space-y-4">
+            {/* <h2 className="text-2xl font-semibold text-slate-900">Overview</h2> */}
+            <div className="space-y-4">
+              {OVERVIEW_ORDER.filter((k) => aboutData[k]).map((k) => (
+                <div key={k} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+                  <div className="text-sm uppercase tracking-wide text-slate-500">{k}</div>
+                  <div className="mt-1 whitespace-pre-line text-slate-800">
+                    {String(aboutData[k])}
                   </div>
-                  <figcaption className="px-2.5 py-2 text-xs text-blue-900/90">
-                    {title}
-                  </figcaption>
-                </figure>
-              );
-            })}
-          </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
+        {/* Symptoms (object/array aware) */}
+        {aboutData?.Symptoms && renderSymptoms(aboutData.Symptoms)}
+
+        {/* Management Options */}
+        {(aboutData?.["Management Options"] || aboutData?.Management) &&
+          renderManagement(aboutData["Management Options"] ?? aboutData.Management)
+        }
+
+        {/* Further Information (separate section, text only) */}
+        {aboutData?.["Further Information"] && renderFurtherInformation(aboutData["Further Information"])}
+
+        {/* Images */}
+        <section className="rounded-3xl bg-white p-6 md:p-8 shadow-sm ring-1 ring-slate-200">
+          <h2 className="text-2xl font-semibold text-slate-900">Images</h2>
+          <p className="text-slate-600 mb-4">Reference and diagnostic images.</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {imageDetails.map(({ path, name }, i) => (
+              <figure
+                key={`${name}-${i}`}
+                className="rounded-xl overflow-hidden border border-slate-200 bg-slate-50"
+              >
+                <div className="aspect-video">
+                  <img
+                    src={encodeURI(path)}
+                    alt={name}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
+                    onError={(e) => { e.currentTarget.style.display = "none"; }}
+                  />
+                </div>
+                <figcaption className="px-3 py-2 text-xs text-slate-700">{name}</figcaption>
+              </figure>
+            ))}
+          </div>
         </section>
 
-        {/* Taxa summary chips */}
-        <section className="bg-white rounded-2xl shadow p-6 md:p-8 border border-blue-100">
+        {/* Related taxa */}
+        <section className="rounded-3xl bg-white p-6 md:p-8 shadow-sm ring-1 ring-slate-200">
           <div className="flex items-center justify-between gap-2 flex-wrap">
-            <h2 className="text-xl md:text-2xl font-semibold text-blue-800">
-              Related taxa
-            </h2>
-            {taxaList.length > 0 && (
-              <div className="text-sm text-blue-800/80">
-                {taxaList.reduce((sum, t) => sum + t.count, 0)} total records
-              </div>
-            )}
+            <h2 className="text-2xl font-semibold text-slate-900">Related taxa</h2>
           </div>
 
           {loading ? (
             <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 animate-pulse">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-8 bg-blue-100 rounded-full" />
+                <div key={i} className="h-8 bg-slate-100 rounded-full" />
               ))}
             </div>
-          ) : taxaList.length === 0 ? (
-            <div className="text-blue-900/70 text-sm mt-2 italic">
+          ) : (taxaList?.length ?? 0) === 0 ? (
+            <div className="text-slate-600 text-sm mt-2 italic">
               No taxa recorded yet for this common name.
             </div>
           ) : (
             <div className="mt-3 flex flex-wrap gap-2">
               {taxaList.map((t) => (
-                <button
+                <span
                   key={t.name}
-                  type="button"
-                  onClick={() => {
-                    // hook up later (e.g., filter entries or open map)
-                    if (coords) {
-                      setSelectedEntry({
-                        lat: Number(e["Latitude (°S)"]),
-                        lng: Number(e["Longitude (°E)"]),
-                        title: `${region}, ${state}`,
-                        subtitle: group?.["Common name"] || commonName,
-                        details: {
-                          Taxon: e.taxon || (e["Nematode Taxa"] || "").trim() || "N/A",
-                          Plant: plant,
-                          Site: site || "N/A",
-                          Date: date ? String(date).slice(0, 10) : "N/A",
-                          Reference: ref || "N/A",
-                        },
-                      });
-                      setMapModalOpen(true);
-                    }
-                  }}
-                  className="px-3 py-1.5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-900 text-sm border border-blue-200 transition"
+                  className="px-3 py-1.5 rounded-full bg-slate-100 text-slate-800 text-sm border border-slate-200"
                   title={`${t.name} (${t.count})`}
                 >
                   <span className="font-medium">{t.name}</span>
-                  <span className="ml-2 text-blue-700/70">({t.count})</span>
-                </button>
+                  <span className="ml-2 text-slate-600">({t.count})</span>
+                </span>
               ))}
-            </div>
-          )}
-        </section>
-
-        {/* Entries list */}
-        <section className="bg-white rounded-2xl shadow p-6 md:p-8 border border-blue-100">
-          <h2 className="text-xl md:text-2xl font-semibold text-blue-800">
-            All related entries
-          </h2>
-          <p className="text-blue-900/80 mb-4">
-            Each card represents a recorded occurrence for this nematode group. Click a card to open
-            details.
-          </p>
-
-          {loading ? (
-            <div className="space-y-3 animate-pulse">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-20 bg-blue-100 rounded-xl" />
-              ))}
-            </div>
-          ) : allEntries.length === 0 ? (
-            <div className="text-blue-900/70 text-sm italic">
-              No entries available for this nematode yet.
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {allEntries.map((e, idx) => {
-                const region = e["Sampling Region"] || "Unknown region";
-                const state = e["Sampling State"] || "Unknown state";
-                const plant = (e["Plant Associated"] || "").replace(/\*/g, "").trim() || "N/A";
-                const site = e["Site Description"];
-                const ref = e["Reference"];
-                const date = e["Sampling Date"];
-                const coords =
-                  e["Latitude (°S)"] != null && e["Longitude (°E)"] != null
-                    ? `${e["Latitude (°S)"]}, ${e["Longitude (°E)"]}`
-                    : null;
-
-                return (
-                  <button
-                    key={`${region}-${state}-${idx}`}
-                    type="button"
-                    onClick={() => {
-                      // plug your action here (e.g., open modal map at coords)
-                      if (coords) {
-                        setSelectedEntry({
-                          lat: Number(e["Latitude (°S)"]),
-                          lng: Number(e["Longitude (°E)"]),
-                          title: `${region}, ${state}`,
-                          subtitle: group?.["Common name"] || commonName,
-                          details: {
-                            Taxon: e.taxon || (e["Nematode Taxa"] || "").trim() || "N/A",
-                            Plant: plant,
-                            Site: site || "N/A",
-                            Date: date ? String(date).slice(0, 10) : "N/A",
-                            Reference: ref || "N/A",
-                          },
-                        });
-                        setMapModalOpen(true);
-                      }
-                    }}
-                    className="w-full text-left bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl p-4 transition shadow-sm"
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <div className="text-sm uppercase tracking-wide text-blue-700/80">
-                          {e.taxon || "Taxon"}
-                        </div>
-                        <div className="mt-0.5 text-base font-semibold text-blue-900">
-                          {region}, {state}
-                        </div>
-                        <div className="mt-1 text-sm text-blue-900/80">
-                          <span className="font-medium">Plant:</span> {plant}
-                          {site ? (
-                            <>
-                              {" "}
-                              <span className="text-blue-700/40">•</span>{" "}
-                              <span className="font-medium">Site:</span> {site}
-                            </>
-                          ) : null}
-                          {coords ? (
-                            <>
-                              {" "}
-                              <span className="text-blue-700/40">•</span>{" "}
-                              <span className="font-medium">Coords:</span> {coords}
-                            </>
-                          ) : null}
-                        </div>
-                      </div>
-                      <div className="text-right text-xs text-blue-900/70">
-                        {date ? String(date).slice(0, 10) : null}
-                        {ref ? <div className="mt-1">{ref}</div> : null}
-                      </div>
-                    </div>
-                  </button>
-                );
-              })}
             </div>
           )}
         </section>
       </main>
 
-      <footer className="py-6 text-center text-xs text-blue-900/70">
-        © {new Date().getFullYear()} Northern Australia Nematode Portal
-      </footer>
-      <MapPreviewModal
+      {/* Optional modal (kept but not wired above) */}
+      {/* <MapPreviewModal
         isOpen={mapModalOpen}
         onClose={() => setMapModalOpen(false)}
         entry={selectedEntry}
-      />
+      /> */}
     </div>
   );
 }

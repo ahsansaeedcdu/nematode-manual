@@ -1,115 +1,121 @@
 // NematodeOverview.jsx
-import React, { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 
 /* --------------------------- Static category model --------------------------- */
 const CATEGORIES = [
   {
-    id: 'sedentary-endoparasite',
-    title: '2.1 Sedentary endoparasite',
+    id: "sedentary-endoparasite",
+    title: "2.1 Sedentary endoparasite",
     blurb:
-      'These nematodes develop specialised feeding sites within plant roots. Rather than remaining worm-like, they enter the root and develop into swollen females that are fully or partly embedded in root tissue.',
+      "Sedentary endoparasitic nematodes enter plant roots and stay fixed in one place, developing swollen females embedded inside the root tissue. They cause distinctive root damage and reduce crop growth.",
     examples: [
-      'Root-knot nematodes (Meloidogyne spp.)',
-      'Cyst nematodes (Heterodera/Globodera spp.)',
+      "Root-knot nematodes (Meloidogyne spp.)",
+      "Cyst nematodes (Globodera spp. & Heterodera spp.)",
+      "Achlysiella nematodes (Achlysiella spp.)",
     ],
-    // keyword rules to slot common names here
-    matchers: [/root-?knot/i, /cyst/i, /citrus\s+nematodes?/i, /\bmeloidogyne\b/i],
+    matchers: [/root-?knot/i, /cyst/i, /achlysiella/i, /\bmeloidogyne\b/i],
   },
   {
-    id: 'migratory-endoparasite',
-    title: '2.2 Migratory endoparasite',
+    id: "sedentary-semi-endoparasite",
+    title: "2.2 Sedentary semi-endoparasite",
     blurb:
-      'These nematodes enter roots and migrate through tissues, feeding as they move. They do not form permanent feeding sites and can cause necrotic lesions and general root damage.',
+      "These nematodes feed with the front part of their body inside the root, while the rear part remains outside.",
     examples: [
-      'Lesion nematodes (Pratylenchus spp.)',
-      'Burrowing nematodes (Radopholus spp.)',
-      'Citrus nematodes (Tylenchulus spp.)',
+      "Reniform nematodes (Rotylenchulus spp.)",
+      "Citrus nematode (Tylenchulus semipenetrans)",
     ],
-    matchers: [/lesion/i, /burrowing/i, /radopholus/i, /pratylenchus/i, /tylenchulus/i],
+    matchers: [/reniform/i, /citrus/i],
   },
   {
-    id: 'ectoparasite',
-    title: '2.3 Ectoparasite',
+    id: "migratory-endoparasite",
+    title: "2.3 Migratory endoparasite",
     blurb:
-      'These nematodes feed from outside the roots, inserting their stylets into root tissues. They often reduce root growth and function and can vector plant viruses.',
+      "Migratory endoparasitic nematodes stay worm-shaped and move through roots, feeding on cells and killing them before moving to new roots.",
     examples: [
-      'Dagger nematodes (Xiphinema spp.)',
-      'Ring nematodes (Criconematidae)',
-      'Stunt/Spiral/Sheath/Pin/Needle/Stubby-root nematodes',
+      "Root-lesion nematodes (Pratylenchus spp.)",
+      "Burrowing nematodes (Radopholus spp.)",
+      "Stem and bulb nematodes (Ditylenchus spp.)",
     ],
-    matchers: [/dagger/i, /ring/i, /stunt/i, /spiral/i, /sheath/i, /\bpin\b/i, /needle/i, /stubby-?root/i, /paratrichodorus/i, /tylenchorhynchus/i, /helicotylenchus/i],
+    matchers: [
+      /root-?lesion/i,
+      /burrowing/i,
+      /radopholus/i,
+      /pratylenchus/i,
+      /ditylenchus/i,
+      /stem ?and ?bulb/i,
+    ],
   },
   {
-    id: 'foliar',
-    title: '2.4 Foliar/Stem nematodes',
+    id: "ectoparasite",
+    title: "2.4 Ectoparasite",
     blurb:
-      'These species attack above-ground tissues (leaves, stems, buds), causing distortion, necrosis, or stunting and can spread via water splash or contaminated plant material.',
-    examples: ['Foliar nematodes (Aphelenchoides spp.)', 'Stem nematodes (Ditylenchus spp.)'],
-    matchers: [/foliar/i, /aphelenchoides/i, /stem/i, /ditylenchus/i],
-  },
-  {
-    id: 'unclassified',
-    title: '2.x Unclassified (pending category)',
-    blurb:
-      'Nematode groups listed here will be assigned to a formal category once classification data is available.',
-    examples: [],
-    matchers: [], // fallback bucket
+      "Ectoparasitic nematodes stay in the soil and feed from outside the roots, damaging root tips and slowing root growth. Their impact is less studied than nematodes that live inside roots.",
+    examples: ["Dagger nematodes (Xiphinema spp.)"],
+    matchers: [/dagger/i, /xiphinema/i],
   },
 ];
 
 /* --------------------------- Helpers --------------------------- */
-const EXAMPLE_COMMONS = [
-  'Root-knot nematodes',
-  'Lesion nematodes',
-  'Ring nematodes',
-  'Dagger nematodes',
-  'Spiral nematodes',
-  'Foliar nematodes',
-  'Stem nematodes',
-];
-
 const normalizeGrouped = (data) => {
+  // Expecting an array of rows; group by "Common name" and store a representative row in .data
   if (!data) return {};
   if (Array.isArray(data)) {
-    // Flattened → group by "Common name"
     return data.reduce((acc, e) => {
-      const cn = e['Common name'] || '(Unknown group)';
-      if (!acc[cn]) acc[cn] = { 'Common name': cn, 'Scientific taxa': [], Entries: {} };
-      const tax = (e['Nematode Taxa'] || '(Unspecified taxon)').trim();
-      acc[cn].Entries[tax] = acc[cn].Entries[tax] || [];
-      acc[cn].Entries[tax].push(e);
+      const cn =
+        e["Common name"] ||
+        e["Common Name"] ||
+        e["common_name"] ||
+        "(Unknown group)";
+      // keep the last seen row as the representative (or choose your own merge logic)
+      acc[cn] = { "Common name": cn, data: e };
       return acc;
     }, {});
   }
+  // Already grouped object
   return data;
 };
 
-const extractCommonNames = (grouped) => {
-  try {
-    return Object.values(grouped).map((g) => g['Common name']).filter(Boolean);
-  } catch {
-    return [];
-  }
-};
-
 const classifyCommonName = (name) => {
-  if (!name) return 'unclassified';
+  if (!name) return "unclassified";
   for (const cat of CATEGORIES) {
-    if (cat.id === 'unclassified') continue;
     if (cat.matchers.some((rx) => rx.test(name))) return cat.id;
   }
-  return 'unclassified';
+  return "unclassified";
 };
+
+const parseSection = (s) =>
+  typeof s === "string" ? s.split(".").map((n) => parseInt(n, 10)) : [];
+
+const compareSections = (a, b) => {
+  const aa = parseSection(a);
+  const bb = parseSection(b);
+
+  // Put items without a section at the end
+  if (aa.length === 0 && bb.length === 0) return 0;
+  if (aa.length === 0) return 1;
+  if (bb.length === 0) return -1;
+
+  for (let i = 0; i < Math.max(aa.length, bb.length); i++) {
+    const diff = (aa[i] || 0) - (bb[i] || 0);
+    if (diff !== 0) return diff;
+  }
+  return 0;
+};
+
+const slugify = (str) =>
+  String(str)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 
 /* --------------------------- Component --------------------------- */
 export default function NematodeOverview({
-  datasetUrl = '/data/combined_nematodes_grouped_by_taxa.json',
+  datasetUrl = "/data/combined_nematodes_grouped_by_taxa.json",
 }) {
   const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+  const [err, setErr] = useState(null);
 
-  // Fetch grouped data if available
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -119,8 +125,7 @@ export default function NematodeOverview({
         const json = await res.json();
         if (!cancelled) setData(json);
       } catch (e) {
-        // No data yet is fine; we’ll fallback to examples
-        if (!cancelled) setError(String(e));
+        if (!cancelled) setErr(String(e));
       }
     })();
     return () => {
@@ -128,210 +133,226 @@ export default function NematodeOverview({
     };
   }, [datasetUrl]);
 
-  // Build list of common names (from data or fallback)
-  const commonNames = useMemo(() => {
-    const grouped = normalizeGrouped(data);
-    const names = extractCommonNames(grouped);
-    if (names.length > 0) return names.sort((a, b) => a.localeCompare(b));
-    return EXAMPLE_COMMONS;
-  }, [data]);
+  const grouped = useMemo(() => normalizeGrouped(data), [data]);
 
-  // Group names by category using keyword rules
+  // Build per-category arrays of entries, then sort by numeric Section
   const groupedByCategory = useMemo(() => {
     const map = Object.fromEntries(CATEGORIES.map((c) => [c.id, []]));
-    commonNames.forEach((cn) => {
-      const id = classifyCommonName(cn);
-      (map[id] || map['unclassified']).push(cn);
+    Object.values(grouped).forEach((entry) => {
+      const cn = entry["Common name"];
+      const catId = classifyCommonName(cn);
+      (map[catId] || (map[catId] = [])).push(entry);
     });
-    // Sort each list A→Z
-    Object.keys(map).forEach((k) => map[k].sort((a, b) => a.localeCompare(b)));
+
+    Object.keys(map).forEach((k) =>
+      map[k].sort((a, b) =>
+        compareSections(a?.data?.Section, b?.data?.Section)
+      )
+    );
     return map;
-  }, [commonNames]);
+  }, [grouped]);
 
   return (
-    <div className="min-h-screen w-screen bg-slate-50">
-      <main className="max-w-[1200px] mx-auto w-full px-4 py-6">
-        {/* 1. Introduction */}
-        <section id="intro" className="bg-white rounded-2xl shadow p-5 md:p-7">
-          <h2 className="text-xl md:text-2xl font-semibold text-slate-800 mb-2">1. Introduction</h2>
-
-          <h3 className="text-lg md:text-xl font-semibold text-slate-800 mt-4 mb-2">
-            1.1 What are nematodes
-          </h3>
-          <p className="text-slate-700 leading-relaxed">
-            Nematodes are microscopic, worm-like organisms commonly found in soil and water. While many
-            are harmless or even beneficial, plant-parasitic nematodes (PPNs) feed on plant roots,
-            disrupting water and nutrient uptake and causing significant crop damage.
-          </p>
-
-          <h3 className="text-lg md:text-xl font-semibold text-slate-800 mt-4 mb-2">
-            1.2 Why biosecurity matters
-          </h3>
-          <p className="text-slate-700 leading-relaxed">
-            Strong biosecurity measures are essential to prevent the introduction and spread of PPNs.
-            Northern Australia’s geographic isolation and unique agricultural systems make it particularly
-            vulnerable to invasive nematodes.
-          </p>
-
-          <h3 className="text-lg md:text-xl font-semibold text-slate-800 mt-4 mb-2">
-            1.3 Why nematodes matter to agriculture in Northern Australia
-          </h3>
-          <p className="text-slate-700 leading-relaxed">
-            PPNs can reduce crop yield and quality, leading to serious economic losses. The region’s
-            tropical climate and diverse cropping systems create ideal conditions for nematode outbreaks,
-            highlighting the need for effective, region-specific management strategies.
-          </p>
-        </section>
-
-        {/* 2. Key PPNs with groupings */}
-        <section id="key" className="mt-6">
-          <div className="bg-white rounded-2xl shadow p-5 md:p-7">
-            <h2 className="text-xl md:text-2xl font-semibold text-slate-800 mb-2">
-              2. Key Plant-Parasitic Nematodes in Northern Australia
-            </h2>
-
-            {CATEGORIES.map((cat) => (
-              <div key={cat.id} className="mt-5">
-                <h3 className="text-lg md:text-xl font-semibold text-slate-800">{cat.title}</h3>
-                {cat.blurb && <p className="text-slate-700 leading-relaxed mt-1">{cat.blurb}</p>}
-                {cat.examples?.length > 0 && (
-                  <div className="text-sm text-slate-600 mt-2">
-                    <span className="font-medium">Examples:&nbsp;</span>
-                    {cat.examples.join('; ')}
-                  </div>
-                )}
-
-                {/* <div className="mt-3">
-                  {groupedByCategory[cat.id]?.length ? (
-                    <ul className="list-disc pl-6 space-y-1">
-                      {groupedByCategory[cat.id].map((cn) => (
-                        <li key={cn}>
-                          <Link
-                            to={`/details/${encodeURIComponent(cn)}`}
-                            className="text-blue-700 hover:text-blue-900 underline-offset-2 hover:underline"
-                          >
-                            {cn}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div className="text-slate-500 text-sm italic">
-                      No entries available yet.
-                    </div>
-                  )}
-                </div> */}
-                <div className="mt-3 space-y-3">
-                {groupedByCategory[cat.id]?.length ? (
-                    groupedByCategory[cat.id].map((cn) => {
-                    // First scientific taxa (if available in data)
-                    const grouped = normalizeGrouped(data);
-                    const sciTaxa =
-                        grouped?.[cn]?.['Scientific taxa']?.[0] || 'Unknown spp.';
-                    const entriesCount = Object.keys(grouped?.[cn]?.Entries || {}).length;
-
-                    return (
-                        <Link
-                        key={cn}
-                        to={`/details/${encodeURIComponent(cn)}`}
-                        className="block bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg shadow-sm p-4 transition"
-                        >
-                        <div className="text-lg font-semibold text-blue-700">
-                            {cn}
-                        </div>
-                        <div className="text-sm italic text-slate-600">
-                            {sciTaxa.endsWith('spp.') ? sciTaxa : `${sciTaxa} spp.`}
-                        </div>
-                        <div className="text-xs text-slate-500 mt-1">
-                            {entriesCount} type{entriesCount !== 1 ? 's' : ''} recorded
-                        </div>
-                        </Link>
-                    );
-                    })
-                ) : (
-                    <div className="text-slate-500 text-sm italic">
-                    No entries available yet.
-                    </div>
-                )}
-                </div>
-
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 3. Preventing Nematode Spread */}
-        <section id="prevention" className="mt-6">
-          <div className="bg-white rounded-2xl shadow p-5 md:p-7">
-            <h2 className="text-xl md:text-2xl font-semibold text-slate-800 mb-2">
-              3. Preventing Nematode Spread
-            </h2>
-            <ul className="list-disc pl-6 text-slate-700 space-y-1">
-              <li>Clean and disinfect machinery, tools, and footwear between fields.</li>
-              <li>Use certified nematode-free seeds and plants.</li>
-              <li>Avoid moving soil from infested areas.</li>
-              <li>Quarantine new plants before planting.</li>
-            </ul>
-          </div>
-        </section>
-
-        {/* 4. Integrated Nematode Management */}
-        <section id="management" className="mt-6">
-          <div className="bg-white rounded-2xl shadow p-5 md:p-7">
-            <h2 className="text-xl md:text-2xl font-semibold text-slate-800 mb-2">
-              4. Integrated Nematode Management
-            </h2>
-            <ul className="list-disc pl-6 text-slate-700 space-y-1">
-              <li>
-                <strong>Crop Rotation:</strong> Use non-host crops to break nematode cycles.
-              </li>
-              <li>
-                <strong>Biological Controls:</strong> Introduce beneficial microorganisms.
-              </li>
-              <li>
-                <strong>Soil Health:</strong> Maintain organic matter and use cover crops.
-              </li>
-              <li>
-                <strong>Chemical Controls:</strong> Apply nematicides as a last resort and follow
-                labels.
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        {/* 5. Resources for Growers */}
-        <section id="resources" className="mt-6">
-          <div className="bg-white rounded-2xl shadow p-5 md:p-7">
-            <h2 className="text-xl md:text-2xl font-semibold text-slate-800 mb-2">
-              5. Resources for Growers
-            </h2>
-            <div className="text-slate-700 space-y-2">
-              <div>
-                <strong>NT:</strong> Northern Territory Department of Industry, Tourism and Trade
-              </div>
-              <div>
-                <strong>QLD:</strong>{' '}
-                <span className="italic text-slate-500">[Insert Contact]</span>
-              </div>
-              <div>
-                <strong>WA:</strong>{' '}
-                <span className="italic text-slate-500">[Insert Contact]</span>
+    <div className="flex min-h-screen w-screen bg-slate-50">
+      {/* Sidebar (packed rectangular card, wider so items stay one line) */}
+      <aside className="hidden md:block w-80 p-3 sticky top-0 h-screen">
+        <div className="h-full rounded-xl bg-white shadow-md border border-slate-200 p-5 overflow-y-auto">
+          <h2 className="text-lg font-bold text-slate-700 mb-4">On this page</h2>
+          <nav className="space-y-3">
+            {/* 1. Introduction */}
+            <div>
+              <a
+                href="#intro"
+                className="block px-3 py-2 rounded-lg text-blue-700 font-semibold hover:bg-blue-50 transition"
+              >
+                1. Introduction
+              </a>
+              <div className="ml-3 mt-1 border-l border-slate-200 pl-3 space-y-1">
+                <a
+                  href="#what-are-nematodes"
+                  className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 text-sm px-2 py-1 rounded-md transition"
+                >
+                  1.1 What are nematodes
+                </a>
+                <a
+                  href="#biosecurity"
+                  className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 text-sm px-2 py-1 rounded-md transition"
+                >
+                  1.2 Why biosecurity matters
+                </a>
+                <a
+                  href="#agriculture"
+                  className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 text-sm px-2 py-1 rounded-md transition"
+                >
+                  1.3 Agriculture in Northern Australia
+                </a>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* Data load status (optional subtle note) */}
-        {error && (
-          <div className="mt-4 text-xs text-rose-700 bg-rose-50 border border-rose-200 rounded p-3">
-            Couldn’t load data from {datasetUrl}. Showing example groups until data is available.
+            {/* 2. Key PPNs */}
+            <div>
+              <a
+                href="#key"
+                className="block px-3 py-2 rounded-lg text-blue-700 font-semibold hover:bg-blue-50 transition"
+              >
+                2. Key Plant-Parasitic Nematodes
+              </a>
+
+              {CATEGORIES.map((cat) => (
+                <div key={cat.id} className="ml-3 mt-1">
+                  <a
+                    href={`#${cat.id}`}
+                    className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 text-sm px-2 py-1 rounded-md transition"
+                  >
+                    {cat.title}
+                  </a>
+
+                  {/* Nested nematode entries for this category, sorted by numeric Section */}
+                  <div className="ml-4 border-l border-slate-200 pl-2 space-y-1">
+                    {groupedByCategory[cat.id]?.map((entry) => {
+                      const cn = entry?.["Common name"];
+                      const sect = entry?.data?.Section || "";
+                      // More unique anchor by combining section + common name
+                      const nodeId = slugify(`${sect} ${cn}`);
+                      return (
+                        <a
+                          key={nodeId}
+                          href={`#${nodeId}`}
+                          className="block text-slate-500 hover:text-blue-700 hover:bg-blue-50 text-xs px-2 py-1 rounded-md transition"
+                          title={cn}
+                        >
+                          {sect ? `${sect} ` : ""}{cn}
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </nav>
+        </div>
+      </aside>
+
+      {/* Main content (kept tight next to the sidebar) */}
+      <main className="flex-1 px-3 py-3 space-y-6">
+        {err && (
+          <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg p-4">
+            Failed to load dataset: {err}
           </div>
         )}
-      </main>
 
-      <footer className="py-6 text-center text-xs text-slate-500">
-        © {new Date().getFullYear()} Northern Australia Nematode Portal
-      </footer>
+        {/* 1. Introduction */}
+        <section id="intro" className="bg-white rounded-2xl shadow p-5 md:p-7">
+          <h2 className="text-xl md:text-2xl font-semibold text-slate-800 mb-2">
+            1. Introduction
+          </h2>
+
+          <h3
+            id="what-are-nematodes"
+            className="text-lg md:text-xl font-semibold text-slate-800 mt-4 mb-2"
+          >
+            1.1 What are nematodes
+          </h3>
+          <ul className="list-disc pl-6 text-slate-700 space-y-1">
+            <li>Nematodes are tiny, worm-like creatures that live in soil and water.</li>
+            <li>Most are harmless or beneficial – they help break down organic matter.</li>
+            <li>
+              Plant-parasitic nematodes (PPNs) feed on plant roots, reducing water and nutrient uptake.
+              Damage often looks like nutrient or water stress—but plants won’t recover after fertilising or watering.
+            </li>
+            <li>They are too small to see without a microscope but can cause major yield losses.</li>
+          </ul>
+
+          <h3
+            id="biosecurity"
+            className="text-lg md:text-xl font-semibold text-slate-800 mt-4 mb-2"
+          >
+            1.2 Why biosecurity matters
+          </h3>
+          <ul className="list-disc pl-6 text-slate-700 space-y-1">
+            <li>Biosecurity = stopping pests from entering and spreading.</li>
+            <li>PPNs spread easily in soil, water, machinery, tools, and planting material.</li>
+            <li>Once they’re in a paddock, removal is difficult and costly – prevention is the best defence.</li>
+          </ul>
+
+          <h3
+            id="agriculture"
+            className="text-lg md:text-xl font-semibold text-slate-800 mt-4 mb-2"
+          >
+            1.3 Why nematodes matter to agriculture in Northern Australia
+          </h3>
+          <ul className="list-disc pl-6 text-slate-700 space-y-1">
+            <li>PPNs weaken plants, causing stunting, yellowing, and poor root systems.</li>
+            <li>Yield losses can range from 20–100%, depending on crop and nematode type.</li>
+            <li>
+              Crops at risk include broadacre crops (cotton, wheat, mungbeans, etc.), fruit crops
+              (melons, bananas, pineapple, etc.), and vegetables (sweet potato, capsicum, tomato, cucumber, etc.).
+            </li>
+            <li>
+              Tropical conditions allow nematodes to multiply quickly – unmanaged outbreaks can spread between farms.
+            </li>
+          </ul>
+        </section>
+
+        {/* 2. Key PPNs */}
+        <section id="key" className="bg-white rounded-2xl shadow p-5 md:p-7">
+          <h2 className="text-xl md:text-2xl font-semibold text-slate-800 mb-2">
+            2. Key Plant-Parasitic Nematodes in Northern Australia
+          </h2>
+
+          {CATEGORIES.map((cat) => (
+            <div key={cat.id} id={cat.id} className="mt-6">
+              <h3 className="text-lg md:text-xl font-semibold text-slate-800">
+                {cat.title}
+              </h3>
+              {cat.blurb && (
+                <p className="text-slate-700 leading-relaxed mt-1">{cat.blurb}</p>
+              )}
+              {cat.examples?.length > 0 && (
+                <div className="text-sm text-slate-600 mt-2">
+                  <span className="font-medium">Examples:&nbsp;</span>
+                  {cat.examples.join("; ")}
+                </div>
+              )}
+
+              {/* Nematode entries for this category (sorted by Section) */}
+              <div className="mt-3 space-y-3">
+                {groupedByCategory[cat.id]?.length ? (
+                  groupedByCategory[cat.id].map((entry) => {
+                    const cn = entry?.["Common name"];
+                    const sciName =
+                      entry?.data?.["Scientific Name"] ||
+                      entry?.data?.["Scientific name"] ||
+                      "";
+                    const sect = entry?.data?.Section || "";
+                    const nodeId = slugify(`${sect} ${cn}`);
+                    const titleText = `${sect ? sect + " " : ""}${cn}${
+                      sciName ? ` (${sciName})` : ""
+                    }`;
+
+                    return (
+                      <div key={nodeId} id={nodeId}>
+                        <Link
+                          to={`/details/${encodeURIComponent(cn)}`}
+                          className="block bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg shadow-sm p-4 transition"
+                        >
+                          <div className="text-lg font-semibold text-blue-700">
+                            {titleText}
+                          </div>
+                        </Link>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className="text-slate-500 text-sm italic">
+                    No entries available yet.
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </section>
+      </main>
     </div>
   );
 }
