@@ -347,7 +347,7 @@ const NematodeGeoMap = () => {
         setNewMapDetailedNematodeRecords(flat);
 
         // pick first few by default, or none—your call
-        setNewMapSelectedNematodeGroups(unique.slice(0, 6));
+        setNewMapSelectedNematodeGroups([]);
       } catch (e) {
         console.error('Error loading combined nematode data:', e);
         setNewMapAllNematodeGroups([]);
@@ -391,13 +391,13 @@ const NematodeGeoMap = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowHistoricalMap(true)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${showHistoricalMap ? 'bg-blue-600 text-white shadow' : 'bg-slate-100 hover:bg-slate-200'}`}
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${showHistoricalMap ? 'bg-blue-600 text-black shadow' : 'bg-slate-100 hover:bg-slate-200'}`}
             >
               Historical
             </button>
             <button
               onClick={() => setShowHistoricalMap(false)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${!showHistoricalMap ? 'bg-blue-600 text-white shadow' : 'bg-slate-100 hover:bg-slate-200'}`}
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${!showHistoricalMap ? 'bg-blue-600 text-black shadow' : 'bg-slate-100 hover:bg-slate-200'}`}
             >
               New Map
             </button>
@@ -435,10 +435,23 @@ const NematodeGeoMap = () => {
           ) : (
             <div className="bg-white rounded-2xl shadow p-4 sticky top-[84px] max-h-[calc(100vh-120px)] flex flex-col">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg font-semibold">Filter nematodes</h2>
+                <h2 className="text-lg font-semibold">Nematodes</h2>
                 <div className="flex gap-2">
-                  <button onClick={handleSelectAll} className="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 rounded text-xs">Select all</button>
-                  <button onClick={handleClearNewMapFilters} className="px-2.5 py-1.5 bg-rose-500 hover:bg-rose-600 text-white rounded text-xs">Clear</button>
+                  <button
+                    onClick={handleSelectAll}
+                    className="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 rounded text-xs font-medium 
+                              transition-transform duration-200 ease-in-out hover:scale-105 hover:shadow"
+                  >
+                    Select all
+                  </button>
+
+                  <button
+                    onClick={handleClearNewMapFilters}
+                    className="px-2.5 py-1.5 bg-rose-500 hover:bg-rose-600 text-black rounded text-xs font-medium 
+                              transition-transform duration-200 ease-in-out hover:scale-105 hover:shadow"
+                  >
+                    Clear
+                  </button>
                 </div>
               </div>
 
