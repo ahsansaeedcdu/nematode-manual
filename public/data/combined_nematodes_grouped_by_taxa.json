@@ -11,9 +11,9 @@
       "Scientific Name": "Achlysiella spp.",
       "Host Range": "Sugarcane",
       "Symptoms": {
-        "General": "Often hard to spot — may look like nutrient or water stress."
+        "General": "Often hard to spot and may look like nutrient or water stress."
       },
-      "Life Cycle": "Adult females are swollen and sausage-shaped. The full life cycle is not well understood.",
+      "Life Cycle": "Adult females swollen, sausage-shaped. Full life cycle not well understood.",
       "Why They Matter": "Rare but potentially a biosecurity concern. Monitoring and identification are important to detect any outbreaks early.",
       "Management Options": [
         "Keep an eye on sugarcane health in Nth QLD",
@@ -21,8 +21,8 @@
         "Follow biosecurity advice to prevent spread"
       ],
       "Further Information": [
-        "Nobbs JM (2003b). Preparation of a CD-ROM library of plant parasitic nematodes: Plant parasitic nematodes recorded from sugarcane in Australia. South Australian Research and Development Institute (SARDI), Adelaide, Australia.",
-        "Siddiqi MR (2006). Tylenchida: Parasites of Plants and Insects, 2nd edn. Commonwealth Agricultural Bureau, Slough."
+        "Nobbs JM (2003). Preparation of a CD-ROM library of plant parasitic nematodes: Plant parasitic nematodes recorded from sugarcane in Australia. South Australian Research and Development Institute (SARDI), Adelaide, Australia.",
+        "Siddiqi MR (2006). Tylenchida: parasites of plants and insects, 2nd ed. Commonwealth Agricultural Bureau, Slough."
       ]
     },
     "Entries": {
@@ -81,6 +81,26 @@
       "Aphelenchoides composticola",
       "Aphelenchoides ritzemabosi"
     ],
+    "data": {
+      "Section": "2.5.1",
+      "Title": "Foliar, leaf or bud nematodes (Aphelenchoides spp.)",
+      "Common Name": "Foliar nematodes",
+      "Scientific Name": "Aphelenchoides spp.",
+      "Host Range": "Strawberry, ferns, lilies, chrysanthemums and other ornamentals.",
+      "Symptoms": {
+        "Leaves/Buds": "Necrotic leaf lesions, leaf distortion, malformed buds/growing points."
+      },
+      "Life Cycle": "10–14 days; survive several months in dry leaves and reproduce in water films on plant surfaces.",
+      "Why They Matter": "Damage leaves and buds, reducing plant vigour and yield.",
+      "Management Options": [
+        "Use nematode-free planting material.",
+        "Remove and destroy infected plant debris.",
+        "Maintain good air circulation and avoid excess moisture on foliage."
+      ],
+      "Further Information": [
+        "Jenkins WR, Taylor DP (1967). Plant Nematology. Reinhold Publishing Corporation, New York, USA."
+      ]
+    },
     "Entries": {
       "Aphelenchoides besseyi": [
         {
@@ -216,6 +236,26 @@
       "Macroposthonia xenoplax",
       "Nothocriconema sp."
     ],
+    "data": {
+      "Section": "2.4.5",
+      "Title": "Ring Nematodes (Family Criconematidae)",
+      "Common Name": "Ring nematodes",
+      "Scientific Name": "Various species in the family Criconematidae (e.g., Caloosia, Hemicriconemoides, Macroposthonia, Morulaimus)",
+      "Host Range": "Woody plants, turfgrass, and native vegetation; specific crop impacts are not well known.",
+      "Symptoms": {
+        "Roots": "Subtle damage, may include stunting or reduced function.",
+        "Aboveground": "Slight decline in vigour, often not obvious."
+      },
+      "Life Cycle": "26–29 days under favourable conditions.",
+      "Why They Matter": "Often under-sampled due to slow movement and difficult extraction. True economic impact is uncertain but may affect woody plants.",
+      "Management Options": [
+        "Use improved detection methods (e.g., sugar flotation, centrifugation) to identify infestations.",
+        "Prevent spread by careful management of soil and plant material."
+      ],
+      "Further Information": [
+        "Jenkins WR, Taylor DP (1967). Plant Nematology. Reinhold Publishing Corporation, New York, USA."
+      ]
+    },
     "Entries": {
       "Criconemella sp.": [
         {
@@ -1085,12 +1125,12 @@
       "Title": "Stem and Bulb Nematodes (Ditylenchus spp.)",
       "Common Name": "Stem and bulb nematodes",
       "Scientific Name": "Ditylenchus spp.",
-      "Host Range": "Rice, oat, faba bean, field pea, lentil, canola, onion, garlic, tomato, and other susceptible field crops.",
+      "Host Range": "Rice, oat, faba bean, field pea, lentil, canola, onion, garlic, tomato and other.",
       "Symptoms": {
         "General": "Stunted growth, swollen stem bases, yellow or brown streaks on leaves."
       },
-      "Life Cycle": "One generation completes in 10–20 days, with the nematode surviving in a dry state within crop residues.",
-      "Why They Matter": "Can reduce crop establishment and yield through damage to stems and bulbs. Potential to spread via infected seed, bulbs, or contaminated soil. Limited knowledge on distribution, host range, and economic impact in northern Australia highlights the need for monitoring and further research.",
+      "Life Cycle": "10–20 days; survives in a dry state within crop residues.",
+      "Why They Matter": "Can reduce crop establishment and yield through damage to stems and bulbs. Potential to spread via infected seed, bulbs, or contaminated soil. Limited knowledge on distribution, host range, and economic impact in Northern Australia highlights the need for monitoring and further research.",
       "Management Options": [
         "Use certified nematode-free seed and planting material",
         "Avoid movement of infected soil or plant material",
@@ -1177,23 +1217,23 @@
       "Common Name": "Cyst nematodes",
       "Scientific Name": "Globodera spp. & Heterodera spp.",
       "Distribution": "Limited detections in Northern Australia.",
-      "Host Range": "Potato, sugarcane, cereals (wheat, barley, oat, triticale), legumes (including clovers), beets, brassicas, and other crops.",
+      "Host Range": "Potato, sugarcane, cereals (wheat, barley, oat, triticale), legumes (including clovers), beets, brassicas, and others.",
       "Crops at Risk": "Potato, sugarcane, cereals, legumes.",
       "Symptoms": {
-        "Roots": "Stunted, cysts (lemon-shaped) on roots.",
+        "Roots": "Stunted, cysts (lemon-shaped) present.",
         "Aboveground": "Patchy growth, yellowing, stunting."
       },
-      "Life Cycle": "One generation completes in 5–8 weeks. Cysts protect eggs for years in soil, making control difficult.",
-      "Why They Matter": "Cause significant yield losses up to 70%. Long-lasting cysts make eradication difficult.",
+      "Life Cycle": "5–-8 weeks. Cysts protect eggs for years ",
+      "Why They Matter": "Cause significant yield losses up to 70%. Long-lasting cysts make control difficult.",
       "Management Options": [
-        "Use resistant varieties if available",
-        "Rotate with non-host crops",
-        "Prevent soil movement from infested areas",
-        "Monitor regularly and follow biosecurity guidelines"
+        "Prevent introduction and spread.",
+        "Use resistant varieties and rotate with non-host crops.",
+        "Avoid moving soil, plants, or equipment from infested areas.",
+        "Monitor crops regularly for symptoms."
       ],
       "Further Information": [
-        "Vanstone VA, Hollaway GJ, Stirling GR (2008). Managing nematode pests in the southern and western regions of the Australian cereal industry: continuing progress in a challenging environment. Australasian Plant Pathology 37, 220-234.",
-        "Blacket MJ, Agarwal A, Wainer J, Triska MD, Renton M, Edwards J (2019). Molecular assessment of the introduction and spread of potato cyst nematode, Globodera rostochiensis, in Victoria. Phytopathology 109, 659-669."
+        "Blacket MJ, Agarwal A, Wainer J, Triska MD, Renton M, Edwards J (2019). Molecular assessment of the introduction and spread of potato cyst nematode, Globodera rostochiensis, in Victoria. Phytopathology 109, 659-669.",
+        "Vanstone VA, Hollaway GJ, Stirling GR (2008). Managing nematode pests in the southern and western regions of the Australian cereal industry: continuing progress in a challenging environment. Australasian Plant Pathology 37, 220-234."
       ]
     },
     "Entries": {
@@ -1238,6 +1278,28 @@
       "Paratylenchus colbrani",
       "Paratylenchus sp."
     ],
+    "data": {
+      "Section": "2.4.9",
+      "Title": "Pin Nematodes (Paratylenchus spp. & Gracilacus spp.)",
+      "Common Name": "Pin nematodes",
+      "Scientific Name": "Paratylenchus spp. & Gracilacus spp.",
+      "Host Range": "Mint, tall fescue, celery, carnations, figs, and others.",
+      "Symptoms": {
+        "Roots": "Usually only affected at high population densities, causing stunted growth.",
+        "Aboveground": "Subtle decline in vigour, often overlooked."
+      },
+      "Life Cycle": "Paratylenchus projectus: 36–38 days at 20–28°C.",
+      "Why They Matter": "Populations can rise rapidly (>500 per 100 cm³ soil). Rapid population growth potential makes monitoring and management important.",
+      "Management Options": [
+        "Monitor populations regularly, especially in susceptible crops.",
+        "Rotate crops and maintain healthy soils to reduce risk.",
+        "Avoid moving infested soil or plants."
+      ],
+      "Further Information": [
+        "Claerbout J, Vandevelde I, Venneman S, Kigozi A, de Sutter N, Neukermans J, Bleyaert P, Bert W, Höfte M, Viaene N (2020). A thorough study of a Paratylenchus sp. in glasshouse-grown lettuce: Characterisation, population dynamics, host plants, and damage threshold as keys to its integrated management. Annals of Applied Biology. 178(1), 62–79.",
+        "Wood FH (1973). Biology and host range of Paratylenchus projectus Jenkins, 1956 (Nematoda: Criconematidae) from a subalpine tussock grassland. New Zealand Journal of Agricultural Research 16, 381–384."
+      ]
+    },
     "Entries": {
       "Gracilacus sp.": [
         {
@@ -1478,6 +1540,30 @@
       "Scutellonema incisicaudatum",
       "Scutellonema sp."
     ],
+    "data": {
+      "Section": "2.4.7",
+      "Title": "Spiral Nematodes (Helicotylenchus spp., Rotylenchus spp. & Scutellonema spp.)",
+      "Common Name": "Spiral nematodes",
+      "Scientific Name": "Helicotylenchus spp., Rotylenchus spp. & Scutellonema spp.",
+      "Host Range": "Banana, horticultural crops, root/tuber crops such as yam.",
+      "Symptoms": {
+        "Roots": "Stunted, necrotic, dry rot in yam tubers.",
+        "Aboveground": "Reduced growth and yield."
+      },
+      "Life Cycle": "30–35 days at 24–32°C for some Helicotylenchus species.",
+      "Why They Matter": "H. multicinctus is a major pest in banana, causing significant economic losses. Scutellonema spp. cause dry rot in yam tubers, reducing quality and storage life. Wide host range and prevalence increase potential crop damage.",
+      "Management Options": [
+        "Use resistant or tolerant crop varieties where available.",
+        "Rotate with non-host crops to reduce populations.",
+        "Maintain good soil health and drainage.",
+        "Avoid moving infested soil or plants.",
+        "Monitor susceptible crops regularly for early detection."
+      ],
+      "Further Information": [
+        "Jenkins WR, Taylor DP (1967). Plant Nematology. Reinhold Publishing Corporation, New York, USA.",
+        "Bridge J, Coyne D, Kwoseh CK (2005). Nematode parasites of tropical root and tuber crops. In: Luc M, Sikora R, Bridge J (eds) Plant Parasitic Nematodes in Subtropical and Tropical Agriculture, 2nd edn. CAB International, Wallingford, UK, pp 221-258."
+      ]
+    },
     "Entries": {
       "Helicotylenchus dihystera": [
         {
@@ -5193,6 +5279,27 @@
       "Hemicycliophora labiata",
       "Hemicycliophora sp."
     ],
+    "data": {
+      "Section": "2.4.10",
+      "Title": "Sheath Nematodes (Hemicycliophora spp.)",
+      "Common Name": "Sheath nematodes",
+      "Scientific Name": "Hemicycliophora spp.",
+      "Host Range": "Globally: wide range of crops, fruit/nut trees, and ornamentals (e.g., black pepper, banana, cucurbits, citrus, rice, tobacco, yardlong bean, bamboo, cardamom). In Australia: no crop damage reported.",
+      "Symptoms": {
+        "Roots": "No observable plant symptoms in Australia.",
+        "Aboveground": "No observable plant symptoms in Australia."
+      },
+      "Life Cycle": "Varies by species; survives in moist soils.",
+      "Why They Matter": "Several species cause significant crop damage internationally (H. arenaria, H. conida, H. parvana, H. poranga, H. similis, H. typica). Broad host range and potential pathogenicity warrants monitoring.",
+      "Management Options": [
+        "Monitor high-risk areas and susceptible crops.",
+        "Maintain soil health and avoid waterlogging."
+      ],
+      "Further Information": [
+        "Nguyen HT, Trinh QP, Couvreur M, Nguyen TD, Bert W (2021). Description of Hemicycliophora cardamomi sp. n. (Nematoda: Hemicycliophoridae) associated with Amomum longiligulare T.L. Wu and a web-based key for the identification of Hemicycliophora spp. Journal of Helminthology 95, e2.",
+        "Van Gundy SD, Rackham RL (1961). Studies on the biology and pathogenicity of Hemicycliophora arenaria. Phytopathology 51, 393-397."
+      ]
+    },
     "Entries": {
       "Hemicycliophora labiata": [
         {
@@ -5263,6 +5370,28 @@
       "Hoplolaimus seinhorsti",
       "Hoplolaimus sp."
     ],
+    "data": {
+      "Section": "2.4.8",
+      "Title": "Lance Nematodes (Hoplolaimus spp.)",
+      "Common Name": "Lance nematodes",
+      "Scientific Name": "Hoplolaimus spp.",
+      "Host Range": "Cotton, rice, citrus, sugarcane, mango, tamarind, cowpea, baobab tree, banana, corn, soybean and others.",
+      "Symptoms": {
+        "Roots": "Stunted, fewer tillers.",
+        "Aboveground": "Reduced plant vigour and yield."
+      },
+      "Life Cycle": "Thrives in sandy soils; reproduction under suitable conditions. Detailed info is limited.",
+      "Why They Matter": "Reduce rice yields by up to 18% in upland systems. Pot trials: 100–10,000 nematodes per plant reduced tillers by 22–36% and grain yield by 11–18%. Less common than other nematodes but potentially important in sandy coastal soils.",
+      "Management Options": [
+        "Monitor sandy soils, especially in coastal cropping regions.",
+        "Rotate with non-host crops or use resistant varieties where available.",
+        "Maintain soil health and avoid moving infested soil or plants."
+      ],
+      "Further Information": [
+        "Ramana KV, Prasad JS, Seshagiri Rao Y (1978). Influence of atmospheric conditions and soil temperature on the prevalence of the lance nematode (Hoplolaimus indicus Sher, 1963) in rice fields. Proceedings of the Indian Academy of Sciences, Section B 87, 39-43.",
+        "Overstreet C, McGawley EC, Khalilian A, Kirkpatrick TL, Monfort WS, Henderson W, Mueller JD (2014). Site-specific nematode management - development and success in cotton production in the United States. Journal of Nematology 46, 309-320."
+      ]
+    },
     "Entries": {
       "Hoplolaimus seinhorsti": [
         {
@@ -5345,6 +5474,26 @@
     "Scientific taxa": [
       "Ibipora lolii"
     ],
+    "data": {
+      "Section": "2.4.3",
+      "Title": "Southern Sting Nematode (Ibipora lolii)",
+      "Common Name": "Southern sting nematode",
+      "Scientific Name": "Ibipora lolii",
+      "Host Range": "Turfgrasses (bowling greens, golf tees, putting greens); potential risk to cereals, sugarcane and maize.",
+      "Symptoms": {
+        "Roots": "Severely reduced.",
+        "Aboveground": "Turf decline, often mistaken for other stresses."
+      },
+      "Life Cycle": "Approximately 21 days.",
+      "Why They Matter": "Most destructive nematode pest of turfgrass in Australia. Spreads easily in sandy soils. Impacts sports fields and recreational areas.",
+      "Management Options": [
+        "Monitor turfgrass in high-risk areas.",
+        "Use clean planting material and treat soil where needed."
+      ],
+      "Further Information": [
+        "Siviour TR, McLeod RW (1979). Redescription of Ibipora lolii (Siviour 1978) comb. n. (Nematoda: Belonolaimidae) with observations on its host range and pathogenicity. Nematologica 25, 487-493."
+      ]
+    },
     "Entries": {
       "Ibipora lolii": [
         {
@@ -5376,23 +5525,23 @@
     ],
     "data": {
       "Section": "2.1.1",
-      "Title": "Root-Knot Nematodes (Meloidogyne spp.)",
+      "Title": "Root-knot Nematodes (Meloidogyne spp.)",
       "Common Name": "Root-knot nematodes",
       "Scientific Name": "Meloidogyne spp.",
       "Distribution": "Five species confirmed in the region: M. arenaria, M. incognita, M. javanica, M. thamesi, and M. enterolobii.",
-      "Host Range": "Affects over 5,000 plant species, including melons, tomatoes, capsicum, cucumber, sweet potato, eggplant, ornamental, and pasture plants.",
+      "Host Range": "5,000 plant species, including melons, tomatoes, capsicum, cucumber, sweet potato, eggplant, ornamental and pasture plants.",
       "Crops at Risk": "Tomato, capsicum, watermelon, peanut, mungbean, cucumber, sweetpotato, eggplant, cotton, etc.",
       "Symptoms": {
-        "Roots": "Stunting and galling of roots; galling, swelling, rotting.",
+        "Roots": "Galled and stunted.",
         "Aboveground": "Stunted growth, wilting, uneven crop performance, especially under heat or drought stress."
       },
-      "Life Cycle": "One generation completes in 4–6 weeks at 24–28°C (shorter in tropical conditions). Females lay up to 1,000 eggs – populations can build rapidly.",
+      "Life Cycle": "4-6 weeks at 24-28°C; faster in tropical conditions; female lay up to 1,000 eggs.",
       "Why They Matter": "Cause 5–20% yield loss or more. M. enterolobii can overcome resistance genes in many crops.",
       "Management Options": [
-        "Use resistant varieties where available",
-        "Crop rotation",
-        "Avoid moving infested soil and plants",
-        "Regularly monitor crops for symptoms"
+        "Major plant-parasitic nematodes in Northern Australia and worldwide.",
+        "Can reduce yields by more than half and cost billions globally.",
+        "Thrive in light soils and warm climates, multiplying year-round in northern regions.",
+        "M. enterolobii can bypass resistance genes in many crops."
       ],
       "Further Information": "Hay F, Stirling GR (2014). Management of root-knot nematode in vegetable crops. Horticulture Innovation Australia."
     },
@@ -7724,6 +7873,29 @@
       "Paralongidorus sacchari",
       "Paralongidorus sp."
     ],
+    "data": {
+      "Section": "2.4.2",
+      "Title": "Needle Nematodes (Paralongidorus spp.)",
+      "Common Name": "Needle nematodes",
+      "Scientific Name": "Paralongidorus spp.",
+      "Host Range": "Mainly perennial crops; P. australis notably impacts rice in Nth QLD.",
+      "Symptoms": {
+        "Roots": "Stunted with dead tips.",
+        "Aboveground": "Poor vigour and reduced growth."
+      },
+      "Life Cycle": "Several weeks.",
+      "Why They Matter": "Cause serious disease in rice and potentially other perennial crops. Serve as vectors for certain plant viruses, increasing biosecurity risks. Probably more widespread than reported due to limited surveys in the north.",
+      "Management Options": [
+        "Monitor susceptible crops, especially rice.",
+        "Use clean planting material and avoid moving infested soil.",
+        "Rotation or fallow may help in annual crops, but options are limited in perennials.",
+        "Maintain crop health (adequate nutrition, moisture, and good drainage) to reduce impact."
+      ],
+      "Further Information": [
+        "Stirling GR, Vawdrey LL (1985). Distribution of a needle nematode, Paralongidorus australis, in rice fields and areas of natural vegetation in North Queensland. Australasian Plant Pathology, 14, 71-72.",
+        "Stirling GR (2023). Ectoparasitic plant-parasitic nematodes known to cause crop damage in Australia. In: Stirling GR (ed) Australian plant-parasitic nematodes: applications and management. APPsNet. https://www.appsnet.org/nematodescontents."
+      ]
+    },
     "Entries": {
       "Paralongidorus australis": [
         {
@@ -7878,13 +8050,34 @@
       ]
     }
   },
-  "Stubby-root nematodes": {
-    "Common name": "Stubby-root nematodes",
+  "Stubby nematodes": {
+    "Common name": "Stubby nematodes",
     "Scientific taxa": [
       "Paratrichodorus minor",
       "Paratrichodorus porosus",
       "Paratrichodorus sp."
     ],
+    "data": {
+      "Section": "2.4.4",
+      "Title": "Stubby Nematodes (Paratrichodorus spp.)",
+      "Common Name": "Stubby nematodes",
+      "Scientific Name": "Paratrichodorus spp.",
+      "Host Range": "Tomatoes, corn, onions, sugarcane, grapefruit, and others.",
+      "Symptoms": {
+        "Roots": "Shortened and thickened; reduced fine feeder rootlets.",
+        "Aboveground": "Poor growth."
+      },
+      "Life Cycle": "16–22 days at 22–30°C; grow best in sandy loam soils.",
+      "Why They Matter": "Can transmit plant viruses. Damage roots and reduce nutrient/water uptake.",
+      "Management Options": [
+        "Monitor susceptible crops, especially in high-risk areas.",
+        "Manage soil health and structure to limit nematode population build-up.",
+        "Use clean planting material and avoid moving infested soil."
+      ],
+      "Further Information": [
+        "Jenkins WR, Taylor DP (1967). Plant Nematology. Reinhold Publishing Corporation, New York, USA."
+      ]
+    },
     "Entries": {
       "Paratrichodorus minor": [
         {
@@ -8137,18 +8330,18 @@
       "Title": "Root-lesion nematodes (Pratylenchus spp.)",
       "Common Name": "Root-lesion nematodes",
       "Scientific Name": "Pratylenchus spp.",
-      "Host Range": "A wide range of crops including cereals, sugarcane, turf, grape, stone fruit, pome fruit, pineapple.",
-      "Life Cycle": "One generation usually completes in 6–8 weeks.",
+      "Host Range": "Wide range of crops including cereals, sugarcane, turf, grape, stone fruit, pome fruit, pineapple.",
+      "Life Cycle": "6–8 weeks.",
       "Symptoms": {
         "Roots": "Lesions, rots, and destruction of feeder roots.",
         "Aboveground": "Stunted plants with yellowing leaves and fewer tillers, often seen in patches across the paddock."
       },
-      "Why They Matter": "Major pests worldwide, often underestimated because root symptoms are subtle. Reduce yields by 5–15% in many crops; P. thornei and P. neglectus can cut wheat yields by up to 64% and 32%, respectively. Damaged roots allow other soil pathogens to enter, worsening plant health.",
+      "Why They Matter": "Major pests worldwide but often underestimated because root symptoms are subtle. Reduce yields by 5–15% in many crops; P. thornei and P. neglectus can cut wheat yields by up to 64% and 32%, respectively. Damaged roots allow other pathogens to enter, worsening plant health.",
       "Management Options": [
-        "Rotate crops with non-host species to reduce nematode populations",
-        "Use resistant or tolerant cultivars where available",
-        "Maintain soil health through organic amendments and proper drainage",
-        "Monitor nematode populations regularly to inform management decisions"
+        "Test soil and roots regularly, as they can be present without obvious symptoms.",
+        "Rotate with poor-host crops to lower nematode numbers.",
+        "Use resistant or tolerant cultivars or rootstocks where available.",
+        "Reduce stress by maintaining good nutrition, organic amendments, and adequate moisture."
       ],
       "Further Information": [
         "Thompson JP, Owen KJ, Stirling GR, Bell MJ (2008). Root lesion nematodes (Pratylenchus thornei and P. neglectus): a review of recent progress in managing a significant pest of grain crops in northern Australia. Australasian Plant Pathology 37, 2325-242.",
@@ -8660,12 +8853,12 @@
       "Title": "Burrowing Nematodes (Radopholus spp.)",
       "Common Name": "Burrowing nematodes",
       "Scientific Name": "Radopholus spp.",
-      "Host Range": "Affect a diverse array of crops including bananas, sugarcane, ginger, turmeric, cardamom, peppers, soybeans, sorghum, maize, eggplant, coffee, tomatoes, and potatoes. Some weed species such as annual ryegrass and wild radish can host these nematodes.",
+      "Host Range": "Wide range of crops including bananas, sugarcane, ginger, turmeric, cardamom, peppers, soybeans, sorghum, maize, eggplant, coffee, tomatoes, and potatoes. Some weed species such as annual ryegrass and wild radish can host these nematodes.",
       "Symptoms": {
         "Roots": "Dark red to black spots that join together.",
-        "Aboveground": "Plants become weak, yellow, stunted, and produce smaller bunches. In wet, windy weather, weakened roots may cause plants to fall over."
+        "Aboveground": "Weak, yellow, stunted, and produce smaller bunches. In wet, windy weather, weakened roots may cause plants to fall over."
       },
-      "Life Cycle": "Feed inside roots; reproduce within root tissue. Radopholus similis completes its life cycle in 20–25 days at soil temperatures of 24–32°C.",
+      "Life Cycle": "20–25 days at 24–32°C.",
       "Why They Matter": "R. similis is the most damaging species, especially to bananas. Severe yield losses reported: 40–70% in oranges, 50–80% in grapefruits, up to 95% over 10 years in bananas.",
       "Management Options": [
         "Clean planting material and enforce quarantine measures",
@@ -8674,8 +8867,8 @@
         "Retain crop residues and apply organic amendments to improve soil health"
       ],
       "Further Information": [
-        "Stirling GR, Pattison AB (2008). Beyond chemical dependency for managing plant-parasitic nematodes: examples from the banana, pineapple and vegetable industries of tropical and subtropical Australia. Australasian Plant Pathology 37, 254-267.",
-        "Pattison AB, Cobon JA, Araya-Vargas M, Chabrier C (2024). Towards sustainable management of nematodes in banana. In Drenth A, Kema G (eds.) Achieving sustainable cultivation of bananas Volume 3: Diseases and pests. Burleigh Dodds Science Publishing, p. 419-450."
+        "Pattison AB, Cobon JA, Araya-Vargas M, Chabrier C (2024). Towards sustainable management of nematodes in banana. In Drenth A, Kema G (eds.) Achieving sustainable cultivation of bananas Volume 3: Diseases and pests. Burleigh Dodds Science Publishing, p. 419-450.",
+        "Stirling GR, Pattison AB (2008). Beyond chemical dependency for managing plant-parasitic nematodes: examples from the banana, pineapple and vegetable industries of tropical and subtropical Australia. Australasian Plant Pathology 37, 254-267."
       ]
     },
     "Entries": {
@@ -9120,13 +9313,13 @@
         "Title": "Reniform Nematodes (Rotylenchulus spp.)",
         "Common Name": "Reniform nematodes",
         "Scientific Name": "Rotylenchulus spp.",
-        "Host Range": "Cotton, cowpea, soybean, tobacco, pineapple, sweetpotato, okra, tomato, beans, and various vegetables. Over 300 plant species are known hosts, including many weeds.",
+        "Host Range": ">300 plant species including cotton, cowpea, soybean, tobacco, pineapple, sweetpotato, okra, tomato, beans, various vegetables and weeds.",
         "Symptoms": {
           "Roots": "Destruction of feeder roots, reduced root volume.",
           "Aboveground": "Stunted growth, yellowing, wilting, delayed flowering, fewer and smaller fruits, and overall yield decline."
         },
-        "Life Cycle": "One generation completes in less than 3 weeks under favourable conditions. Females embed their heads in root tissue, leaving the body outside. Each female lays 40–100 eggs. Populations build quickly, particularly in soils with higher silt or clay content.",
-        "Why They Matter": "Rotylenchulus reniformis is the dominant species in northern Australia and a major pest of cotton and vegetable crops. Infestations can reduce cotton yields by 10–25% under typical conditions, with losses exceeding 50% under drought stress or in high-density infestations. Difficult to detect due to subtle symptoms.",
+        "Life Cycle": "≤3 weeks Females embeds their heads in roots; each lays 40–100 eggs.",
+        "Why They Matter": "Rotylenchulus reniformis is the dominant species in northern Australia and a major pest of cotton, vegetables and pineapple. Can cut cotton yields by 10-25% (over 50% in bad seasons). Worsens root diseases and often goes unnoticed due to subtle symptoms.",
         "Management Options": [
           "Rotate with non-host crops and manage weeds",
           "Use resistant or tolerant varieties where available",
@@ -9134,9 +9327,9 @@
           "Avoid spreading infested soil on equipment, tools, or footwear"
         ],
         "Further Information": [
+          "Lawrence KS (2022). Reniform nematode (Rotylenchulus reniformis) and its interactions with cotton (Gossypium hirsutum). In Integrated Nematode Management: State-of-the-art and visions for the future (Eds. RA Sikora et al.) CAB International, Wallingford, Chapter 14, 94-99.",
           "Smith LJ, Scheikowski L, Kafle D (2024). The distribution of reniform nematode (Rotylenchulus reniformis) in cotton fields in central QLD and population dynamics in response to cropping regime. Pathogens 13, 888.",
-          "Stirling GR (2023). PSN 031. Reniform nematode (Rotylenchulus reniformis), a damaging pest of many crops in tropical and subtropical regions of Australia. In: Stirling GR (ed) Plant and soil nematodes: friend and foe. APPsNet. https://www.appsnet.org/nematodes",
-          "Lawrence KS (2022). Reniform nematode (Rotylenchulus reniformis) and its interactions with cotton (Gossypium hirsutum). In Integrated Nematode Management: State-of-the-art and visions for the future (Eds. RA Sikora et al.) CAB International, Wallingford, Chapter 14, 94-99."
+          "Stirling GR (2023). PSN 031. Reniform nematode (Rotylenchulus reniformis), a damaging pest of many crops in tropical and subtropical regions of Australia. In: Stirling GR (ed) Plant and soil nematodes: friend and foe. APPsNet. https://www.appsnet.org/nematodes"
         ]
       },
     "Entries": {
@@ -10342,6 +10535,28 @@
       "Tylenchorhynchus sp.",
       "Tylenchorhynchus triglyphus"
     ],
+    "data": {
+      "Section": "2.4.6",
+      "Title": "Stunt Nematodes (Tylenchorhynchus spp.)",
+      "Common Name": "Stunt nematodes or stylet nematodes",
+      "Scientific Name": "Tylenchorhynchus spp.",
+      "Host Range": "Rice, corn, wheat, sugarcane, sorghum, citrus, soybean, sweet potato, lettuce, grape, and others.",
+      "Symptoms": {
+        "Roots": "Stunted and reduced root mass; corn roots may weigh 40–60% less when infested.",
+        "Aboveground": "Stunted shoots, yellowing, wilting, and defoliation."
+      },
+      "Life Cycle": "Populations can increase from 10 to 5,000 individuals in ~8 months under favourable conditions.",
+      "Why They Matter": "Cause major root damage, reducing plant growth and yields. Potential to affect many crops in Northern Australia due to wide host range.",
+      "Management Options": [
+        "Monitor soil and root health regularly.",
+        "Rotate crops and use resistant varieties where available.",
+        "Maintain soil health and avoid practices that encourage nematode build-up."
+      ],
+      "Further Information": [
+        "Handoo ZA (2000). A key and diagnostic compendium to the species of the genus Tylenchorhynchus Cobb, 1913 (Nematoda: Belonolaimidae). Journal of Nematology 32(1), 20-34.",
+        "Jenkins WR, Taylor DP (1967). Plant Nematology. Reinhold Publishing Corporation, New York, USA."
+      ]
+    },
     "Entries": {
       "Tylenchorhynchus annulatus": [
         {
@@ -11133,7 +11348,7 @@
         "Roots": "Stunting and general deterioration of roots.",
         "Aboveground": "Poor growth and delayed production, known as the citrus replant problem."
       },
-      "Life Cycle": "One generation completes in 6–8 weeks at 24–26°C. Each female lays several hundred eggs. Populations build quickly in fine-textured or sandy soils with high organic matter.",
+      "Life Cycle": "6–8 weeks at 24–26°C: female lays several hundred eggs.",
       "Why They Matter": "Causes crop losses ranging from 10 to 50%. Serious economic impact due to reduced tree growth and delayed production, especially in replant situations.",
       "Management Options": [
         "Use nematode-free planting material",
@@ -11257,17 +11472,17 @@
       "Title": "Dagger Nematodes (Xiphinema spp.)",
       "Common Name": "Dagger nematodes",
       "Scientific Name": "Xiphinema spp.",
-      "Host Range": "Many crops, especially perennial horticultural crops such as fruit trees, grapevines, strawberries, figs, tomatoes, and also rice, sugarcane, peanuts, and soybeans.",
+      "Host Range": "Perennial horticultural crops (fruit trees, grapevines, strawberries, figs, tomatoes), rice, sugarcane, peanuts, soybeans.",
       "Symptoms": {
-        "Roots": "Stunting, galling and malfunction of root tips.",
-        "Aboveground": "Reduced vigour, uneven growth, and poor yields."
+        "Roots": "Stunted, tips damaged.",
+        "Aboveground": "Poor vigour and yield."
       },
-      "Life Cycle": "One generation completes in about one year, prefers mild soils (~20°C) with moderate moisture (25–80%).",
-      "Why They Matter": "Damage to root tips limits water and nutrient uptake, lowering yields. Some species can transmit plant viruses, increasing biosecurity risks.",
+      "Life Cycle": "1 year; prefers mild soils (~20°C) with moderate moisture (25–80%).",
+      "Why They Matter": "Damage to root tips limits water and nutrient uptake, lowering yields. Some species transmit plant viruses, increasing biosecurity risks.",
       "Management Options": [
-        "Test soils, especially sandy ones, for presence before planting",
         "Use clean planting material and avoid moving infested soil",
-        "Rotate crops and use resistant rootstocks when available"
+        "Rotate crops and use resistant rootstocks when available",
+        "Keep crops healthy with good nutrition, moisture, and drainage."
       ],
       "Further Information": [
         "Jenkins WR, Taylor DP (1967). Plant Nematology. Reinhold Publishing Corporation, New York, USA."

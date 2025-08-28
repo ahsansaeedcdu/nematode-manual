@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import FadeIn from "../FadeIn/FadeIn";
 
 // import './NematodeGeoMap.css';
 import L from 'leaflet';
@@ -105,7 +106,24 @@ const flattenCombinedData = (combined) => {
   jittered.forEach((p, i) => { out[i].lat = p.lat; out[i].lng = p.lng; });
   return out;
 };
+function formatNematodeName(name) {
+  if (!name) return 'N/A';
 
+  return name.split(" ").map((part, i, arr) => {
+    // If it's "sp." or "spp.", leave normal
+    if (part === "sp." || part === "spp.") {
+      return <span key={i}> {part}</span>;
+    }
+
+    // Italicise genus (first word) and species (second word if present)
+    if (i === 0 || (i === 1 && arr[0][0] === arr[0][0].toUpperCase())) {
+      return <em key={i}> {part}</em>;
+    }
+
+    // Otherwise leave normal
+    return <span key={i}> {part}</span>;
+  });
+}
 /* ----------------- GeoJSONLayerWithInteractions (used by NEW map for markers only) ----------------- */
 const GeoJSONLayerWithInteractions = ({
   geoData,
@@ -203,7 +221,7 @@ const GeoJSONLayerWithInteractions = ({
             <Popup>
               <div className="font-semibold text-slate-800">
                 {/* <p className="mb-1"><strong>Common name:</strong> {record.common_nematode_name}</p> */}
-                <p className="mb-1"><strong>Nematode Taxa:</strong> {record.nematode || 'N/A'}</p>
+                <p className="mb-1"> <strong>Nematode Taxa:</strong>{' '} {record.nematode ? formatNematodeName(record.nematode) : 'N/A'} </p>
                 <p className="mb-1"><strong>Associated Plant(s):</strong> {plantClean}</p>
                 <p className="mb-1"><strong>Region:</strong> {([record['Sampling Region'], record['Sampling State']].filter(v => v && String(v).trim()).join(', ')) || 'N/A'}</p>
                 {/* <p className="mb-1"><strong>State:</strong> {record['Sampling State'] || 'N/A'}</p> */}
@@ -253,7 +271,7 @@ const HistoricalMap = () => {
     const species = (lgaName && nematodeMap[lgaName]) || [];
     const tooltipContent = `
       <strong>${lgaName || 'Unknown LGA'}</strong><br/>
-      ${species.length ? species.join(', ') : 'No nematodes found'}
+      ${species.length ? species.join(', ') : 'Unconfirmed presence of PPN'}
     `;
 
     // Tooltip
@@ -383,23 +401,24 @@ const NematodeGeoMap = () => {
   }, [groupQuery, newMapAllNematodeGroups]);
 
   return (
+    <FadeIn>
     <div className="min-h-screen w-screen bg-slate-50 text-slate-800 flex flex-col">
       {/* Header */}
       <header className="w-full border-b bg-white/90 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-[1400px] mx-auto px-4 py-3 flex items-center justify-between">
-        <h1 className="text-xl md:text-2xl font-semibold tracking-tight !text-blue-600">Plant-parasitic Nematodes Distribution Maps</h1>
+        <h2 className="text-xl md:text-2xl font-semibold tracking-tight !text-blue-600">Distribution of Plant-parasitic Nematodes in Norhtern Australia</h2>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowHistoricalMap(true)}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${showHistoricalMap ? 'bg-blue-600 text-black shadow' : 'bg-slate-100 hover:bg-slate-200'}`}
             >
-              Historical
+              Overview
             </button>
             <button
               onClick={() => setShowHistoricalMap(false)}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${!showHistoricalMap ? 'bg-blue-600 text-black shadow' : 'bg-slate-100 hover:bg-slate-200'}`}
             >
-              New Map
+              Taxa
             </button>
           </div>
         </div>
@@ -410,26 +429,28 @@ const NematodeGeoMap = () => {
         <aside className="md:col-span-1">
           {showHistoricalMap ? (
             <div className="bg-white rounded-2xl shadow p-4 sticky top-[84px]">
-              <h2 className="text-lg font-semibold mb-2">About this view</h2>
+              <h2 className="text-lg font-semibold mb-2">About this map</h2>
               <p className="text-sm text-slate-600">
-                This map highlights LGAs with recorded nematode presence  and those without .
+                This map shows where plant-parasitic nematodes (PPNs) have been found in Northern Australia.
               </p>
               <div className="mt-4">
                 <ul className="space-y-2 text-sm text-slate-700">
                   <li className="flex items-center gap-3">
-                    <span className="inline-block h-4 w-4 rounded-full bg-[#f87171] ring-1 ring-[#f87171]/40" />
-                    <span>Confirmed presence of plant-parasitic nematodes (PPN)
+                    <span className="inline-block h-4 w-4 shrink-0 rounded-full bg-[#f87171] ring-1 ring-[#f87171]/40" />
+                    <span>
+                      <strong>Confirmed</strong> – nematodes have been detected in these areas.
                     </span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <span className="inline-block h-4 w-4 rounded-full bg-[#e5e7eb] ring-1 ring-[#e5e7eb]/60" />
-                    <span>Unconfirmed presence of plant-parasitic nematodes (PPN)
+                    <span className="inline-block h-4 w-4 shrink-0 rounded-full bg-[#e5e7eb] ring-1 ring-[#e5e7eb]/60" />
+                    <span>
+                      <strong>Unconfirmed</strong> – nematodes may occur, but not yet verified.
                     </span>
                   </li>
                 </ul>
               </div>
               <div className="mt-4 p-3 rounded-lg bg-slate-50 border text-sm">
-                Tip: Zoom or pan to focus on specific regions.
+                <strong>Tip:</strong> Zoom in to see details for specific regions.
               </div>
             </div>
           ) : (
@@ -543,10 +564,11 @@ const NematodeGeoMap = () => {
       </main>
 
       {/* Footer */}
-      <footer className="py-4 text-center text-xs text-slate-500">
+      {/* <footer className="py-4 text-center text-xs text-slate-500">
         Data visualisation prototype · Leaflet + Tailwind
-      </footer>
+      </footer> */}
     </div>
+    </FadeIn>
   );
 };
 

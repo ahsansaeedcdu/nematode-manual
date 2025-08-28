@@ -1,6 +1,8 @@
 // NematodeDetail.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ChevronDown, ChevronRight } from "lucide-react";
+import FadeIn from "../../components/FadeIn/FadeIn";
 // import MapPreviewModal from "../../components/MapPreviewModal/MapPreviewModal"; // optional
 
 /** --- helpers --- */
@@ -31,10 +33,12 @@ const flattenEntriesFromTaxaMap = (taxaMap) => {
 const OVERVIEW_ORDER = [
   "Common Name",
   "Scientific Name",
-  "Distribution",
-  "Crops at Risk",
+  "Host Range",
   "Life Cycle",
   "Why They Matter",
+  "Symptoms",
+  "Management Options",
+  "Further Information"
 ];
 
 // robust array parser
@@ -134,176 +138,356 @@ export default function NematodeDetail({
   ];
 
   /** --- renderers (STRICT single-column) --- */
+  const [open, setOpen] = useState({}); // track which sections are open
 
+  const toggle = (key) => {
+    setOpen((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
   // Symptoms can be:
   // 1) object like { Roots: "...", Aboveground: "..." }
   // 2) array of strings
   // 3) single string
-  const renderSymptoms = (val) => {
+  const renderSymptoms = (val, open, toggle) => {
     const isObj = val && typeof val === "object" && !Array.isArray(val);
-    if (isObj) {
-      const preferred = ["Roots", "Belowground", "Aboveground", "Leaves", "Stems", "Fruits", "General"];
-      const keys = Object.keys(val || {});
-      const order = [...preferred.filter((k) => keys.includes(k)), ...keys.filter((k) => !preferred.includes(k))];
 
-      return (
-        <section className="rounded-2xl border border-sky-200 bg-white p-6 shadow-sm">
-          <h2 className="text-xl md:text-2xl font-semibold text-slate-800">Symptoms</h2>
-          <div className="mt-4 space-y-4">
-            {order.map((k) => {
-              const v = val[k];
-              const bullets = Array.isArray(v) ? v : splitToBullets(v);
-              return (
-                <div key={k}>
-                  <div className="text-sm font-semibold uppercase tracking-wide text-sky-700/90">{k}</div>
-                  {bullets.length > 1 ? (
-                    <ul className="mt-1 list-disc pl-6 text-slate-800 space-y-1">
-                      {bullets.map((b, i) => <li key={i}>{b}</li>)}
-                    </ul>
-                  ) : (
-                    <p className="mt-1 text-slate-800">{String(v)}</p>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      );
-    }
-
-    const items = Array.isArray(val) ? val : toArray(val);
     return (
       <section className="rounded-2xl border border-sky-200 bg-white p-6 shadow-sm">
-        <h2 className="text-xl md:text-2xl font-semibold text-slate-800">Symptoms</h2>
-        {items?.length ? (
-          <ul className="mt-3 list-disc pl-6 text-slate-800 space-y-1">
-            {items.map((it, i) => <li key={i}>{it}</li>)}
-          </ul>
-        ) : (
-          <p className="mt-3 text-slate-600">No symptoms listed.</p>
+        {/* Toggle header */}
+        <button
+          onClick={() => toggle("Symptoms")}
+          className="flex items-center justify-between w-full text-left"
+        >
+          <h2 className="text-xl md:text-2xl font-semibold text-slate-800">
+            Symptoms
+          </h2>
+          {open["Symptoms"] ? (
+            <ChevronDown className="w-5 h-5 text-slate-600" />
+          ) : (
+            <ChevronRight className="w-5 h-5 text-slate-600" />
+          )}
+        </button>
+
+        {/* Collapsible content */}
+        {open["Symptoms"] && (
+          <div className="mt-4 space-y-4">
+            {isObj ? (
+              (() => {
+                const preferred = [
+                  "Roots",
+                  "Belowground",
+                  "Aboveground",
+                  "Leaves",
+                  "Stems",
+                  "Fruits",
+                  "General",
+                ];
+                const keys = Object.keys(val || {});
+                const order = [
+                  ...preferred.filter((k) => keys.includes(k)),
+                  ...keys.filter((k) => !preferred.includes(k)),
+                ];
+
+                return order.map((k) => {
+                  const v = val[k];
+                  const bullets = Array.isArray(v) ? v : splitToBullets(v);
+                  return (
+                    <div key={k}>
+                      <div className="text-sm font-semibold uppercase tracking-wide text-sky-700/90">
+                        {k}
+                      </div>
+                      {bullets.length > 1 ? (
+                        <ul className="mt-1 list-disc pl-6 text-slate-800 space-y-1">
+                          {bullets.map((b, i) => (
+                            <li key={i}>{b}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="mt-1 text-slate-800">{String(v)}</p>
+                      )}
+                    </div>
+                  );
+                });
+              })()
+            ) : (
+              (() => {
+                const items = Array.isArray(val) ? val : toArray(val);
+                return items?.length ? (
+                  <ul className="mt-3 list-disc pl-6 text-slate-800 space-y-1">
+                    {items.map((it, i) => (
+                      <li key={i}>{it}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="mt-3 text-slate-600">No symptoms listed.</p>
+                );
+              })()
+            )}
+          </div>
         )}
       </section>
     );
   };
 
-  const renderManagement = (val) => {
+  const renderManagement = (val, open, toggle) => {
     const items = Array.isArray(val) ? val : toArray(val);
+
     return (
       <section className="rounded-2xl border border-emerald-200 bg-white p-6 shadow-sm">
-        <h2 className="text-xl md:text-2xl font-semibold text-slate-800">Management Options</h2>
-        {items?.length ? (
-          <ul className="mt-3 list-disc pl-6 text-slate-800 space-y-1">
-            {items.map((it, i) => <li key={i}>{it}</li>)}
-          </ul>
-        ) : (
-          <p className="mt-3 text-slate-600">No management options listed.</p>
+        {/* Toggle header */}
+        <button
+          onClick={() => toggle("Management Options")}
+          className="flex items-center justify-between w-full text-left"
+        >
+          <h2 className="text-xl md:text-2xl font-semibold text-slate-800">
+            Management Options
+          </h2>
+          {open["Management Options"] ? (
+            <ChevronDown className="w-5 h-5 text-slate-600" />
+          ) : (
+            <ChevronRight className="w-5 h-5 text-slate-600" />
+          )}
+        </button>
+
+        {/* Collapsible content */}
+        {open["Management Options"] && (
+          <>
+            {items?.length ? (
+              <ul className="mt-3 list-disc pl-6 text-slate-800 space-y-1">
+                {items.map((it, i) => (
+                  <li key={i}>{it}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-3 text-slate-600">No management options listed.</p>
+            )}
+          </>
         )}
       </section>
     );
   };
 
   // Show references as clean modern text (no links), in its own section
-  const renderFurtherInformation = (val) => {
-    const items = Array.isArray(val) ? val : toArray(val);
+  const renderFurtherInformation = (val, open, toggle) => {
+  // Ensure array without splitting into sentences
+    const items = Array.isArray(val) ? val : [String(val)];
+
     return (
       <section className="rounded-2xl border border-violet-200 bg-white p-6 shadow-sm">
-        <h2 className="text-xl md:text-2xl font-semibold text-slate-800">Further Information</h2>
-        {items?.length ? (
-          <ol className="mt-3 list-decimal pl-6 space-y-3">
-            {items.map((it, i) => (
-              <li key={i} className="text-slate-800 leading-relaxed">
-                {/* If item is object, try a readable fallback; else show string */}
-                {typeof it === "object" ? JSON.stringify(it) : String(it)}
-              </li>
-            ))}
-          </ol>
-        ) : (
-          <p className="mt-3 text-slate-600">No references provided.</p>
+        {/* Toggle header */}
+        <button
+          onClick={() => toggle("Further Information")}
+          className="flex items-center justify-between w-full text-left"
+        >
+          <h2 className="text-xl md:text-2xl font-semibold text-slate-800">
+            Further Information
+          </h2>
+          {open["Further Information"] ? (
+            <ChevronDown className="w-5 h-5 text-slate-600" />
+          ) : (
+            <ChevronRight className="w-5 h-5 text-slate-600" />
+          )}
+        </button>
+
+        {/* Collapsible content */}
+        {open["Further Information"] && (
+          <>
+            {items?.length ? (
+              <ol className="mt-3 list-decimal pl-6 space-y-3">
+                {items.map((it, i) => (
+                  <li
+                    key={i}
+                    className="text-slate-800 leading-relaxed border-b border-slate-100 pb-2 last:border-0"
+                  >
+                    {String(it)}
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <p className="mt-3 text-slate-600">No references provided.</p>
+            )}
+          </>
         )}
       </section>
     );
   };
+    
+  const formatScientificName = (text) => {
+    if (!text) return "";
 
+    // Split words to check each part
+    return text.split(" ").map((word, idx) => {
+      const lower = word.toLowerCase();
+      if (lower === "sp." || lower === "spp.") {
+        return (
+          <span key={idx} className="not-italic">
+            {word}{" "}
+          </span>
+        );
+      }
+      // Italicise genus/species names
+      return (
+        <span key={idx} className="italic">
+          {word}{" "}
+        </span>
+      );
+    });
+  }
+  const splitIntoSentences = (text) => {
+  if (!text) return [];
+  return text.split(/\. (?=[A-Z])/).map((s, idx, arr) => 
+    idx < arr.length - 1 ? s.trim() + "." : s.trim()
+  );
+};
   return (
+    <FadeIn>
     <div className="min-h-screen w-screen bg-white">
       <main className="max-w-[1200px] mx-auto w-full px-6 md:px-8 py-8 space-y-8">
         {/* Header / Hero */}
-        <section className="rounded-3xl bg-white/90 backdrop-blur-sm shadow-md ring-1 ring-slate-200 p-7 md:p-9">
-          {loading ? (
-            <div className="animate-pulse">
-              <div className="h-5 w-1/3 bg-slate-100 rounded mb-3" />
-              <div className="h-9 w-2/3 bg-slate-100 rounded" />
-            </div>
-          ) : err ? (
-            <div className="text-rose-700">
-              Failed to load data: <span className="font-mono">{err}</span>
-            </div>
-          ) : group ? (
-            <>
-              {/* STRICT single-column labels */}
-              {/* <div className="text-xs uppercase tracking-wider text-slate-500">Common name</div> */}
-              <h1 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
-                {aboutData?.Title || group["Common name"] || commonName}
-              </h1>
-
-              {/* {aboutData?.["Scientific Name"] && (
-                <div className="mt-4">
-                  <div className="text-xs uppercase tracking-wider text-slate-500">
-                    Scientific name
-                  </div>
-                  <div className="text-lg md:text-xl text-slate-800 italic">
-                    {aboutData["Scientific Name"]}
-                  </div>
-                </div>
-              )} */}
-
-              {/* Genus label */}
-              {/* {genusLabel && (
-                <div className="mt-3">
-                  <div className="text-xs uppercase tracking-wider text-slate-500">Likely genus</div>
-                  <div className="text-slate-800 italic">{genusLabel}</div>
-                </div>
-              )} */}
-            </>
-          ) : (
-            <div className="text-slate-800">
-              No data found for <strong>{commonName}</strong>.
-            </div>
-          )}
-        </section>
+        {(loading || err || !group) && (
+          <section className="rounded-3xl bg-white/90 backdrop-blur-sm shadow-md ring-1 ring-slate-200 p-7 md:p-9">
+            {loading ? (
+              <div className="animate-pulse">
+                <div className="h-5 w-1/3 bg-slate-100 rounded mb-3" />
+                <div className="h-9 w-2/3 bg-slate-100 rounded" />
+              </div>
+            ) : err ? (
+              <div className="text-rose-700">
+                Failed to load data: <span className="font-mono">{err}</span>
+              </div>
+            ) : (
+              <div className="text-slate-800">
+                No data found for <strong>{commonName}</strong>.
+              </div>
+            )}
+          </section>
+        )}
 
         {/* Overview section (single column cards) */}
         {aboutData && (
           <section className="space-y-4">
-            {/* <h2 className="text-2xl font-semibold text-slate-900">Overview</h2> */}
-            <div className="space-y-4">
+            <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+              <h2 className="text-3xl md:text-4xl font-bold !text-blue-600 leading-tight">
+                {aboutData?.Title || group["Common name"] || commonName}
+              </h2>
               {OVERVIEW_ORDER.filter((k) => aboutData[k]).map((k) => (
-                <div key={k} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-                  <div className="text-sm uppercase tracking-wide text-slate-500">{k}</div>
-                  <div className="mt-1 whitespace-pre-line text-slate-800">
-                    {String(aboutData[k])}
-                  </div>
+                <div key={k} className="border-b border-slate-200 last:border-0 py-3">
+                  {/* Clickable title */}
+                  <button
+                    onClick={() => toggle(k)}
+                    className="flex items-center justify-between w-full text-left"
+                  >
+                    <span className="text-sm uppercase tracking-wide text-slate-600 font-semibold">
+                      {k}
+                    </span>
+                    {open[k] ? (
+                      <ChevronDown className="w-4 h-4 text-slate-500" />
+                    ) : (
+                      <ChevronRight className="w-4 h-4 text-slate-500" />
+                    )}
+                  </button>
+
+                  {/* Collapsible content */}
+                  {open[k] && (
+                    <div className="mt-2 text-slate-800 text-sm">
+                      {k === "Scientific Name" ? (
+                        formatScientificName(String(aboutData[k]))
+                      ) : k === "Why They Matter" ? (
+                        <ul className="list-disc pl-5 space-y-1">
+                          {splitIntoSentences(String(aboutData[k])).map((line, i) => (
+                            <li key={i}>{line}</li>
+                          ))}
+                        </ul>
+                      ) : k === "Symptoms" ? (
+                        (() => {
+                          const val = aboutData[k];
+                          const isObj = val && typeof val === "object" && !Array.isArray(val);
+                          if (isObj) {
+                            const preferred = ["Roots", "Belowground", "Aboveground", "Leaves", "Stems", "Fruits", "General"];
+                            const keys = Object.keys(val || {});
+                            const order = [
+                              ...preferred.filter((x) => keys.includes(x)),
+                              ...keys.filter((x) => !preferred.includes(x)),
+                            ];
+                            return (
+                              <div className="space-y-3">
+                                {order.map((part) => {
+                                  const v = val[part];
+                                  const bullets = Array.isArray(v) ? v : splitToBullets(v);
+                                  return (
+                                    <div key={part}>
+                                      <div className="text-xs font-semibold uppercase tracking-wide text-sky-700/90">
+                                        {part}
+                                      </div>
+                                      {bullets.length > 1 ? (
+                                        <ul className="mt-1 list-disc pl-6 space-y-1">
+                                          {bullets.map((b, i) => (
+                                            <li key={i}>{b}</li>
+                                          ))}
+                                        </ul>
+                                      ) : (
+                                        <p className="mt-1">{String(v)}</p>
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            );
+                          }
+                          const items = Array.isArray(val) ? val : toArray(val);
+                          return (
+                            <ul className="list-disc pl-6 space-y-1">
+                              {items.map((it, i) => (
+                                <li key={i}>{it}</li>
+                              ))}
+                            </ul>
+                          );
+                        })()
+                      ) : k === "Management Options" ? (
+                        <ul className="list-disc pl-5 space-y-1">
+                          {(Array.isArray(aboutData[k]) ? aboutData[k] : toArray(aboutData[k])).map((it, i) => (
+                            <li key={i}>{it}</li>
+                          ))}
+                        </ul>
+                      ) : k === "Further Information" ? (
+                          <ol className="list-decimal pl-5 space-y-2">
+                            {(Array.isArray(aboutData[k]) ? aboutData[k] : [String(aboutData[k])]).map(
+                              (it, i) => (
+                                <li key={i} className="leading-relaxed">
+                                  {String(it)}
+                                </li>
+                              )
+                            )}
+                          </ol>
+                      ) : (
+                        splitIntoSentences(String(aboutData[k])).map((line, i) => (
+                          <p key={i} className="mb-1">
+                            {line}
+                          </p>
+                        ))
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
           </section>
+
         )}
 
         {/* Symptoms (object/array aware) */}
-        {aboutData?.Symptoms && renderSymptoms(aboutData.Symptoms)}
+        {/* {aboutData?.Symptoms && renderSymptoms(aboutData.Symptoms, open, toggle)} */}
 
         {/* Management Options */}
-        {(aboutData?.["Management Options"] || aboutData?.Management) &&
-          renderManagement(aboutData["Management Options"] ?? aboutData.Management)
-        }
+        {/* {aboutData?.["Management Options"] &&
+        renderManagement(aboutData["Management Options"], open, toggle)} */}
 
         {/* Further Information (separate section, text only) */}
-        {aboutData?.["Further Information"] && renderFurtherInformation(aboutData["Further Information"])}
+        {/* {aboutData?.["Further Information"] &&
+      renderFurtherInformation(aboutData["Further Information"], open, toggle)} */}
 
         {/* Images */}
         <section className="rounded-3xl bg-white p-6 md:p-8 shadow-sm ring-1 ring-slate-200">
           <h2 className="text-2xl font-semibold text-slate-900">Images</h2>
-          <p className="text-slate-600 mb-4">Reference and diagnostic images.</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {imageDetails.map(({ path, name }, i) => (
               <figure
@@ -365,5 +549,6 @@ export default function NematodeDetail({
         entry={selectedEntry}
       /> */}
     </div>
+    </FadeIn>
   );
 }
