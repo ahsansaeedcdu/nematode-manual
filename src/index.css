@@ -69,12 +69,19 @@ button:focus-visible {
 /* ===== Leaflet Tooltip (hover) ===== */
 .leaflet-tooltip.custom-tooltip {
   background: #ffffff;
-  color: #0f172a;              /* slate-900 */
-  border: 1px solid #bfdbfe;   /* blue-200 */
+  color: #0f172a; /* slate-900 */
+  border: 1px solid #bfdbfe; /* blue-200 */
   border-radius: 10px;
   padding: 6px 10px;
   box-shadow: 0 6px 18px rgba(2, 6, 23, 0.12); /* soft shadow */
-  font: 12.5px/1.35 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  font:
+    12.5px/1.35 ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    "Helvetica Neue",
+    Arial;
   pointer-events: none;
   max-width: 260px;
 }
@@ -85,19 +92,21 @@ button:focus-visible {
 .leaflet-tooltip.custom-tooltip:before {
   content: "";
   position: absolute;
-  width: 8px; height: 8px;
+  width: 8px;
+  height: 8px;
   background: #ffffff;
   border-left: 1px solid #bfdbfe;
   border-top: 1px solid #bfdbfe;
   transform: rotate(45deg);
-  bottom: -5px; left: 14px;   /* tail position */
+  bottom: -5px;
+  left: 14px; /* tail position */
   box-shadow: 2px 2px 8px rgba(2, 6, 23, 0.08);
 }
 
 /* ===== Leaflet Popup (click) – for your modal preview ===== */
 .leaflet-popup.nice-popup .leaflet-popup-content-wrapper {
   background: #ffffff;
-  border: 1px solid #bfdbfe;   /* blue-200 */
+  border: 1px solid #bfdbfe; /* blue-200 */
   border-radius: 12px;
   box-shadow: 0 10px 24px rgba(2, 6, 23, 0.18);
 }
@@ -106,14 +115,14 @@ button:focus-visible {
   border: 1px solid #bfdbfe;
 }
 .leaflet-popup.nice-popup .leaflet-popup-content {
-  margin: 10px 12px;          /* tighten default spacing */
-  color: #0f172a;             /* slate-900 */
+  margin: 10px 12px; /* tighten default spacing */
+  color: #0f172a; /* slate-900 */
   font-size: 13px;
   line-height: 1.35;
 }
 .leaflet-popup.nice-popup .leaflet-popup-content .title {
   font-weight: 700;
-  color: #1e3a8a;             /* blue-900 */
+  color: #1e3a8a; /* blue-900 */
   margin-bottom: 2px;
 }
 .leaflet-popup.nice-popup .kv {
@@ -122,7 +131,7 @@ button:focus-visible {
   gap: 2px 8px;
 }
 .leaflet-popup.nice-popup .kv .k {
-  color: #1d4ed8;             /* blue-700 */
+  color: #1d4ed8; /* blue-700 */
   font-weight: 600;
 }
 .leaflet-popup.nice-popup .kv .v {

@@ -46,7 +46,11 @@ export default function Navbar() {
       <div className="md:hidden">
         <div className="h-16 px-4 flex items-center justify-center relative">
           {/* Logo centered */}
-          <Link to="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
+          <Link
+            to="/"
+            className="flex items-center gap-2"
+            onClick={() => setOpen(false)}
+          >
             <div className="h-9 w-9 rounded-xl bg-blue-600 grid place-items-center text-white font-bold">
               N
             </div>
@@ -57,15 +61,29 @@ export default function Navbar() {
 
           {/* Toggle at right */}
           <button
-            onClick={() => setOpen(v => !v)}
+            onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
             className="absolute right-4 inline-flex items-center justify-center rounded-md p-2 text-blue-700 hover:text-blue-900 hover:bg-blue-100"
           >
-            <svg className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg
+              className="h-7 w-7"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
               {open ? (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 7h16M4 12h16M4 17h16"
+                />
               )}
             </svg>
           </button>
@@ -79,13 +97,22 @@ export default function Navbar() {
         >
           <div className="px-4 pb-4">
             <div className="rounded-2xl bg-blue-100 ring-1 ring-blue-200 backdrop-blur-sm p-3 flex flex-col gap-3">
-              <NavLink to="/" end className={linkClass} onClick={() => setOpen(false)}>
+              <NavLink
+                to="/"
+                end
+                className={linkClass}
+                onClick={() => setOpen(false)}
+              >
                 Home
               </NavLink>
-              <NavLink to="/introduction" className={linkClass} onClick={() => setOpen(false)}>
+              {/* <NavLink to="/introduction" className={linkClass} onClick={() => setOpen(false)}>
                 Introduction
-              </NavLink>
-              <NavLink to="/nematodes/map" className={linkClass} onClick={() => setOpen(false)}>
+              </NavLink> */}
+              <NavLink
+                to="/nematodes/map"
+                className={linkClass}
+                onClick={() => setOpen(false)}
+              >
                 Map
               </NavLink>
             </div>

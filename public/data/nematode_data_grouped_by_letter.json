@@ -2,226 +2,118 @@
   "A": [
     {
       "name": "Achlysiella williamsi",
-      "regions": [
-        "Burdekin area, Innisfail, Mackay"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Sugarcane*"
-      ],
-      "references": [
-        "Nobbs 2003b"
-      ],
+      "regions": ["Burdekin area, Innisfail, Mackay"],
+      "states": ["QLD"],
+      "plants_associated": ["Sugarcane*"],
+      "references": ["Nobbs 2003b"],
       "count": 1
     },
     {
       "name": "Aphelenchoides besseyi",
-      "regions": [
-        "Carnarvon",
-        "Adelaide River"
-      ],
-      "states": [
-        "WA",
-        "NT"
-      ],
-      "plants_associated": [
-        "Common bean*  ",
-        "Rice*  "
-      ],
-      "references": [
-        "Nobbs 2003a"
-      ],
+      "regions": ["Carnarvon", "Adelaide River"],
+      "states": ["WA", "NT"],
+      "plants_associated": ["Common bean*  ", "Rice*  "],
+      "references": ["Nobbs 2003a"],
       "count": 2
     },
     {
       "name": "Aphelenchoides coffeae",
-      "regions": [
-        "Ayr"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Sugarcane*"
-      ],
-      "references": [
-        "Nobbs 2003b"
-      ],
+      "regions": ["Ayr"],
+      "states": ["QLD"],
+      "plants_associated": ["Sugarcane*"],
+      "references": ["Nobbs 2003b"],
       "count": 1
     },
     {
       "name": "Aphelenchoides composticola",
-      "regions": [
-        "Yeppoon"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Beet*  "
-      ],
-      "references": [
-        "Nobbs 2003c"
-      ],
+      "regions": ["Yeppoon"],
+      "states": ["QLD"],
+      "plants_associated": ["Beet*  "],
+      "references": ["Nobbs 2003c"],
       "count": 1
     },
     {
       "name": "Aphelenchoides ritzemabosi",
-      "regions": [
-        "-"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003a, b, c"
-      ],
+      "regions": ["-"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003a, b, c"],
       "count": 1
     },
     {
       "name": "Aphelenchoides sp.",
-      "regions": [
-        "Carnarvon"
-      ],
-      "states": [
-        "WA"
-      ],
-      "plants_associated": [
-        "Common bean*"
-      ],
-      "references": [
-        "Nobbs 2003c"
-      ],
+      "regions": ["Carnarvon"],
+      "states": ["WA"],
+      "plants_associated": ["Common bean*"],
+      "references": ["Nobbs 2003c"],
       "count": 1
     }
   ],
   "C": [
     {
       "name": "Caloosia nudata",
-      "regions": [
-        "-"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "\u2013  "
-      ],
-      "references": [
-        "Nobbs 2003c"
-      ],
+      "regions": ["-"],
+      "states": ["NT"],
+      "plants_associated": ["\u2013  "],
+      "references": ["Nobbs 2003c"],
       "count": 1
     },
     {
       "name": "Criconemella sp.",
-      "regions": [
-        "Carnarvon"
-      ],
-      "states": [
-        "WA"
-      ],
-      "plants_associated": [
-        "Banana"
-      ],
-      "references": [
-        "QDAF, 2022"
-      ],
+      "regions": ["Carnarvon"],
+      "states": ["WA"],
+      "plants_associated": ["Banana"],
+      "references": ["QDAF, 2022"],
       "count": 1
     }
   ],
   "D": [
     {
       "name": "Ditylenchus anchilospomosus",
-      "regions": [
-        "Yeppoon"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Tomato*  "
-      ],
-      "references": [
-        "Nobbs 2003a, c"
-      ],
+      "regions": ["Yeppoon"],
+      "states": ["QLD"],
+      "plants_associated": ["Tomato*  "],
+      "references": ["Nobbs 2003a, c"],
       "count": 1
     },
     {
       "name": "Ditylenchus sp.",
-      "regions": [
-        "Carnarvon",
-        "Yeppoon"
-      ],
-      "states": [
-        "WA",
-        "QLD"
-      ],
+      "regions": ["Carnarvon", "Yeppoon"],
+      "states": ["WA", "QLD"],
       "plants_associated": [
         "Passionfruit, unidentified native weeds",
         "Common bean*  ",
         "Tomato*, pea*  "
       ],
-      "references": [
-        "Nobbs 2003c",
-        "This study"
-      ],
+      "references": ["Nobbs 2003c", "This study"],
       "count": 2
     }
   ],
   "F": [
     {
       "name": "f. Criconematidae",
-      "regions": [
-        "Herbert region "
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Sugarcane"
-      ],
-      "references": [
-        "Bull et al 2018; Bhuiyan et al 2020"
-      ],
+      "regions": ["Herbert region "],
+      "states": ["QLD"],
+      "plants_associated": ["Sugarcane"],
+      "references": ["Bull et al 2018; Bhuiyan et al 2020"],
       "count": 1
     }
   ],
   "G": [
     {
       "name": "Globodera sp.",
-      "regions": [
-        "Birdsville"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Desert nightshade*  "
-      ],
-      "references": [
-        "Nobbs 2003c"
-      ],
+      "regions": ["Birdsville"],
+      "states": ["QLD"],
+      "plants_associated": ["Desert nightshade*  "],
+      "references": ["Nobbs 2003c"],
       "count": 1
     },
     {
       "name": "Gracilacus sp.",
-      "regions": [
-        "Katherine"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "Sorghum*  "
-      ],
-      "references": [
-        "Nobbs 2003a"
-      ],
+      "regions": ["Katherine"],
+      "states": ["NT"],
+      "plants_associated": ["Sorghum*  "],
+      "references": ["Nobbs 2003a"],
       "count": 1
     }
   ],
@@ -240,11 +132,7 @@
         "Kabra",
         "Yeppoon"
       ],
-      "states": [
-        "NT",
-        "QLD",
-        "W"
-      ],
+      "states": ["NT", "QLD", "W"],
       "plants_associated": [
         "Soursop*",
         "Maize*  ",
@@ -268,18 +156,10 @@
     },
     {
       "name": "Helicotylenchus labiatus",
-      "regions": [
-        "-"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003b, c"
-      ],
+      "regions": ["-"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003b, c"],
       "count": 1
     },
     {
@@ -289,15 +169,8 @@
         "-",
         "Atherton Tableland, Tully, Innisfail, Lakeland"
       ],
-      "states": [
-        "WA",
-        "NT",
-        "QLD"
-      ],
-      "plants_associated": [
-        "Banana*",
-        "-"
-      ],
+      "states": ["WA", "NT", "QLD"],
+      "plants_associated": ["Banana*", "-"],
       "references": [
         "Collins & Vanstone 2009",
         "Nobbs 2003a, b, c",
@@ -339,11 +212,7 @@
         "Middle Point",
         "Edmonton"
       ],
-      "states": [
-        "WA",
-        "NT",
-        "QLD"
-      ],
+      "states": ["WA", "NT", "QLD"],
       "plants_associated": [
         "Unidentified weeds in bushland",
         "Rice",
@@ -382,291 +251,134 @@
     },
     {
       "name": "Helicotylenchus varicaudatus",
-      "regions": [
-        "-"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003a, b, c"
-      ],
+      "regions": ["-"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003a, b, c"],
       "count": 1
     },
     {
       "name": "Hemicriconemoides brachyurus",
-      "regions": [
-        "-"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003a, b, c"
-      ],
+      "regions": ["-"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003a, b, c"],
       "count": 1
     },
     {
       "name": "Hemicriconemoides cocophilus",
-      "regions": [
-        "Adelaide river",
-        "-",
-        "Darwin",
-        "Kununurra"
-      ],
-      "states": [
-        "WA",
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003a, b, c",
-        "Sauer 1981"
-      ],
+      "regions": ["Adelaide river", "-", "Darwin", "Kununurra"],
+      "states": ["WA", "NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003a, b, c", "Sauer 1981"],
       "count": 4
     },
     {
       "name": "Hemicriconemoides mangiferae",
-      "regions": [
-        "-",
-        "Lower Burdekin, Pioneer"
-      ],
-      "states": [
-        "NT",
-        "QLD"
-      ],
-      "plants_associated": [
-        "-",
-        "Sugarcane*"
-      ],
-      "references": [
-        "Nobbs 2003a, b, c",
-        "Nobbs 2003b"
-      ],
+      "regions": ["-", "Lower Burdekin, Pioneer"],
+      "states": ["NT", "QLD"],
+      "plants_associated": ["-", "Sugarcane*"],
+      "references": ["Nobbs 2003a, b, c", "Nobbs 2003b"],
       "count": 2
     },
     {
       "name": "Hemicriconemoides obtusus",
-      "regions": [
-        "-"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "Sorghum*  "
-      ],
-      "references": [
-        "Nobbs 2003a"
-      ],
+      "regions": ["-"],
+      "states": ["NT"],
+      "plants_associated": ["Sorghum*  "],
+      "references": ["Nobbs 2003a"],
       "count": 1
     },
     {
       "name": "Hemicriconemoides squamosus",
-      "regions": [
-        "Pioneer"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Sugarcane*"
-      ],
-      "references": [
-        "Nobbs 2003b"
-      ],
+      "regions": ["Pioneer"],
+      "states": ["QLD"],
+      "plants_associated": ["Sugarcane*"],
+      "references": ["Nobbs 2003b"],
       "count": 1
     },
     {
       "name": "Hemicycliophora labiata",
-      "regions": [
-        "Lower Burdekin, Pioneer"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Sugarcane*"
-      ],
-      "references": [
-        "Nobbs 2003b"
-      ],
+      "regions": ["Lower Burdekin, Pioneer"],
+      "states": ["QLD"],
+      "plants_associated": ["Sugarcane*"],
+      "references": ["Nobbs 2003b"],
       "count": 1
     },
     {
       "name": "Hemicycliophora sp.",
-      "regions": [
-        "Bees Creek"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "Unidentified native bushland vegetation"
-      ],
-      "references": [
-        "This study"
-      ],
+      "regions": ["Bees Creek"],
+      "states": ["NT"],
+      "plants_associated": ["Unidentified native bushland vegetation"],
+      "references": ["This study"],
       "count": 1
     },
     {
       "name": "Heterodera sp.",
-      "regions": [
-        "Kununurra"
-      ],
-      "states": [
-        "WA"
-      ],
-      "plants_associated": [
-        "Sugarcane*"
-      ],
-      "references": [
-        "Nobbs 2003b"
-      ],
+      "regions": ["Kununurra"],
+      "states": ["WA"],
+      "plants_associated": ["Sugarcane*"],
+      "references": ["Nobbs 2003b"],
       "count": 1
     },
     {
       "name": "Hoplolaimus seinhorsti",
-      "regions": [
-        "Adelaide river",
-        "-",
-        "Darwin",
-        "Kununurra"
-      ],
-      "states": [
-        "WA",
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003a, b, c",
-        "Sauer 1981"
-      ],
+      "regions": ["Adelaide river", "-", "Darwin", "Kununurra"],
+      "states": ["WA", "NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003a, b, c", "Sauer 1981"],
       "count": 4
     },
     {
       "name": "Hoplolaimus sp.",
-      "regions": [
-        "Katherine"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "1956, unpublished"
-      ],
+      "regions": ["Katherine"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["1956, unpublished"],
       "count": 1
     }
   ],
   "I": [
     {
       "name": "Ibipora lolii",
-      "regions": [
-        "Trunding"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Turfgrass*"
-      ],
-      "references": [
-        "Nambiar et al. 2010"
-      ],
+      "regions": ["Trunding"],
+      "states": ["QLD"],
+      "plants_associated": ["Turfgrass*"],
+      "references": ["Nambiar et al. 2010"],
       "count": 1
     }
   ],
   "M": [
     {
       "name": "Macroposthonia Coomansi",
-      "regions": [
-        "Kununurra"
-      ],
-      "states": [
-        "WA"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Sauer 1981"
-      ],
+      "regions": ["Kununurra"],
+      "states": ["WA"],
+      "plants_associated": ["-"],
+      "references": ["Sauer 1981"],
       "count": 1
     },
     {
       "name": "Macroposthonia caballeroi",
-      "regions": [
-        "-",
-        "Darwin"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003a, b, c",
-        "Sauer 1981"
-      ],
+      "regions": ["-", "Darwin"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003a, b, c", "Sauer 1981"],
       "count": 2
     },
     {
       "name": "Macroposthonia onoensis",
-      "regions": [
-        "-",
-        "Darwin",
-        "Tully, Mirriwinni"
-      ],
-      "states": [
-        "NT",
-        "QLD"
-      ],
-      "plants_associated": [
-        "-",
-        "Sugarcane*"
-      ],
-      "references": [
-        "Nobbs 2003a, b, c",
-        "Sauer 1981",
-        "Nobbs 2003b"
-      ],
+      "regions": ["-", "Darwin", "Tully, Mirriwinni"],
+      "states": ["NT", "QLD"],
+      "plants_associated": ["-", "Sugarcane*"],
+      "references": ["Nobbs 2003a, b, c", "Sauer 1981", "Nobbs 2003b"],
       "count": 3
     },
     {
       "name": "Macroposthonia ornata",
-      "regions": [
-        "-",
-        "Koah",
-        "Bamage"
-      ],
-      "states": [
-        "NT",
-        "QLD"
-      ],
-      "plants_associated": [
-        "-",
-        "Maize*  ",
-        "Tomato*  "
-      ],
-      "references": [
-        "Nobbs 2003c",
-        "Nobbs 2003a, b, c",
-        "Nobbs 2003a, c"
-      ],
+      "regions": ["-", "Koah", "Bamage"],
+      "states": ["NT", "QLD"],
+      "plants_associated": ["-", "Maize*  ", "Tomato*  "],
+      "references": ["Nobbs 2003c", "Nobbs 2003a, b, c", "Nobbs 2003a, c"],
       "count": 3
     },
     {
@@ -690,11 +402,7 @@
         "-",
         "Karama"
       ],
-      "states": [
-        "WA",
-        "NT",
-        "QLD"
-      ],
+      "states": ["WA", "NT", "QLD"],
       "plants_associated": [
         "Sweetpotato, beans, mango",
         "Cotton, wild cucumber, ginger",
@@ -714,47 +422,23 @@
         "-",
         "Rhodes grass "
       ],
-      "references": [
-        "Nobbs 2003a, b, c",
-        "Nobbs 2003b",
-        "This study"
-      ],
+      "references": ["Nobbs 2003a, b, c", "Nobbs 2003b", "This study"],
       "count": 17
     },
     {
       "name": "Macroposthonia sphaerocephala",
-      "regions": [
-        "-",
-        "Ayr, Pioneer, Lower Burdekin"
-      ],
-      "states": [
-        "NT",
-        "QLD"
-      ],
-      "plants_associated": [
-        "-",
-        "Sugarcane*"
-      ],
-      "references": [
-        "Nobbs 2003a, b, c",
-        "Nobbs 2003b"
-      ],
+      "regions": ["-", "Ayr, Pioneer, Lower Burdekin"],
+      "states": ["NT", "QLD"],
+      "plants_associated": ["-", "Sugarcane*"],
+      "references": ["Nobbs 2003a, b, c", "Nobbs 2003b"],
       "count": 2
     },
     {
       "name": "Macroposthonia xenoplax",
-      "regions": [
-        "Darwin"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "Grape "
-      ],
-      "references": [
-        "1970, unpublished"
-      ],
+      "regions": ["Darwin"],
+      "states": ["NT"],
+      "plants_associated": ["Grape "],
+      "references": ["1970, unpublished"],
       "count": 1
     },
     {
@@ -765,11 +449,7 @@
         "Bungalow  ",
         "Carnarvon"
       ],
-      "states": [
-        "WA",
-        "NT",
-        "QLD"
-      ],
+      "states": ["WA", "NT", "QLD"],
       "plants_associated": [
         "Banana*",
         "Banana",
@@ -806,10 +486,7 @@
         "Edge Hill",
         "Middle Point"
       ],
-      "states": [
-        "NT",
-        "QLD"
-      ],
+      "states": ["NT", "QLD"],
       "plants_associated": [
         "Chilli*",
         "Chilli*, sweetpotato*",
@@ -857,11 +534,7 @@
         "Middle Point",
         "Marrakai"
       ],
-      "states": [
-        "WA",
-        "NT",
-        "QLD"
-      ],
+      "states": ["WA", "NT", "QLD"],
       "plants_associated": [
         "Cucumber*, sweetpotato*",
         "Milky mangrove*",
@@ -893,24 +566,14 @@
     },
     {
       "name": "Meloidogyne javanica",
-      "regions": [
-        "Carnarvon",
-        "Bungalow  ",
-        "Fishery Falls"
-      ],
-      "states": [
-        "WA",
-        "QLD"
-      ],
+      "regions": ["Carnarvon", "Bungalow  ", "Fishery Falls"],
+      "states": ["WA", "QLD"],
       "plants_associated": [
         "Banana, pawpaw, tomato, chilli, etc.",
         "Citrus*",
         "Unidentified native bush plants"
       ],
-      "references": [
-        "2024, unpublished",
-        "2024 unpublished"
-      ],
+      "references": ["2024, unpublished", "2024 unpublished"],
       "count": 3
     },
     {
@@ -953,11 +616,7 @@
         "Nightcliff",
         "Middle Point"
       ],
-      "states": [
-        "WA",
-        "NT",
-        "QLD"
-      ],
+      "states": ["WA", "NT", "QLD"],
       "plants_associated": [
         "Bananas, cucurbits, tomato, sweet potato, taro",
         "Indian spinach*",
@@ -1014,162 +673,80 @@
     },
     {
       "name": "Meloidogyne thamesi",
-      "regions": [
-        "Boulia"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Common bean*  "
-      ],
-      "references": [
-        "Nobbs 2003a, c"
-      ],
+      "regions": ["Boulia"],
+      "states": ["QLD"],
+      "plants_associated": ["Common bean*  "],
+      "references": ["Nobbs 2003a, c"],
       "count": 1
     },
     {
       "name": "Morulaimus sp.",
-      "regions": [
-        "Kununurra"
-      ],
-      "states": [
-        "W"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Sauer 1981"
-      ],
+      "regions": ["Kununurra"],
+      "states": ["W"],
+      "plants_associated": ["-"],
+      "references": ["Sauer 1981"],
       "count": 1
     },
     {
       "name": "Morulaimus whitei",
-      "regions": [
-        "-"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003a, c"
-      ],
+      "regions": ["-"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003a, c"],
       "count": 1
     }
   ],
   "N": [
     {
       "name": "Nothocriconema sp.",
-      "regions": [
-        "Kununurra"
-      ],
-      "states": [
-        "W"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Sauer 1981"
-      ],
+      "regions": ["Kununurra"],
+      "states": ["W"],
+      "plants_associated": ["-"],
+      "references": ["Sauer 1981"],
       "count": 1
     }
   ],
   "P": [
     {
       "name": "Paralongidorus australis",
-      "regions": [
-        "Burdekin River Basin"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Rice*  "
-      ],
-      "references": [
-        "Nobbs 2003a"
-      ],
+      "regions": ["Burdekin River Basin"],
+      "states": ["QLD"],
+      "plants_associated": ["Rice*  "],
+      "references": ["Nobbs 2003a"],
       "count": 1
     },
     {
       "name": "Paralongidorus eucalypti",
-      "regions": [
-        "Katherine"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "Sorghum*  "
-      ],
-      "references": [
-        "Nobbs 2003a"
-      ],
+      "regions": ["Katherine"],
+      "states": ["NT"],
+      "plants_associated": ["Sorghum*  "],
+      "references": ["Nobbs 2003a"],
       "count": 1
     },
     {
       "name": "Paralongidorus sacchari",
-      "regions": [
-        "Herbert River District, Mossman",
-        "Ayr"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Sugarcane*",
-        "Rice*  "
-      ],
-      "references": [
-        "Nobbs 2003a",
-        "Nobbs 2003b"
-      ],
+      "regions": ["Herbert River District, Mossman", "Ayr"],
+      "states": ["QLD"],
+      "plants_associated": ["Sugarcane*", "Rice*  "],
+      "references": ["Nobbs 2003a", "Nobbs 2003b"],
       "count": 2
     },
     {
       "name": "Paralongidorus sp.",
-      "regions": [
-        "Broome",
-        "Douglas-Daly"
-      ],
-      "states": [
-        "WA",
-        "NT"
-      ],
+      "regions": ["Broome", "Douglas-Daly"],
+      "states": ["WA", "NT"],
       "plants_associated": [
         "Citrus, tomato, okra, onion, pumpkin, melon, etc.",
         "Sorghum, unidentified weeds"
       ],
-      "references": [
-        "This study"
-      ],
+      "references": ["This study"],
       "count": 2
     },
     {
       "name": "Paratrichodorus minor",
-      "regions": [
-        "Herbert region",
-        "Koah",
-        "Millaroo",
-        "Kununurra",
-        "Ayr"
-      ],
-      "states": [
-        "WA",
-        "QLD"
-      ],
-      "plants_associated": [
-        "Guar*  ",
-        "Pea* ",
-        "Maize*  ",
-        "Sugarcane",
-        "-"
-      ],
+      "regions": ["Herbert region", "Koah", "Millaroo", "Kununurra", "Ayr"],
+      "states": ["WA", "QLD"],
+      "plants_associated": ["Guar*  ", "Pea* ", "Maize*  ", "Sugarcane", "-"],
       "references": [
         "Nobbs 2003c",
         "Nobbs 2003a, c",
@@ -1180,32 +757,16 @@
     },
     {
       "name": "Paratrichodorus porosus",
-      "regions": [
-        "Ayr, Mackay"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Sugarcane*"
-      ],
-      "references": [
-        "Nobbs 2003b"
-      ],
+      "regions": ["Ayr, Mackay"],
+      "states": ["QLD"],
+      "plants_associated": ["Sugarcane*"],
+      "references": ["Nobbs 2003b"],
       "count": 1
     },
     {
       "name": "Paratrichodorus sp.",
-      "regions": [
-        "Broome",
-        "Carnarvon",
-        "Kununurra",
-        "Herbert region"
-      ],
-      "states": [
-        "WA",
-        "QLD"
-      ],
+      "regions": ["Broome", "Carnarvon", "Kununurra", "Herbert region"],
+      "states": ["WA", "QLD"],
       "plants_associated": [
         "Pumpkin, chilli, pawpaw, banana",
         "Sugarcane",
@@ -1221,18 +782,10 @@
     },
     {
       "name": "Paratylenchus colbrani",
-      "regions": [
-        "Burdekin"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Sugarcane*"
-      ],
-      "references": [
-        "Nobbs 2003b"
-      ],
+      "regions": ["Burdekin"],
+      "states": ["QLD"],
+      "plants_associated": ["Sugarcane*"],
+      "references": ["Nobbs 2003b"],
       "count": 1
     },
     {
@@ -1246,11 +799,7 @@
         "Carnarvon",
         "Broome"
       ],
-      "states": [
-        "WA",
-        "NT",
-        "QLD"
-      ],
+      "states": ["WA", "NT", "QLD"],
       "plants_associated": [
         "Pineapple, sweet potato, sugarcane",
         "Banana, weeds",
@@ -1279,11 +828,7 @@
         "-",
         "East Barron, Malanda"
       ],
-      "states": [
-        "WA",
-        "NT",
-        "QLD"
-      ],
+      "states": ["WA", "NT", "QLD"],
       "plants_associated": [
         "Sorghum*  ",
         "Coffee",
@@ -1306,34 +851,18 @@
     },
     {
       "name": "Pratylenchus coffee",
-      "regions": [
-        "North Queensland"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "Banana"
-      ],
-      "references": [
-        "Dang Le & Perrine-Walker 2019a"
-      ],
+      "regions": ["North Queensland"],
+      "states": ["NT"],
+      "plants_associated": ["Banana"],
+      "references": ["Dang Le & Perrine-Walker 2019a"],
       "count": 1
     },
     {
       "name": "Pratylenchus jordanensis",
-      "regions": [
-        "-"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003a, c"
-      ],
+      "regions": ["-"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003a, c"],
       "count": 1
     },
     {
@@ -1355,11 +884,7 @@
         "Melville Island",
         "Karama"
       ],
-      "states": [
-        "WA",
-        "NT",
-        "QLD"
-      ],
+      "states": ["WA", "NT", "QLD"],
       "plants_associated": [
         "Sorghum, cotton",
         "Sugarcane, unidentified weeds",
@@ -1376,10 +901,7 @@
         "Sugarcane, sesame, unidentified weeds",
         "Sweet potato, tomato, chilli, mango, etc."
       ],
-      "references": [
-        "Collins & Vanstone 2009",
-        "This study"
-      ],
+      "references": ["Collins & Vanstone 2009", "This study"],
       "count": 15
     },
     {
@@ -1389,104 +911,51 @@
         "Darwin",
         "Herbert region"
       ],
-      "states": [
-        "NT",
-        "QLD"
-      ],
-      "plants_associated": [
-        "Sugarcane*",
-        "Sugarcane",
-        "Grape* "
-      ],
-      "references": [
-        "2024, unpublished",
-        "Nobbs 2003b",
-        "Bull et al 2018"
-      ],
+      "states": ["NT", "QLD"],
+      "plants_associated": ["Sugarcane*", "Sugarcane", "Grape* "],
+      "references": ["2024, unpublished", "Nobbs 2003b", "Bull et al 2018"],
       "count": 3
     }
   ],
   "R": [
     {
       "name": "Radopholus  capitatus",
-      "regions": [
-        "Kununurra"
-      ],
-      "states": [
-        "W"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Sauer 1981"
-      ],
+      "regions": ["Kununurra"],
+      "states": ["W"],
+      "plants_associated": ["-"],
+      "references": ["Sauer 1981"],
       "count": 1
     },
     {
       "name": "Radopholus  rectus",
-      "regions": [
-        "Kununurra"
-      ],
-      "states": [
-        "W"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Sauer 1981"
-      ],
+      "regions": ["Kununurra"],
+      "states": ["W"],
+      "plants_associated": ["-"],
+      "references": ["Sauer 1981"],
       "count": 1
     },
     {
       "name": "Radopholus nativus",
-      "regions": [
-        "-",
-        "Darwin"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003c",
-        "Sauer 1981"
-      ],
+      "regions": ["-", "Darwin"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003c", "Sauer 1981"],
       "count": 2
     },
     {
       "name": "Radopholus nigeriensis",
-      "regions": [
-        "-"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003a, c"
-      ],
+      "regions": ["-"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003a, c"],
       "count": 1
     },
     {
       "name": "Radopholus similis",
-      "regions": [
-        "Carnarvon#"
-      ],
-      "states": [
-        "WA"
-      ],
-      "plants_associated": [
-        "Banana "
-      ],
-      "references": [
-        "Collins & Vanstone 2009"
-      ],
+      "regions": ["Carnarvon#"],
+      "states": ["WA"],
+      "plants_associated": ["Banana "],
+      "references": ["Collins & Vanstone 2009"],
       "count": 1
     },
     {
@@ -1502,12 +971,7 @@
         "Broome",
         "Marrakai"
       ],
-      "states": [
-        " NT",
-        "WA",
-        "NT",
-        "QLD"
-      ],
+      "states": [" NT", "WA", "NT", "QLD"],
       "plants_associated": [
         "Sorghum*  ",
         "Ginger",
@@ -1538,12 +1002,7 @@
         "Kununurra",
         "Bowen"
       ],
-      "states": [
-        "WA",
-        "NT",
-        "QLD",
-        "W"
-      ],
+      "states": ["WA", "NT", "QLD", "W"],
       "plants_associated": [
         "Carica papaya*",
         "Carica papaya",
@@ -1552,11 +1011,7 @@
         "-",
         "Tomato*  "
       ],
-      "references": [
-        "Nobbs 2003c",
-        "Sauer 1981",
-        "Nobbs 2003a"
-      ],
+      "references": ["Nobbs 2003c", "Sauer 1981", "Nobbs 2003a"],
       "count": 6
     },
     {
@@ -1592,11 +1047,7 @@
         "Humpty  Doo",
         "Edmonton"
       ],
-      "states": [
-        "WA",
-        "NT",
-        "QLD"
-      ],
+      "states": ["WA", "NT", "QLD"],
       "plants_associated": [
         "Pumpkin, chilli, pawpaw, banana",
         "Banana, pawpaw, pineapple, citrus, mango",
@@ -1628,51 +1079,23 @@
         "Eggplant, tomato, pawpaw, pumpkin, etc.",
         "Citrus, sugarcane, pumpkin, spinach, coffee, banana, etc."
       ],
-      "references": [
-        "Nobbs 2003b",
-        "This study"
-      ],
+      "references": ["Nobbs 2003b", "This study"],
       "count": 29
     },
     {
       "name": "Rotylenchus brevicaudatus",
-      "regions": [
-        "Rockhampton",
-        "Lower Burdekin, Pioneer",
-        "Yeppoon"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Potato*, pumpkin*  ",
-        "Tomato*  ",
-        "Sugarcane*"
-      ],
-      "references": [
-        "Nobbs 2003c",
-        "Nobbs 2003b"
-      ],
+      "regions": ["Rockhampton", "Lower Burdekin, Pioneer", "Yeppoon"],
+      "states": ["QLD"],
+      "plants_associated": ["Potato*, pumpkin*  ", "Tomato*  ", "Sugarcane*"],
+      "references": ["Nobbs 2003c", "Nobbs 2003b"],
       "count": 3
     },
     {
       "name": "Rotylenchus incultus",
-      "regions": [
-        "-",
-        "Darwin",
-        "Kununurra"
-      ],
-      "states": [
-        "WA",
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Sauer 1981",
-        "Nobbs 2003a, c"
-      ],
+      "regions": ["-", "Darwin", "Kununurra"],
+      "states": ["WA", "NT"],
+      "plants_associated": ["-"],
+      "references": ["Sauer 1981", "Nobbs 2003a, c"],
       "count": 3
     },
     {
@@ -1687,11 +1110,7 @@
         "Kununurra",
         "Marrakai"
       ],
-      "states": [
-        "WA",
-        "NT",
-        "QLD"
-      ],
+      "states": ["WA", "NT", "QLD"],
       "plants_associated": [
         "Sorghum*  ",
         "Pawpaw*",
@@ -1716,66 +1135,34 @@
   "S": [
     {
       "name": "Sauertylenchus sp.",
-      "regions": [
-        "Kununurra"
-      ],
-      "states": [
-        "WA"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Sauer 1981"
-      ],
+      "regions": ["Kununurra"],
+      "states": ["WA"],
+      "plants_associated": ["-"],
+      "references": ["Sauer 1981"],
       "count": 1
     },
     {
       "name": "Scutellonema brachyurum",
-      "regions": [
-        "Darwin"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "Golden apple"
-      ],
-      "references": [
-        "Sauer 1981"
-      ],
+      "regions": ["Darwin"],
+      "states": ["NT"],
+      "plants_associated": ["Golden apple"],
+      "references": ["Sauer 1981"],
       "count": 1
     },
     {
       "name": "Scutellonema impar",
-      "regions": [
-        "Katherine"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "Sorghum*  "
-      ],
-      "references": [
-        "Nobbs 2003b, c"
-      ],
+      "regions": ["Katherine"],
+      "states": ["NT"],
+      "plants_associated": ["Sorghum*  "],
+      "references": ["Nobbs 2003b, c"],
       "count": 1
     },
     {
       "name": "Scutellonema incisicaudatum",
-      "regions": [
-        "-"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003a, c"
-      ],
+      "regions": ["-"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003a, c"],
       "count": 1
     },
     {
@@ -1792,10 +1179,7 @@
         "Thorack R, Darwin",
         "Karama"
       ],
-      "states": [
-        "WA",
-        "NT"
-      ],
+      "states": ["WA", "NT"],
       "plants_associated": [
         "Sorghum*  ",
         "Ginger",
@@ -1809,11 +1193,7 @@
         "Sweet potato",
         "Banana, ginger, cassava, pawpaw, etc."
       ],
-      "references": [
-        "Sauer 1981",
-        "Nobbs 2003a",
-        "This study"
-      ],
+      "references": ["Sauer 1981", "Nobbs 2003a", "This study"],
       "count": 10
     }
   ],
@@ -1826,88 +1206,46 @@
         "Ayr, Mackay, Tully, Ingham Burdekin",
         "Burdekin River Basin, Mareeba"
       ],
-      "states": [
-        "WA",
-        "QLD"
-      ],
+      "states": ["WA", "QLD"],
       "plants_associated": [
         "Sugarcane",
         "Common bean*  ",
         "Sugarcane*",
         "Rice*  "
       ],
-      "references": [
-        "Nobbs 2003a",
-        "Nobbs 2003b",
-        "Bull et al 2018"
-      ],
+      "references": ["Nobbs 2003a", "Nobbs 2003b", "Bull et al 2018"],
       "count": 4
     },
     {
       "name": "Tylenchorhynchus brevilineatus",
-      "regions": [
-        "Carnarvon",
-        "Boulia"
-      ],
-      "states": [
-        "WA",
-        "QLD"
-      ],
-      "plants_associated": [
-        "Common bean*  ",
-        "Tomato*  "
-      ],
-      "references": [
-        "Nobbs 2003c"
-      ],
+      "regions": ["Carnarvon", "Boulia"],
+      "states": ["WA", "QLD"],
+      "plants_associated": ["Common bean*  ", "Tomato*  "],
+      "references": ["Nobbs 2003c"],
       "count": 2
     },
     {
       "name": "Tylenchorhynchus capitatus",
-      "regions": [
-        "Boulia"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Tomato*  "
-      ],
-      "references": [
-        "Nobbs 2003c"
-      ],
+      "regions": ["Boulia"],
+      "states": ["QLD"],
+      "plants_associated": ["Tomato*  "],
+      "references": ["Nobbs 2003c"],
       "count": 1
     },
     {
       "name": "Tylenchorhynchus claytoni",
-      "regions": [
-        "Burdekin, Ingham, Mackay"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Sugarcane*"
-      ],
-      "references": [
-        "Nobbs 2003b"
-      ],
+      "regions": ["Burdekin, Ingham, Mackay"],
+      "states": ["QLD"],
+      "plants_associated": ["Sugarcane*"],
+      "references": ["Nobbs 2003b"],
       "count": 1
     },
     {
       "name": "Tylenchorhynchus coffeae",
-      "regions": [
-        "Fowler, Tully"
-      ],
-      "states": [
-        "QLD"
-      ],
-      "plants_associated": [
-        "Sugarcane*"
-      ],
-      "references": [
-        "Nobbs 2003b"
-      ],
+      "regions": ["Fowler, Tully"],
+      "states": ["QLD"],
+      "plants_associated": ["Sugarcane*"],
+      "references": ["Nobbs 2003b"],
       "count": 1
     },
     {
@@ -1932,11 +1270,7 @@
         "North Queensland, Tully",
         "Middle Point"
       ],
-      "states": [
-        "WA",
-        "NT",
-        "QLD"
-      ],
+      "states": ["WA", "NT", "QLD"],
       "plants_associated": [
         "Tomato, onion, melon, mango, etc.",
         "Pumpkin, chilli, pawpaw, banana",
@@ -1967,79 +1301,36 @@
     },
     {
       "name": "Tylenchorhynchus triglyphus",
-      "regions": [
-        "-"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003a, c"
-      ],
+      "regions": ["-"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003a, c"],
       "count": 1
     },
     {
       "name": "Tylenchulus semipenetrans",
-      "regions": [
-        "Carnarvon",
-        "Adelaide River",
-        "Alice Springs"
-      ],
-      "states": [
-        "WA",
-        "NT"
-      ],
-      "plants_associated": [
-        "Lemon*",
-        "Citrus",
-        "Banana"
-      ],
-      "references": [
-        "2024, unpublished",
-        "Sauer 1981",
-        "Goss 1958"
-      ],
+      "regions": ["Carnarvon", "Adelaide River", "Alice Springs"],
+      "states": ["WA", "NT"],
+      "plants_associated": ["Lemon*", "Citrus", "Banana"],
+      "references": ["2024, unpublished", "Sauer 1981", "Goss 1958"],
       "count": 3
     },
     {
       "name": "Tylenchulus sp.",
-      "regions": [
-        "Carnarvon"
-      ],
-      "states": [
-        "WA"
-      ],
-      "plants_associated": [
-        "Lime, table grapes"
-      ],
-      "references": [
-        "This study"
-      ],
+      "regions": ["Carnarvon"],
+      "states": ["WA"],
+      "plants_associated": ["Lime, table grapes"],
+      "references": ["This study"],
       "count": 1
     }
   ],
   "X": [
     {
       "name": "Xiphinema americanum",
-      "regions": [
-        "Russell River",
-        "Thorack R Darwin"
-      ],
-      "states": [
-        "NT",
-        "QLD"
-      ],
-      "plants_associated": [
-        "Sorghum*  ",
-        "Sugarcane*"
-      ],
-      "references": [
-        "Nobbs 2003a",
-        "Nobbs 2003b"
-      ],
+      "regions": ["Russell River", "Thorack R Darwin"],
+      "states": ["NT", "QLD"],
+      "plants_associated": ["Sorghum*  ", "Sugarcane*"],
+      "references": ["Nobbs 2003a", "Nobbs 2003b"],
       "count": 2
     },
     {
@@ -2051,16 +1342,8 @@
         "Kununurra",
         "Lower Burdekin, Russell River, Pioneer"
       ],
-      "states": [
-        "NT",
-        "WA",
-        "QLD"
-      ],
-      "plants_associated": [
-        "Sugarcane",
-        "-",
-        "Sugarcane*"
-      ],
+      "states": ["NT", "WA", "QLD"],
+      "plants_associated": ["Sugarcane", "-", "Sugarcane*"],
       "references": [
         "Sauer 1981",
         "Nobbs 2003a, c",
@@ -2071,66 +1354,34 @@
     },
     {
       "name": "Xiphinema insigne",
-      "regions": [
-        "-"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003a, c"
-      ],
+      "regions": ["-"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003a, c"],
       "count": 1
     },
     {
       "name": "Xiphinema monohysterum",
-      "regions": [
-        "-"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003a, c"
-      ],
+      "regions": ["-"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003a, c"],
       "count": 1
     },
     {
       "name": "Xiphinema radicicola",
-      "regions": [
-        "Katherine"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "Sorghum* "
-      ],
-      "references": [
-        "Nobbs 2003a"
-      ],
+      "regions": ["Katherine"],
+      "states": ["NT"],
+      "plants_associated": ["Sorghum* "],
+      "references": ["Nobbs 2003a"],
       "count": 1
     },
     {
       "name": "Xiphinema setariae",
-      "regions": [
-        "-"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Nobbs 2003a, c"
-      ],
+      "regions": ["-"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["Nobbs 2003a, c"],
       "count": 1
     },
     {
@@ -2152,11 +1403,7 @@
         "Broome",
         "Middle Point"
       ],
-      "states": [
-        "WA",
-        "NT",
-        "QLD"
-      ],
+      "states": ["WA", "NT", "QLD"],
       "plants_associated": [
         "-",
         "Pumpkin, chilli, pawpaw, banana",
@@ -2175,43 +1422,23 @@
         "Citrus, tomato, okra, onion, pumpkin, melon",
         "Ginger, mints, sweet potato"
       ],
-      "references": [
-        "Sauer 1981",
-        "Bhuiyan et al 2020",
-        "This study"
-      ],
+      "references": ["Sauer 1981", "Bhuiyan et al 2020", "This study"],
       "count": 15
     },
     {
       "name": "Xiphinema truncatum",
-      "regions": [
-        "Kununurra"
-      ],
-      "states": [
-        "WA"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Sauer 1981"
-      ],
+      "regions": ["Kununurra"],
+      "states": ["WA"],
+      "plants_associated": ["-"],
+      "references": ["Sauer 1981"],
       "count": 1
     },
     {
       "name": "Xiphinema vulgare",
-      "regions": [
-        "Adelaide River"
-      ],
-      "states": [
-        "NT"
-      ],
-      "plants_associated": [
-        "-"
-      ],
-      "references": [
-        "Sauer 1981"
-      ],
+      "regions": ["Adelaide River"],
+      "states": ["NT"],
+      "plants_associated": ["-"],
+      "references": ["Sauer 1981"],
       "count": 1
     }
   ]

@@ -3,11 +3,14 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import FadeIn from "../../components/FadeIn/FadeIn";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import DetailPDF from "../../components/DetailPDF/DetailPDF";
 // import MapPreviewModal from "../../components/MapPreviewModal/MapPreviewModal"; // optional
 
 /** --- helpers --- */
 const getGenusLabelFromTaxaArray = (scientificTaxa) => {
-  if (!Array.isArray(scientificTaxa) || scientificTaxa.length === 0) return null;
+  if (!Array.isArray(scientificTaxa) || scientificTaxa.length === 0)
+    return null;
   const first = String(scientificTaxa[0] || "").trim();
   const genus = first.split(/\s+/)[0];
   return genus ? `${genus} spp.` : null;
@@ -38,14 +41,17 @@ const OVERVIEW_ORDER = [
   "Why They Matter",
   "Symptoms",
   "Management Options",
-  "Further Information"
+  "Further Information",
 ];
 
 // robust array parser
 const toArray = (val) => {
   if (Array.isArray(val)) return val.filter(Boolean).map(String);
   if (typeof val === "string") {
-    const parts = val.split(/\n|;|,/).map((s) => s.trim()).filter(Boolean);
+    const parts = val
+      .split(/\n|;|,/)
+      .map((s) => s.trim())
+      .filter(Boolean);
     return parts.length ? parts : [val].filter(Boolean);
   }
   return [];
@@ -85,7 +91,9 @@ export default function NematodeDetail({
         if (!cancelled) setLoading(false);
       }
     })();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [datasetUrl]);
 
   const grouped = useMemo(() => normalizeGrouped(data), [data]);
@@ -95,7 +103,7 @@ export default function NematodeDetail({
     if (!grouped || typeof grouped !== "object") return null;
     if (grouped[commonName]) return grouped[commonName];
     const k = Object.keys(grouped).find(
-      (key) => key.trim().toLowerCase() === commonName.toLowerCase()
+      (key) => key.trim().toLowerCase() === commonName.toLowerCase(),
     );
     return k ? grouped[k] : null;
   }, [grouped, commonName]);
@@ -106,7 +114,7 @@ export default function NematodeDetail({
       Object.keys(taxaMap)
         .map((name) => ({ name, count: (taxaMap[name] || []).length }))
         .sort((a, b) => a.name.localeCompare(b.name)),
-    [taxaMap]
+    [taxaMap],
   );
 
   const allEntries = useMemo(
@@ -116,29 +124,44 @@ export default function NematodeDetail({
         const bR = (b["Sampling Region"] || "").toLowerCase();
         return aR.localeCompare(bR);
       }),
-    [taxaMap]
+    [taxaMap],
   );
 
-  const aboutData = group?.data && typeof group.data === "object" ? group.data : null;
+  const aboutData =
+    group?.data && typeof group.data === "object" ? group.data : null;
 
   // Genus label priority: Scientific taxa array -> Scientific Name in aboutData
   const genusLabel = useMemo(() => {
     const fromArray = getGenusLabelFromTaxaArray(group?.["Scientific taxa"]);
     if (fromArray) return fromArray;
-    const fromData = getGenusLabelFromScientificName(aboutData?.["Scientific Name"]);
+    const fromData = getGenusLabelFromScientificName(
+      aboutData?.["Scientific Name"],
+    );
     return fromData || null;
   }, [group, aboutData]);
 
   // demo images (replace with actual images if available)
   const imageDetails = [
-    { path: "/data/RKN Juvenile Under Microscope.jpg", name: "RKN Juvenile Under Microscope.jpg" },
-    { path: "/data/Root Galls on Tomato Caused by RKN.jpg", name: "Root Galls on Tomato Caused by RKN.jpg" },
-    { path: "/data/RKN Juvenile Under Microscope.jpg", name: "RKN Juvenile Under Microscope.jpg" },
-    { path: "/data/Root Galls on Tomato Caused by RKN.jpg", name: "Root Galls on Tomato Caused by RKN.jpg" },
+    {
+      path: "/data/RKN Juvenile Under Microscope.jpg",
+      name: "RKN Juvenile Under Microscope.jpg",
+    },
+    {
+      path: "/data/Root Galls on Tomato Caused by RKN.jpg",
+      name: "Root Galls on Tomato Caused by RKN.jpg",
+    },
+    {
+      path: "/data/RKN Juvenile Under Microscope.jpg",
+      name: "RKN Juvenile Under Microscope.jpg",
+    },
+    {
+      path: "/data/Root Galls on Tomato Caused by RKN.jpg",
+      name: "Root Galls on Tomato Caused by RKN.jpg",
+    },
   ];
 
   /** --- renderers (STRICT single-column) --- */
-  const [open, setOpen] = useState({}); // track which sections are open
+  const [open, setOpen] = useState({ "Common Name": true }); // track which sections are open
 
   const toggle = (key) => {
     setOpen((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -170,58 +193,56 @@ export default function NematodeDetail({
         {/* Collapsible content */}
         {open["Symptoms"] && (
           <div className="mt-4 space-y-4">
-            {isObj ? (
-              (() => {
-                const preferred = [
-                  "Roots",
-                  "Belowground",
-                  "Aboveground",
-                  "Leaves",
-                  "Stems",
-                  "Fruits",
-                  "General",
-                ];
-                const keys = Object.keys(val || {});
-                const order = [
-                  ...preferred.filter((k) => keys.includes(k)),
-                  ...keys.filter((k) => !preferred.includes(k)),
-                ];
+            {isObj
+              ? (() => {
+                  const preferred = [
+                    "Roots",
+                    "Belowground",
+                    "Aboveground",
+                    "Leaves",
+                    "Stems",
+                    "Fruits",
+                    "General",
+                  ];
+                  const keys = Object.keys(val || {});
+                  const order = [
+                    ...preferred.filter((k) => keys.includes(k)),
+                    ...keys.filter((k) => !preferred.includes(k)),
+                  ];
 
-                return order.map((k) => {
-                  const v = val[k];
-                  const bullets = Array.isArray(v) ? v : splitToBullets(v);
-                  return (
-                    <div key={k}>
-                      <div className="text-sm font-semibold uppercase tracking-wide text-sky-700/90">
-                        {k}
+                  return order.map((k) => {
+                    const v = val[k];
+                    const bullets = Array.isArray(v) ? v : splitToBullets(v);
+                    return (
+                      <div key={k}>
+                        <div className="text-sm font-semibold uppercase tracking-wide text-sky-700/90">
+                          {k}
+                        </div>
+                        {bullets.length > 1 ? (
+                          <ul className="mt-1 list-disc pl-6 text-slate-800 space-y-1">
+                            {bullets.map((b, i) => (
+                              <li key={i}>{b}</li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p className="mt-1 text-slate-800">{String(v)}</p>
+                        )}
                       </div>
-                      {bullets.length > 1 ? (
-                        <ul className="mt-1 list-disc pl-6 text-slate-800 space-y-1">
-                          {bullets.map((b, i) => (
-                            <li key={i}>{b}</li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <p className="mt-1 text-slate-800">{String(v)}</p>
-                      )}
-                    </div>
+                    );
+                  });
+                })()
+              : (() => {
+                  const items = Array.isArray(val) ? val : toArray(val);
+                  return items?.length ? (
+                    <ul className="mt-3 list-disc pl-6 text-slate-800 space-y-1">
+                      {items.map((it, i) => (
+                        <li key={i}>{it}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="mt-3 text-slate-600">No symptoms listed.</p>
                   );
-                });
-              })()
-            ) : (
-              (() => {
-                const items = Array.isArray(val) ? val : toArray(val);
-                return items?.length ? (
-                  <ul className="mt-3 list-disc pl-6 text-slate-800 space-y-1">
-                    {items.map((it, i) => (
-                      <li key={i}>{it}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="mt-3 text-slate-600">No symptoms listed.</p>
-                );
-              })()
-            )}
+                })()}
           </div>
         )}
       </section>
@@ -258,7 +279,9 @@ export default function NematodeDetail({
                 ))}
               </ul>
             ) : (
-              <p className="mt-3 text-slate-600">No management options listed.</p>
+              <p className="mt-3 text-slate-600">
+                No management options listed.
+              </p>
             )}
           </>
         )}
@@ -268,7 +291,7 @@ export default function NematodeDetail({
 
   // Show references as clean modern text (no links), in its own section
   const renderFurtherInformation = (val, open, toggle) => {
-  // Ensure array without splitting into sentences
+    // Ensure array without splitting into sentences
     const items = Array.isArray(val) ? val : [String(val)];
 
     return (
@@ -310,7 +333,7 @@ export default function NematodeDetail({
       </section>
     );
   };
-    
+
   const formatScientificName = (text) => {
     if (!text) return "";
 
@@ -331,224 +354,277 @@ export default function NematodeDetail({
         </span>
       );
     });
-  }
+  };
   const splitIntoSentences = (text) => {
-  if (!text) return [];
-  return text.split(/\. (?=[A-Z])/).map((s, idx, arr) => 
-    idx < arr.length - 1 ? s.trim() + "." : s.trim()
-  );
-};
+    if (!text) return [];
+    return text
+      .split(/\. (?=[A-Z])/)
+      .map((s, idx, arr) => (idx < arr.length - 1 ? s.trim() + "." : s.trim()));
+  };
   return (
     <FadeIn>
-    <div className="min-h-screen w-screen bg-white">
-      <main className="max-w-[1200px] mx-auto w-full px-6 md:px-8 py-8 space-y-8">
-        {/* Header / Hero */}
-        {(loading || err || !group) && (
-          <section className="rounded-3xl bg-white/90 backdrop-blur-sm shadow-md ring-1 ring-slate-200 p-7 md:p-9">
-            {loading ? (
-              <div className="animate-pulse">
-                <div className="h-5 w-1/3 bg-slate-100 rounded mb-3" />
-                <div className="h-9 w-2/3 bg-slate-100 rounded" />
+      <div className="min-h-screen w-screen bg-white">
+        <main className="max-w-[1200px] mx-auto w-full px-6 md:px-8 py-8 space-y-8">
+          {/* Header / Hero */}
+          {(loading || err || !group) && (
+            <section className="rounded-3xl bg-white/90 backdrop-blur-sm shadow-md ring-1 ring-slate-200 p-7 md:p-9">
+              {loading ? (
+                <div className="animate-pulse">
+                  <div className="h-5 w-1/3 bg-slate-100 rounded mb-3" />
+                  <div className="h-9 w-2/3 bg-slate-100 rounded" />
+                </div>
+              ) : err ? (
+                <div className="text-rose-700">
+                  Failed to load data: <span className="font-mono">{err}</span>
+                </div>
+              ) : (
+                <div className="text-slate-800">
+                  No data found for <strong>{commonName}</strong>.
+                </div>
+              )}
+            </section>
+          )}
+
+          <div className="flex gap-3 mb-6">
+            <PDFDownloadLink
+              document={
+                <DetailPDF aboutData={aboutData} imageDetails={imageDetails} />
+              }
+              fileName={`${aboutData?.Title || aboutData?.["Common Name"] || commonName || "nematode-detail"}.pdf`}
+            >
+              {({ loading }) => (
+                <button className="px-3 py-1.5 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                  {loading ? "Preparing PDF..." : "Download PDF"}
+                </button>
+              )}
+            </PDFDownloadLink>
+
+            <button
+              onClick={() => window.print()}
+              className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 rounded text-white"
+            >
+              Print
+            </button>
+          </div>
+
+          {/* Overview section (single column cards) */}
+          {aboutData && (
+            <section className="space-y-4">
+              <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+                <h2 className="text-3xl md:text-4xl font-bold !text-blue-600 leading-tight">
+                  {aboutData?.Title || group["Common name"] || commonName}
+                </h2>
+                {OVERVIEW_ORDER.filter((k) => aboutData[k]).map((k) => (
+                  <div
+                    key={k}
+                    className="border-b border-slate-200 last:border-0 py-3"
+                  >
+                    {/* Clickable title */}
+                    <button
+                      onClick={() => toggle(k)}
+                      className="flex items-center justify-between w-full text-left"
+                    >
+                      <span className="text-sm uppercase tracking-wide text-slate-600 font-semibold">
+                        {k}
+                      </span>
+                      {open[k] ? (
+                        <ChevronDown className="w-4 h-4 text-slate-500" />
+                      ) : (
+                        <ChevronRight className="w-4 h-4 text-slate-500" />
+                      )}
+                    </button>
+
+                    {/* Collapsible content */}
+                    {open[k] && (
+                      <div className="mt-2 text-slate-800 text-sm">
+                        {k === "Scientific Name" ? (
+                          formatScientificName(String(aboutData[k]))
+                        ) : k === "Why They Matter" ? (
+                          <ul className="list-disc pl-5 space-y-1">
+                            {splitIntoSentences(String(aboutData[k])).map(
+                              (line, i) => (
+                                <li key={i}>{line}</li>
+                              ),
+                            )}
+                          </ul>
+                        ) : k === "Symptoms" ? (
+                          (() => {
+                            const val = aboutData[k];
+                            const isObj =
+                              val &&
+                              typeof val === "object" &&
+                              !Array.isArray(val);
+                            if (isObj) {
+                              const preferred = [
+                                "Roots",
+                                "Belowground",
+                                "Aboveground",
+                                "Leaves",
+                                "Stems",
+                                "Fruits",
+                                "General",
+                              ];
+                              const keys = Object.keys(val || {});
+                              const order = [
+                                ...preferred.filter((x) => keys.includes(x)),
+                                ...keys.filter((x) => !preferred.includes(x)),
+                              ];
+                              return (
+                                <div className="space-y-3">
+                                  {order.map((part) => {
+                                    const v = val[part];
+                                    const bullets = Array.isArray(v)
+                                      ? v
+                                      : splitToBullets(v);
+                                    return (
+                                      <div key={part}>
+                                        <div className="text-xs font-semibold uppercase tracking-wide text-sky-700/90">
+                                          {part}
+                                        </div>
+                                        {bullets.length > 1 ? (
+                                          <ul className="mt-1 list-disc pl-6 space-y-1">
+                                            {bullets.map((b, i) => (
+                                              <li key={i}>{b}</li>
+                                            ))}
+                                          </ul>
+                                        ) : (
+                                          <p className="mt-1">{String(v)}</p>
+                                        )}
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              );
+                            }
+                            const items = Array.isArray(val)
+                              ? val
+                              : toArray(val);
+                            return (
+                              <ul className="list-disc pl-6 space-y-1">
+                                {items.map((it, i) => (
+                                  <li key={i}>{it}</li>
+                                ))}
+                              </ul>
+                            );
+                          })()
+                        ) : k === "Management Options" ? (
+                          <ul className="list-disc pl-5 space-y-1">
+                            {(Array.isArray(aboutData[k])
+                              ? aboutData[k]
+                              : toArray(aboutData[k])
+                            ).map((it, i) => (
+                              <li key={i}>{it}</li>
+                            ))}
+                          </ul>
+                        ) : k === "Further Information" ? (
+                          <ol className="list-decimal pl-5 space-y-2">
+                            {(Array.isArray(aboutData[k])
+                              ? aboutData[k]
+                              : [String(aboutData[k])]
+                            ).map((it, i) => (
+                              <li key={i} className="leading-relaxed">
+                                {String(it)}
+                              </li>
+                            ))}
+                          </ol>
+                        ) : (
+                          splitIntoSentences(String(aboutData[k])).map(
+                            (line, i) => (
+                              <p key={i} className="mb-1">
+                                {line}
+                              </p>
+                            ),
+                          )
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
-            ) : err ? (
-              <div className="text-rose-700">
-                Failed to load data: <span className="font-mono">{err}</span>
+            </section>
+          )}
+
+          {/* Symptoms (object/array aware) */}
+          {/* {aboutData?.Symptoms && renderSymptoms(aboutData.Symptoms, open, toggle)} */}
+
+          {/* Management Options */}
+          {/* {aboutData?.["Management Options"] &&
+        renderManagement(aboutData["Management Options"], open, toggle)} */}
+
+          {/* Further Information (separate section, text only) */}
+          {/* {aboutData?.["Further Information"] &&
+      renderFurtherInformation(aboutData["Further Information"], open, toggle)} */}
+
+          {/* Images */}
+          <section className="rounded-3xl bg-white p-6 md:p-8 shadow-sm ring-1 ring-slate-200">
+            <h2 className="text-2xl font-semibold text-slate-900">Images</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              {imageDetails.map(({ path, name }, i) => (
+                <figure
+                  key={`${name}-${i}`}
+                  className="rounded-xl overflow-hidden border border-slate-200 bg-slate-50"
+                >
+                  <div className="aspect-video">
+                    <img
+                      src={encodeURI(path)}
+                      alt={name}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                      }}
+                    />
+                  </div>
+                  <figcaption className="px-3 py-2 text-xs text-slate-700">
+                    {name}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+
+          {/* Related taxa */}
+          <section className="rounded-3xl bg-white p-6 md:p-8 shadow-sm ring-1 ring-slate-200">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
+              <h2 className="text-2xl font-semibold text-slate-900">
+                Related taxa
+              </h2>
+            </div>
+
+            {loading ? (
+              <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 animate-pulse">
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="h-8 bg-slate-100 rounded-full" />
+                ))}
+              </div>
+            ) : (taxaList?.length ?? 0) === 0 ? (
+              <div className="text-slate-600 text-sm mt-2 italic">
+                No taxa recorded yet for this common name.
               </div>
             ) : (
-              <div className="text-slate-800">
-                No data found for <strong>{commonName}</strong>.
+              <div className="mt-3 flex flex-wrap gap-2">
+                {taxaList.map((t) => (
+                  <span
+                    key={t.name}
+                    className="px-3 py-1.5 rounded-full bg-slate-100 text-slate-800 text-sm border border-slate-200"
+                    title={`${t.name} (${t.count})`}
+                  >
+                    <span className="font-medium">{t.name}</span>
+                    <span className="ml-2 text-slate-600">({t.count})</span>
+                  </span>
+                ))}
               </div>
             )}
           </section>
-        )}
+        </main>
 
-        {/* Overview section (single column cards) */}
-        {aboutData && (
-          <section className="space-y-4">
-            <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-              <h2 className="text-3xl md:text-4xl font-bold !text-blue-600 leading-tight">
-                {aboutData?.Title || group["Common name"] || commonName}
-              </h2>
-              {OVERVIEW_ORDER.filter((k) => aboutData[k]).map((k) => (
-                <div key={k} className="border-b border-slate-200 last:border-0 py-3">
-                  {/* Clickable title */}
-                  <button
-                    onClick={() => toggle(k)}
-                    className="flex items-center justify-between w-full text-left"
-                  >
-                    <span className="text-sm uppercase tracking-wide text-slate-600 font-semibold">
-                      {k}
-                    </span>
-                    {open[k] ? (
-                      <ChevronDown className="w-4 h-4 text-slate-500" />
-                    ) : (
-                      <ChevronRight className="w-4 h-4 text-slate-500" />
-                    )}
-                  </button>
-
-                  {/* Collapsible content */}
-                  {open[k] && (
-                    <div className="mt-2 text-slate-800 text-sm">
-                      {k === "Scientific Name" ? (
-                        formatScientificName(String(aboutData[k]))
-                      ) : k === "Why They Matter" ? (
-                        <ul className="list-disc pl-5 space-y-1">
-                          {splitIntoSentences(String(aboutData[k])).map((line, i) => (
-                            <li key={i}>{line}</li>
-                          ))}
-                        </ul>
-                      ) : k === "Symptoms" ? (
-                        (() => {
-                          const val = aboutData[k];
-                          const isObj = val && typeof val === "object" && !Array.isArray(val);
-                          if (isObj) {
-                            const preferred = ["Roots", "Belowground", "Aboveground", "Leaves", "Stems", "Fruits", "General"];
-                            const keys = Object.keys(val || {});
-                            const order = [
-                              ...preferred.filter((x) => keys.includes(x)),
-                              ...keys.filter((x) => !preferred.includes(x)),
-                            ];
-                            return (
-                              <div className="space-y-3">
-                                {order.map((part) => {
-                                  const v = val[part];
-                                  const bullets = Array.isArray(v) ? v : splitToBullets(v);
-                                  return (
-                                    <div key={part}>
-                                      <div className="text-xs font-semibold uppercase tracking-wide text-sky-700/90">
-                                        {part}
-                                      </div>
-                                      {bullets.length > 1 ? (
-                                        <ul className="mt-1 list-disc pl-6 space-y-1">
-                                          {bullets.map((b, i) => (
-                                            <li key={i}>{b}</li>
-                                          ))}
-                                        </ul>
-                                      ) : (
-                                        <p className="mt-1">{String(v)}</p>
-                                      )}
-                                    </div>
-                                  );
-                                })}
-                              </div>
-                            );
-                          }
-                          const items = Array.isArray(val) ? val : toArray(val);
-                          return (
-                            <ul className="list-disc pl-6 space-y-1">
-                              {items.map((it, i) => (
-                                <li key={i}>{it}</li>
-                              ))}
-                            </ul>
-                          );
-                        })()
-                      ) : k === "Management Options" ? (
-                        <ul className="list-disc pl-5 space-y-1">
-                          {(Array.isArray(aboutData[k]) ? aboutData[k] : toArray(aboutData[k])).map((it, i) => (
-                            <li key={i}>{it}</li>
-                          ))}
-                        </ul>
-                      ) : k === "Further Information" ? (
-                          <ol className="list-decimal pl-5 space-y-2">
-                            {(Array.isArray(aboutData[k]) ? aboutData[k] : [String(aboutData[k])]).map(
-                              (it, i) => (
-                                <li key={i} className="leading-relaxed">
-                                  {String(it)}
-                                </li>
-                              )
-                            )}
-                          </ol>
-                      ) : (
-                        splitIntoSentences(String(aboutData[k])).map((line, i) => (
-                          <p key={i} className="mb-1">
-                            {line}
-                          </p>
-                        ))
-                      )}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </section>
-
-        )}
-
-        {/* Symptoms (object/array aware) */}
-        {/* {aboutData?.Symptoms && renderSymptoms(aboutData.Symptoms, open, toggle)} */}
-
-        {/* Management Options */}
-        {/* {aboutData?.["Management Options"] &&
-        renderManagement(aboutData["Management Options"], open, toggle)} */}
-
-        {/* Further Information (separate section, text only) */}
-        {/* {aboutData?.["Further Information"] &&
-      renderFurtherInformation(aboutData["Further Information"], open, toggle)} */}
-
-        {/* Images */}
-        <section className="rounded-3xl bg-white p-6 md:p-8 shadow-sm ring-1 ring-slate-200">
-          <h2 className="text-2xl font-semibold text-slate-900">Images</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {imageDetails.map(({ path, name }, i) => (
-              <figure
-                key={`${name}-${i}`}
-                className="rounded-xl overflow-hidden border border-slate-200 bg-slate-50"
-              >
-                <div className="aspect-video">
-                  <img
-                    src={encodeURI(path)}
-                    alt={name}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
-                    onError={(e) => { e.currentTarget.style.display = "none"; }}
-                  />
-                </div>
-                <figcaption className="px-3 py-2 text-xs text-slate-700">{name}</figcaption>
-              </figure>
-            ))}
-          </div>
-        </section>
-
-        {/* Related taxa */}
-        <section className="rounded-3xl bg-white p-6 md:p-8 shadow-sm ring-1 ring-slate-200">
-          <div className="flex items-center justify-between gap-2 flex-wrap">
-            <h2 className="text-2xl font-semibold text-slate-900">Related taxa</h2>
-          </div>
-
-          {loading ? (
-            <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 animate-pulse">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-8 bg-slate-100 rounded-full" />
-              ))}
-            </div>
-          ) : (taxaList?.length ?? 0) === 0 ? (
-            <div className="text-slate-600 text-sm mt-2 italic">
-              No taxa recorded yet for this common name.
-            </div>
-          ) : (
-            <div className="mt-3 flex flex-wrap gap-2">
-              {taxaList.map((t) => (
-                <span
-                  key={t.name}
-                  className="px-3 py-1.5 rounded-full bg-slate-100 text-slate-800 text-sm border border-slate-200"
-                  title={`${t.name} (${t.count})`}
-                >
-                  <span className="font-medium">{t.name}</span>
-                  <span className="ml-2 text-slate-600">({t.count})</span>
-                </span>
-              ))}
-            </div>
-          )}
-        </section>
-      </main>
-
-      {/* Optional modal (kept but not wired above) */}
-      {/* <MapPreviewModal
+        {/* Optional modal (kept but not wired above) */}
+        {/* <MapPreviewModal
         isOpen={mapModalOpen}
         onClose={() => setMapModalOpen(false)}
         entry={selectedEntry}
       /> */}
-    </div>
+      </div>
     </FadeIn>
   );
 }

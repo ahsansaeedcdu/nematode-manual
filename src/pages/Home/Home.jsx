@@ -1,24 +1,24 @@
 // src/pages/Home/Home.jsx (create this file)
-import React, { useState, useEffect } from 'react';
-import SearchBar from '../../components/searchbar/SearchBar';
-import AZFilter from '../../components/A-Zfilter/AZFilter';
-import NematodeList from '../../components/nematodeList/NematodeList';
-import nematodeData from '../../data/nematodeData';
+import React, { useState, useEffect } from "react";
+import SearchBar from "../../components/searchbar/SearchBar";
+import AZFilter from "../../components/A-Zfilter/AZFilter";
+import NematodeList from "../../components/nematodeList/NematodeList";
+import nematodeData from "../../data/nematodeData";
 // import HomePage  from '../../components/HomePage/HomePage';
-import { Link } from 'react-router-dom';
-import '../../App.css';
-import HomePage from '../../components/HomePage/HomePage';
+import { Link } from "react-router-dom";
+import "../../App.css";
+import HomePage from "../../components/HomePage/HomePage";
 
 function Home() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [selectedLetter, setSelectedLetter] = useState(null);
   const [nematodeData, setNematodeData] = useState({});
 
   useEffect(() => {
-      fetch('/data/nematode_data_grouped_by_letter.json')
-        .then(res => res.json())
-        .then(data => setNematodeData(data))
-        .catch(err => console.error('Failed to load nematode data:', err));
+    fetch("/data/nematode_data_grouped_by_letter.json")
+      .then((res) => res.json())
+      .then((data) => setNematodeData(data))
+      .catch((err) => console.error("Failed to load nematode data:", err));
   }, []);
 
   return (

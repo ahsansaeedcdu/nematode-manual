@@ -1,9 +1,7 @@
 {
   "Achlysiella williamsi": {
     "Common name": "Achlysiella williamsi",
-    "Scientific taxa": [
-      "Achlysiella williamsi"
-    ],
+    "Scientific taxa": ["Achlysiella williamsi"],
     "data": {
       "Section": "2.1.3",
       "Title": "Achlysiella nematodes (Achlysiella spp.)",
@@ -200,9 +198,7 @@
   },
   "Caloosia nudata": {
     "Common name": "Caloosia nudata",
-    "Scientific taxa": [
-      "Caloosia nudata"
-    ],
+    "Scientific taxa": ["Caloosia nudata"],
     "Entries": {
       "Caloosia nudata": [
         {
@@ -1116,10 +1112,7 @@
   },
   "Stem and bulb nematodes": {
     "Common name": "Stem and bulb nematodes",
-    "Scientific taxa": [
-      "Ditylenchus anchilospomosus",
-      "Ditylenchus sp."
-    ],
+    "Scientific taxa": ["Ditylenchus anchilospomosus", "Ditylenchus sp."],
     "data": {
       "Section": "2.3.3",
       "Title": "Stem and Bulb Nematodes (Ditylenchus spp.)",
@@ -1207,10 +1200,7 @@
   },
   "Cyst nematodes": {
     "Common name": "Cyst nematodes",
-    "Scientific taxa": [
-      "Globodera sp.",
-      "Heterodera sp."
-    ],
+    "Scientific taxa": ["Globodera sp.", "Heterodera sp."],
     "data": {
       "Section": "2.1.2",
       "Title": "Cyst nematodes (Globodera spp. & Heterodera spp.)",
@@ -5275,10 +5265,7 @@
   },
   "Sheath nematodes": {
     "Common name": "Sheath nematodes",
-    "Scientific taxa": [
-      "Hemicycliophora labiata",
-      "Hemicycliophora sp."
-    ],
+    "Scientific taxa": ["Hemicycliophora labiata", "Hemicycliophora sp."],
     "data": {
       "Section": "2.4.10",
       "Title": "Sheath Nematodes (Hemicycliophora spp.)",
@@ -5366,10 +5353,7 @@
   },
   "Lance nematodes": {
     "Common name": "Lance nematodes",
-    "Scientific taxa": [
-      "Hoplolaimus seinhorsti",
-      "Hoplolaimus sp."
-    ],
+    "Scientific taxa": ["Hoplolaimus seinhorsti", "Hoplolaimus sp."],
     "data": {
       "Section": "2.4.8",
       "Title": "Lance Nematodes (Hoplolaimus spp.)",
@@ -5471,9 +5455,7 @@
   },
   "Southern sting nematodes": {
     "Common name": "Southern sting nematodes",
-    "Scientific taxa": [
-      "Ibipora lolii"
-    ],
+    "Scientific taxa": ["Ibipora lolii"],
     "data": {
       "Section": "2.4.3",
       "Title": "Southern Sting Nematode (Ibipora lolii)",
@@ -7819,9 +7801,7 @@
   },
   "Morulaimus whitei": {
     "Common name": "Morulaimus whitei",
-    "Scientific taxa": [
-      "Morulaimus whitei"
-    ],
+    "Scientific taxa": ["Morulaimus whitei"],
     "Entries": {
       "Morulaimus whitei": [
         {
@@ -7843,9 +7823,7 @@
   },
   "Morulaimus sp.": {
     "Common name": "Morulaimus sp.",
-    "Scientific taxa": [
-      "Morulaimus sp."
-    ],
+    "Scientific taxa": ["Morulaimus sp."],
     "Entries": {
       "Morulaimus sp.": [
         {
@@ -9308,30 +9286,30 @@
       "Rotylenchulus sp.",
       "Rotylenchus brevicaudatus"
     ],
-     "data": {
-        "Section": "2.2.1",
-        "Title": "Reniform Nematodes (Rotylenchulus spp.)",
-        "Common Name": "Reniform nematodes",
-        "Scientific Name": "Rotylenchulus spp.",
-        "Host Range": ">300 plant species including cotton, cowpea, soybean, tobacco, pineapple, sweetpotato, okra, tomato, beans, various vegetables and weeds.",
-        "Symptoms": {
-          "Roots": "Destruction of feeder roots, reduced root volume.",
-          "Aboveground": "Stunted growth, yellowing, wilting, delayed flowering, fewer and smaller fruits, and overall yield decline."
-        },
-        "Life Cycle": "≤3 weeks Females embeds their heads in roots; each lays 40–100 eggs.",
-        "Why They Matter": "Rotylenchulus reniformis is the dominant species in northern Australia and a major pest of cotton, vegetables and pineapple. Can cut cotton yields by 10-25% (over 50% in bad seasons). Worsens root diseases and often goes unnoticed due to subtle symptoms.",
-        "Management Options": [
-          "Rotate with non-host crops and manage weeds",
-          "Use resistant or tolerant varieties where available",
-          "Optimise soil health and drainage to discourage build-up",
-          "Avoid spreading infested soil on equipment, tools, or footwear"
-        ],
-        "Further Information": [
-          "Lawrence KS (2022). Reniform nematode (Rotylenchulus reniformis) and its interactions with cotton (Gossypium hirsutum). In Integrated Nematode Management: State-of-the-art and visions for the future (Eds. RA Sikora et al.) CAB International, Wallingford, Chapter 14, 94-99.",
-          "Smith LJ, Scheikowski L, Kafle D (2024). The distribution of reniform nematode (Rotylenchulus reniformis) in cotton fields in central QLD and population dynamics in response to cropping regime. Pathogens 13, 888.",
-          "Stirling GR (2023). PSN 031. Reniform nematode (Rotylenchulus reniformis), a damaging pest of many crops in tropical and subtropical regions of Australia. In: Stirling GR (ed) Plant and soil nematodes: friend and foe. APPsNet. https://www.appsnet.org/nematodes"
-        ]
+    "data": {
+      "Section": "2.2.1",
+      "Title": "Reniform Nematodes (Rotylenchulus spp.)",
+      "Common Name": "Reniform nematodes",
+      "Scientific Name": "Rotylenchulus spp.",
+      "Host Range": ">300 plant species including cotton, cowpea, soybean, tobacco, pineapple, sweetpotato, okra, tomato, beans, various vegetables and weeds.",
+      "Symptoms": {
+        "Roots": "Destruction of feeder roots, reduced root volume.",
+        "Aboveground": "Stunted growth, yellowing, wilting, delayed flowering, fewer and smaller fruits, and overall yield decline."
       },
+      "Life Cycle": "≤3 weeks Females embeds their heads in roots; each lays 40–100 eggs.",
+      "Why They Matter": "Rotylenchulus reniformis is the dominant species in northern Australia and a major pest of cotton, vegetables and pineapple. Can cut cotton yields by 10-25% (over 50% in bad seasons). Worsens root diseases and often goes unnoticed due to subtle symptoms.",
+      "Management Options": [
+        "Rotate with non-host crops and manage weeds",
+        "Use resistant or tolerant varieties where available",
+        "Optimise soil health and drainage to discourage build-up",
+        "Avoid spreading infested soil on equipment, tools, or footwear"
+      ],
+      "Further Information": [
+        "Lawrence KS (2022). Reniform nematode (Rotylenchulus reniformis) and its interactions with cotton (Gossypium hirsutum). In Integrated Nematode Management: State-of-the-art and visions for the future (Eds. RA Sikora et al.) CAB International, Wallingford, Chapter 14, 94-99.",
+        "Smith LJ, Scheikowski L, Kafle D (2024). The distribution of reniform nematode (Rotylenchulus reniformis) in cotton fields in central QLD and population dynamics in response to cropping regime. Pathogens 13, 888.",
+        "Stirling GR (2023). PSN 031. Reniform nematode (Rotylenchulus reniformis), a damaging pest of many crops in tropical and subtropical regions of Australia. In: Stirling GR (ed) Plant and soil nematodes: friend and foe. APPsNet. https://www.appsnet.org/nematodes"
+      ]
+    },
     "Entries": {
       "Rotylenchulus reniformis": [
         {
@@ -10502,9 +10480,7 @@
   },
   "Sauertylenchus sp.": {
     "Common name": "Sauertylenchus sp.",
-    "Scientific taxa": [
-      "Sauertylenchus sp."
-    ],
+    "Scientific taxa": ["Sauertylenchus sp."],
     "Entries": {
       "Sauertylenchus sp.": [
         {
@@ -11334,10 +11310,7 @@
   },
   "Citrus nematodes": {
     "Common name": "Citrus nematodes",
-    "Scientific taxa": [
-      "Tylenchulus semipenetrans",
-      "Tylenchulus sp."
-    ],
+    "Scientific taxa": ["Tylenchulus semipenetrans", "Tylenchulus sp."],
     "data": {
       "Section": "2.2.2",
       "Title": "Citrus Nematode (Tylenchulus semipenetrans)",
@@ -12305,9 +12278,7 @@
   },
   "Lesion nematodes": {
     "Common name": "Lesion nematodes",
-    "Scientific taxa": [
-      "Pratylenchus sp."
-    ],
+    "Scientific taxa": ["Pratylenchus sp."],
     "Entries": {
       "Pratylenchus sp.": [
         {

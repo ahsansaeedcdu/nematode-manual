@@ -5,10 +5,7 @@
   "Albany": [],
   "Albury": [],
   "Alexandrina": [],
-  "Alice Springs": [
-    "M. javanica",
-    "M. incognita"
-  ],
+  "Alice Springs": ["M. javanica", "M. incognita"],
   "Alpine": [],
   "Anangu Pitjantjatjara Yankunytjatjara": [],
   "Ararat": [],
@@ -51,9 +48,7 @@
   "Boddington": [],
   "Bogan": [],
   "Boroondara": [],
-  "Boulia": [
-    "M. thamesi"
-  ],
+  "Boulia": ["M. thamesi"],
   "Bourke": [],
   "Boyup Brook": [],
   "Break O'Day": [],
@@ -64,18 +59,14 @@
   "Brisbane": [],
   "Broken Hill": [],
   "Brookton": [],
-  "Broome": [
-    "Meloidogyne sp."
-  ],
+  "Broome": ["Meloidogyne sp."],
   "Broomehill-Tambellup": [],
   "Bruce Rock": [],
   "Bulloo": [],
   "Buloke": [],
   "Bunbury": [],
   "Bundaberg": [],
-  "Burdekin": [
-    "M. incognita"
-  ],
+  "Burdekin": ["M. incognita"],
   "Burke": [],
   "Burnie": [],
   "Burnside": [],
@@ -83,11 +74,7 @@
   "Busselton": [],
   "Byron": [],
   "Cabonne": [],
-  "Cairns": [
-    "Meloidogyne sp.",
-    "M. javanica",
-    "M. arenaria"
-  ],
+  "Cairns": ["Meloidogyne sp.", "M. javanica", "M. arenaria"],
   "Cambridge": [],
   "Camden": [],
   "Campaspe": [],
@@ -108,10 +95,7 @@
   "Carpentaria": [],
   "Carrathool": [],
   "Casey": [],
-  "Cassowary Coast": [
-    "Meloidogyne sp.",
-    "M. incognita"
-  ],
+  "Cassowary Coast": ["Meloidogyne sp.", "M. incognita"],
   "Ceduna": [],
   "Central Coast (NSW)": [],
   "Central Coast (Tas.)": [],
@@ -141,15 +125,10 @@
   "Colac Otway": [],
   "Collie": [],
   "Coober Pedy": [],
-  "Cook": [
-    "Meloidogyne sp."
-  ],
+  "Cook": ["Meloidogyne sp."],
   "Coolamon": [],
   "Coolgardie": [],
-  "Coomalie": [
-    "Meloidogyne sp.",
-    "M. arenaria"
-  ],
+  "Coomalie": ["Meloidogyne sp.", "M. arenaria"],
   "Coonamble": [],
   "Coorong": [],
   "Coorow": [],
@@ -190,9 +169,7 @@
   "Dumbleyung": [],
   "Dundas": [],
   "Dungog": [],
-  "East Arnhem": [
-    "Meloidogyne sp."
-  ],
+  "East Arnhem": ["Meloidogyne sp."],
   "East Fremantle": [],
   "East Gippsland": [],
   "East Pilbara": [],
@@ -275,10 +252,7 @@
   "Karoonda East Murray": [],
   "Karratha": [],
   "Katanning": [],
-  "Katherine": [
-    "Meloidogyne sp.",
-    "M. javanica"
-  ],
+  "Katherine": ["Meloidogyne sp.", "M. javanica"],
   "Kellerberrin": [],
   "Kempsey": [],
   "Kent": [],
@@ -310,11 +284,7 @@
   "Leonora": [],
   "Light": [],
   "Lismore": [],
-  "Litchfield": [
-    "Meloidogyne sp.",
-    "M. enterolobli",
-    "M. incognita"
-  ],
+  "Litchfield": ["Meloidogyne sp.", "M. enterolobli", "M. incognita"],
   "Lithgow": [],
   "Liverpool": [],
   "Liverpool Plains": [],
@@ -327,9 +297,7 @@
   "Longreach": [],
   "Lower Eyre Peninsula": [],
   "Loxton Waikerie": [],
-  "MacDonnell": [
-    "Meloidogyne sp."
-  ],
+  "MacDonnell": ["Meloidogyne sp."],
   "Macedon Ranges": [],
   "Mackay": [],
   "Maitland": [],
@@ -340,11 +308,7 @@
   "Mapoon": [],
   "Maralinga Tjarutja": [],
   "Maranoa": [],
-  "Mareeba": [
-    "M. javanica",
-    "M. enterolobli",
-    "M. arenaria"
-  ],
+  "Mareeba": ["M. javanica", "M. enterolobli", "M. arenaria"],
   "Maribyrnong": [],
   "Marion": [],
   "Maroondah": [],
@@ -388,9 +352,7 @@
   "Mount Alexander": [],
   "Mount Barker": [],
   "Mount Gambier": [],
-  "Mount Isa": [
-    "M. javanica"
-  ],
+  "Mount Isa": ["M. javanica"],
   "Mount Magnet": [],
   "Mount Marshall": [],
   "Mount Remarkable": [],
@@ -445,11 +407,7 @@
   "Orroroo Carrieton": [],
   "Outside Australia": [],
   "Palm Island": [],
-  "Palmerston": [
-    "Meloidogyne sp.",
-    "M. enterolobli",
-    "M. incognita"
-  ],
+  "Palmerston": ["Meloidogyne sp.", "M. enterolobli", "M. incognita"],
   "Parkes": [],
   "Paroo": [],
   "Parramatta": [],
@@ -483,13 +441,9 @@
   "Richmond": [],
   "Richmond Valley": [],
   "Robe": [],
-  "Rockhampton": [
-    "M. arenaria"
-  ],
+  "Rockhampton": ["M. arenaria"],
   "Rockingham": [],
-  "Roper Gulf": [
-    "Meloidogyne sp."
-  ],
+  "Roper Gulf": ["Meloidogyne sp."],
   "Roxby Downs": [],
   "Ryde": [],
   "Salisbury": [],
@@ -523,11 +477,7 @@
   "Swan": [],
   "Swan Hill": [],
   "Sydney": [],
-  "Tablelands": [
-    "Meloidogyne sp.",
-    "M. javanica",
-    "M. incognita"
-  ],
+  "Tablelands": ["Meloidogyne sp.", "M. javanica", "M. incognita"],
   "Tammin": [],
   "Tamworth": [],
   "Tasman": [],
@@ -537,16 +487,12 @@
   "Tenterfield": [],
   "The Hills": [],
   "Three Springs": [],
-  "Tiwi Islands": [
-    "Meloidogyne sp."
-  ],
+  "Tiwi Islands": ["Meloidogyne sp."],
   "Toodyay": [],
   "Toowoomba": [],
   "Torres": [],
   "Torres Strait Island": [],
-  "Townsville": [
-    "M. javanica"
-  ],
+  "Townsville": ["M. javanica"],
   "Towong": [],
   "Trayning": [],
   "Tumby Bay": [],
@@ -554,11 +500,7 @@
   "Unincorp. Other Territories": [],
   "Unincorporated ACT": [],
   "Unincorporated NSW": [],
-  "Unincorporated NT": [
-    "Meloidogyne sp.",
-    "M. enterolobli",
-    "M. incognita"
-  ],
+  "Unincorporated NT": ["Meloidogyne sp.", "M. enterolobli", "M. incognita"],
   "Unincorporated SA": [],
   "Unincorporated Vic": [],
   "Unley": [],
@@ -592,9 +534,7 @@
   "Weipa": [],
   "Wellington": [],
   "Wentworth": [],
-  "West Arnhem": [
-    "M. enterolobli"
-  ],
+  "West Arnhem": ["M. enterolobli"],
   "West Arthur": [],
   "West Coast": [],
   "West Daly": [],
@@ -604,10 +544,7 @@
   "Western Downs": [],
   "Westonia": [],
   "Whitehorse": [],
-  "Whitsunday": [
-    "Meloidogyne sp.",
-    "M. javanica"
-  ],
+  "Whitsunday": ["Meloidogyne sp.", "M. javanica"],
   "Whittlesea": [],
   "Whyalla": [],
   "Wickepin": [],
@@ -627,9 +564,7 @@
   "Wujal Wujal": [],
   "Wyalkatchem": [],
   "Wyndham": [],
-  "Wyndham-East Kimberley": [
-    "Meloidogyne sp."
-  ],
+  "Wyndham-East Kimberley": ["Meloidogyne sp."],
   "Yalgoo": [],
   "Yankalilla": [],
   "Yarra": [],

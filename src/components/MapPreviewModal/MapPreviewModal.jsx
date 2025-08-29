@@ -43,7 +43,7 @@ export default function MapPreviewModal({
   if (!isOpen || !entry) return null;
 
   const { lat, lng, title, subtitle, details } = entry;
-  
+
   return (
     <AnimatePresence>
       {/* Backdrop */}
@@ -55,19 +55,19 @@ export default function MapPreviewModal({
         exit={{ opacity: 0 }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
         onClick={(e) => {
-            if (e.target === overlayRef.current) onClose?.();
+          if (e.target === overlayRef.current) onClose?.();
         }}
       >
         {/* Modal */}
         <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            initial={{ opacity: 0, scale: 0.96, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 40 }}
-            transition={{
-                duration: 0.35,
-                ease: "easeInOut"
-            }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          initial={{ opacity: 0, scale: 0.96, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.9, y: 40 }}
+          transition={{
+            duration: 0.35,
+            ease: "easeInOut",
+          }}
         >
           <div className="w-full max-w-3xl rounded-2xl bg-white shadow-2xl border border-blue-100 overflow-hidden">
             {/* Header */}

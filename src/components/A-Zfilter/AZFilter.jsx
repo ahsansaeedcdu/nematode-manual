@@ -1,6 +1,6 @@
-import './AZFilter.css';
+import "./AZFilter.css";
 
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 function AZFilter({ onLetterClick }) {
   return (

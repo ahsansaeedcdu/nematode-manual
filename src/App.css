@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
-#root{
+#root {
   max-width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: start;
-  background-color:white;
+  background-color: white;
 }
 
 .main {
@@ -18,8 +18,6 @@
   background: white; /* or whatever your default background is */
 }
 
-
-
-h1{
-color: blue;
+h1 {
+  color: blue;
 }

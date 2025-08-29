@@ -1,9 +1,7 @@
 {
   "Achlysiella williamsi": {
     "Common name": "Achlysiella williamsi",
-    "Scientific taxa": [
-      "Achlysiella williamsi"
-    ],
+    "Scientific taxa": ["Achlysiella williamsi"],
     "Entries": [
       {
         "Sampling Date": null,
@@ -147,9 +145,7 @@
   },
   "Caloosia nudata": {
     "Common name": "Caloosia nudata",
-    "Scientific taxa": [
-      "Caloosia nudata"
-    ],
+    "Scientific taxa": ["Caloosia nudata"],
     "Entries": [
       {
         "Sampling Date": null,
@@ -1021,10 +1017,7 @@
   },
   "Stem nematodes": {
     "Common name": "Stem nematodes",
-    "Scientific taxa": [
-      "Ditylenchus anchilospomosus",
-      "Ditylenchus sp."
-    ],
+    "Scientific taxa": ["Ditylenchus anchilospomosus", "Ditylenchus sp."],
     "Entries": [
       {
         "Sampling Date": null,
@@ -1087,10 +1080,7 @@
   },
   "Cyst nematodes": {
     "Common name": "Cyst nematodes",
-    "Scientific taxa": [
-      "Globodera sp.",
-      "Heterodera sp."
-    ],
+    "Scientific taxa": ["Globodera sp.", "Heterodera sp."],
     "Entries": [
       {
         "Sampling Date": null,
@@ -3422,10 +3412,7 @@
   },
   "Sheath nematodes": {
     "Common name": "Sheath nematodes",
-    "Scientific taxa": [
-      "Hemicycliophora labiata",
-      "Hemicycliophora sp."
-    ],
+    "Scientific taxa": ["Hemicycliophora labiata", "Hemicycliophora sp."],
     "Entries": [
       {
         "Sampling Date": null,
@@ -3488,10 +3475,7 @@
   },
   "Lance nematodes": {
     "Common name": "Lance nematodes",
-    "Scientific taxa": [
-      "Hoplolaimus seinhorsti",
-      "Hoplolaimus sp."
-    ],
+    "Scientific taxa": ["Hoplolaimus seinhorsti", "Hoplolaimus sp."],
     "Entries": [
       {
         "Sampling Date": null,
@@ -3567,9 +3551,7 @@
   },
   "Southern sting nematodes": {
     "Common name": "Southern sting nematodes",
-    "Scientific taxa": [
-      "Ibipora lolii"
-    ],
+    "Scientific taxa": ["Ibipora lolii"],
     "Entries": [
       {
         "Sampling Date": null,
@@ -5859,9 +5841,7 @@
   },
   "Morulaimus whitei": {
     "Common name": "Morulaimus whitei",
-    "Scientific taxa": [
-      "Morulaimus whitei"
-    ],
+    "Scientific taxa": ["Morulaimus whitei"],
     "Entries": [
       {
         "Sampling Date": null,
@@ -5881,9 +5861,7 @@
   },
   "Morulaimus sp.": {
     "Common name": "Morulaimus sp.",
-    "Scientific taxa": [
-      "Morulaimus sp."
-    ],
+    "Scientific taxa": ["Morulaimus sp."],
     "Entries": [
       {
         "Sampling Date": null,
@@ -8380,9 +8358,7 @@
   },
   "Sauertylenchus sp.": {
     "Common name": "Sauertylenchus sp.",
-    "Scientific taxa": [
-      "Sauertylenchus sp."
-    ],
+    "Scientific taxa": ["Sauertylenchus sp."],
     "Entries": [
       {
         "Sampling Date": null,
@@ -9174,10 +9150,7 @@
   },
   "Citrus nematodes": {
     "Common name": "Citrus nematodes",
-    "Scientific taxa": [
-      "Tylenchulus semipenetrans",
-      "Tylenchulus sp."
-    ],
+    "Scientific taxa": ["Tylenchulus semipenetrans", "Tylenchulus sp."],
     "Entries": [
       {
         "Sampling Date": null,
@@ -9255,9 +9228,7 @@
   },
   "Tylenchulus sp.": {
     "Common name": "Tylenchulus sp.",
-    "Scientific taxa": [
-      "Tylenchulus sp."
-    ],
+    "Scientific taxa": ["Tylenchulus sp."],
     "Entries": [
       {
         "Sampling Date": null,
@@ -10087,9 +10058,7 @@
   },
   "Lesion nematodes": {
     "Common name": "Lesion nematodes",
-    "Scientific taxa": [
-      "Pratylenchus sp."
-    ],
+    "Scientific taxa": ["Pratylenchus sp."],
     "Entries": [
       {
         "Sampling Date": "2024-01-05 00:00:00",
