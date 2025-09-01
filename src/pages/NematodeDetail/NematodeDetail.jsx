@@ -103,7 +103,7 @@ export default function NematodeDetail({
     if (!grouped || typeof grouped !== "object") return null;
     if (grouped[commonName]) return grouped[commonName];
     const k = Object.keys(grouped).find(
-      (key) => key.trim().toLowerCase() === commonName.toLowerCase(),
+      (key) => key.trim().toLowerCase() === commonName.toLowerCase()
     );
     return k ? grouped[k] : null;
   }, [grouped, commonName]);
@@ -114,7 +114,7 @@ export default function NematodeDetail({
       Object.keys(taxaMap)
         .map((name) => ({ name, count: (taxaMap[name] || []).length }))
         .sort((a, b) => a.name.localeCompare(b.name)),
-    [taxaMap],
+    [taxaMap]
   );
 
   const allEntries = useMemo(
@@ -124,7 +124,7 @@ export default function NematodeDetail({
         const bR = (b["Sampling Region"] || "").toLowerCase();
         return aR.localeCompare(bR);
       }),
-    [taxaMap],
+    [taxaMap]
   );
 
   const aboutData =
@@ -135,7 +135,7 @@ export default function NematodeDetail({
     const fromArray = getGenusLabelFromTaxaArray(group?.["Scientific taxa"]);
     if (fromArray) return fromArray;
     const fromData = getGenusLabelFromScientificName(
-      aboutData?.["Scientific Name"],
+      aboutData?.["Scientific Name"]
     );
     return fromData || null;
   }, [group, aboutData]);
@@ -161,7 +161,16 @@ export default function NematodeDetail({
   ];
 
   /** --- renderers (STRICT single-column) --- */
-  const [open, setOpen] = useState({ "Common Name": true }); // track which sections are open
+  const [open, setOpen] = useState({
+    "Common Name": true,
+    "Scientific Name": true,
+    "Host Range": true,
+    "Life Cycle": true,
+    "Why They Matter": true,
+    Symptoms: true,
+    "Management Options": true,
+    "Further Information": true,
+  }); // track which sections are open
 
   const toggle = (key) => {
     setOpen((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -412,8 +421,108 @@ export default function NematodeDetail({
             <section className="space-y-4">
               <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
                 <h2 className="text-3xl md:text-4xl font-bold !text-blue-600 leading-tight">
-                  {aboutData?.Title || group["Common name"] || commonName}
+                  {(() => {
+                    const rawCommon =
+                      aboutData?.["Common Name"] ||
+                      group["Common name"] ||
+                      commonName ||
+                      "";
+                    const hasNematodeWord = /\bnematodes?\b/i.test(rawCommon);
+                    if (hasNematodeWord) return <span>{rawCommon}</span>;
+
+                    // Common name is a taxon (Genus species OR Genus sp./spp.)
+                    const parts = rawCommon.trim().split(/\s+/);
+                    if (parts.length === 0) return null;
+
+                    // Genus + sp./spp. → italicize only Genus
+                    if (/\bsp\.?\b|\bspp\.?\b/i.test(parts[1] || "")) {
+                      return (
+                        <>
+                          <span className="italic">{parts[0]}</span>
+                          {parts[1] ? ` ${parts[1]}` : ""}
+                          {parts.slice(2).length
+                            ? ` ${parts.slice(2).join(" ")}`
+                            : ""}
+                        </>
+                      );
+                    }
+
+                    // Genus + species → italicize both
+                    if (parts.length >= 2) {
+                      return (
+                        <>
+                          <span className="italic">{parts[0]}</span>{" "}
+                          <span className="italic">{parts[1]}</span>
+                          {parts.slice(2).length
+                            ? ` ${parts.slice(2).join(" ")}`
+                            : ""}
+                        </>
+                      );
+                    }
+
+                    // Single word (Genus) → italicize it
+                    return <span className="italic">{parts[0]}</span>;
+                  })()}
+
+                  {aboutData?.["Scientific Name"] && (
+                    <>
+                      {" ("}
+                      {
+                        // Scientific name (can be multiple with & or ,)
+                        aboutData["Scientific Name"]
+                          .split(/(&|,)/)
+                          .map((chunk, i, arr) => {
+                            const t = chunk.trim();
+                            if (t === "&" || t === ",") {
+                              return (
+                                <span key={i} className="mx-1">
+                                  {t}
+                                </span>
+                              );
+                            }
+                            if (!t) return null;
+
+                            const w = t.split(/\s+/);
+
+                            // Genus + sp./spp. → italicize only Genus
+                            if (/\bsp\.?\b|\bspp\.?\b/i.test(w[1] || "")) {
+                              return (
+                                <span key={i}>
+                                  <span className="italic">{w[0]}</span>
+                                  {w[1] ? ` ${w[1]}` : ""}
+                                  {w.slice(2).length
+                                    ? ` ${w.slice(2).join(" ")}`
+                                    : ""}
+                                </span>
+                              );
+                            }
+
+                            // Genus + species → italicize both
+                            if (w.length >= 2) {
+                              return (
+                                <span key={i}>
+                                  <span className="italic">{w[0]}</span>{" "}
+                                  <span className="italic">{w[1]}</span>
+                                  {w.slice(2).length
+                                    ? ` ${w.slice(2).join(" ")}`
+                                    : ""}
+                                </span>
+                              );
+                            }
+
+                            // Single word (Genus) → italicize it
+                            return (
+                              <span key={i}>
+                                <span className="italic">{w[0]}</span>
+                              </span>
+                            );
+                          })
+                      }
+                      {")"}
+                    </>
+                  )}
                 </h2>
+
                 {OVERVIEW_ORDER.filter((k) => aboutData[k]).map((k) => (
                   <div
                     key={k}
@@ -444,7 +553,7 @@ export default function NematodeDetail({
                             {splitIntoSentences(String(aboutData[k])).map(
                               (line, i) => (
                                 <li key={i}>{line}</li>
-                              ),
+                              )
                             )}
                           </ul>
                         ) : k === "Symptoms" ? (
@@ -533,7 +642,7 @@ export default function NematodeDetail({
                               <p key={i} className="mb-1">
                                 {line}
                               </p>
-                            ),
+                            )
                           )
                         )}
                       </div>

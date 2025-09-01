@@ -176,9 +176,7 @@ export default function NematodeOverview({
     });
 
     Object.keys(map).forEach((k) =>
-      map[k].sort((a, b) =>
-        compareSections(a?.data?.Section, b?.data?.Section),
-      ),
+      map[k].sort((a, b) => compareSections(a?.data?.Section, b?.data?.Section))
     );
     return map;
   }, [grouped]);
@@ -295,7 +293,34 @@ export default function NematodeOverview({
                         {/* Nested nematode entries */}
                         <div className="ml-4 border-l border-slate-200 pl-2 space-y-1">
                           {groupedByCategory[cat.id]?.map((entry) => {
-                            const cn = entry?.["Common name"];
+                            const rawCN = entry?.["Common name"];
+                            const cn =
+                              rawCN && !rawCN.toLowerCase().includes("nematode")
+                                ? (() => {
+                                    const parts = rawCN.split(/\s+/);
+                                    if (
+                                      parts.includes("spp.") ||
+                                      parts.includes("sp.")
+                                    ) {
+                                      return parts[0]
+                                        ? <i>{parts[0]}</i> +
+                                            " " +
+                                            parts.slice(1).join(" ")
+                                        : rawCN;
+                                    }
+                                    if (parts.length >= 2) {
+                                      return (
+                                        <>
+                                          <i>
+                                            {parts[0]} {parts[1]}
+                                          </i>{" "}
+                                          {parts.slice(2).join(" ")}
+                                        </>
+                                      );
+                                    }
+                                    return rawCN;
+                                  })()
+                                : rawCN;
                             const sect = entry?.data?.Section || "";
                             const nodeId = slugify(`${sect} ${cn}`);
                             return (
@@ -606,25 +631,106 @@ export default function NematodeOverview({
                 <div className="mt-3 space-y-3">
                   {groupedByCategory[cat.id]?.length ? (
                     groupedByCategory[cat.id].map((entry) => {
-                      const cn = entry?.["Common name"];
-                      const sciName =
+                      const rawCN = entry?.["Common name"];
+                      const rawSci =
                         entry?.data?.["Scientific Name"] ||
                         entry?.data?.["Scientific name"] ||
                         "";
                       const sect = entry?.data?.Section || "";
-                      const nodeId = slugify(`${sect} ${cn}`);
-                      const titleText = `${sect ? sect + " " : ""}${cn}${
-                        sciName ? ` (${sciName})` : ""
-                      }`;
+                      const nodeId = slugify(`${sect} ${rawCN || ""}`);
+
+                      // Format Common Name
+                      const cn =
+                        rawCN && !rawCN.toLowerCase().includes("nematode")
+                          ? (() => {
+                              const parts = rawCN.split(/\s+/);
+                              if (
+                                parts.includes("spp.") ||
+                                parts.includes("sp.")
+                              ) {
+                                return (
+                                  <>
+                                    <i>{parts[0]}</i> {parts.slice(1).join(" ")}
+                                  </>
+                                );
+                              }
+                              if (parts.length >= 2) {
+                                return (
+                                  <>
+                                    <i>
+                                      {parts[0]} {parts[1]}
+                                    </i>{" "}
+                                    {parts.slice(2).join(" ")}
+                                  </>
+                                );
+                              }
+                              return rawCN;
+                            })()
+                          : rawCN;
+
+                      // Format Scientific Name
+                      // Format Scientific Name (handles multiple with "&" or ",")
+                      const sciName =
+                        rawSci &&
+                        rawSci.split(/(&|,)/).map((part, i) => {
+                          const trimmed = part.trim();
+                          if (trimmed === "&" || trimmed === ",") {
+                            return (
+                              <span key={i} className="mx-1">
+                                {trimmed}
+                              </span>
+                            );
+                          }
+                          if (!trimmed) return null;
+
+                          const tokens = trimmed.split(/\s+/);
+                          // Case: "Genus spp." or "Genus sp."
+                          if (
+                            tokens.includes("spp.") ||
+                            tokens.includes("sp.")
+                          ) {
+                            return (
+                              <span key={i}>
+                                <i>{tokens[0]} </i> {tokens[1]}
+                                {tokens.slice(2).join(" ")}
+                              </span>
+                            );
+                          }
+                          // Case: "Genus species"
+                          if (tokens.length >= 2) {
+                            return (
+                              <span key={i}>
+                                <i>
+                                  {tokens[0]} {tokens[1]}
+                                </i>{" "}
+                                {tokens.slice(2).join(" ")}
+                              </span>
+                            );
+                          }
+                          // Fallback: single word (italicise whole thing)
+                          return (
+                            <span key={i}>
+                              <i>{trimmed}</i>
+                            </span>
+                          );
+                        });
 
                       return (
                         <div key={nodeId} id={nodeId}>
                           <Link
-                            to={`/details/${encodeURIComponent(cn)}`}
+                            to={`/details/${encodeURIComponent(rawCN || "")}`}
                             className="block bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg shadow-sm p-4 transition"
                           >
                             <div className="text-lg font-semibold text-blue-700">
-                              {titleText}
+                              {sect && (
+                                <span className="font-bold">{sect} </span>
+                              )}
+                              {cn}
+                              {sciName && (
+                                <span className="ml-1 text-slate-600 font-normal">
+                                  ({sciName})
+                                </span>
+                              )}
                             </div>
                           </Link>
                         </div>
