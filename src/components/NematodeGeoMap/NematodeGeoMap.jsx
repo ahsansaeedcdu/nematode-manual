@@ -412,17 +412,17 @@ const NematodeGeoMap = () => {
             <div className="bg-white rounded-2xl shadow p-4 sticky top-[84px]">
               <h2 className="text-lg font-semibold mb-2">About this view</h2>
               <p className="text-sm text-slate-600">
-                This map highlights LGAs with recorded nematode presence and those without.
+              This map shows where plant-parasitic nematodes (PPNs) have been found in Northern Australia.
               </p>
               <div className="mt-4">
                 <ul className="space-y-2 text-sm text-slate-700">
                   <li className="flex items-center gap-3">
                     <span className="inline-block h-4 w-4 rounded-full bg-[#f87171] ring-1 ring-[#f87171]/40" />
-                    <span>Nematodes found</span>
+                    <span> nematodes have been detected in these areas.</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <span className="inline-block h-4 w-4 rounded-full bg-[#e5e7eb] ring-1 ring-[#e5e7eb]/60" />
-                    <span>Not found / no record</span>
+                    <span> nematodes may occur, but not yet verified.​</span>
                   </li>
                 </ul>
               </div>
