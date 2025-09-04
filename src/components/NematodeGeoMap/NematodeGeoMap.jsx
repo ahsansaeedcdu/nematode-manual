@@ -207,7 +207,7 @@ const GeoJSONLayerWithInteractions = ({
         !isNaN(record.lat) &&
         !isNaN(record.lng) &&
         record.originalGroupKey &&
-        selectedNematodeGroups.includes(record.originalGroupKey),
+        selectedNematodeGroups.includes(record.originalGroupKey)
     );
   }, [showMarkers, detailedNematodeRecords, selectedNematodeGroups]);
 
@@ -323,7 +323,7 @@ const HistoricalMap = () => {
         fillOpacity: 0.75,
       };
     },
-    [nematodeMap],
+    [nematodeMap]
   );
 
   const onEachFeature = (feature, layer) => {
@@ -458,23 +458,23 @@ const NematodeGeoMap = () => {
   const handleNewMapCheckboxChange = useCallback((event) => {
     const { value, checked } = event.target;
     setNewMapSelectedNematodeGroups((prev) =>
-      checked ? [...prev, value] : prev.filter((g) => g !== value),
+      checked ? [...prev, value] : prev.filter((g) => g !== value)
     );
   }, []);
   const handleClearNewMapFilters = useCallback(
     () => setNewMapSelectedNematodeGroups([]),
-    [],
+    []
   );
   const handleSelectAll = useCallback(
     () => setNewMapSelectedNematodeGroups(newMapAllNematodeGroups),
-    [newMapAllNematodeGroups],
+    [newMapAllNematodeGroups]
   );
 
   const filteredGroups = useMemo(() => {
     const q = groupQuery.trim().toLowerCase();
     if (!q) return newMapAllNematodeGroups;
     return newMapAllNematodeGroups.filter((name) =>
-      name.toLowerCase().includes(q),
+      name.toLowerCase().includes(q)
     );
   }, [groupQuery, newMapAllNematodeGroups]);
 
@@ -576,32 +576,68 @@ const NematodeGeoMap = () => {
                     </p>
                   ) : filteredGroups.length > 0 ? (
                     <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-1 gap-2">
-                      {filteredGroups.map((group) => (
-                        <label
-                          key={group}
-                          className="flex items-center justify-between gap-3 p-2 rounded-lg border hover:border-slate-300 cursor-pointer"
-                          title={group}
-                        >
-                          <div className="flex items-center gap-2 min-w-0">
-                            <span
-                              className="inline-block w-3.5 h-3.5 rounded shrink-0"
-                              style={{
-                                backgroundColor: getNematodeGroupColor(group),
-                              }}
+                      {filteredGroups.map((group) => {
+                        const formatName = (name) => {
+                          if (name.toLowerCase().includes("nematode")) {
+                            return name; // leave untouched
+                          }
+
+                          const parts = name.split(" ");
+                          if (parts.length === 0) return name;
+
+                          if (parts.includes("spp.") || parts.includes("sp.")) {
+                            // Italicize only Genus
+                            return (
+                              <>
+                                <i>{parts[0]}</i> {parts.slice(1).join(" ")}
+                              </>
+                            );
+                          }
+
+                          if (parts.length >= 2) {
+                            // Italicize Genus + species
+                            return (
+                              <>
+                                <i>
+                                  {parts[0]} {parts[1]}
+                                </i>{" "}
+                                {parts.slice(2).join(" ")}
+                              </>
+                            );
+                          }
+
+                          return name;
+                        };
+
+                        return (
+                          <label
+                            key={group}
+                            className="flex items-center justify-between gap-3 p-2 rounded-lg border hover:border-slate-300 cursor-pointer"
+                            title={group}
+                          >
+                            <div className="flex items-center gap-2 min-w-0">
+                              <span
+                                className="inline-block w-3.5 h-3.5 rounded shrink-0"
+                                style={{
+                                  backgroundColor: getNematodeGroupColor(group),
+                                }}
+                              />
+                              <span className="text-sm truncate">
+                                {formatName(group)}
+                              </span>
+                            </div>
+                            <input
+                              type="checkbox"
+                              value={group}
+                              checked={newMapSelectedNematodeGroups.includes(
+                                group
+                              )}
+                              onChange={handleNewMapCheckboxChange}
+                              className="h-4 w-4 accent-blue-600"
                             />
-                            <span className="text-sm truncate">{group}</span>
-                          </div>
-                          <input
-                            type="checkbox"
-                            value={group}
-                            checked={newMapSelectedNematodeGroups.includes(
-                              group,
-                            )}
-                            onChange={handleNewMapCheckboxChange}
-                            className="h-4 w-4 accent-blue-600"
-                          />
-                        </label>
-                      ))}
+                          </label>
+                        );
+                      })}
                     </div>
                   ) : (
                     <p className="text-slate-500 text-sm p-2">
