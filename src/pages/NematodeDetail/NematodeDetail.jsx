@@ -5,6 +5,9 @@ import { ChevronDown, ChevronRight } from "lucide-react";
 import FadeIn from "../../components/FadeIn/FadeIn";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import DetailPDF from "../../components/DetailPDF/DetailPDF";
+import { getImagesForNematode } from "../../lib/getNematodeImages";
+import ImageGallery from "../../components/ImageGallery/ImageGallery";
+
 // import MapPreviewModal from "../../components/MapPreviewModal/MapPreviewModal"; // optional
 
 /** --- helpers --- */
@@ -129,7 +132,7 @@ export default function NematodeDetail({
 
   const aboutData =
     group?.data && typeof group.data === "object" ? group.data : null;
-
+  
   // Genus label priority: Scientific taxa array -> Scientific Name in aboutData
   const genusLabel = useMemo(() => {
     const fromArray = getGenusLabelFromTaxaArray(group?.["Scientific taxa"]);
@@ -140,27 +143,6 @@ export default function NematodeDetail({
     return fromData || null;
   }, [group, aboutData]);
 
-  // demo images (replace with actual images if available)
-  const imageDetails = [
-    {
-      path: "/data/RKN Juvenile Under Microscope.jpg",
-      name: "RKN Juvenile Under Microscope.jpg",
-    },
-    {
-      path: "/data/Root Galls on Tomato Caused by RKN.jpg",
-      name: "Root Galls on Tomato Caused by RKN.jpg",
-    },
-    {
-      path: "/data/RKN Juvenile Under Microscope.jpg",
-      name: "RKN Juvenile Under Microscope.jpg",
-    },
-    {
-      path: "/data/Root Galls on Tomato Caused by RKN.jpg",
-      name: "Root Galls on Tomato Caused by RKN.jpg",
-    },
-  ];
-
-  /** --- renderers (STRICT single-column) --- */
   const [open, setOpen] = useState({
     "Common Name": true,
     "Scientific Name": true,
@@ -174,173 +156,6 @@ export default function NematodeDetail({
 
   const toggle = (key) => {
     setOpen((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-  // Symptoms can be:
-  // 1) object like { Roots: "...", Aboveground: "..." }
-  // 2) array of strings
-  // 3) single string
-  const renderSymptoms = (val, open, toggle) => {
-    const isObj = val && typeof val === "object" && !Array.isArray(val);
-
-    return (
-      <section className="rounded-2xl border border-sky-200 bg-white p-6 shadow-sm">
-        {/* Toggle header */}
-        <button
-          onClick={() => toggle("Symptoms")}
-          className="flex items-center justify-between w-full text-left"
-        >
-          <h2 className="text-xl md:text-2xl font-semibold text-slate-800">
-            Symptoms
-          </h2>
-          {open["Symptoms"] ? (
-            <ChevronDown className="w-5 h-5 text-slate-600" />
-          ) : (
-            <ChevronRight className="w-5 h-5 text-slate-600" />
-          )}
-        </button>
-
-        {/* Collapsible content */}
-        {open["Symptoms"] && (
-          <div className="mt-4 space-y-4">
-            {isObj
-              ? (() => {
-                  const preferred = [
-                    "Roots",
-                    "Belowground",
-                    "Aboveground",
-                    "Leaves",
-                    "Stems",
-                    "Fruits",
-                    "General",
-                  ];
-                  const keys = Object.keys(val || {});
-                  const order = [
-                    ...preferred.filter((k) => keys.includes(k)),
-                    ...keys.filter((k) => !preferred.includes(k)),
-                  ];
-
-                  return order.map((k) => {
-                    const v = val[k];
-                    const bullets = Array.isArray(v) ? v : splitToBullets(v);
-                    return (
-                      <div key={k}>
-                        <div className="text-sm font-semibold uppercase tracking-wide text-sky-700/90">
-                          {k}
-                        </div>
-                        {bullets.length > 1 ? (
-                          <ul className="mt-1 list-disc pl-6 text-slate-800 space-y-1">
-                            {bullets.map((b, i) => (
-                              <li key={i}>{b}</li>
-                            ))}
-                          </ul>
-                        ) : (
-                          <p className="mt-1 text-slate-800">{String(v)}</p>
-                        )}
-                      </div>
-                    );
-                  });
-                })()
-              : (() => {
-                  const items = Array.isArray(val) ? val : toArray(val);
-                  return items?.length ? (
-                    <ul className="mt-3 list-disc pl-6 text-slate-800 space-y-1">
-                      {items.map((it, i) => (
-                        <li key={i}>{it}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="mt-3 text-slate-600">No symptoms listed.</p>
-                  );
-                })()}
-          </div>
-        )}
-      </section>
-    );
-  };
-
-  const renderManagement = (val, open, toggle) => {
-    const items = Array.isArray(val) ? val : toArray(val);
-
-    return (
-      <section className="rounded-2xl border border-emerald-200 bg-white p-6 shadow-sm">
-        {/* Toggle header */}
-        <button
-          onClick={() => toggle("Management Options")}
-          className="flex items-center justify-between w-full text-left"
-        >
-          <h2 className="text-xl md:text-2xl font-semibold text-slate-800">
-            Management Options
-          </h2>
-          {open["Management Options"] ? (
-            <ChevronDown className="w-5 h-5 text-slate-600" />
-          ) : (
-            <ChevronRight className="w-5 h-5 text-slate-600" />
-          )}
-        </button>
-
-        {/* Collapsible content */}
-        {open["Management Options"] && (
-          <>
-            {items?.length ? (
-              <ul className="mt-3 list-disc pl-6 text-slate-800 space-y-1">
-                {items.map((it, i) => (
-                  <li key={i}>{it}</li>
-                ))}
-              </ul>
-            ) : (
-              <p className="mt-3 text-slate-600">
-                No management options listed.
-              </p>
-            )}
-          </>
-        )}
-      </section>
-    );
-  };
-
-  // Show references as clean modern text (no links), in its own section
-  const renderFurtherInformation = (val, open, toggle) => {
-    // Ensure array without splitting into sentences
-    const items = Array.isArray(val) ? val : [String(val)];
-
-    return (
-      <section className="rounded-2xl border border-violet-200 bg-white p-6 shadow-sm">
-        {/* Toggle header */}
-        <button
-          onClick={() => toggle("Further Information")}
-          className="flex items-center justify-between w-full text-left"
-        >
-          <h2 className="text-xl md:text-2xl font-semibold text-slate-800">
-            Further Information
-          </h2>
-          {open["Further Information"] ? (
-            <ChevronDown className="w-5 h-5 text-slate-600" />
-          ) : (
-            <ChevronRight className="w-5 h-5 text-slate-600" />
-          )}
-        </button>
-
-        {/* Collapsible content */}
-        {open["Further Information"] && (
-          <>
-            {items?.length ? (
-              <ol className="mt-3 list-decimal pl-6 space-y-3">
-                {items.map((it, i) => (
-                  <li
-                    key={i}
-                    className="text-slate-800 leading-relaxed border-b border-slate-100 pb-2 last:border-0"
-                  >
-                    {String(it)}
-                  </li>
-                ))}
-              </ol>
-            ) : (
-              <p className="mt-3 text-slate-600">No references provided.</p>
-            )}
-          </>
-        )}
-      </section>
-    );
   };
 
   const formatScientificName = (text) => {
@@ -370,6 +185,7 @@ export default function NematodeDetail({
       .split(/\. (?=[A-Z])/)
       .map((s, idx, arr) => (idx < arr.length - 1 ? s.trim() + "." : s.trim()));
   };
+  const imageDetails = getImagesForNematode(commonName);
   return (
     <FadeIn>
       <div className="min-h-screen w-screen bg-white">
@@ -653,45 +469,8 @@ export default function NematodeDetail({
             </section>
           )}
 
-          {/* Symptoms (object/array aware) */}
-          {/* {aboutData?.Symptoms && renderSymptoms(aboutData.Symptoms, open, toggle)} */}
-
-          {/* Management Options */}
-          {/* {aboutData?.["Management Options"] &&
-        renderManagement(aboutData["Management Options"], open, toggle)} */}
-
-          {/* Further Information (separate section, text only) */}
-          {/* {aboutData?.["Further Information"] &&
-      renderFurtherInformation(aboutData["Further Information"], open, toggle)} */}
-
           {/* Images */}
-          <section className="rounded-3xl bg-white p-6 md:p-8 shadow-sm ring-1 ring-slate-200">
-            <h2 className="text-2xl font-semibold text-slate-900">Images</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-              {imageDetails.map(({ path, name }, i) => (
-                <figure
-                  key={`${name}-${i}`}
-                  className="rounded-xl overflow-hidden border border-slate-200 bg-slate-50"
-                >
-                  <div className="aspect-video">
-                    <img
-                      src={encodeURI(path)}
-                      alt={name}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
-                      onError={(e) => {
-                        e.currentTarget.style.display = "none";
-                      }}
-                    />
-                  </div>
-                  <figcaption className="px-3 py-2 text-xs text-slate-700">
-                    {name}
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </section>
-
+          <ImageGallery imageDetails={imageDetails} />
           {/* Related taxa */}
           <section className="rounded-3xl bg-white p-6 md:p-8 shadow-sm ring-1 ring-slate-200">
             <div className="flex items-center justify-between gap-2 flex-wrap">

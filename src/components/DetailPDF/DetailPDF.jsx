@@ -79,44 +79,68 @@ const SECTION_LABELS = {
   "Further Information": "References & Further Reading",
 };
 
-export default function DetailPDF({ aboutData, imageDetails }) {
+export default function DetailPDF({
+  aboutData = {},          // ✅ default to {}
+  imageDetails = []        // ✅ default to []
+}) {
+  const safeAbout = (aboutData && typeof aboutData === "object") ? aboutData : {};
+  const safeImages = Array.isArray(imageDetails)
+    ? imageDetails.filter((x) => x && typeof x === "object" && x.path)
+    : [];
+
+  // Only include sections that actually have a value
+  const sectionKeys = Object.keys(SECTION_LABELS).filter((key) => {
+    const v = safeAbout?.[key];
+    return v !== null && v !== undefined && String(v).trim() !== "";
+  });
+
+  // Helper: bulletize plain text if splitIntoSentences isn't available
+  const toSentences = (val) =>
+    typeof splitIntoSentences === "function"
+      ? splitIntoSentences(String(val))
+      : String(val).split(/(?<=[.!?])\s+/).filter(Boolean);
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         {/* Title */}
         <Text style={styles.title}>
-          {aboutData?.Title || aboutData?.["Common Name"] || "Nematode Detail"}
+          {safeAbout?.Title ||
+            safeAbout?.["Common Name"] ||
+            "Nematode Detail"}
         </Text>
 
-        {/* Loop through known sections */}
-        {Object.keys(SECTION_LABELS).map((key) => {
-          if (!aboutData[key]) return null; // skip missing keys
-          const val = aboutData[key];
+        {/* Sections */}
+        {sectionKeys.map((key) => {
+          const val = safeAbout[key];
 
           return (
             <View key={key} style={styles.section}>
               <Text style={styles.heading}>{SECTION_LABELS[key]}</Text>
 
-              {/* Different formatting depending on section */}
               {key === "Symptoms" ? (
-                Object.entries(val).map(([subKey, subVal], i) => (
-                    <View key={i} style={{ marginBottom: 6 }}>
-                    <Text style={{ fontSize: 11, fontWeight: "bold", color: "#1d4ed8" }}>
-                        {subKey}
-                    </Text>
-                    <Text style={styles.text}>{String(subVal)}</Text>
-                    </View>
-                ))
-             ) : key === "Why They Matter" ? (
-                splitIntoSentences(String(val)).map((line, i) => (
+                (val && typeof val === "object" && !Array.isArray(val))
+                  ? Object.entries(val).map(([subKey, subVal], i) => (
+                      <View key={i} style={{ marginBottom: 6 }}>
+                        <Text style={{ fontSize: 11, fontWeight: "bold", color: "#1d4ed8" }}>
+                          {String(subKey)}
+                        </Text>
+                        <Text style={styles.text}>{String(subVal ?? "—")}</Text>
+                      </View>
+                    ))
+                  : (
+                    <Text style={styles.text}>{String(val)}</Text>
+                  )
+              ) : key === "Why They Matter" ? (
+                toSentences(val).map((line, i) => (
                   <Text key={i} style={styles.bullet}>• {line}</Text>
                 ))
               ) : key === "Management Options" ? (
-                (Array.isArray(val) ? val : [val]).map((line, i) => (
+                (Array.isArray(val) ? val : [val]).filter((x) => x != null).map((line, i) => (
                   <Text key={i} style={styles.bullet}>• {String(line)}</Text>
                 ))
               ) : key === "Further Information" ? (
-                (Array.isArray(val) ? val : [val]).map((line, i) => (
+                (Array.isArray(val) ? val : [val]).filter((x) => x != null).map((line, i) => (
                   <Text key={i} style={styles.text}>{String(line)}</Text>
                 ))
               ) : (
@@ -127,21 +151,23 @@ export default function DetailPDF({ aboutData, imageDetails }) {
         })}
 
         {/* Images */}
-        {imageDetails?.length > 0 && (
-            <View style={styles.section}>
-                <Text style={styles.heading}>Images</Text>
-                <View style={styles.imageGrid}>
-                {imageDetails.map(({ path, name }, i) => (
-                    <View key={i} style={styles.imageWrapper} wrap={false}>
-                    <Image src={path} style={styles.image} />
-                    <Text style={styles.caption}>{name}</Text>
-                    </View>
-                ))}
+        {safeImages.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.heading}>Images</Text>
+            <View style={styles.imageGrid}>
+              {safeImages.map(({ path, name }, i) => (
+                <View key={i} style={styles.imageWrapper} wrap={false}>
+                  {/* Guard the src so React-PDF never sees undefined */}
+                  <Image src={String(path)} style={styles.image} />
+                  <Text style={styles.caption}>{String(name ?? "")}</Text>
                 </View>
+              ))}
             </View>
-            )}
+          </View>
+        )}
       </Page>
     </Document>
   );
 }
+
 
