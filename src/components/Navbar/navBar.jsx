@@ -4,86 +4,112 @@ import { NavLink, Link } from "react-router-dom";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
+  // Active = darker text only (no underline/line)
   const linkClass = ({ isActive }) =>
     [
-      "px-5 py-2 rounded-full text-xl font-semibold transition", // bigger text
-      isActive
-        ? "text-blue-700 bg-blue-200 ring-1 ring-blue-300"
-        : "text-blue-600 hover:text-blue-800 hover:bg-blue-100/60",
+      "px-0 py-2 text-sm md:text-base font-medium transition-colors",
+      isActive ? "text-amber-600 font-bold" : "text-slate-600 hover:text-gray-900",
+
     ].join(" ");
 
   return (
-    <nav className="w-full bg-[#f1faee] shadow-sm">
-      {/* Desktop / tablet */}
-      <div className="mx-auto max-w-none px-6">
-        <div className="hidden md:flex h-20 items-center justify-center gap-6">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="h-10 w-10 rounded-xl bg-blue-600 grid place-items-center text-white font-bold ring-2 ring-blue-400/40 group-hover:ring-blue-300/60 transition">
-              N
-            </div>
-            <span className="text-blue-800 group-hover:text-blue-900 text-2xl font-bold tracking-tight">
-              Plant-parasitic Nematodes in Northern Australia
-            </span>
-          </Link>
+    <nav className="sticky top-0 z-50 w-full bg-zinc-50 border-b border-zinc-200 shadow-sm">
+      {/* Desktop / tablet (edge-to-edge, slight left offset) */}
+      <div className="hidden md:flex h-16 items-center justify-between">
+  {/* Left Section: Brand */}
+  <Link
+    to="/"
+    onClick={() => setOpen(false)}
+    className="pl-4 sm:pl-6 flex items-center gap-3"
+  >
+    {/* Neutral SVG logo */}
+    <svg
+      className="h-9 w-9"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <defs>
+        <linearGradient id="nema-neutral" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#94a3b8" /> {/* slate-400 */}
+          <stop offset="1" stopColor="#334155" /> {/* slate-700 */}
+        </linearGradient>
+      </defs>
+      <circle cx="12" cy="12" r="10" fill="url(#nema-neutral)" />
+      <path
+        d="M7 14c2.5-4 7.5-4 10 0"
+        stroke="#fff"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <path
+        d="M12 6c1.6 1.2 2.9 3 3.5 5"
+        stroke="#fff"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        fill="none"
+      />
+    </svg>
+    <span className="text-gray-900 text-lg font-semibold tracking-tight">
+      Plant-parasitic Nematodes in Northern Australia
+    </span>
+  </Link>
 
-          {/* Separator dot */}
-          <span className="text-blue-400 text-xl select-none">•</span>
+  {/* Center Section: Navigation Links */}
+  <div className="flex items-center gap-8">
+    <NavLink to="/" end className={linkClass}>
+      Home
+    </NavLink>
+    <NavLink to="/nematodes/map" className={linkClass}>
+      Map
+    </NavLink>
+  </div>
 
-          {/* Centered links */}
-          <div className="flex items-center gap-3">
-            <NavLink to="/" end className={linkClass}>
-              Home
-            </NavLink>
-            <NavLink to="/nematodes/map" className={linkClass}>
-              Map
-            </NavLink>
-          </div>
-        </div>
-      </div>
+  {/* Right Section: A placeholder to balance the layout */}
+  <div className="pr-4 sm:pr-6 w-[292px]"></div>
+</div>
 
       {/* Mobile */}
       <div className="md:hidden">
-        <div className="h-16 px-4 flex items-center justify-center relative">
-          {/* Logo centered */}
+        <div className="h-16 flex items-center justify-between px-4">
           <Link
             to="/"
-            className="flex items-center gap-2"
             onClick={() => setOpen(false)}
+            className="flex items-center gap-2"
           >
-            <div className="h-9 w-9 rounded-xl bg-blue-600 grid place-items-center text-white font-bold">
-              N
-            </div>
-            <span className="text-blue-800 text-lg font-bold tracking-tight">
+            <svg
+              className="h-8 w-8"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <defs>
+                <linearGradient id="nema-neutral-sm" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stopColor="#94a3b8" />
+                  <stop offset="1" stopColor="#334155" />
+                </linearGradient>
+              </defs>
+              <circle cx="12" cy="12" r="10" fill="url(#nema-neutral-sm)" />
+              <path d="M7 14c2.5-4 7.5-4 10 0" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" fill="none" />
+              <path d="M12 6c1.6 1.2 2.9 3 3.5 5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" fill="none" />
+            </svg>
+            <span className="text-gray-900 text-base font-semibold">
               Plant-parasitic Nematodes
             </span>
           </Link>
 
-          {/* Toggle at right */}
           <button
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => setOpen(v => !v)}
             aria-label="Toggle menu"
-            className="absolute right-4 inline-flex items-center justify-center rounded-md p-2 text-blue-700 hover:text-blue-900 hover:bg-blue-100"
+            aria-expanded={open}
+            className="inline-flex items-center justify-center rounded-md p-2 text-slate-700 hover:bg-zinc-100"
           >
-            <svg
-              className="h-7 w-7"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
+            <svg className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               {open ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 7h16M4 12h16M4 17h16"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h16" />
               )}
             </svg>
           </button>
@@ -92,30 +118,37 @@ export default function Navbar() {
         {/* Slide-down panel */}
         <div
           className={`overflow-hidden transition-[max-height] duration-300 ${
-            open ? "max-h-64" : "max-h-0"
+            open ? "max-h-40" : "max-h-0"
           }`}
         >
           <div className="px-4 pb-4">
-            <div className="rounded-2xl bg-blue-100 ring-1 ring-blue-200 backdrop-blur-sm p-3 flex flex-col gap-3">
+            <nav className="flex flex-col">
               <NavLink
                 to="/"
                 end
-                className={linkClass}
+                className={({ isActive }) =>
+                  [
+                    "py-2 pl-1 text-sm font-medium transition-colors",
+                    isActive ? "text-gray-900" : "text-slate-600 hover:text-gray-900",
+                  ].join(" ")
+                }
                 onClick={() => setOpen(false)}
               >
                 Home
               </NavLink>
-              {/* <NavLink to="/introduction" className={linkClass} onClick={() => setOpen(false)}>
-                Introduction
-              </NavLink> */}
               <NavLink
                 to="/nematodes/map"
-                className={linkClass}
+                className={({ isActive }) =>
+                  [
+                    "py-2 pl-1 text-sm font-medium transition-colors",
+                    isActive ? "text-gray-900" : "text-slate-600 hover:text-gray-900",
+                  ].join(" ")
+                }
                 onClick={() => setOpen(false)}
               >
                 Map
               </NavLink>
-            </div>
+            </nav>
           </div>
         </div>
       </div>

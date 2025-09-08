@@ -490,13 +490,13 @@ const NematodeGeoMap = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setShowHistoricalMap(true)}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${showHistoricalMap ? "bg-blue-600 text-black shadow" : "bg-slate-100 hover:bg-slate-200"}`}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${showHistoricalMap ? "bg-blue-400 text-black shadow" : "bg-slate-100 hover:bg-slate-200"}`}
               >
                 Overview
               </button>
               <button
                 onClick={() => setShowHistoricalMap(false)}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${!showHistoricalMap ? "bg-blue-600 text-black shadow" : "bg-slate-100 hover:bg-slate-200"}`}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${!showHistoricalMap ? "bg-blue-400 text-black shadow" : "bg-slate-100 hover:bg-slate-200"}`}
               >
                 Taxa
               </button>
@@ -508,7 +508,7 @@ const NematodeGeoMap = () => {
           {/* Left Sidebar */}
           <aside className="md:col-span-1">
             {showHistoricalMap ? (
-              <div className="bg-white rounded-2xl shadow p-4 sticky top-[84px]">
+              <div className="bg-white rounded-2xl shadow p-4 top-[84px]">
                 <h2 className="text-lg font-semibold mb-2">About this map</h2>
                 <p className="text-sm text-slate-600">
                 This map shows where plant-parasitic nematodes (PPNs) have been found in Northern Australia.
