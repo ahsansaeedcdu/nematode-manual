@@ -560,7 +560,7 @@ const NematodeGeoMap = () => {
                 {/* Search */}
                 <div className="mb-3 relative">
                   <img
-                    src="/src/assets/search-icon.svg"
+                    src="/search-icon.svg"
                     alt="Search"
                     className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none"
                   />
