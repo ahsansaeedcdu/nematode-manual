@@ -6,14 +6,16 @@ export default function Navbar() {
 
   // Active = darker text only (no underline/line)
   const linkClass = ({ isActive }) =>
-    [
-      "px-0 py-2 text-sm md:text-base font-medium transition-colors",
-      isActive ? "text-amber-600 font-bold" : "text-slate-600 hover:text-gray-900",
+  [
+    "px-4 py-2 rounded-[12px] text-sm md:text-base font-sans transition-colors duration-200",
+    isActive
+      ? "bg-[#027FB8] text-white border border-[#027FB8]"
+      : "text-black hover:text-[#027FB8]",
+  ].join(" ");
 
-    ].join(" ");
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-zinc-50 border-b border-zinc-200 shadow-sm">
+    <nav className="sticky top-0 z-50 w-full bg-[#DDEDFF] border-b border-zinc-200 shadow-sm">
       {/* Desktop / tablet (edge-to-edge, slight left offset) */}
       <div className="hidden md:flex h-16 items-center justify-between">
   {/* Left Section: Brand */}
@@ -51,7 +53,7 @@ export default function Navbar() {
         fill="none"
       />
     </svg>
-    <span className="text-gray-900 text-lg font-semibold tracking-tight">
+    <span className="text-[#84786D] text-lg font-semibold tracking-tight">
       Plant-parasitic Nematodes in Northern Australia
     </span>
   </Link>

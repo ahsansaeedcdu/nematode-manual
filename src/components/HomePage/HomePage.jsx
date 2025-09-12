@@ -223,7 +223,7 @@ export default function NematodeOverview({
                 <button
                   onClick={() => toggleSidebar("section1")}
                   className="flex items-center justify-between w-full text-left 
-                          px-3 py-2 rounded-lg text-blue-700 font-semibold 
+                          px-3 py-2 rounded-lg text-[#027fb8] font-semibold 
                           hover:bg-blue-50 transition"
                 >
                   <span>1. Introduction</span>
@@ -267,7 +267,7 @@ export default function NematodeOverview({
                 <button
                   onClick={() => toggleSidebar("section2")}
                   className="flex items-center justify-between w-full text-left 
-                          px-3 py-2 rounded-lg text-blue-700 font-semibold 
+                          px-3 py-2 rounded-lg text-[#027fb8] font-semibold 
                           hover:bg-blue-50 transition"
                 >
                   <span>2. Key Plant-Parasitic Nematodes</span>
@@ -284,7 +284,7 @@ export default function NematodeOverview({
                       <div key={cat.id}>
                         <a
                           href={`#${cat.id}`}
-                          className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 
+                          className="block text-[#038764] hover:text-blue-700 hover:bg-blue-50 
                                   text-sm px-2 py-1 rounded-md transition"
                         >
                           {cat.title}
@@ -327,7 +327,7 @@ export default function NematodeOverview({
                               <a
                                 key={nodeId}
                                 href={`#${nodeId}`}
-                                className="block text-slate-500 hover:text-blue-700 hover:bg-blue-50 
+                                className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
                                         text-xs px-2 py-1 rounded-md transition"
                                 title={cn}
                               >
@@ -348,7 +348,7 @@ export default function NematodeOverview({
                 <button
                   onClick={() => toggleSidebar("section3")}
                   className="flex items-center justify-between w-full text-left 
-                          px-3 py-2 rounded-lg text-blue-700 font-semibold 
+                          px-3 py-2 rounded-lg text-[#027fb8] font-semibold 
                           hover:bg-blue-50 transition"
                 >
                   <span>3. Preventing Nematode Spread</span>
@@ -391,7 +391,7 @@ export default function NematodeOverview({
                 <button
                   onClick={() => toggleSidebar("section4")}
                   className="flex items-center justify-between w-full text-left 
-                          px-3 py-2 rounded-lg text-blue-700 font-semibold 
+                          px-3 py-2 rounded-lg text-[#027fb8] font-semibold 
                           hover:bg-blue-50 transition"
                 >
                   <span>4. Integrated Nematode Management</span>
@@ -440,7 +440,7 @@ export default function NematodeOverview({
                 <button
                   onClick={() => toggleSidebar("section5")}
                   className="flex items-center justify-between w-full text-left px-3 py-2 
-                          rounded-lg text-blue-700 font-semibold hover:bg-blue-50 transition"
+                          rounded-lg text-[#027fb8] font-semibold hover:bg-blue-50 transition"
                 >
                   <span>5. Services for Growers</span>
                   {sidebarOpen.section5 ? (
@@ -484,7 +484,7 @@ export default function NematodeOverview({
             id="intro"
             className="bg-white rounded-2xl shadow p-5 md:p-7"
           >
-            <h2 className="text-xl md:text-2xl font-semibold text-slate-800 mb-2">
+            <h2 className="text-xl md:text-2xl font-semibold text-[#027fb8] mb-2">
               1. Introduction
             </h2>
 
@@ -495,7 +495,7 @@ export default function NematodeOverview({
                 className="flex items-center justify-between w-full text-left 
              bg-slate-50 hover:bg-slate-100 border border-slate-200 
              rounded-lg shadow-sm p-4 transition 
-             text-lg md:text-xl font-semibold text-slate-800"
+             text-lg md:text-xl font-semibold text-[#038764]"
               >
                 <span>1.1 What are nematodes</span>
                 {open.what ? (
@@ -505,7 +505,7 @@ export default function NematodeOverview({
                 )}
               </button>
               {open.what && (
-                <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
+                <ul className="list-disc pl-6 text-[#292929] space-y-1 mt-2">
                   <li>
                     Nematodes are tiny, worm-like creatures that live in soil
                     and water.
@@ -535,7 +535,7 @@ export default function NematodeOverview({
                 className="flex items-center justify-between w-full text-left 
              bg-slate-50 hover:bg-slate-100 border border-slate-200 
              rounded-lg shadow-sm p-4 transition 
-             text-lg md:text-xl font-semibold text-slate-800"
+             text-lg md:text-xl font-semibold text-[#038764]"
               >
                 <span>1.2 Why biosecurity matters</span>
                 {open.biosecurity ? (
@@ -545,7 +545,7 @@ export default function NematodeOverview({
                 )}
               </button>
               {open.biosecurity && (
-                <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
+                <ul className="list-disc pl-6 text-[#292929] space-y-1 mt-2">
                   <li>
                     Biosecurity = stopping pests from entering and spreading.
                   </li>
@@ -568,7 +568,7 @@ export default function NematodeOverview({
                 className="flex items-center justify-between w-full text-left 
              bg-slate-50 hover:bg-slate-100 border border-slate-200 
              rounded-lg shadow-sm p-4 transition 
-             text-lg md:text-xl font-semibold text-slate-800"
+             text-lg md:text-xl font-semibold text-[#038764]"
               >
                 <span>
                   1.3 Why nematodes matter to agriculture in Northern Australia
@@ -580,7 +580,7 @@ export default function NematodeOverview({
                 )}
               </button>
               {open.agriculture && (
-                <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
+                <ul className="list-disc pl-6 text-[#292929] space-y-1 mt-2">
                   <li>
                     PPNs weaken plants, causing stunting, yellowing, and poor
                     root systems.
@@ -606,13 +606,13 @@ export default function NematodeOverview({
 
           {/* 2. Key PPNs */}
           <section id="key" className="bg-white rounded-2xl shadow p-5 md:p-7">
-            <h2 className="text-xl md:text-2xl font-semibold text-slate-800 mb-2">
+            <h2 className="text-xl md:text-2xl font-semibold text-[#027fb8] mb-2">
               2. Key Plant-Parasitic Nematodes in Northern Australia
             </h2>
 
             {CATEGORIES.map((cat) => (
               <div key={cat.id} id={cat.id} className="mt-6">
-                <h3 className="text-lg md:text-xl font-semibold text-slate-800">
+                <h3 className="text-lg md:text-xl font-semibold text-[#038764]">
                   {cat.title}
                 </h3>
                 {cat.blurb && (
@@ -628,7 +628,7 @@ export default function NematodeOverview({
               )} */}
 
                 {/* Nematode entries for this category (sorted by Section) */}
-                <div className="mt-3 space-y-3">
+                <div className="mt-3 space-y-3 ">
                   {groupedByCategory[cat.id]?.length ? (
                     groupedByCategory[cat.id].map((entry) => {
                       const rawCN = entry?.["Common name"];
@@ -764,7 +764,7 @@ export default function NematodeOverview({
                 className="flex items-center justify-between w-full text-left 
                         bg-slate-50 hover:bg-slate-100 border border-slate-200 
                         rounded-lg shadow-sm p-4 transition 
-                        text-lg md:text-xl font-semibold text-slate-800"
+                        text-lg md:text-xl font-semibold text-[#038764]"
               >
                 <span>3.1 Sanitize Equipment and Tools</span>
                 {open.sanitize ? (
@@ -798,7 +798,7 @@ export default function NematodeOverview({
                 className="flex items-center justify-between w-full text-left 
                         bg-slate-50 hover:bg-slate-100 border border-slate-200 
                         rounded-lg shadow-sm p-4 transition 
-                        text-lg md:text-xl font-semibold text-slate-800"
+                        text-lg md:text-xl font-semibold text-[#038764]"
               >
                 <span>3.2 Manage Planting Material and Soil Movement</span>
                 {open.planting ? (
@@ -832,7 +832,7 @@ export default function NematodeOverview({
                 className="flex items-center justify-between w-full text-left 
                         bg-slate-50 hover:bg-slate-100 border border-slate-200 
                         rounded-lg shadow-sm p-4 transition 
-                        text-lg md:text-xl font-semibold text-slate-800"
+                        text-lg md:text-xl font-semibold text-[#038764]"
               >
                 <span>3.3 Quarantine New Plants</span>
                 {open.quarantine ? (
@@ -878,7 +878,7 @@ export default function NematodeOverview({
                 className="flex items-center justify-between w-full text-left
                         bg-slate-50 hover:bg-slate-100 border border-slate-200
                         rounded-lg shadow-sm p-4 transition
-                        text-lg md:text-xl font-semibold text-slate-800"
+                        text-lg md:text-xl font-semibold text-[#038764]"
               >
                 <span>4.1 Monitoring and Record-Keeping</span>
                 {open.monitoring ? (
@@ -912,7 +912,7 @@ export default function NematodeOverview({
                 className="flex items-center justify-between w-full text-left
                         bg-slate-50 hover:bg-slate-100 border border-slate-200
                         rounded-lg shadow-sm p-4 transition
-                        text-lg md:text-xl font-semibold text-slate-800"
+                        text-lg md:text-xl font-semibold text-[#038764]"
               >
                 <span>4.2 Crop Rotation and Cultural Practices</span>
                 {open.rotation ? (
@@ -951,7 +951,7 @@ export default function NematodeOverview({
                 className="flex items-center justify-between w-full text-left
                         bg-slate-50 hover:bg-slate-100 border border-slate-200
                         rounded-lg shadow-sm p-4 transition
-                        text-lg md:text-xl font-semibold text-slate-800"
+                        text-lg md:text-xl font-semibold text-[#038764]"
               >
                 <span>4.3 Biological Control</span>
                 {open.biological ? (
@@ -985,7 +985,7 @@ export default function NematodeOverview({
                 className="flex items-center justify-between w-full text-left
                         bg-slate-50 hover:bg-slate-100 border border-slate-200
                         rounded-lg shadow-sm p-4 transition
-                        text-lg md:text-xl font-semibold text-slate-800"
+                        text-lg md:text-xl font-semibold text-[#038764]"
               >
                 <span>4.4 Chemical Control: Safe Use and Limitations</span>
                 {open.chemical ? (
@@ -1036,7 +1036,7 @@ export default function NematodeOverview({
                 className="flex items-center justify-between w-full text-left
                         bg-slate-50 hover:bg-slate-100 border border-slate-200
                         rounded-lg shadow-sm p-4 transition
-                        text-lg md:text-xl font-semibold text-slate-800"
+                        text-lg md:text-xl font-semibold text-[#038764]"
               >
                 <span>5.1 Sampling Methods</span>
                 {open.sampling ? (
@@ -1071,7 +1071,7 @@ export default function NematodeOverview({
                 className="flex items-center justify-between w-full text-left
                         bg-slate-50 hover:bg-slate-100 border border-slate-200
                         rounded-lg shadow-sm p-4 transition
-                        text-lg md:text-xl font-semibold text-slate-800"
+                        text-lg md:text-xl font-semibold text-[#038764]"
               >
                 <span>5.2 State Government Diagnostic Laboratories</span>
                 {open.labs ? (

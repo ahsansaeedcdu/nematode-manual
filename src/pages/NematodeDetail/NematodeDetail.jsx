@@ -218,7 +218,7 @@ export default function NematodeDetail({
               fileName={`${aboutData?.Title || aboutData?.["Common Name"] || commonName || "nematode-detail"}.pdf`}
             >
               {({ loading }) => (
-                <button className="px-3 py-1.5 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                <button className="px-3 py-1.5 bg-[#027FB8] text-white rounded hover:bg-blue-700 transition">
                   {loading ? "Preparing PDF..." : "Download PDF"}
                 </button>
               )}
@@ -226,7 +226,7 @@ export default function NematodeDetail({
 
             <button
               onClick={() => window.print()}
-              className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 rounded text-white"
+              className="px-3 py-1.5 bg-[#027FB8] hover:bg-blue-700 rounded text-white"
             >
               Print
             </button>
@@ -236,7 +236,7 @@ export default function NematodeDetail({
           {aboutData && (
             <section className="space-y-4">
               <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-                <h2 className="text-3xl md:text-4xl font-bold !text-blue-600 leading-tight">
+                <h2 className="text-3xl md:text-4xl font-bold text-[#027fb8] leading-tight">
                   {(() => {
                     const rawCommon =
                       aboutData?.["Common Name"] ||
@@ -349,7 +349,7 @@ export default function NematodeDetail({
                       onClick={() => toggle(k)}
                       className="flex items-center justify-between w-full text-left"
                     >
-                      <span className="text-sm uppercase tracking-wide text-slate-600 font-semibold">
+                      <span className="text-sm uppercase tracking-wide text-[#038764] font-semibold">
                         {k}
                       </span>
                       {open[k] ? (
@@ -361,7 +361,7 @@ export default function NematodeDetail({
 
                     {/* Collapsible content */}
                     {open[k] && (
-                      <div className="mt-2 text-slate-800 text-sm">
+                      <div className="mt-2 text-[#292929] text-sm">
                         {k === "Scientific Name" ? (
                           formatScientificName(String(aboutData[k]))
                         ) : k === "Why They Matter" ? (
@@ -387,7 +387,6 @@ export default function NematodeDetail({
                                 "Leaves",
                                 "Stems",
                                 "Fruits",
-                                "General",
                               ];
                               const keys = Object.keys(val || {});
                               const order = [

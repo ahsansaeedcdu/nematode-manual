@@ -484,7 +484,7 @@ const NematodeGeoMap = () => {
         {/* Header */}
         <header className="w-full border-b bg-white/90 backdrop-blur-sm sticky top-0 z-10">
           <div className="max-w-[1400px] mx-auto px-4 py-3 flex items-center justify-between">
-            <h2 className="text-xl md:text-2xl font-semibold tracking-tight !text-blue-600">
+            <h2 className="text-xl md:text-2xl font-semibold tracking-tight !text-[#027fb8]">
               Distribution of Plant-parasitic Nematodes in Norhtern Australia
             </h2>
             <div className="flex items-center gap-2">
@@ -558,18 +558,24 @@ const NematodeGeoMap = () => {
                 </div>
 
                 {/* Search */}
-                <div className="mb-3">
+                <div className="mb-3 relative">
+                  <img
+                    src="/src/assets/search-icon.svg"
+                    alt="Search"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none"
+                  />
                   <input
                     type="text"
                     placeholder="Search common name…"
                     value={groupQuery}
                     onChange={(e) => setGroupQuery(e.target.value)}
-                    className="w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full rounded-lg border border-[#E3E5E7] pl-10 pr-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#027fb8]"
                   />
                 </div>
 
+
                 {/* Scrollable checkbox grid */}
-                <div className="flex-1 overflow-y-auto rounded-xl border p-2">
+                <div className="flex-1 overflow-y-auto rounded-xl border border-[#E3E5E7] p-2">
                   {newMapIsLoading ? (
                     <p className="text-slate-500 text-sm p-2">
                       Loading nematode groups…
@@ -612,7 +618,7 @@ const NematodeGeoMap = () => {
                         return (
                           <label
                             key={group}
-                            className="flex items-center justify-between gap-3 p-2 rounded-lg border hover:border-slate-300 cursor-pointer"
+                            className="flex items-center justify-between gap-3 p-2 rounded-lg border border-[#E3E5E7] hover:border-slate-300 cursor-pointer"
                             title={group}
                           >
                             <div className="flex items-center gap-2 min-w-0">

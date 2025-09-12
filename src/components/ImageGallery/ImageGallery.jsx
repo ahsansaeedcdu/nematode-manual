@@ -47,9 +47,9 @@ export default function ImageGallery({ imageDetails = [] }) {
       {/* Title */}
       <header className="mb-6">
         <h2 className="text-2xl md:text-3xl font-semibold tracking-tight leading-tight">
-          <span className="bg-gradient-to-r from-indigo-600 via-fuchsia-600 to-pink-600 bg-clip-text text-transparent">
+          {/* <span className="bg-gradient-to-r from-indigo-600 via-fuchsia-600 to-pink-600 bg-clip-text text-transparent"> */}
             Images
-          </span>
+          {/* </span> */}
         </h2>
         <p className="mt-1 text-sm text-slate-600">
           {imageDetails.length} {imageDetails.length === 1 ? "item" : "items"}
