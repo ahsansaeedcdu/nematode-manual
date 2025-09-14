@@ -18,7 +18,8 @@ import FadeIn from "../FadeIn/FadeIn";
 
 // import './NematodeGeoMap.css';
 import L from "leaflet";
-
+import "leaflet-simple-map-screenshoter";
+1
 /* -------------------- Leaflet marker fix -------------------- */
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -291,6 +292,78 @@ const GeoJSONLayerWithInteractions = ({
     </>
   );
 };
+function ensureBorderPatchCSS() {
+  if (document.getElementById("tw-border-off-css")) return;
+  const css = `
+    /* Disable Tailwind's global borders ONLY during screenshot */
+    .leaflet-container.tw-borders-off,
+    .leaflet-container.tw-borders-off * ,
+    .leaflet-container.tw-borders-off *::before,
+    .leaflet-container.tw-borders-off *::after {
+      border-style: none !important;
+      border-width: 0 !important;
+      border-color: transparent !important;
+    }
+  `;
+  const style = document.createElement("style");
+  style.id = "tw-border-off-css";
+  style.textContent = css;
+  document.head.appendChild(style);
+}
+
+const MapScreenshoter= ({ name = "map" }) => {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!map) return;
+    ensureBorderPatchCSS();
+
+    // Use an integer DPR to avoid tile seams; 1 or 2 are sensible
+    const dpr = Math.max(1, Math.round(window.devicePixelRatio || 1));
+
+    // Define a magnification factor
+    const magnificationFactor = 5; // Adjust this value to control the size
+
+    // Add the plugin control
+    const control = L.simpleMapScreenshoter({
+      position: "topleft",
+      cropImageByInnerWH: true,      // capture EXACT viewport
+      hideElementsWithSelectors: [],  // keep UI as-is
+      preventDownload: false,
+      screenName: () => `${name}-${Date.now()}`,
+      mimeType: "image/png",
+      domtoimageOptions: {
+        width: map.getSize().x * dpr * magnificationFactor,
+        height: map.getSize().y * dpr * magnificationFactor,
+        style: {
+          transform: `scale(${dpr * magnificationFactor})`,
+          transformOrigin: "top left",
+          backgroundColor: "white",
+        },
+        quality: 1,
+      },
+      onPixelDataFail: async ({ plugin, domtoimageOptions }) =>
+        plugin._getPixelDataOfNormalMap(domtoimageOptions),
+    }).addTo(map);
+
+    // Toggle Tailwind border patch during the screenshot only
+    const onStart = () => map.getContainer().classList.add("tw-borders-off");
+    const onEnd   = () => map.getContainer().classList.remove("tw-borders-off");
+
+    map.on("simpleMapScreenshoter.takeScreen", onStart);
+    map.on("simpleMapScreenshoter.done", onEnd);
+    map.on("simpleMapScreenshoter.error", onEnd);
+
+    return () => {
+      map.off("simpleMapScreenshoter.takeScreen", onStart);
+      map.off("simpleMapScreenshoter.done", onEnd);
+      map.off("simpleMapScreenshoter.error", onEnd);
+      control?.remove?.();
+    };
+  }, [map, name]);
+
+  return null;
+}
 
 /* --------------------------- HistoricalMap (simpler visuals, same data) --------------------------- */
 /* --------------------------- HistoricalMap (tooltip + hover) --------------------------- */
@@ -375,7 +448,9 @@ const HistoricalMap = () => {
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="© OpenStreetMap contributors"
+        crossOrigin={true}
       />
+      <MapScreenshoter name="overview" />
       {geoData && (
         <GeoJSON data={geoData} style={styleFn} onEachFeature={onEachFeature} />
       )}
@@ -679,7 +754,9 @@ const NematodeGeoMap = () => {
                   <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution="© OpenStreetMap contributors"
+                    crossOrigin={true}
                   />
+                  <MapScreenshoter name="taxa" />
                   <GeoJSONLayerWithInteractions
                     geoData={null}
                     detailedNematodeRecords={newMapDetailedNematodeRecords}
