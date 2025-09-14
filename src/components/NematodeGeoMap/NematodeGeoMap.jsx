@@ -18,8 +18,8 @@ import FadeIn from "../FadeIn/FadeIn";
 
 // import './NematodeGeoMap.css';
 import L from "leaflet";
-import "leaflet-simple-map-screenshoter";
-1
+// import "leaflet-simple-map-screenshoter";
+import * as htmlToImage from "html-to-image";
 /* -------------------- Leaflet marker fix -------------------- */
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -292,78 +292,78 @@ const GeoJSONLayerWithInteractions = ({
     </>
   );
 };
-function ensureBorderPatchCSS() {
-  if (document.getElementById("tw-border-off-css")) return;
-  const css = `
-    /* Disable Tailwind's global borders ONLY during screenshot */
-    .leaflet-container.tw-borders-off,
-    .leaflet-container.tw-borders-off * ,
-    .leaflet-container.tw-borders-off *::before,
-    .leaflet-container.tw-borders-off *::after {
-      border-style: none !important;
-      border-width: 0 !important;
-      border-color: transparent !important;
-    }
-  `;
-  const style = document.createElement("style");
-  style.id = "tw-border-off-css";
-  style.textContent = css;
-  document.head.appendChild(style);
-}
+// function ensureBorderPatchCSS() {
+//   if (document.getElementById("tw-border-off-css")) return;
+//   const css = `
+//     /* Disable Tailwind's global borders ONLY during screenshot */
+//     .leaflet-container.tw-borders-off,
+//     .leaflet-container.tw-borders-off * ,
+//     .leaflet-container.tw-borders-off *::before,
+//     .leaflet-container.tw-borders-off *::after {
+//       border-style: none !important;
+//       border-width: 0 !important;
+//       border-color: transparent !important;
+//     }
+//   `;
+//   const style = document.createElement("style");
+//   style.id = "tw-border-off-css";
+//   style.textContent = css;
+//   document.head.appendChild(style);
+// }
 
-const MapScreenshoter= ({ name = "map" }) => {
-  const map = useMap();
+// const MapScreenshoter= ({ name = "map" }) => {
+//   const map = useMap();
 
-  useEffect(() => {
-    if (!map) return;
-    ensureBorderPatchCSS();
+//   useEffect(() => {
+//     if (!map) return;
+//     ensureBorderPatchCSS();
 
-    // Use an integer DPR to avoid tile seams; 1 or 2 are sensible
-    const dpr = Math.max(1, Math.round(window.devicePixelRatio || 1));
+//     // Use an integer DPR to avoid tile seams; 1 or 2 are sensible
+//     const dpr = Math.max(1, Math.round(window.devicePixelRatio || 1));
 
-    // Define a magnification factor
-    const magnificationFactor = 5; // Adjust this value to control the size
+//     // Define a magnification factor
+//     const magnificationFactor = 5; // Adjust this value to control the size
 
-    // Add the plugin control
-    const control = L.simpleMapScreenshoter({
-      position: "topleft",
-      cropImageByInnerWH: true,      // capture EXACT viewport
-      hideElementsWithSelectors: [],  // keep UI as-is
-      preventDownload: false,
-      screenName: () => `${name}-${Date.now()}`,
-      mimeType: "image/png",
-      domtoimageOptions: {
-        width: map.getSize().x * dpr * magnificationFactor,
-        height: map.getSize().y * dpr * magnificationFactor,
-        style: {
-          transform: `scale(${dpr * magnificationFactor})`,
-          transformOrigin: "top left",
-          backgroundColor: "white",
-        },
-        quality: 1,
-      },
-      onPixelDataFail: async ({ plugin, domtoimageOptions }) =>
-        plugin._getPixelDataOfNormalMap(domtoimageOptions),
-    }).addTo(map);
+//     // Add the plugin control
+//     const control = L.simpleMapScreenshoter({
+//       position: "topleft",
+//       cropImageByInnerWH: true,      // capture EXACT viewport
+//       hideElementsWithSelectors: [],  // keep UI as-is
+//       preventDownload: false,
+//       screenName: () => `${name}-${Date.now()}`,
+//       mimeType: "image/png",
+//       domtoimageOptions: {
+//         width: map.getSize().x * dpr * magnificationFactor,
+//         height: map.getSize().y * dpr * magnificationFactor,
+//         style: {
+//           transform: `scale(${dpr * magnificationFactor})`,
+//           transformOrigin: "top left",
+//           backgroundColor: "white",
+//         },
+//         quality: 1,
+//       },
+//       onPixelDataFail: async ({ plugin, domtoimageOptions }) =>
+//         plugin._getPixelDataOfNormalMap(domtoimageOptions),
+//     }).addTo(map);
 
-    // Toggle Tailwind border patch during the screenshot only
-    const onStart = () => map.getContainer().classList.add("tw-borders-off");
-    const onEnd   = () => map.getContainer().classList.remove("tw-borders-off");
+//     // Toggle Tailwind border patch during the screenshot only
+//     const onStart = () => map.getContainer().classList.add("tw-borders-off");
+//     const onEnd   = () => map.getContainer().classList.remove("tw-borders-off");
 
-    map.on("simpleMapScreenshoter.takeScreen", onStart);
-    map.on("simpleMapScreenshoter.done", onEnd);
-    map.on("simpleMapScreenshoter.error", onEnd);
+//     map.on("simpleMapScreenshoter.takeScreen", onStart);
+//     map.on("simpleMapScreenshoter.done", onEnd);
+//     map.on("simpleMapScreenshoter.error", onEnd);
 
-    return () => {
-      map.off("simpleMapScreenshoter.takeScreen", onStart);
-      map.off("simpleMapScreenshoter.done", onEnd);
-      map.off("simpleMapScreenshoter.error", onEnd);
-      control?.remove?.();
-    };
-  }, [map, name]);
+//     return () => {
+//       map.off("simpleMapScreenshoter.takeScreen", onStart);
+//       map.off("simpleMapScreenshoter.done", onEnd);
+//       map.off("simpleMapScreenshoter.error", onEnd);
+//       control?.remove?.();
+//     };
+//   }, [map, name]);
 
-  return null;
-}
+//   return null;
+// }
 
 /* --------------------------- HistoricalMap (simpler visuals, same data) --------------------------- */
 /* --------------------------- HistoricalMap (tooltip + hover) --------------------------- */
@@ -438,41 +438,44 @@ const HistoricalMap = () => {
   };
 
   return (
-    <MapContainer
-      center={[-25.2744, 133.7751]}
-      zoom={5}
-      style={{ height: "100%", width: "100%" }}
-      doubleClickZoom={false}
-      className="rounded-xl"
-    >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution="© OpenStreetMap contributors"
-        crossOrigin={true}
-      />
-      <MapScreenshoter name="overview" />
-      {geoData && (
-        <GeoJSON data={geoData} style={styleFn} onEachFeature={onEachFeature} />
-      )}
+     <div className="relative h-full w-full"> {/* [ADDED] wrapper for overlay positioning */}
+      <MapContainer
+        center={[-25.2744, 133.7751]}
+        zoom={5}
+        style={{ height: "100%", width: "100%" }}
+        doubleClickZoom={false}
+        className="rounded-xl"
+      >
+        {/* [ADDED] CORS so snapshots work */}
+        {/* Enable CORS so snapshots include tiles */}
+        <TileLayer
+          crossOrigin="anonymous"
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution="© OpenStreetMap contributors"
+        />
+        {geoData && (
+          <GeoJSON data={geoData} style={styleFn} onEachFeature={onEachFeature} />
+        )}
+      </MapContainer>
 
-      {/* Tiny legend */}
+      {/* Tiny legend OVER the map (not inside MapContainer) */}
       <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg shadow p-3 text-sm text-slate-700">
         <div className="flex items-center gap-2">
-          <span
-            className="w-3.5 h-3.5 rounded-sm inline-block"
-            style={{ backgroundColor: "#f87171" }}
-          ></span>
+          <span className="w-3.5 h-3.5 rounded-sm inline-block" style={{ backgroundColor: "#f87171" }}></span>
+
+
+
           Nematodes present
         </div>
         <div className="flex items-center gap-2 mt-1">
-          <span
-            className="w-3.5 h-3.5 rounded-sm inline-block"
-            style={{ backgroundColor: "#e5e7eb" }}
-          ></span>
+          <span className="w-3.5 h-3.5 rounded-sm inline-block" style={{ backgroundColor: "#e5e7eb" }}></span>
+
+
+
           No record
         </div>
       </div>
-    </MapContainer>
+    </div>
   );
 };
 
@@ -489,7 +492,36 @@ const NematodeGeoMap = () => {
 
   // search / filter text for the checkbox grid
   const [groupQuery, setGroupQuery] = useState("");
+  const mapShotRef = useRef(null); // [ADDED]
 
+    const handleDownloadSnapshot = async () => { // [ADDED]
+      const node = mapShotRef.current;
+      if (!node) return;
+      try {
+        // Optional: wait for any images/tiles still decoding
+        await Promise.all(
+          Array.from(node.querySelectorAll("img")).map((img) =>
+            img.decode().catch(() => {})
+          )
+        );
+
+        const dataUrl = await htmlToImage.toPng(node, {
+          pixelRatio: 2,
+          cacheBust: true,
+          backgroundColor: "#ffffff",
+          width: node.clientWidth,
+          height: node.clientHeight,
+        });
+        const a = document.createElement("a");
+        const ts = new Date().toISOString().replace(/[:.]/g, "-");
+        a.download = `nematodes-map-${ts}.png`;
+        a.href = dataUrl;
+        a.click();
+      } catch (err) {
+        console.error("Snapshot failed:", err);
+        alert("Snapshot failed. Wait for tiles to finish loading and try again.");
+      }
+    };
   // load new map data when New Map tab is shown
   useEffect(() => {
     const fetchNewMapData = async () => {
@@ -574,6 +606,14 @@ const NematodeGeoMap = () => {
                 className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${!showHistoricalMap ? "bg-blue-400 text-black shadow" : "bg-slate-100 hover:bg-slate-200"}`}
               >
                 Taxa
+              </button>
+               {/* [ADDED] Download / Snapshot button */}
+              <button
+                onClick={handleDownloadSnapshot}
+                className="px-3 py-1.5 rounded-lg text-sm font-medium text-black shadow bg-slate-100 hover:bg-slate-200"
+                title="Save current map as PNG"
+              >
+                Download / Snapshot
               </button>
             </div>
           </div>
@@ -740,36 +780,39 @@ const NematodeGeoMap = () => {
 
           {/* Map Panel */}
           <section className="md:col-span-3">
-            <div className="bg-white rounded-2xl shadow overflow-hidden h-[80vh]">
-              {showHistoricalMap ? (
-                <HistoricalMap />
-              ) : (
-                <MapContainer
-                  center={[-25.2744, 133.7751]}
-                  zoom={5}
-                  style={{ height: "100%", width: "100%" }}
-                  doubleClickZoom={false}
-                  className="rounded-xl"
-                >
-                  <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution="© OpenStreetMap contributors"
-                    crossOrigin={true}
-                  />
-                  <MapScreenshoter name="taxa" />
-                  <GeoJSONLayerWithInteractions
-                    geoData={null}
-                    detailedNematodeRecords={newMapDetailedNematodeRecords}
-                    getFeatureBaseStyle={null}
-                    selectedLGA={null}
-                    setSelectedLGA={null}
-                    lgaLayersRef={null}
-                    selectedLGAStyle={null}
-                    selectedNematodeGroups={newMapSelectedNematodeGroups}
-                    showMarkers={true}
-                  />
-                </MapContainer>
-              )}
+            <div className="bg-white rounded-2xl shadow overflow-hidden">
+              {/* [ADDED] Only the area inside this wrapper gets captured */}
+              <div ref={mapShotRef} className="h-[80vh]"> {/* [ADDED] */}
+                {showHistoricalMap ? (
+                  <HistoricalMap />
+                ) : (
+                  <MapContainer
+                    center={[-25.2744, 133.7751]}
+                    zoom={5}
+                    style={{ height: "100%", width: "100%" }}
+                    doubleClickZoom={false}
+                    className="rounded-xl"
+                  >
+                    {/* [ADDED] CORS so snapshots include tiles */}
+                    <TileLayer
+                      crossOrigin="anonymous"
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      attribution="© OpenStreetMap contributors"
+                    />
+                    <GeoJSONLayerWithInteractions
+                      geoData={null}
+                      detailedNematodeRecords={newMapDetailedNematodeRecords}
+                      getFeatureBaseStyle={null}
+                      selectedLGA={null}
+                      setSelectedLGA={null}
+                      lgaLayersRef={null}
+                      selectedLGAStyle={null}
+                      selectedNematodeGroups={newMapSelectedNematodeGroups}
+                      showMarkers={true}
+                    />
+                  </MapContainer>
+                )}
+              </div>
             </div>
           </section>
         </main>
