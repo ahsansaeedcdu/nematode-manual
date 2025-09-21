@@ -1,12 +1,12 @@
 import React from "react";
-// import { Routes, Route } from 'react-router-dom';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import NematodeMap from "./pages/NematodeMap/NematodeMap";
 import NematodeDetail from "./pages/NematodeDetail/NematodeDetail";
 import Navbar from "./components/Navbar/navBar";
-import Introduction from "./components/introduction/introduction";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import Footer from "./components/Footer/Footer"; 
+import ImageGallery from "./components/ImageGallery/ImageGallery";
 
 function App() {
   return (
@@ -18,19 +18,19 @@ function App() {
           path="/"
           element={
             <>
-              {" "}
               <Navbar />
-              <Home />{" "}
+              <Home />
+              <Footer />   {/* ← here */}
             </>
           }
         />
-        {/* <Route path="/introduction" element={ <> <Navbar /><Introduction/> </>} /> */}
         <Route
           path="/nematodes/map"
           element={
             <>
-              {" "}
-              <Navbar /> <NematodeMap />{" "}
+              <Navbar />
+              <NematodeMap />
+              <Footer />   {/* ← here */}
             </>
           }
         />
@@ -38,11 +38,13 @@ function App() {
           path="/details/:commonName"
           element={
             <>
-              {" "}
-              <Navbar /> <NematodeDetail />{" "}
+              <Navbar />
+              <NematodeDetail />
+              <Footer />   {/* ← here */}
             </>
           }
         />
+
       </Routes>
     </>
   );
