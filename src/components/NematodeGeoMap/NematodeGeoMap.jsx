@@ -298,7 +298,7 @@ const HistoricalMap = () => {
       .then((res) => res.json())
       .then(setGeoData);
 
-    fetch("https://nematodes.blob.core.windows.net/nematodes-data/lga_nematode_map.json?sp=r&st=2025-09-22T11:37:08Z&se=2025-09-25T19:52:08Z&sv=2024-11-04&sr=b&sig=h9rkzPt1li%2BqXPsDVdDa2Guyl%2BwurJ6PHrBmnprMFOU%3D")
+    fetch("https://nematodes.blob.core.windows.net/nematodes-data/lga_nematode_map.json?sp=r&st=2025-09-26T04:39:58Z&se=2025-10-11T12:54:58Z&sv=2024-11-04&sr=b&sig=5YtBbsuwhHwBdtPuqvtjyqJ01iJIZsK8PRZPByAeI%2F4%3D")
       .then((res) => res.json())
       .then(setNematodeMap);
   }, []);
@@ -451,7 +451,7 @@ const NematodeGeoMap = () => {
     const fetchNewMapData = async () => {
       setNewMapIsLoading(true);
       try {
-        const res = await fetch("https://nematodes.blob.core.windows.net/nematodes-data/combined_nematodes_with_coords.json?sp=r&st=2025-09-22T11:18:10Z&se=2025-09-25T19:33:10Z&sv=2024-11-04&sr=b&sig=aNvniI37gSWsq70MaXb2aMXElDDRa6Ty3JFSN%2Bdb2ls%3D");
+        const res = await fetch("https://nematodes.blob.core.windows.net/nematodes-data/combined_nematodes_with_coords.json?sp=r&st=2025-09-26T04:35:38Z&se=2025-10-11T12:50:38Z&sv=2024-11-04&sr=b&sig=T2XvfogJ%2FBQHEObr3%2B8tWoM%2FJ%2BpX7q%2Bk646bxH6jUDI%3D");
         const combined = await res.json();
 
         const groupNames = Object.values(combined)
