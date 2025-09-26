@@ -68,7 +68,7 @@ const splitToBullets = (text) =>
     .filter(Boolean);
 
 export default function NematodeDetail({
-  datasetUrl = "https://nematodes.blob.core.windows.net/nematodes-data/combined_nematodes_grouped_by_taxa.json?sp=r&st=2025-09-26T04:33:50Z&se=2025-10-11T12:48:50Z&sv=2024-11-04&sr=b&sig=GjO1cbb63mLtK5fYFoUVD7ufEQZu99n8vt9nZBDuz2Y%3D",
+  datasetUrl = "/data/combined_nematodes_grouped_by_taxa.json",
 }) {
   const { commonName: paramCommonName } = useParams();
   const commonName = decodeURIComponent(paramCommonName || "").trim();

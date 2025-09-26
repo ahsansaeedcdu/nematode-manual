@@ -13,7 +13,7 @@ const CommonNameMap = () => {
     Promise.all([
       fetch("/data/LGA_2024_context.json").then((r) => r.json()),
       fetch(
-        "https://nematodes.blob.core.windows.net/nematodes-data/combined_nematodes_with_coords.json?sp=r&st=2025-09-26T04:35:38Z&se=2025-10-11T12:50:38Z&sv=2024-11-04&sr=b&sig=T2XvfogJ%2FBQHEObr3%2B8tWoM%2FJ%2BpX7q%2Bk646bxH6jUDI%3D"
+        "/data/combined_nematodes_with_coords.json"
       ).then((r) => r.json()),
     ]).then(([geo, combinedData]) => {
       setGeoData(geo);
