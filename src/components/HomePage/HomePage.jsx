@@ -509,9 +509,10 @@ export default function NematodeOverview({
                   <li>Nematodes are tiny, worm-like creatures that live in soil and water.</li>
                   <li>Most are harmless or beneficia, helping to break down organic matter.</li>
                   <li>
-                    Plant-parasitic nematodes (PPNs) feed on plant roots, reducing water and nutrient uptake. Damage often looks like
-                    nutrient or water stress, but unlike those problems, plants won’t recover after fertilising or watering.
+                  Plant-parasitic nematodes (PPNs) feed on plant roots, reducing water and nutrient uptake.
+                   Damage often looks like nutrient or water stress, but unlike those problems, plants won’t recover after fertilising or watering.
                   </li>
+             
                   <li>Most are too small to see without a microscope but can cause major yield losses.</li>
                 </ul>
               )}
@@ -537,10 +538,11 @@ export default function NematodeOverview({
                 <ul className="list-disc pl-6 text-[#292929] space-y-1 mt-2">
                   <li>Biosecurity is about preventing pathogens and pests from entering and spreading.</li>
                   <li>
-                    PPNs can easily spread through soil on shoes, machinery, or tools, as well as via water flow and planting material.
+                  PPNs can easily spread through soil on shoes, machinery, or tools, as well as via water flow and planting material.
                   </li>
                   <li>
-                    Once PPNs infest a paddock, they are usually only manageable, not eradicable. Prevention is the best defence.
+                  Once PPNs infest a paddock, they are usually only manageable, not eradicable. Prevention is the best defence.
+
                   </li>
                 </ul>
               )}

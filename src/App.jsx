@@ -20,7 +20,7 @@ function App() {
             <>
               <Navbar />
               <Home />
-              <Footer />   {/* ← here */}
+              <Footer />   
             </>
           }
         />
@@ -40,7 +40,7 @@ function App() {
             <>
               <Navbar />
               <NematodeDetail />
-              <Footer />   {/* ← here */}
+              <Footer />   
             </>
           }
         />
