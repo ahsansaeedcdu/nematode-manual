@@ -12,12 +12,12 @@ export default function introduction() {
       <section>
         <h2>1. Introduction</h2>
 
-        <h3>1.1 What are nematodes</h3>
+        <h3>1.1 What are nematodes </h3>
         <p>
-          Nematodes are microscopic, worm-like organisms commonly found in soil
-          and water. While many are harmless or even beneficial, plant-parasitic
-          nematodes (PPNs) feed on plant roots, disrupting water and nutrient
-          uptake and causing significant crop damage.
+        •	Nematodes are tiny, worm-like  that live in soil and water.
+        •	Most are harmless or beneficia, helping to break down organic matter.
+        •	Plant-parasitic nematodes (PPNs) feed on plant roots, reducing water and nutrient uptake. Damage often looks like nutrient or water stress, but unlike those problems, plants won’t recover after fertilising or watering.
+        •	Most are too small to see without a microscope but can cause major yieldlosses.
         </p>
 
         <h3>1.2 Why biosecurity matters</h3>
