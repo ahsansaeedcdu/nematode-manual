@@ -8,9 +8,9 @@ export default function Footer() {
   return (
     <footer className="mt-0 bg-[#DDEDFF] text-slate-800">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* top */}
+   
         <div className="grid grid-cols-1 gap-10 py-10 md:grid-cols-4">
-          {/* brand / about */}
+      
           <div className="space-y-3">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white/80 shadow-sm">
@@ -32,7 +32,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* quick links */}
+       
           <nav aria-label="Quick links">
             <h3 className="mb-3 text-sm font-semibold">Quick links</h3>
             <ul className="space-y-2 text-sm">
