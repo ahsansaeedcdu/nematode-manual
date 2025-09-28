@@ -13,19 +13,16 @@ export default function introduction() {
         <h2>1. Introduction</h2>
 
         <h3>1.1 What are nematodes </h3>
-        <p>
-        •	Nematodes are tiny, worm-like  that live in soil and water.
-        •	Most are harmless or beneficia, helping to break down organic matter.
-        •	Plant-parasitic nematodes (PPNs) feed on plant roots, reducing water and nutrient uptake. Damage often looks like nutrient or water stress, but unlike those problems, plants won’t recover after fertilising or watering.
-        •	Most are too small to see without a microscope but can cause major yieldlosses.
+        <p>	Nematodes are tiny, worm-like  that live in soil and water. Most are harmless or beneficia, helping to break down organic matter. Plant-parasitic nematodes (PPNs) feed on plant roots, reducing water and nutrient uptake. Damage often looks like nutrient or water stress, but unlike those problems, 
+        plants won’t recover after fertilising or watering. Most are too small to see without a microscope but can cause major yield losses.
         </p>
 
+        <>{console.log("Introduction component loaded", Date.now())
+        }</>
+
+
         <h3>1.2 Why biosecurity matters</h3>
-        <p>
-          Strong biosecurity measures are essential to prevent the introduction
-          and spread of PPNs. Northern Australia's geographic isolation and
-          unique agricultural systems make it particularly vulnerable to
-          invasive nematodes.
+        <p>Biosecurity is about preventing pathogens and pests from entering and spreading.PPNs can easily spread through soil on shoes, machinery, or tools, as well as via water flow and planting material. Once PPNs infest a paddock, they are usually only manageable, not eradicable. Prevention is the best defence.
         </p>
 
         <h3>1.3 Why nematodes matter to agriculture in Northern Australia</h3>
