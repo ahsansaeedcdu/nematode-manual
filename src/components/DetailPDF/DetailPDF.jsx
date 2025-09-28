@@ -64,10 +64,22 @@ const styles = StyleSheet.create({
 // Helper: split text into sentences
 const splitIntoSentences = (text) => {
   if (!text) return [];
-  return text.split(/\. (?=[A-Z])/).map((s, idx, arr) => 
+  return text.split(/\. (?=[A-Z])/).map((s, idx, arr) =>
     idx < arr.length - 1 ? s.trim() + "." : s.trim()
   );
-}
+};
+
+// Helper: convert a value into bullet items (supports array, newlines, or • bullets)
+const toBullets = (val) => {
+  if (val == null) return [];
+  if (Array.isArray(val)) return val.map(String).map((s) => s.trim()).filter(Boolean);
+  // split on newlines or leading bullets
+  return String(val)
+    .split(/\n|•/g)
+    .map((s) => s.trim())
+    .filter(Boolean);
+};
+
 // Mapping JSON keys → nice section titles
 const SECTION_LABELS = {
   "Scientific Name": "Scientific Name",
@@ -77,13 +89,25 @@ const SECTION_LABELS = {
   "Why They Matter": "Why They Matter",
   "Management Options": "Management Options",
   "Further Information": "References & Further Reading",
+
+  // NEW sections
+  "Reported Species in Northern Australia": "Reported Species in Northern Australia",
+  "Other Key Species in Australia": "Other Key Species in Australia",
+  "Potential Threat Species (Not Detected in Australia)":
+    "Potential Threat Species (Not Detected in Australia)",
 };
 
+const BULLET_SECTION_KEYS = new Set([
+  "Reported Species in Northern Australia",
+  "Other Key Species in Australia",
+  "Potential Threat Species (Not Detected in Australia)",
+]);
+
 export default function DetailPDF({
-  aboutData = {},          // ✅ default to {}
-  imageDetails = []        // ✅ default to []
+  aboutData = {}, // ✅ default to {}
+  imageDetails = [], // ✅ default to []
 }) {
-  const safeAbout = (aboutData && typeof aboutData === "object") ? aboutData : {};
+  const safeAbout = aboutData && typeof aboutData === "object" ? aboutData : {};
   const safeImages = Array.isArray(imageDetails)
     ? imageDetails.filter((x) => x && typeof x === "object" && x.path)
     : [];
@@ -105,9 +129,7 @@ export default function DetailPDF({
       <Page size="A4" style={styles.page}>
         {/* Title */}
         <Text style={styles.title}>
-          {safeAbout?.Title ||
-            safeAbout?.["Common Name"] ||
-            "Nematode Detail"}
+          {safeAbout?.Title || safeAbout?.["Common Name"] || "Nematode Detail"}
         </Text>
 
         {/* Sections */}
@@ -119,29 +141,51 @@ export default function DetailPDF({
               <Text style={styles.heading}>{SECTION_LABELS[key]}</Text>
 
               {key === "Symptoms" ? (
-                (val && typeof val === "object" && !Array.isArray(val))
-                  ? Object.entries(val).map(([subKey, subVal], i) => (
-                      <View key={i} style={{ marginBottom: 6 }}>
-                        <Text style={{ fontSize: 11, fontWeight: "bold", color: "#1d4ed8" }}>
-                          {String(subKey)}
-                        </Text>
-                        <Text style={styles.text}>{String(subVal ?? "—")}</Text>
-                      </View>
-                    ))
-                  : (
-                    <Text style={styles.text}>{String(val)}</Text>
-                  )
+                val && typeof val === "object" && !Array.isArray(val) ? (
+                  Object.entries(val).map(([subKey, subVal], i) => (
+                    <View key={i} style={{ marginBottom: 6 }}>
+                      <Text
+                        style={{
+                          fontSize: 11,
+                          fontWeight: "bold",
+                          color: "#1d4ed8",
+                        }}
+                      >
+                        {String(subKey)}
+                      </Text>
+                      <Text style={styles.text}>{String(subVal ?? "—")}</Text>
+                    </View>
+                  ))
+                ) : (
+                  <Text style={styles.text}>{String(val)}</Text>
+                )
               ) : key === "Why They Matter" ? (
                 toSentences(val).map((line, i) => (
-                  <Text key={i} style={styles.bullet}>• {line}</Text>
+                  <Text key={i} style={styles.bullet}>
+                    • {line}
+                  </Text>
                 ))
               ) : key === "Management Options" ? (
-                (Array.isArray(val) ? val : [val]).filter((x) => x != null).map((line, i) => (
-                  <Text key={i} style={styles.bullet}>• {String(line)}</Text>
-                ))
+                (Array.isArray(val) ? val : [val])
+                  .filter((x) => x != null)
+                  .map((line, i) => (
+                    <Text key={i} style={styles.bullet}>
+                      • {String(line)}
+                    </Text>
+                  ))
               ) : key === "Further Information" ? (
-                (Array.isArray(val) ? val : [val]).filter((x) => x != null).map((line, i) => (
-                  <Text key={i} style={styles.text}>{String(line)}</Text>
+                (Array.isArray(val) ? val : [val])
+                  .filter((x) => x != null)
+                  .map((line, i) => (
+                    <Text key={i} style={styles.text}>
+                      {String(line)}
+                    </Text>
+                  ))
+              ) : BULLET_SECTION_KEYS.has(key) ? (
+                toBullets(val).map((line, i) => (
+                  <Text key={i} style={styles.bullet}>
+                    • {line}
+                  </Text>
                 ))
               ) : (
                 <Text style={styles.text}>{String(val)}</Text>
@@ -157,7 +201,6 @@ export default function DetailPDF({
             <View style={styles.imageGrid}>
               {safeImages.map(({ path, name }, i) => (
                 <View key={i} style={styles.imageWrapper} wrap={false}>
-                  {/* Guard the src so React-PDF never sees undefined */}
                   <Image src={String(path)} style={styles.image} />
                   <Text style={styles.caption}>{String(name ?? "")}</Text>
                 </View>
@@ -169,5 +212,3 @@ export default function DetailPDF({
     </Document>
   );
 }
-
-
