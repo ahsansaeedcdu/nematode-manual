@@ -493,9 +493,9 @@ export default function NematodeOverview({
               <button
                 onClick={() => toggle("what")}
                 className="flex items-center justify-between w-full text-left 
-             bg-slate-50 hover:bg-slate-100 border border-slate-200 
-             rounded-lg shadow-sm p-4 transition 
-             text-lg md:text-xl font-semibold text-[#038764]"
+                      bg-slate-50 hover:bg-slate-100 border border-slate-200 
+                      rounded-lg shadow-sm p-4 transition 
+                      text-lg md:text-xl font-semibold text-[#038764]"
               >
                 <span>1.1 What are nematodes</span>
                 {open.what ? (
@@ -506,19 +506,14 @@ export default function NematodeOverview({
               </button>
               {open.what && (
                 <ul className="list-disc pl-6 text-[#292929] space-y-1 mt-2">
-                  <li>
-                  Nematodes are tiny, worm-like creatures that live in soil and water.
-                  </li>
-                  <li>
-                    Most are harmless or beneficia, helping to break down organic matter.
-                  </li>
+                  <li>Nematodes are tiny, worm-like creatures that live in soil and water.</li>
+                  <li>Most are harmless or beneficia, helping to break down organic matter.</li>
                   <li>
                   Plant-parasitic nematodes (PPNs) feed on plant roots, reducing water and nutrient uptake.
                    Damage often looks like nutrient or water stress, but unlike those problems, plants won’t recover after fertilising or watering.
                   </li>
-                  <li>
-                  Most are too small to see without a microscope but can cause major yield losses.
-                  </li>
+             
+                  <li>Most are too small to see without a microscope but can cause major yield losses.</li>
                 </ul>
               )}
             </div>
@@ -528,9 +523,9 @@ export default function NematodeOverview({
               <button
                 onClick={() => toggle("biosecurity")}
                 className="flex items-center justify-between w-full text-left 
-             bg-slate-50 hover:bg-slate-100 border border-slate-200 
-             rounded-lg shadow-sm p-4 transition 
-             text-lg md:text-xl font-semibold text-[#038764]"
+                      bg-slate-50 hover:bg-slate-100 border border-slate-200 
+                      rounded-lg shadow-sm p-4 transition 
+                      text-lg md:text-xl font-semibold text-[#038764]"
               >
                 <span>1.2 Why biosecurity matters</span>
                 {open.biosecurity ? (
@@ -541,14 +536,13 @@ export default function NematodeOverview({
               </button>
               {open.biosecurity && (
                 <ul className="list-disc pl-6 text-[#292929] space-y-1 mt-2">
-                  <li>
-                  Biosecurity is about preventing pathogens and pests from entering and spreading.
-                  </li>
+                  <li>Biosecurity is about preventing pathogens and pests from entering and spreading.</li>
                   <li>
                   PPNs can easily spread through soil on shoes, machinery, or tools, as well as via water flow and planting material.
                   </li>
                   <li>
                   Once PPNs infest a paddock, they are usually only manageable, not eradicable. Prevention is the best defence.
+
                   </li>
                 </ul>
               )}
@@ -559,13 +553,11 @@ export default function NematodeOverview({
               <button
                 onClick={() => toggle("agriculture")}
                 className="flex items-center justify-between w-full text-left 
-             bg-slate-50 hover:bg-slate-100 border border-slate-200 
-             rounded-lg shadow-sm p-4 transition 
-             text-lg md:text-xl font-semibold text-[#038764]"
+                      bg-slate-50 hover:bg-slate-100 border border-slate-200 
+                      rounded-lg shadow-sm p-4 transition 
+                      text-lg md:text-xl font-semibold text-[#038764]"
               >
-                <span>
-                  1.3 Why nematodes matter to agriculture in Northern Australia
-                </span>
+                <span>1.3 Why nematodes matter to agriculture in Northern Australia</span>
                 {open.agriculture ? (
                   <ChevronDown className="w-5 h-5 text-slate-600" />
                 ) : (
@@ -574,23 +566,17 @@ export default function NematodeOverview({
               </button>
               {open.agriculture && (
                 <ul className="list-disc pl-6 text-[#292929] space-y-1 mt-2">
+                  <li>PPNs can weaken plants, cause stunting, yellowing, tuber defects and poor root systems.</li>
                   <li>
-                    PPNs weaken plants, causing stunting, yellowing, and poor
-                    root systems.
+                    Yield losses vary by crop and nematode type; small losses (&lt;10%) are often uneconomic, but susceptible crops or
+                    outbreaks can exceed 20%.
                   </li>
                   <li>
-                    Yield losses can range from 20–100%, depending on crop and
-                    nematode type.
+                    Crops at risk include broadacre crops (cotton, wheat, mungbeans, etc.), fruit crops (melons, bananas, pineapple, etc.),
+                    and vegetables (sweet potato, capsicum, tomato, cucumber, etc.).
                   </li>
                   <li>
-                    Crops at risk include broadacre crops (cotton, wheat,
-                    mungbeans, etc.), fruit crops (melons, bananas, pineapple,
-                    etc.), and vegetables (sweet potato, capsicum, tomato,
-                    cucumber, etc.).
-                  </li>
-                  <li>
-                    Tropical conditions allow nematodes to multiply quickly –
-                    unmanaged outbreaks can spread between farms.
+                    Tropical conditions allow nematodes to multiply quickly. If unmanaged, outbreaks can spread between farms.
                   </li>
                 </ul>
               )}
@@ -600,8 +586,20 @@ export default function NematodeOverview({
           {/* 2. Key PPNs */}
           <section id="key" className="bg-white rounded-2xl shadow p-5 md:p-7">
             <h2 className="text-xl md:text-2xl font-semibold text-[#027fb8] mb-2">
-              2. Key Plant-Parasitic Nematodes in Northern Australia
+              2. Plant-Parasitic Nematodes in Northern Australia
             </h2>
+
+
+
+        
+                <p className="list-disc pl-6 text-[#292929] space-y-1 mt-2">
+                  Plant-parasitic nematodes (PPNs) feed on plant roots in different ways, depending on the species and crop. Some feed only on outer root tissue, while others penetrate deeper or completely enter the root. PPNs use a specialised needle-like structure (stylet) to feed. Some induce the plant to form enlarged or nutrient-rich cells that support nematode growth, while others directly damage root tissue.
+These feeding activities reduce plant vigour and yield, leading to stunted growth, poor root systems, reduced yield, or, in severe cases, unmarketable produce or crop failure. Understanding how nematodes interact with roots helps growers recognise symptoms and select effective management strategies. 
+This section highlights the main PPNs affecting crops in Northern Australia, their biology, symptoms, and practical management options.
+                </p>
+
+
+
 
             {CATEGORIES.map((cat) => (
               <div key={cat.id} id={cat.id} className="mt-6">
