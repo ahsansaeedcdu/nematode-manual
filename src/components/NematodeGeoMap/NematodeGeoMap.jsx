@@ -15,11 +15,14 @@ import {
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import FadeIn from "../FadeIn/FadeIn";
+import CommonNameMap from "../CommonNameMap/CommonNameMap"; // <-- add this import
 
 // import './NematodeGeoMap.css';
 import L from "leaflet";
 // import "leaflet-simple-map-screenshoter";
 import * as htmlToImage from "html-to-image";
+const NEMATODES_COMBINED = import.meta.env.NEMATODES_COMBINED;
+const NEMATODES_MAP = import.meta.env.NEMATODES_MAP;
 /* -------------------- Leaflet marker fix -------------------- */
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -144,17 +147,12 @@ function formatNematodeName(name) {
   if (!name) return "N/A";
 
   return name.split(" ").map((part, i, arr) => {
-    // If it's "sp." or "spp.", leave normal
     if (part === "sp." || part === "spp.") {
       return <span key={i}> {part}</span>;
     }
-
-    // Italicise genus (first word) and species (second word if present)
     if (i === 0 || (i === 1 && arr[0][0] === arr[0][0].toUpperCase())) {
       return <em key={i}> {part}</em>;
     }
-
-    // Otherwise leave normal
     return <span key={i}> {part}</span>;
   });
 }
@@ -188,8 +186,7 @@ const GeoJSONLayerWithInteractions = ({
       },
       mouseout: (e) => {
         if (lgaName === selectedLGA) return;
-        if (getFeatureBaseStyle)
-          e.target.setStyle(getFeatureBaseStyle(feature));
+        if (getFeatureBaseStyle) e.target.setStyle(getFeatureBaseStyle(feature));
       },
       click: () => {
         if (setSelectedLGA) setSelectedLGA(lgaName);
@@ -251,15 +248,15 @@ const GeoJSONLayerWithInteractions = ({
 
           return (
             <Marker
-              key={`marker-${record["Sampling Region"] || "r"}-${record["Sampling State"] || "s"}-${index}`}
+              key={`marker-${record["Sampling Region"] || "r"}-${
+                record["Sampling State"] || "s"
+              }-${index}`}
               position={[record.lat, record.lng]}
               icon={customIcon}
             >
               <Popup>
                 <div className="font-semibold text-slate-800">
-                  {/* <p className="mb-1"><strong>Common name:</strong> {record.common_nematode_name}</p> */}
                   <p className="mb-1">
-                    {" "}
                     <strong>Nematode Taxa:</strong>{" "}
                     {record.nematode
                       ? formatNematodeName(record.nematode)
@@ -274,7 +271,6 @@ const GeoJSONLayerWithInteractions = ({
                       .filter((v) => v && String(v).trim())
                       .join(", ") || "N/A"}
                   </p>
-                  {/* <p className="mb-1"><strong>State:</strong> {record['Sampling State'] || 'N/A'}</p> */}
                   {record.sample_size != null && (
                     <p className="mb-1">
                       <strong>Highest Recorded Density:</strong>{" "}
@@ -282,8 +278,6 @@ const GeoJSONLayerWithInteractions = ({
                       soil
                     </p>
                   )}
-                  {/* {record['Site Description'] && <p className="mb-1"><strong>Site:</strong> {record['Site Description']}</p>}
-                {record.reference && <p className="mb-1"><strong>Reference:</strong> {record.reference}</p>} */}
                 </div>
               </Popup>
             </Marker>
@@ -292,95 +286,23 @@ const GeoJSONLayerWithInteractions = ({
     </>
   );
 };
-// function ensureBorderPatchCSS() {
-//   if (document.getElementById("tw-border-off-css")) return;
-//   const css = `
-//     /* Disable Tailwind's global borders ONLY during screenshot */
-//     .leaflet-container.tw-borders-off,
-//     .leaflet-container.tw-borders-off * ,
-//     .leaflet-container.tw-borders-off *::before,
-//     .leaflet-container.tw-borders-off *::after {
-//       border-style: none !important;
-//       border-width: 0 !important;
-//       border-color: transparent !important;
-//     }
-//   `;
-//   const style = document.createElement("style");
-//   style.id = "tw-border-off-css";
-//   style.textContent = css;
-//   document.head.appendChild(style);
-// }
 
-// const MapScreenshoter= ({ name = "map" }) => {
-//   const map = useMap();
-
-//   useEffect(() => {
-//     if (!map) return;
-//     ensureBorderPatchCSS();
-
-//     // Use an integer DPR to avoid tile seams; 1 or 2 are sensible
-//     const dpr = Math.max(1, Math.round(window.devicePixelRatio || 1));
-
-//     // Define a magnification factor
-//     const magnificationFactor = 5; // Adjust this value to control the size
-
-//     // Add the plugin control
-//     const control = L.simpleMapScreenshoter({
-//       position: "topleft",
-//       cropImageByInnerWH: true,      // capture EXACT viewport
-//       hideElementsWithSelectors: [],  // keep UI as-is
-//       preventDownload: false,
-//       screenName: () => `${name}-${Date.now()}`,
-//       mimeType: "image/png",
-//       domtoimageOptions: {
-//         width: map.getSize().x * dpr * magnificationFactor,
-//         height: map.getSize().y * dpr * magnificationFactor,
-//         style: {
-//           transform: `scale(${dpr * magnificationFactor})`,
-//           transformOrigin: "top left",
-//           backgroundColor: "white",
-//         },
-//         quality: 1,
-//       },
-//       onPixelDataFail: async ({ plugin, domtoimageOptions }) =>
-//         plugin._getPixelDataOfNormalMap(domtoimageOptions),
-//     }).addTo(map);
-
-//     // Toggle Tailwind border patch during the screenshot only
-//     const onStart = () => map.getContainer().classList.add("tw-borders-off");
-//     const onEnd   = () => map.getContainer().classList.remove("tw-borders-off");
-
-//     map.on("simpleMapScreenshoter.takeScreen", onStart);
-//     map.on("simpleMapScreenshoter.done", onEnd);
-//     map.on("simpleMapScreenshoter.error", onEnd);
-
-//     return () => {
-//       map.off("simpleMapScreenshoter.takeScreen", onStart);
-//       map.off("simpleMapScreenshoter.done", onEnd);
-//       map.off("simpleMapScreenshoter.error", onEnd);
-//       control?.remove?.();
-//     };
-//   }, [map, name]);
-
-//   return null;
-// }
-
-/* --------------------------- HistoricalMap (simpler visuals, same data) --------------------------- */
 /* --------------------------- HistoricalMap (tooltip + hover) --------------------------- */
 const HistoricalMap = () => {
   const [geoData, setGeoData] = useState(null);
   const [nematodeMap, setNematodeMap] = useState({});
 
   useEffect(() => {
+    // Using Promise.all is cleaner, but the core issue is rendering too soon.
     fetch("/data/LGA_2024_context.json")
       .then((res) => res.json())
       .then(setGeoData);
+
     fetch("/data/lga_nematode_map.json")
       .then((res) => res.json())
       .then(setNematodeMap);
   }, []);
 
-  // Base style: minimal borders, soft fills
   const styleFn = useCallback(
     (feature) => {
       const lgaName = feature.properties?.LGA_NAME24?.trim();
@@ -389,8 +311,8 @@ const HistoricalMap = () => {
         Array.isArray(nematodeMap[lgaName]) &&
         nematodeMap[lgaName].length > 0;
       return {
-        fillColor: hasData ? "#f87171" : "#e5e7eb", // red-300 vs gray-200
-        color: "#ffffff", // thin white boundary
+        fillColor: hasData ? "#f87171" : "#e5e7eb",
+        color: "#ffffff",
         weight: 0.6,
         opacity: 1,
         fillOpacity: 0.75,
@@ -400,8 +322,8 @@ const HistoricalMap = () => {
   );
 
   const onEachFeature = (feature, layer) => {
-    // Apply base style
-    layer.setStyle(styleFn(feature));
+    // You no longer need to call setStyle here, the GeoJSON `style` prop handles it.
+    // layer.setStyle(styleFn(feature)); 
 
     const lgaName = feature.properties?.LGA_NAME24?.trim();
     const species = (lgaName && nematodeMap[lgaName]) || [];
@@ -410,21 +332,19 @@ const HistoricalMap = () => {
       ${species.length ? species.join(", ") : "Unconfirmed presence of PPN"}
     `;
 
-    // Tooltip
     layer.bindTooltip(tooltipContent, {
       sticky: true,
       opacity: 0.95,
       className: "custom-tooltip",
     });
 
-    // Hover outline + subtle emphasis
     layer.on({
       mouseover: (e) => {
         const base = styleFn(feature);
         e.target.setStyle({
           ...base,
           weight: 2.2,
-          color: "#111827", // slate-900-ish for a crisp outline
+          color: "#111827",
           fillOpacity: 0.85,
         });
         const el = e.target.getElement?.();
@@ -432,13 +352,15 @@ const HistoricalMap = () => {
         if (e.target.bringToFront) e.target.bringToFront();
       },
       mouseout: (e) => {
+        // The GeoJSON component's `resetStyle` method is often used here,
+        // but your method is also perfectly fine.
         e.target.setStyle(styleFn(feature));
       },
     });
   };
 
   return (
-     <div className="relative h-full w-full"> {/* [ADDED] wrapper for overlay positioning */}
+    <div className="relative h-full w-full">
       <MapContainer
         center={[-25.2744, 133.7751]}
         zoom={5}
@@ -446,39 +368,39 @@ const HistoricalMap = () => {
         doubleClickZoom={false}
         className="rounded-xl"
       >
-        {/* [ADDED] CORS so snapshots work */}
-        {/* Enable CORS so snapshots include tiles */}
         <TileLayer
           crossOrigin="anonymous"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="© OpenStreetMap contributors"
         />
-        {geoData && (
+        
+        {/* THE FIX IS HERE 👇 */}
+        {geoData && Object.keys(nematodeMap).length > 0 && (
           <GeoJSON data={geoData} style={styleFn} onEachFeature={onEachFeature} />
         )}
-      </MapContainer>
 
-      {/* Tiny legend OVER the map (not inside MapContainer) */}
+      </MapContainer>
+      
+      {/* Legend remains the same */}
       <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg shadow p-3 text-sm text-slate-700">
         <div className="flex items-center gap-2">
-          <span className="w-3.5 h-3.5 rounded-sm inline-block" style={{ backgroundColor: "#f87171" }}></span>
-
-
-
+          <span
+            className="w-3.5 h-3.5 rounded-sm inline-block"
+            style={{ backgroundColor: "#f87171" }}
+          ></span>
           Nematodes present
         </div>
         <div className="flex items-center gap-2 mt-1">
-          <span className="w-3.5 h-3.5 rounded-sm inline-block" style={{ backgroundColor: "#e5e7eb" }}></span>
-
-
-
+          <span
+            className="w-3.5 h-3.5 rounded-sm inline-block"
+            style={{ backgroundColor: "#e5e7eb" }}
+          ></span>
           No record
         </div>
       </div>
     </div>
   );
 };
-
 /* --------------------------- Main wrapper (UI refreshed) --------------------------- */
 const NematodeGeoMap = () => {
   // New Map States
@@ -488,41 +410,43 @@ const NematodeGeoMap = () => {
   const [newMapSelectedNematodeGroups, setNewMapSelectedNematodeGroups] =
     useState([]);
   const [newMapIsLoading, setNewMapIsLoading] = useState(false);
-  const [showHistoricalMap, setShowHistoricalMap] = useState(true);
+
+  // mode: "overview" | "taxa" | "common"
+  const [showHistoricalMap, setShowHistoricalMap] = useState("overview"); // <-- CHANGED
 
   // search / filter text for the checkbox grid
   const [groupQuery, setGroupQuery] = useState("");
-  const mapShotRef = useRef(null); // [ADDED]
+  const mapShotRef = useRef(null);
 
-    const handleDownloadSnapshot = async () => { // [ADDED]
-      const node = mapShotRef.current;
-      if (!node) return;
-      try {
-        // Optional: wait for any images/tiles still decoding
-        await Promise.all(
-          Array.from(node.querySelectorAll("img")).map((img) =>
-            img.decode().catch(() => {})
-          )
-        );
+  const handleDownloadSnapshot = async () => {
+    const node = mapShotRef.current;
+    if (!node) return;
+    try {
+      await Promise.all(
+        Array.from(node.querySelectorAll("img")).map((img) =>
+          img.decode().catch(() => {})
+        )
+      );
 
-        const dataUrl = await htmlToImage.toPng(node, {
-          pixelRatio: 2,
-          cacheBust: true,
-          backgroundColor: "#ffffff",
-          width: node.clientWidth,
-          height: node.clientHeight,
-        });
-        const a = document.createElement("a");
-        const ts = new Date().toISOString().replace(/[:.]/g, "-");
-        a.download = `nematodes-map-${ts}.png`;
-        a.href = dataUrl;
-        a.click();
-      } catch (err) {
-        console.error("Snapshot failed:", err);
-        alert("Snapshot failed. Wait for tiles to finish loading and try again.");
-      }
-    };
-  // load new map data when New Map tab is shown
+      const dataUrl = await htmlToImage.toPng(node, {
+        pixelRatio: 2,
+        cacheBust: true,
+        backgroundColor: "#ffffff",
+        width: node.clientWidth,
+        height: node.clientHeight,
+      });
+      const a = document.createElement("a");
+      const ts = new Date().toISOString().replace(/[:.]/g, "-");
+      a.download = `nematodes-map-${ts}.png`;
+      a.href = dataUrl;
+      a.click();
+    } catch (err) {
+      console.error("Snapshot failed:", err);
+      alert("Snapshot failed. Wait for tiles to finish loading and try again.");
+    }
+  };
+
+  // load taxa map data only when Taxa tab is active
   useEffect(() => {
     const fetchNewMapData = async () => {
       setNewMapIsLoading(true);
@@ -539,7 +463,6 @@ const NematodeGeoMap = () => {
         const flat = flattenCombinedData(combined);
         setNewMapDetailedNematodeRecords(flat);
 
-        // pick first few by default, or none—your call
         setNewMapSelectedNematodeGroups([]);
       } catch (e) {
         console.error("Error loading combined nematode data:", e);
@@ -551,10 +474,10 @@ const NematodeGeoMap = () => {
       }
     };
 
-    if (!showHistoricalMap) {
+    if (showHistoricalMap === "taxa") {
       fetchNewMapData();
     } else {
-      // clear when leaving
+      // clear when leaving taxa
       setNewMapDetailedNematodeRecords([]);
       setNewMapAllNematodeGroups([]);
       setNewMapSelectedNematodeGroups([]);
@@ -596,18 +519,35 @@ const NematodeGeoMap = () => {
             </h2>
             <div className="flex items-center gap-2">
               <button
-                onClick={() => setShowHistoricalMap(true)}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${showHistoricalMap ? "bg-blue-400 text-black shadow" : "bg-slate-100 hover:bg-slate-200"}`}
+                onClick={() => setShowHistoricalMap("overview")}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${
+                  showHistoricalMap === "overview"
+                    ? "bg-blue-400 text-black shadow"
+                    : "bg-slate-100 hover:bg-slate-200"
+                }`}
               >
                 Overview
               </button>
               <button
-                onClick={() => setShowHistoricalMap(false)}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${!showHistoricalMap ? "bg-blue-400 text-black shadow" : "bg-slate-100 hover:bg-slate-200"}`}
+                onClick={() => setShowHistoricalMap("taxa")}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${
+                  showHistoricalMap === "taxa"
+                    ? "bg-blue-400 text-black shadow"
+                    : "bg-slate-100 hover:bg-slate-200"
+                }`}
               >
                 Taxa
               </button>
-               {/* [ADDED] Download / Snapshot button */}
+              <button
+                onClick={() => setShowHistoricalMap("common")}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${
+                  showHistoricalMap === "common"
+                    ? "bg-blue-400 text-black shadow"
+                    : "bg-slate-100 hover:bg-slate-200"
+                }`}
+              >
+                Common Name
+              </button>
               <button
                 onClick={handleDownloadSnapshot}
                 className="px-3 py-1.5 rounded-lg text-sm font-medium text-black shadow bg-slate-100 hover:bg-slate-200"
@@ -622,24 +562,27 @@ const NematodeGeoMap = () => {
         <main className="flex-1 max-w-[1400px] mx-auto w-full px-3 md:px-4 py-4 grid grid-cols-1 md:grid-cols-4 gap-4">
           {/* Left Sidebar */}
           <aside className="md:col-span-1">
-            {showHistoricalMap ? (
+            {showHistoricalMap === "overview" && (
               <div className="bg-white rounded-2xl shadow p-4 top-[84px]">
                 <h2 className="text-lg font-semibold mb-2">About this map</h2>
                 <p className="text-sm text-slate-600">
-                This map shows where plant-parasitic nematodes (PPNs) have been found in Northern Australia.
+                  This map shows where plant-parasitic nematodes (PPNs) have
+                  been found in Northern Australia.
                 </p>
                 <div className="mt-4">
                   <ul className="space-y-2 text-sm text-slate-700">
                     <li className="flex items-center gap-3">
                       <span className="inline-block h-4 w-4 shrink-0 rounded-full bg-[#f87171] ring-1 ring-[#f87171]/40" />
                       <span>
-                        <strong>Confirmed</strong> – nematodes have been detected in these areas.
+                        <strong>Confirmed</strong> – nematodes have been
+                        detected in these areas.
                       </span>
                     </li>
                     <li className="flex items-center gap-3">
                       <span className="inline-block h-4 w-4 shrink-0 rounded-full bg-[#e5e7eb] ring-1 ring-[#e5e7eb]/60" />
                       <span>
-                        <strong>Unconfirmed</strong> – nematodes may occur, but not yet verified.​
+                        <strong>Unconfirmed</strong> – nematodes may occur, but
+                        not yet verified.​
                       </span>
                     </li>
                   </ul>
@@ -649,7 +592,9 @@ const NematodeGeoMap = () => {
                   regions.
                 </div>
               </div>
-            ) : (
+            )}
+
+            {showHistoricalMap === "taxa" && (
               <div className="bg-white rounded-2xl shadow p-4 sticky top-[84px] max-h-[calc(100vh-120px)] flex flex-col">
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-lg font-semibold">Nematodes</h2>
@@ -688,7 +633,6 @@ const NematodeGeoMap = () => {
                   />
                 </div>
 
-
                 {/* Scrollable checkbox grid */}
                 <div className="flex-1 overflow-y-auto rounded-xl border border-[#E3E5E7] p-2">
                   {newMapIsLoading ? (
@@ -700,14 +644,12 @@ const NematodeGeoMap = () => {
                       {filteredGroups.map((group) => {
                         const formatName = (name) => {
                           if (name.toLowerCase().includes("nematode")) {
-                            return name; // leave untouched
+                            return name;
                           }
-
                           const parts = name.split(" ");
                           if (parts.length === 0) return name;
 
                           if (parts.includes("spp.") || parts.includes("sp.")) {
-                            // Italicize only Genus
                             return (
                               <>
                                 <i>{parts[0]}</i> {parts.slice(1).join(" ")}
@@ -716,7 +658,6 @@ const NematodeGeoMap = () => {
                           }
 
                           if (parts.length >= 2) {
-                            // Italicize Genus + species
                             return (
                               <>
                                 <i>
@@ -767,13 +708,19 @@ const NematodeGeoMap = () => {
                   )}
                 </div>
 
-                {/* Small legend */}
-                {!showHistoricalMap && (
-                  <div className="mt-3 text-xs text-slate-600">
-                    Markers are colored by Common name. Multiple points at the
-                    same location are gently offset so each remains clickable.
-                  </div>
-                )}
+                <div className="mt-3 text-xs text-slate-600">
+                  Markers are colored by Common name. Multiple points at the
+                  same location are gently offset so each remains clickable.
+                </div>
+              </div>
+            )}
+
+            {showHistoricalMap === "common" && (
+              <div className="bg-white rounded-2xl shadow p-4 sticky top-[84px]">
+                <h2 className="text-lg font-semibold">Common Name</h2>
+                <p className="text-sm text-slate-600">
+                  Rendering Common Name map…
+                </p>
               </div>
             )}
           </aside>
@@ -781,11 +728,10 @@ const NematodeGeoMap = () => {
           {/* Map Panel */}
           <section className="md:col-span-3">
             <div className="bg-white rounded-2xl shadow overflow-hidden">
-              {/* [ADDED] Only the area inside this wrapper gets captured */}
-              <div ref={mapShotRef} className="h-[80vh]"> {/* [ADDED] */}
-                {showHistoricalMap ? (
-                  <HistoricalMap />
-                ) : (
+              <div ref={mapShotRef} className="h-[80vh]">
+                {showHistoricalMap === "overview" && <HistoricalMap />}
+
+                {showHistoricalMap === "taxa" && (
                   <MapContainer
                     center={[-25.2744, 133.7751]}
                     zoom={5}
@@ -793,7 +739,6 @@ const NematodeGeoMap = () => {
                     doubleClickZoom={false}
                     className="rounded-xl"
                   >
-                    {/* [ADDED] CORS so snapshots include tiles */}
                     <TileLayer
                       crossOrigin="anonymous"
                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -812,15 +757,12 @@ const NematodeGeoMap = () => {
                     />
                   </MapContainer>
                 )}
+
+                {showHistoricalMap === "common" && <CommonNameMap />}
               </div>
             </div>
           </section>
         </main>
-
-        {/* Footer */}
-        {/* <footer className="py-4 text-center text-xs text-slate-500">
-        Data visualisation prototype · Leaflet + Tailwind
-      </footer> */}
       </div>
     </FadeIn>
   );
