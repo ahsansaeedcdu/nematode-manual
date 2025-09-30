@@ -1,10 +1,17 @@
 import React from "react";
-import FadeIn from "../../components/FadeIn/FadeIn"; // adjust path if needed
+import FadeIn from "../../components/FadeIn/FadeIn";
+// Put your image at: src/assets/about-rln.jpg
+import aboutImg from "../../assets/NA PPN website photos/Root-lesion nematodes/Above-ground symptoms of wheat caused by RLN (collecty by Kirsty Owen).jpg";
 
 export default function AboutUs({
-  imageUrl = "src/assets/NA PPN website photos/Root-lesion nematodes/Above-ground symptoms of wheat caused by RLN (collecty by Kirsty Owen).jpg",
-  imageAlt = "Photo used on About page",
+  // optional override; prefer leaving this empty so we use the hashed asset
+  imageUrl,
+  imageAlt = "Above-ground symptoms of wheat caused by RLN (photo by Kirsty Owen)",
 }) {
+  // If a full URL is passed, use it; otherwise use the bundled asset (cache-busted)
+  const resolvedSrc =
+    imageUrl && /^https?:\/\//i.test(imageUrl) ? imageUrl : aboutImg;
+
   return (
     <FadeIn>
       <section className="w-screen h-[80vh] bg-white">
@@ -13,26 +20,26 @@ export default function AboutUs({
           <div className="flex items-center justify-center bg-[#03334A] text-white">
             <div className="max-w-xl px-6 md:px-10 space-y-5 text-base md:text-lg leading-relaxed">
               <p>
-                This website has been developed as an educational resource to support the booklet “Plant-Parasitic Nematodes – Biosecurity and Management in Northern Australia.” 
+                This website has been developed as an educational resource to support the booklet “Plant-Parasitic Nematodes – Biosecurity and Management in Northern Australia.”
               </p>
               <p>
-                This booklet was developed with support from the Northern Australia Biosecurity Strategy (NABS), Biosecurity Plant and Science Services Division, Department of Agriculture, Fisheries and Forestry, Australian Government, while the website itself was created by Charles Darwin University (CDU) staff (Dr Yujuan Li and Prof Stephen Xu) together with CDU Master of IT students (  Jahidul Islam and Ahsan Saeed ) as part of their internship program. 
+                This booklet was developed with support from the Northern Australia Biosecurity Strategy (NABS), Biosecurity Plant and Science Services Division, Department of Agriculture, Fisheries and Forestry, Australian Government, while the website itself was created by Charles Darwin University (CDU) staff (Dr Yujuan Li and Prof Stephen Xu) together with CDU Master of IT students (  Jahidul Islam and Ahsan Saeed ) as part of their internship program.
               </p>
               <p>
-                Our aim is to provide growers, agronomists, and biosecurity stakeholders with accessible information on plant-parasitic nematodes, their management, and the importance of preventing their spread in Northern Australia. 
+                Our aim is to provide growers, agronomists, and biosecurity stakeholders with accessible information on plant-parasitic nematodes, their management, and the importance of preventing their spread in Northern Australia.
               </p>
-              <p>
-                For enquiries, please contact:  
-              </p>
+              <p>For enquiries, please contact:</p>
             </div>
           </div>
 
           {/* Right: image with caption overlay */}
           <div className="relative h-full">
             <img
-              src={imageUrl}
+              src={resolvedSrc}
               alt={imageAlt}
               className="absolute inset-0 w-full h-full object-cover"
+              loading="eager"
+              decoding="async"
             />
 
             {/* Bottom gradient for caption legibility */}
