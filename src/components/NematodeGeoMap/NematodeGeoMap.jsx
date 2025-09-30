@@ -541,7 +541,7 @@ const NematodeGeoMap = () => {
                     : "bg-slate-100 hover:bg-slate-200"
                 }`}
               >
-                Taxa
+                By taxa (Markers)
               </button>
               <button
                 onClick={() => setShowHistoricalMap("common")}
@@ -551,7 +551,7 @@ const NematodeGeoMap = () => {
                     : "bg-slate-100 hover:bg-slate-200"
                 }`}
               >
-                Common Name
+                By taxa (Shaded)
               </button>
               <button
                 onClick={handleDownloadSnapshot}

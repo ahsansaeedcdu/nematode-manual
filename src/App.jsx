@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar/navBar";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import Footer from "./components/Footer/Footer"; 
 import ImageGallery from "./components/ImageGallery/ImageGallery";
+import AboutUs from "./pages/about/AboutUs";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             </>
           }
         />
+
         <Route
           path="/nematodes/map"
           element={
@@ -40,6 +42,17 @@ function App() {
             <>
               <Navbar />
               <NematodeDetail />
+              <Footer />   
+            </>
+          }
+        />
+
+        <Route
+          path="/about"
+          element={
+            <>
+              <Navbar />
+              <AboutUs />
               <Footer />   
             </>
           }
