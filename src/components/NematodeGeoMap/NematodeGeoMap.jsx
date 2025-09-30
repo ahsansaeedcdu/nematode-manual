@@ -278,6 +278,11 @@ const GeoJSONLayerWithInteractions = ({
                       soil
                     </p>
                   )}
+                  {record.reference && (
+                  <p className="mb-1">
+                    <strong>Reference:</strong> {record.reference}
+                  </p>
+                  )}
                 </div>
               </Popup>
             </Marker>
