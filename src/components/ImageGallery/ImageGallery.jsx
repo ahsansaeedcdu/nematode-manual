@@ -43,18 +43,14 @@ export default function ImageGallery({ imageDetails = [] }) {
   }
 
   return (
-    <section className="rounded-3xl bg-white p-6 md:p-8 shadow-sm ring-1 ring-slate-200">
+    <section className="rounded-3xl bg-white p-6 md:p-8 ">
       {/* Title */}
-      <header className="mb-6">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight leading-tight">
-          {/* <span className="bg-gradient-to-r from-indigo-600 via-fuchsia-600 to-pink-600 bg-clip-text text-transparent"> */}
-            Images
-          {/* </span> */}
-        </h2>
+      {/* <header className="mb-6">
+        
         <p className="mt-1 text-sm text-slate-600">
           {imageDetails.length} {imageDetails.length === 1 ? "item" : "items"}
         </p>
-      </header>
+      </header> */}
 
       {/* Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
