@@ -12,8 +12,7 @@ import ImageGallery from "../../components/ImageGallery/ImageGallery";
 
 /** --- helpers --- */
 const getGenusLabelFromTaxaArray = (scientificTaxa) => {
-  if (!Array.isArray(scientificTaxa) || scientificTaxa.length === 0)
-    return null;
+  if (!Array.isArray(scientificTaxa) || scientificTaxa.length === 0) return null;
   const first = String(scientificTaxa[0] || "").trim();
   const genus = first.split(/\s+/)[0];
   return genus ? `${genus} spp.` : null;
@@ -51,10 +50,7 @@ const OVERVIEW_ORDER = [
 const toArray = (val) => {
   if (Array.isArray(val)) return val.filter(Boolean).map(String);
   if (typeof val === "string") {
-    const parts = val
-      .split(/\n|;|,/)
-      .map((s) => s.trim())
-      .filter(Boolean);
+    const parts = val.split(/\n|;|,/).map((s) => s.trim()).filter(Boolean);
     return parts.length ? parts : [val].filter(Boolean);
   }
   return [];
@@ -132,7 +128,7 @@ export default function NematodeDetail({
 
   const aboutData =
     group?.data && typeof group.data === "object" ? group.data : null;
-  
+
   // Genus label priority: Scientific taxa array -> Scientific Name in aboutData
   const genusLabel = useMemo(() => {
     const fromArray = getGenusLabelFromTaxaArray(group?.["Scientific taxa"]);
@@ -160,8 +156,6 @@ export default function NematodeDetail({
 
   const formatScientificName = (text) => {
     if (!text) return "";
-
-    // Split words to check each part
     return text.split(" ").map((word, idx) => {
       const lower = word.toLowerCase();
       if (lower === "sp." || lower === "spp.") {
@@ -171,7 +165,6 @@ export default function NematodeDetail({
           </span>
         );
       }
-      // Italicise genus/species names
       return (
         <span key={idx} className="italic">
           {word}{" "}
@@ -179,13 +172,16 @@ export default function NematodeDetail({
       );
     });
   };
+
   const splitIntoSentences = (text) => {
     if (!text) return [];
     return text
       .split(/\. (?=[A-Z])/)
       .map((s, idx, arr) => (idx < arr.length - 1 ? s.trim() + "." : s.trim()));
   };
+
   const imageDetails = getImagesForNematode(commonName);
+
   return (
     <FadeIn>
       <div className="min-h-screen w-screen bg-white">
@@ -212,10 +208,13 @@ export default function NematodeDetail({
 
           <div className="flex gap-3 mb-6">
             <PDFDownloadLink
-              document={
-                <DetailPDF aboutData={aboutData} imageDetails={imageDetails} />
-              }
-              fileName={`${aboutData?.Title || aboutData?.["Common Name"] || commonName || "nematode-detail"}.pdf`}
+              document={<DetailPDF aboutData={aboutData} imageDetails={imageDetails} />}
+              fileName={`${
+                aboutData?.Title ||
+                aboutData?.["Common Name"] ||
+                commonName ||
+                "nematode-detail"
+              }.pdf`}
             >
               {({ loading }) => (
                 <button className="px-3 py-1.5 bg-[#027FB8] text-white rounded hover:bg-blue-700 transition">
@@ -246,104 +245,81 @@ export default function NematodeDetail({
                     const hasNematodeWord = /\bnematodes?\b/i.test(rawCommon);
                     if (hasNematodeWord) return <span>{rawCommon}</span>;
 
-                    // Common name is a taxon (Genus species OR Genus sp./spp.)
                     const parts = rawCommon.trim().split(/\s+/);
                     if (parts.length === 0) return null;
 
-                    // Genus + sp./spp. → italicize only Genus
                     if (/\bsp\.?\b|\bspp\.?\b/i.test(parts[1] || "")) {
                       return (
                         <>
                           <span className="italic">{parts[0]}</span>
                           {parts[1] ? ` ${parts[1]}` : ""}
-                          {parts.slice(2).length
-                            ? ` ${parts.slice(2).join(" ")}`
-                            : ""}
+                          {parts.slice(2).length ? ` ${parts.slice(2).join(" ")}` : ""}
                         </>
                       );
                     }
 
-                    // Genus + species → italicize both
                     if (parts.length >= 2) {
                       return (
                         <>
                           <span className="italic">{parts[0]}</span>{" "}
                           <span className="italic">{parts[1]}</span>
-                          {parts.slice(2).length
-                            ? ` ${parts.slice(2).join(" ")}`
-                            : ""}
+                          {parts.slice(2).length ? ` ${parts.slice(2).join(" ")}` : ""}
                         </>
                       );
                     }
 
-                    // Single word (Genus) → italicize it
                     return <span className="italic">{parts[0]}</span>;
                   })()}
 
                   {aboutData?.["Scientific Name"] && (
                     <>
                       {" ("}
-                      {
-                        // Scientific name (can be multiple with & or ,)
-                        aboutData["Scientific Name"]
-                          .split(/(&|,)/)
-                          .map((chunk, i, arr) => {
-                            const t = chunk.trim();
-                            if (t === "&" || t === ",") {
-                              return (
-                                <span key={i} className="mx-1">
-                                  {t}
-                                </span>
-                              );
-                            }
-                            if (!t) return null;
+                      {aboutData["Scientific Name"].split(/(&|,)/).map((chunk, i) => {
+                        const t = chunk.trim();
+                        if (t === "&" || t === ",") {
+                          return (
+                            <span key={i} className="mx-1">
+                              {t}
+                            </span>
+                          );
+                        }
+                        if (!t) return null;
 
-                            const w = t.split(/\s+/);
+                        const w = t.split(/\s+/);
 
-                            // Genus + sp./spp. → italicize only Genus
-                            if (/\bsp\.?\b|\bspp\.?\b/i.test(w[1] || "")) {
-                              return (
-                                <span key={i}>
-                                  <span className="italic">{w[0]}</span>
-                                  {w[1] ? ` ${w[1]}` : ""}
-                                  {w.slice(2).length
-                                    ? ` ${w.slice(2).join(" ")}`
-                                    : ""}
-                                </span>
-                              );
-                            }
+                        if (/\bsp\.?\b|\bspp\.?\b/i.test(w[1] || "")) {
+                          return (
+                            <span key={i}>
+                              <span className="italic">{w[0]}</span>
+                              {w[1] ? ` ${w[1]}` : ""}
+                              {w.slice(2).length ? ` ${w.slice(2).join(" ")}` : ""}
+                            </span>
+                          );
+                        }
 
-                            // Genus + species → italicize both
-                            if (w.length >= 2) {
-                              return (
-                                <span key={i}>
-                                  <span className="italic">{w[0]}</span>{" "}
-                                  <span className="italic">{w[1]}</span>
-                                  {w.slice(2).length
-                                    ? ` ${w.slice(2).join(" ")}`
-                                    : ""}
-                                </span>
-                              );
-                            }
+                        if (w.length >= 2) {
+                          return (
+                            <span key={i}>
+                              <span className="italic">{w[0]}</span>{" "}
+                              <span className="italic">{w[1]}</span>
+                              {w.slice(2).length ? ` ${w.slice(2).join(" ")}` : ""}
+                            </span>
+                          );
+                        }
 
-                            // Single word (Genus) → italicize it
-                            return (
-                              <span key={i}>
-                                <span className="italic">{w[0]}</span>
-                              </span>
-                            );
-                          })
-                      }
+                        return (
+                          <span key={i}>
+                            <span className="italic">{w[0]}</span>
+                          </span>
+                        );
+                      })}
                       {")"}
                     </>
                   )}
                 </h2>
 
                 {OVERVIEW_ORDER.filter((k) => aboutData[k]).map((k) => (
-                  <div
-                    key={k}
-                    className="border-b border-slate-200 last:border-0 py-3"
-                  >
+                  <div key={k} className="border-b border-slate-200 last:border-0 py-3">
                     {/* Clickable title */}
                     <button
                       onClick={() => toggle(k)}
@@ -366,40 +342,38 @@ export default function NematodeDetail({
                           formatScientificName(String(aboutData[k]))
                         ) : k === "Why They Matter" ? (
                           <ul className="list-disc pl-5 space-y-1">
-                            {splitIntoSentences(String(aboutData[k])).map(
-                              (line, i) => (
-                                <li key={i}>{line}</li>
-                              )
-                            )}
+                            {splitIntoSentences(String(aboutData[k])).map((line, i) => (
+                              <li key={i}>{line}</li>
+                            ))}
                           </ul>
                         ) : k === "Symptoms" ? (
                           (() => {
                             const val = aboutData[k];
-                            const isObj =
-                              val &&
-                              typeof val === "object" &&
-                              !Array.isArray(val);
+                            const isObj = val && typeof val === "object" && !Array.isArray(val);
+
+                            // --- Images FIRST (right after "Symptoms" title) ---
+                            const imagesTop =
+                              Array.isArray(imageDetails) && imageDetails.length > 0 ? (
+                                <div className="mt-2">
+                                  {/* Plain = no outline/card, rounded images */}
+                                  <ImageGallery imageDetails={imageDetails} variant="plain" />
+                                </div>
+                              ) : null;
+
+                            // --- Then the rest of the symptoms content ---
+                            let symptomsBlock;
                             if (isObj) {
-                              const preferred = [
-                                "Roots",
-                                "Belowground",
-                                "Aboveground",
-                                "Leaves",
-                                "Stems",
-                                "Fruits",
-                              ];
+                              const preferred = ["Roots", "Belowground", "Aboveground", "Leaves", "Stems", "Fruits"];
                               const keys = Object.keys(val || {});
                               const order = [
                                 ...preferred.filter((x) => keys.includes(x)),
                                 ...keys.filter((x) => !preferred.includes(x)),
                               ];
-                              return (
-                                <div className="space-y-3">
+                              symptomsBlock = (
+                                <div className="space-y-3 mt-3">
                                   {order.map((part) => {
                                     const v = val[part];
-                                    const bullets = Array.isArray(v)
-                                      ? v
-                                      : splitToBullets(v);
+                                    const bullets = Array.isArray(v) ? v : splitToBullets(v);
                                     return (
                                       <div key={part}>
                                         <div className="text-xs font-semibold uppercase tracking-wide text-sky-700/90">
@@ -419,46 +393,44 @@ export default function NematodeDetail({
                                   })}
                                 </div>
                               );
+                            } else {
+                              const items = Array.isArray(val) ? val : toArray(val);
+                              symptomsBlock = (
+                                <ul className="list-disc pl-6 space-y-1 mt-3">
+                                  {items.map((it, i) => (
+                                    <li key={i}>{it}</li>
+                                  ))}
+                                </ul>
+                              );
                             }
-                            const items = Array.isArray(val)
-                              ? val
-                              : toArray(val);
+
                             return (
-                              <ul className="list-disc pl-6 space-y-1">
-                                {items.map((it, i) => (
-                                  <li key={i}>{it}</li>
-                                ))}
-                              </ul>
+                              <>
+                                {imagesTop}
+                                {symptomsBlock}
+                              </>
                             );
                           })()
                         ) : k === "Management Options" ? (
                           <ul className="list-disc pl-5 space-y-1">
-                            {(Array.isArray(aboutData[k])
-                              ? aboutData[k]
-                              : toArray(aboutData[k])
-                            ).map((it, i) => (
+                            {(Array.isArray(aboutData[k]) ? aboutData[k] : toArray(aboutData[k])).map((it, i) => (
                               <li key={i}>{it}</li>
                             ))}
                           </ul>
                         ) : k === "Further Information" ? (
                           <ol className="list-decimal pl-5 space-y-2">
-                            {(Array.isArray(aboutData[k])
-                              ? aboutData[k]
-                              : [String(aboutData[k])]
-                            ).map((it, i) => (
+                            {(Array.isArray(aboutData[k]) ? aboutData[k] : [String(aboutData[k])]).map((it, i) => (
                               <li key={i} className="leading-relaxed">
                                 {String(it)}
                               </li>
                             ))}
                           </ol>
                         ) : (
-                          splitIntoSentences(String(aboutData[k])).map(
-                            (line, i) => (
-                              <p key={i} className="mb-1">
-                                {line}
-                              </p>
-                            )
-                          )
+                          splitIntoSentences(String(aboutData[k])).map((line, i) => (
+                            <p key={i} className="mb-1">
+                              {line}
+                            </p>
+                          ))
                         )}
                       </div>
                     )}
@@ -468,14 +440,13 @@ export default function NematodeDetail({
             </section>
           )}
 
-          {/* Images */}
-          <ImageGallery imageDetails={imageDetails} />
+          {/* Removed standalone bottom Images section */}
+          {/* <ImageGallery imageDetails={imageDetails} /> */}
+
           {/* Related taxa */}
           <section className="rounded-3xl bg-white p-6 md:p-8 shadow-sm ring-1 ring-slate-200">
             <div className="flex items-center justify-between gap-2 flex-wrap">
-              <h2 className="text-2xl font-semibold text-slate-900">
-                Related taxa
-              </h2>
+              <h2 className="text-2xl font-semibold text-slate-900">Related taxa</h2>
             </div>
 
             {loading ? (
@@ -507,10 +478,10 @@ export default function NematodeDetail({
 
         {/* Optional modal (kept but not wired above) */}
         {/* <MapPreviewModal
-        isOpen={mapModalOpen}
-        onClose={() => setMapModalOpen(false)}
-        entry={selectedEntry}
-      /> */}
+          isOpen={mapModalOpen}
+          onClose={() => setMapModalOpen(false)}
+          entry={selectedEntry}
+        /> */}
       </div>
     </FadeIn>
   );
