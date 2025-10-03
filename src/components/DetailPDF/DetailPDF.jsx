@@ -13,14 +13,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#1d4ed8", // nice blue
+    color: "#1d4ed8",
     marginBottom: 20,
     textAlign: "center",
   },
   section: {
     marginBottom: 16,
     paddingBottom: 8,
-    borderBottom: "1pt solid #e5e7eb", // light divider
+    borderBottom: "1pt solid #e5e7eb",
   },
   heading: {
     fontSize: 13,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   imageGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 10,
+    // (react-pdf doesn't officially support 'gap', but margins below achieve spacing)
   },
   imageWrapper: {
     marginRight: 10,
@@ -64,10 +64,11 @@ const styles = StyleSheet.create({
 // Helper: split text into sentences
 const splitIntoSentences = (text) => {
   if (!text) return [];
-  return text.split(/\. (?=[A-Z])/).map((s, idx, arr) => 
+  return text.split(/\. (?=[A-Z])/).map((s, idx, arr) =>
     idx < arr.length - 1 ? s.trim() + "." : s.trim()
   );
-}
+};
+
 // Mapping JSON keys → nice section titles
 const SECTION_LABELS = {
   "Scientific Name": "Scientific Name",
@@ -80,10 +81,11 @@ const SECTION_LABELS = {
 };
 
 export default function DetailPDF({
-  aboutData = {},          // ✅ default to {}
-  imageDetails = []        // ✅ default to []
+  aboutData = {},
+  imageDetails = [],
 }) {
-  const safeAbout = (aboutData && typeof aboutData === "object") ? aboutData : {};
+  const safeAbout =
+    aboutData && typeof aboutData === "object" ? aboutData : {};
   const safeImages = Array.isArray(imageDetails)
     ? imageDetails.filter((x) => x && typeof x === "object" && x.path)
     : [];
@@ -94,7 +96,6 @@ export default function DetailPDF({
     return v !== null && v !== undefined && String(v).trim() !== "";
   });
 
-  // Helper: bulletize plain text if splitIntoSentences isn't available
   const toSentences = (val) =>
     typeof splitIntoSentences === "function"
       ? splitIntoSentences(String(val))
@@ -114,35 +115,81 @@ export default function DetailPDF({
         {sectionKeys.map((key) => {
           const val = safeAbout[key];
 
+          // --- Special layout for Symptoms: IMAGES go right under the heading ---
+          if (key === "Symptoms") {
+            const isObj =
+              val && typeof val === "object" && !Array.isArray(val);
+
+            return (
+              <View key={key} style={styles.section}>
+                <Text style={styles.heading}>{SECTION_LABELS[key]}</Text>
+
+                {/* Images directly under the Symptoms heading */}
+                {safeImages.length > 0 && (
+                  <View style={{ marginBottom: 8 }}>
+                    <View style={styles.imageGrid}>
+                      {safeImages.map(({ path, name }, i) => (
+                        <View key={i} style={styles.imageWrapper} wrap={false}>
+                          <Image src={String(path)} style={styles.image} />
+                          {name ? (
+                            <Text style={styles.caption}>{String(name)}</Text>
+                          ) : null}
+                        </View>
+                      ))}
+                    </View>
+                  </View>
+                )}
+
+                {/* Then the symptoms text/content */}
+                {isObj
+                  ? Object.entries(val).map(([subKey, subVal], i) => (
+                      <View key={i} style={{ marginBottom: 6 }}>
+                        <Text
+                          style={{
+                            fontSize: 11,
+                            fontWeight: "bold",
+                            color: "#1d4ed8",
+                          }}
+                        >
+                          {String(subKey)}
+                        </Text>
+                        <Text style={styles.text}>
+                          {String(subVal ?? "—")}
+                        </Text>
+                      </View>
+                    ))
+                  : <Text style={styles.text}>{String(val)}</Text>}
+              </View>
+            );
+          }
+
+          // --- Default rendering for other sections ---
           return (
             <View key={key} style={styles.section}>
               <Text style={styles.heading}>{SECTION_LABELS[key]}</Text>
 
-              {key === "Symptoms" ? (
-                (val && typeof val === "object" && !Array.isArray(val))
-                  ? Object.entries(val).map(([subKey, subVal], i) => (
-                      <View key={i} style={{ marginBottom: 6 }}>
-                        <Text style={{ fontSize: 11, fontWeight: "bold", color: "#1d4ed8" }}>
-                          {String(subKey)}
-                        </Text>
-                        <Text style={styles.text}>{String(subVal ?? "—")}</Text>
-                      </View>
-                    ))
-                  : (
-                    <Text style={styles.text}>{String(val)}</Text>
-                  )
-              ) : key === "Why They Matter" ? (
+              {key === "Why They Matter" ? (
                 toSentences(val).map((line, i) => (
-                  <Text key={i} style={styles.bullet}>• {line}</Text>
+                  <Text key={i} style={styles.bullet}>
+                    • {line}
+                  </Text>
                 ))
               ) : key === "Management Options" ? (
-                (Array.isArray(val) ? val : [val]).filter((x) => x != null).map((line, i) => (
-                  <Text key={i} style={styles.bullet}>• {String(line)}</Text>
-                ))
+                (Array.isArray(val) ? val : [val])
+                  .filter((x) => x != null)
+                  .map((line, i) => (
+                    <Text key={i} style={styles.bullet}>
+                      • {String(line)}
+                    </Text>
+                  ))
               ) : key === "Further Information" ? (
-                (Array.isArray(val) ? val : [val]).filter((x) => x != null).map((line, i) => (
-                  <Text key={i} style={styles.text}>{String(line)}</Text>
-                ))
+                (Array.isArray(val) ? val : [val])
+                  .filter((x) => x != null)
+                  .map((line, i) => (
+                    <Text key={i} style={styles.text}>
+                      {String(line)}
+                    </Text>
+                  ))
               ) : (
                 <Text style={styles.text}>{String(val)}</Text>
               )}
@@ -150,24 +197,8 @@ export default function DetailPDF({
           );
         })}
 
-        {/* Images */}
-        {safeImages.length > 0 && (
-          <View style={styles.section}>
-            <Text style={styles.heading}>Images</Text>
-            <View style={styles.imageGrid}>
-              {safeImages.map(({ path, name }, i) => (
-                <View key={i} style={styles.imageWrapper} wrap={false}>
-                  {/* Guard the src so React-PDF never sees undefined */}
-                  <Image src={String(path)} style={styles.image} />
-                  <Text style={styles.caption}>{String(name ?? "")}</Text>
-                </View>
-              ))}
-            </View>
-          </View>
-        )}
+        {/* Removed the standalone Images section */}
       </Page>
     </Document>
   );
 }
-
-
