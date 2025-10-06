@@ -2,7 +2,9 @@ import React from "react";
 import FadeIn from "../../components/FadeIn/FadeIn";
 // Put your image at: src/assets/about-rln.jpg
 // import aboutImg from "../../assets/NA PPN website photos/Root-lesion nematodes/Above-ground symptoms of wheat caused by RLN (collecty by Kirsty Owen).jpg";
-import aboutImg from "../../assets/images2/Root-lesion nematodes/Above-ground symptoms of wheat caused by RLN (collecty by Kirsty Owen).jpg"
+//import aboutImg from "../../assets/images2/Root-lesion nematodes/Above-ground symptoms of wheat caused by RLN (collecty by Kirsty Owen).jpg"
+// import aboutImg from '../../assets/images2/Root-kno'
+import aboutImg from '../../assets/images/Root-knot nematodes/Aboveground symptoms of root-knot nematode damage on pawpaw (collected by Yujuan Jady Li).JPG'
 export default function AboutUs({
   // optional override; prefer leaving this empty so we use the hashed asset
   imageUrl,
@@ -48,7 +50,8 @@ export default function AboutUs({
             {/* Caption */}
             <div className="absolute inset-x-0 bottom-0 flex justify-center px-4 pb-4">
               <div className="inline-block max-w-[92%] md:max-w-[80%] bg-black/55 text-white text-xs md:text-sm leading-snug px-3 py-2 rounded-md backdrop-blur-[2px]">
-                Above-ground symptoms of wheat caused by RLN (collecty by Kirsty Owen)
+               
+                Aboveground symptoms of root-knot nematode damage on pawpaw (collected by Yujuan Jady Li)
               </div>
             </div>
           </div>
