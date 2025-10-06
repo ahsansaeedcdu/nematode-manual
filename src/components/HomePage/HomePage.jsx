@@ -3,6 +3,12 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import FadeIn from "../FadeIn/FadeIn";
+import wheatToleranceImg from "../../assets/images2/additional/Intolerant vs tolerant wheat to nematodes(collected by Jason Sheedy).JPG";
+import pineappleMulchImg from "../../assets/images2/additional/Mulching pineapple residues to enrich soil (collected by Yujuan Jady Li).jpg";
+import pasteuriaImg from "../../assets/images2/additional/Pasteuria bacteria killing root-lesion nematode in the field (collected by Yujuan Jady Li).png";
+import fumigantImg from "../../assets/images2/additional/Applying fumigants before planting (collected by Yujuan Jady Li).jpg";
+import sweetpotatoNematicideImg from "../../assets/images2/additional/Nematicide application in sweetpotato field (collected by Yujuan Jady Li).jpg";
+
 /* --------------------------- Static category model --------------------------- */
 const CATEGORIES = [
   {
@@ -417,6 +423,7 @@ export default function NematodeOverview({
                               text-sm px-2 py-1 rounded-md transition"
                     >
                       4.2 Crop Rotation and Cultural Practices
+
                     </a>
                     <a
                       href="#biological"
@@ -894,118 +901,179 @@ This section highlights the main PPNs affecting crops in Northern Australia, the
                   </li>
                 </ul>
               )}
-            </div>
+              {/* 4.2 Crop Rotation and Cultural Practices */}
+                <div id="rotation" className="mt-4">
+                  <button
+                    onClick={() => toggle("rotation")}
+                    className="flex items-center justify-between w-full text-left
+                            bg-slate-50 hover:bg-slate-100 border border-slate-200
+                            rounded-lg shadow-sm p-4 transition
+                            text-lg md:text-xl font-semibold text-[#038764]"
+                  >
+                    <span>4.2 Crop Rotation and Cultural Practices</span>
+                    {open.rotation ? (
+                      <ChevronDown className="w-5 h-5 text-slate-600" />
+                    ) : (
+                      <ChevronRight className="w-5 h-5 text-slate-600" />
+                    )}
+                  </button>
 
-            {/* 4.2 Crop Rotation and Cultural Practices */}
-            <div id="rotation" className="mt-4">
-              <button
-                onClick={() => toggle("rotation")}
-                className="flex items-center justify-between w-full text-left
-                        bg-slate-50 hover:bg-slate-100 border border-slate-200
-                        rounded-lg shadow-sm p-4 transition
-                        text-lg md:text-xl font-semibold text-[#038764]"
-              >
-                <span>4.2 Crop Rotation and Cultural Practices</span>
-                {open.rotation ? (
-                  <ChevronDown className="w-5 h-5 text-slate-600" />
-                ) : (
-                  <ChevronRight className="w-5 h-5 text-slate-600" />
-                )}
-              </button>
-              {open.rotation && (
-                <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
-                  <li>
-                    Rotate crops with non-host or poor-host plants to disrupt
-                    nematode life cycles.
-                  </li>
-                  <li>
-                    Use cover crops and maintain soil organic matter to improve
-                    soil health and support natural nematode antagonists.
-                  </li>
-                  <li>
-                    Adjust planting times, solarise soil, or use bare fallowing
-                    when practical (tropical conditions may limit some
-                    practices).
-                  </li>
-                  <li>
-                    Reduce plant stress by maintaining good nutrition and
-                    moisture. Healthy plants are less affected by nematodes.
-                  </li>
-                </ul>
-              )}
-            </div>
+                  {open.rotation && (
+                    <>
+                      <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
+                        <li>Rotate crops with non-host or poor-host plants to disrupt nematode life cycles.</li>
+                        <li>Use cover crops and maintain soil organic matter to improve soil health and support natural nematode antagonists.</li>
+                        <li>Adjust planting times, solarise soil, or use bare fallowing when practical (tropical conditions may limit some practices).</li>
+                        <li>Reduce plant stress by maintaining good nutrition and moisture. Healthy plants are less affected by nematodes.</li>
+                      </ul>
+                      {/* Side-by-side images with same baseline + responsive heights */}
+                      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Image 1: Wheat tolerance */}
+                        <figure className="flex flex-col">
+                          {/* Fixed-height, responsive image box so both bottoms align */}
+                          <div className="relative w-full h-[280px] sm:h-[320px] md:h-[360px] lg:h-[420px] rounded-xl border border-slate-200 shadow-md overflow-hidden bg-white">
+                            <img
+                              src={wheatToleranceImg}
+                              alt="Intolerant vs tolerant wheat to nematodes (photo: Jason Sheedy)"
+                              loading="lazy"
+                              className="absolute inset-0 w-full h-full object-contain"
+                            />
+                          </div>
+                          {/* Give captions a minimum height so different line wraps don't shift baselines */}
+                          <figcaption className="text-xs text-slate-500 mt-2 text-center min-h-[28px] md:min-h-[32px]">
+                            Intolerant vs tolerant wheat to nematodes (Collected by Jason Sheedy).
+                          </figcaption>
+                        </figure>
 
-            {/* 4.3 Biological Control */}
-            <div id="biological" className="mt-4">
-              <button
-                onClick={() => toggle("biological")}
-                className="flex items-center justify-between w-full text-left
-                        bg-slate-50 hover:bg-slate-100 border border-slate-200
-                        rounded-lg shadow-sm p-4 transition
-                        text-lg md:text-xl font-semibold text-[#038764]"
-              >
-                <span>4.3 Biological Control</span>
-                {open.biological ? (
-                  <ChevronDown className="w-5 h-5 text-slate-600" />
-                ) : (
-                  <ChevronRight className="w-5 h-5 text-slate-600" />
-                )}
-              </button>
-              {open.biological && (
-                <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
-                  <li>
-                    Encourage beneficial fungi, predatory mites, and bacteria
-                    that naturally suppress nematodes.
-                  </li>
-                  <li>
-                    Support these organisms with organic amendments, compost and
-                    healthy soils.
-                  </li>
-                  <li>
-                    Effectiveness varies by region and crop — combine with other
-                    strategies and monitor results.
-                  </li>
-                </ul>
-              )}
-            </div>
+                        {/* Image 2: Pineapple mulching */}
+                        <figure className="flex flex-col">
+                          <div className="relative w-full h-[280px] sm:h-[320px] md:h-[360px] lg:h-[420px] rounded-xl border border-slate-200 shadow-md overflow-hidden bg-white">
+                            <img
+                              src={pineappleMulchImg}
+                              alt="Mulching pineapple residues to enrich soil (collected by Yujuan Jady Li)"
+                              loading="lazy"
+                              className="absolute inset-0 w-full h-full object-contain"
+                            />
+                          </div>
+                          <figcaption className="text-xs text-slate-500 mt-2 text-center min-h-[28px] md:min-h-[32px]">
+                            Mulching pineapple residues to enrich soil (Collected by Yujuan Jady Li).
+                          </figcaption>
+                        </figure>
+                      </div>
+
+                    </>
+                  )}
+                </div>
+
+            </div>     
+        
+                    {/* 4.3 Biological Control */}
+        <div id="biological" className="mt-4">
+          <button
+            onClick={() => toggle("biological")}
+            className="flex items-center justify-between w-full text-left
+                    bg-slate-50 hover:bg-slate-100 border border-slate-200
+                    rounded-lg shadow-sm p-4 transition
+                    text-lg md:text-xl font-semibold text-[#038764]"
+          >
+            <span>4.3 Biological Control</span>
+            {open.biological ? (
+              <ChevronDown className="w-5 h-5 text-slate-600" />
+            ) : (
+              <ChevronRight className="w-5 h-5 text-slate-600" />
+            )}
+          </button>
+
+          {open.biological && (
+            <>
+              <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
+                <li>Encourage beneficial fungi, predatory mites, and bacteria that naturally suppress nematodes.</li>
+                <li>Support these organisms with organic amendments, compost and healthy soils.</li>
+                <li>Effectiveness varies by region and crop — combine with other strategies and monitor results.</li>
+              </ul>
+
+              {/* Image: Pasteuria */}
+              <figure className="mt-4 flex flex-col">
+                <div className="relative w-full h-[280px] sm:h-[320px] md:h-[360px] lg:h-[420px] rounded-xl border border-slate-200 shadow-md overflow-hidden bg-white">
+                  <img
+                    src={pasteuriaImg}
+                    alt="Pasteuria bacteria killing root-lesion nematode in the field (Photo: Yujuan Jady Li)"
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-contain"
+                  />
+                </div>
+                <figcaption className="text-xs text-slate-500 mt-2 text-center min-h-[28px] md:min-h-[32px]">
+                  Pasteuria bacteria killing root-lesion nematode in the field (Photo: Yujuan Jady Li).
+                </figcaption>
+              </figure>
+            </>
+          )}
+        </div>
+
 
             {/* 4.4 Chemical Control */}
-            <div id="chemical" className="mt-4">
-              <button
-                onClick={() => toggle("chemical")}
-                className="flex items-center justify-between w-full text-left
-                        bg-slate-50 hover:bg-slate-100 border border-slate-200
-                        rounded-lg shadow-sm p-4 transition
-                        text-lg md:text-xl font-semibold text-[#038764]"
-              >
-                <span>4.4 Chemical Control: Safe Use and Limitations</span>
-                {open.chemical ? (
-                  <ChevronDown className="w-5 h-5 text-slate-600" />
-                ) : (
-                  <ChevronRight className="w-5 h-5 text-slate-600" />
-                )}
-              </button>
-              {open.chemical && (
-                <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
-                  <li>
-                    Use nematicides only when necessary, following label
-                    instructions and safety guidelines.
-                  </li>
-                  <li>
-                    Be aware of environmental risks and potential development of
-                    resistance.
-                  </li>
-                  <li>
-                    Chemical control can provide immediate relief, but is less
-                    sustainable long-term, particularly in tropical soils.
-                  </li>
-                  <li>
-                    Always combine chemical control with cultural and biological
-                    strategies for best results.
-                  </li>
-                </ul>
-              )}
-            </div>
+            {/* 4.4 Chemical Control: Safe Use and Limitations */}
+<div id="chemical" className="mt-4">
+  <button
+    onClick={() => toggle("chemical")}
+    className="flex items-center justify-between w-full text-left
+            bg-slate-50 hover:bg-slate-100 border border-slate-200
+            rounded-lg shadow-sm p-4 transition
+            text-lg md:text-xl font-semibold text-[#038764]"
+  >
+    <span>4.4 Chemical Control: Safe Use and Limitations</span>
+    {open.chemical ? (
+      <ChevronDown className="w-5 h-5 text-slate-600" />
+    ) : (
+      <ChevronRight className="w-5 h-5 text-slate-600" />
+    )}
+  </button>
+
+  {open.chemical && (
+    <>
+      <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
+        <li>Use nematicides only when necessary, following label instructions and safety guidelines.</li>
+        <li>Be aware of environmental risks and potential development of resistance.</li>
+        <li>Chemical control can provide immediate relief, but is less sustainable long-term, particularly in tropical soils.</li>
+        <li>Always combine chemical control with cultural and biological strategies for best results.</li>
+      </ul>
+
+      {/* Two images: equal baseline and responsive */}
+      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Image 1: Applying fumigants */}
+        <figure className="flex flex-col">
+          <div className="relative w-full h-[280px] sm:h-[320px] md:h-[360px] lg:h-[420px] rounded-xl border border-slate-200 shadow-md overflow-hidden bg-white">
+            <img
+              src={fumigantImg}
+              alt="Applying fumigants before planting (Photo: Yujuan Jady Li)"
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-contain"
+            />
+          </div>
+          <figcaption className="text-xs text-slate-500 mt-2 text-center min-h-[28px] md:min-h-[32px]">
+            Applying fumigants before planting (Photo: Yujuan Jady Li).
+          </figcaption>
+        </figure>
+
+        {/* Image 2: Nematicide in sweetpotato field */}
+        <figure className="flex flex-col">
+          <div className="relative w-full h-[280px] sm:h-[320px] md:h-[360px] lg:h-[420px] rounded-xl border border-slate-200 shadow-md overflow-hidden bg-white">
+            <img
+              src={sweetpotatoNematicideImg}
+              alt="Nematicide application in sweetpotato field (Photo: Yujuan Jady Li)"
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-contain"
+            />
+          </div>
+          <figcaption className="text-xs text-slate-500 mt-2 text-center min-h-[28px] md:min-h-[32px]">
+            Nematicide application in sweetpotato field (Photo: Yujuan Jady Li).
+          </figcaption>
+        </figure>
+      </div>
+    </>
+  )}
+</div>
+
           </section>
           <section
             id="services"
