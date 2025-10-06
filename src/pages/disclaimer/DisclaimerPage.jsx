@@ -8,11 +8,7 @@ export default function DisclaimerPage() {
         <h1 className="text-4xl font-bold text-[#027fb8]">Disclaimer</h1>
         <div className="mt-5 text-slate-900 leading-7 space-y-4">
           <p>
-            The information provided on this website is intended for general educational and awareness purposes only.
-            While every effort has been made to ensure accuracy, Charles Darwin University accepts no responsibility
-            for any loss or damage arising from reliance on the information. This website does not replace professional
-            advice. Users should seek specific guidance from qualified experts for nematode diagnosis and management
-            decisions.
+          This booklet is provided for general information purposes only. While care has been taken to ensure the accuracy of the information at the time of publication, no guarantee is given that it is complete, current, or applicable to all situations. Readers are encouraged to seek independent professional advice before applying any recommendations, and to confirm current requirements with appropriate biosecurity and agricultural authorities. <br/>The authors, contributors, and publishers accept no responsibility or liability for any loss, damage, or other consequences that may result from the use of, or reliance on, the information contained in this booklet whether in English or any other language.
           </p>
         </div>
       </section>
