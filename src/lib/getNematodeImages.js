@@ -1,6 +1,6 @@
 
 const modules = import.meta.glob(
-  "/src/assets/images/**/*.{png,jpg,jpeg,JPG,JPEG,webp,svg}",
+  "/src/assets/images2/**/*.{png,jpg,jpeg,JPG,JPEG,webp,svg}",
   { eager: true }
 );
 
@@ -12,7 +12,7 @@ export function getImagesForNematode(commonName) {
   // Return an empty array if no name is provided.
   if (!commonName) return [];
   const folderName = commonName.trim();
-  const prefix = `/src/assets/images/${folderName}/`;
+  const prefix = `/src/assets/images2/${folderName}/`;
   const items = Object.entries(files)
 
     .filter(([path]) => path.toLowerCase().startsWith(prefix.toLowerCase()))

@@ -1,8 +1,8 @@
 import React from "react";
 import FadeIn from "../../components/FadeIn/FadeIn";
 // Put your image at: src/assets/about-rln.jpg
-import aboutImg from "../../assets/NA PPN website photos/Root-lesion nematodes/Above-ground symptoms of wheat caused by RLN (collecty by Kirsty Owen).jpg";
-
+// import aboutImg from "../../assets/NA PPN website photos/Root-lesion nematodes/Above-ground symptoms of wheat caused by RLN (collecty by Kirsty Owen).jpg";
+import aboutImg from "../../assets/images2/Root-lesion nematodes/Above-ground symptoms of wheat caused by RLN (collecty by Kirsty Owen).jpg"
 export default function AboutUs({
   // optional override; prefer leaving this empty so we use the hashed asset
   imageUrl,
