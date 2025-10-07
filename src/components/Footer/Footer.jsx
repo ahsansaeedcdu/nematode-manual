@@ -99,7 +99,7 @@ export default function Footer() {
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <div className="flex items-center">
               <img
-                src="src/assets/CDU_RINA_CMYK_FINAL.jpg"
+                src="/CDU_RINA_CMYK_FINAL.jpg"
                 alt="Charles Darwin University | RINA"
                 className="h-10 w-auto object-contain"
                 loading="lazy"
