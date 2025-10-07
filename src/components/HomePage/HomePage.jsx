@@ -199,6 +199,11 @@ export default function NematodeOverview({
     chemical: false,
     sampling: false,
     labs: false,
+    where: false,
+    when: false,
+    how: false,
+    handling: false,
+    include: false,
   });
   const toggle = (key) => {
     setOpen((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -244,22 +249,22 @@ export default function NematodeOverview({
                   <div className="ml-3 mt-1 border-l border-slate-200 pl-3 space-y-1">
                     <a
                       href="#what-are-nematodes"
-                      className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 
-                              text-sm px-2 py-1 rounded-md transition"
+                      className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
+                                        text-xs px-2 py-1 rounded-md transition"
                     >
                       1.1 What are nematodes
                     </a>
                     <a
                       href="#biosecurity"
-                      className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 
-                              text-sm px-2 py-1 rounded-md transition"
+                      className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
+                                        text-xs px-2 py-1 rounded-md transition"
                     >
                       1.2 Why biosecurity matters
                     </a>
                     <a
                       href="#agriculture"
-                      className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 
-                              text-sm px-2 py-1 rounded-md transition"
+                      className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
+                                        text-xs px-2 py-1 rounded-md transition"
                     >
                       1.3 Agriculture in Northern Australia
                     </a>
@@ -369,22 +374,22 @@ export default function NematodeOverview({
                   <div className="ml-3 mt-1 border-l border-slate-200 pl-3 space-y-1">
                     <a
                       href="#sanitize"
-                      className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 
-                              text-sm px-2 py-1 rounded-md transition"
+                      className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
+                                        text-xs px-2 py-1 rounded-md transition"
                     >
                       3.1 Sanitize Equipment and Tools
                     </a>
                     <a
                       href="#planting"
-                      className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 
-                              text-sm px-2 py-1 rounded-md transition"
+                      className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
+                                        text-xs px-2 py-1 rounded-md transition"
                     >
                       3.2 Manage Planting Material and Soil Movement
                     </a>
                     <a
                       href="#quarantine"
-                      className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 
-                              text-sm px-2 py-1 rounded-md transition"
+                      className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
+                                        text-xs px-2 py-1 rounded-md transition"
                     >
                       3.3 Quarantine New Plants
                     </a>
@@ -412,30 +417,30 @@ export default function NematodeOverview({
                   <div className="ml-3 mt-1 border-l border-slate-200 pl-3 space-y-1">
                     <a
                       href="#monitoring"
-                      className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 
-                              text-sm px-2 py-1 rounded-md transition"
+                      className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
+                                        text-xs px-2 py-1 rounded-md transition"
                     >
                       4.1 Monitoring and Record-Keeping
                     </a>
                     <a
                       href="#rotation"
-                      className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 
-                              text-sm px-2 py-1 rounded-md transition"
+                      className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
+                                        text-xs px-2 py-1 rounded-md transition"
                     >
                       4.2 Crop Rotation and Cultural Practices
 
                     </a>
                     <a
                       href="#biological"
-                      className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 
-                              text-sm px-2 py-1 rounded-md transition"
+                      className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
+                                        text-xs px-2 py-1 rounded-md transition"
                     >
                       4.3 Biological Control
                     </a>
                     <a
                       href="#chemical"
-                      className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 
-                              text-sm px-2 py-1 rounded-md transition"
+                      className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
+                                        text-xs px-2 py-1 rounded-md transition"
                     >
                       4.4 Chemical Control: Safe Use and Limitations
                     </a>
@@ -460,16 +465,39 @@ export default function NematodeOverview({
                 {sidebarOpen.section5 && (
                   <div className="ml-3 mt-1 border-l border-slate-200 pl-3 space-y-1">
                     <a
-                      href="#sampling"
-                      className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 text-sm px-2 py-1 rounded-md transition"
+                      href="#where"
+                      className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
+                                        text-xs px-2 py-1 rounded-md transition"
                     >
-                      5.1 Sampling Methods
+                      5.1 Where to Send Samples
                     </a>
                     <a
-                      href="#labs"
-                      className="block text-slate-600 hover:text-blue-700 hover:bg-blue-50 text-sm px-2 py-1 rounded-md transition"
+                      href="#when"
+                      className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
+                                        text-xs px-2 py-1 rounded-md transition"
                     >
-                      5.2 State Government Diagnostic Laboratories
+                      5.2 When to Collect Samples
+                    </a>
+                    <a
+                      href="#how"
+                      className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
+                                        text-xs px-2 py-1 rounded-md transition"
+                    >
+                      5.3 Where to Send Samples
+                    </a>
+                    <a
+                      href="#handling"
+                      className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
+                                        text-xs px-2 py-1 rounded-md transition"
+                    >
+                      5.4 When to Collect Samples
+                    </a>
+                    <a
+                      href="#include"
+                      className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
+                                        text-xs px-2 py-1 rounded-md transition"
+                    >
+                      5.5 Where to Send Samples
                     </a>
                   </div>
                 )}
@@ -752,7 +780,8 @@ This section highlights the main PPNs affecting crops in Northern Australia, the
             </h2>
             <p className="text-slate-700 leading-relaxed mb-4">
               Preventing nematodes from entering or moving within your farm is
-              the first line of defence. Key steps include:
+              the first line of defence.
+              Key steps include:
             </p>
 
             {/* 3.1 Sanitize Equipment and Tools */}
@@ -774,16 +803,13 @@ This section highlights the main PPNs affecting crops in Northern Australia, the
               {open.sanitize && (
                 <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
                   <li>
-                    Clean machinery, tools, and footwear before moving between
-                    fields or properties.
+                    Remove soil and plant debris from machinery, tools, and footwear before moving between fields.
                   </li>
                   <li>
-                    Even small amounts of soil or plant debris can carry
-                    nematodes.
+                    Pay special attention to tyres, treads, blades, and boots.
                   </li>
                   <li>
-                    Pay special attention to soil that may stick to tyres,
-                    treads, blades, or boots.
+                    Where appropriate, use chemical sanitisers (e.g., quaternary ammonia, bleach) and follow instructions carefully.
                   </li>
                 </ul>
               )}
@@ -808,16 +834,13 @@ This section highlights the main PPNs affecting crops in Northern Australia, the
               {open.planting && (
                 <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
                   <li>
-                    Only use certified nematode-free seeds, seedlings, and
-                    transplants.
+                    Use certified nematode-free seeds, seedlings, and transplants.
                   </li>
                   <li>
-                    Avoid moving soil, compost, mulch, or plant material from
-                    known infested areas.
+                    Avoid moving soil, compost, mulch, or plant material from known infested areas.
                   </li>
                   <li>
-                    If soil must be moved, ensure it is tested and treated where
-                    possible.
+                    Test and treat soil if movement is unavoidable.
                   </li>
                 </ul>
               )}
@@ -842,16 +865,13 @@ This section highlights the main PPNs affecting crops in Northern Australia, the
               {open.quarantine && (
                 <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
                   <li>
-                    Isolate newly purchased or sourced plants for observation
-                    before planting.
+                    Isolate newly sourced plants before planting.
                   </li>
                   <li>
-                    Monitor regularly for early signs of nematode infection,
-                    such as stunted growth, yellowing, or poor root development.
+                    Monitor for early signs of nematode infection (stunting, yellowing, poor roots).
                   </li>
                   <li>
-                    If any symptoms appear, contact local biosecurity or
-                    extension services before introducing plants to other areas.
+                    Seek advice from local biosecurity or extension services if symptoms appear.
                   </li>
                 </ul>
               )}
@@ -895,10 +915,10 @@ This section highlights the main PPNs affecting crops in Northern Australia, the
                     Track nematode levels, crop rotations, and treatments to
                     support better management decisions.
                   </li>
-                  <li>
+                  {/* <li>
                     Early detection allows for targeted, lower-cost control and
                     helps prevent major losses.
-                  </li>
+                  </li> */}
                 </ul>
               )}
               {/* 4.2 Crop Rotation and Cultural Practices */}
@@ -922,9 +942,9 @@ This section highlights the main PPNs affecting crops in Northern Australia, the
                     <>
                       <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
                         <li>Rotate crops with non-host or poor-host plants to disrupt nematode life cycles.</li>
-                        <li>Use cover crops and maintain soil organic matter to improve soil health and support natural nematode antagonists.</li>
-                        <li>Adjust planting times, solarise soil, or use bare fallowing when practical (tropical conditions may limit some practices).</li>
-                        <li>Reduce plant stress by maintaining good nutrition and moisture. Healthy plants are less affected by nematodes.</li>
+                        <li>Use cover crops and maintain soil organic matter to support beneficial organisms.</li>
+                        <li>Adjust planting times, solarise soil, or bare fallow when practical.</li>
+                        <li>Maintain plant health through good nutrition and moisture.</li>
                       </ul>
                       {/* Side-by-side images with same baseline + responsive heights */}
                       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1031,12 +1051,71 @@ This section highlights the main PPNs affecting crops in Northern Australia, the
 
   {open.chemical && (
     <>
-      <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
-        <li>Use nematicides only when necessary, following label instructions and safety guidelines.</li>
-        <li>Be aware of environmental risks and potential development of resistance.</li>
-        <li>Chemical control can provide immediate relief, but is less sustainable long-term, particularly in tropical soils.</li>
-        <li>Always combine chemical control with cultural and biological strategies for best results.</li>
+      <div className="mt-2 text-slate-700 space-y-3">
+  <p className="font-medium">
+    Chemical control is sometimes necessary and nematicides come in two main types:
+  </p>
+
+  <ol className="list-decimal pl-6 space-y-3">
+    <li>
+      <div className="font-semibold">Fumigants</div>
+      <p className="text-sm italic">
+        (e.g., 1,3-D, metham sodium, chloropicrin)
+      </p>
+      <p className="mt-1">
+        Act quickly by producing gases that diffuse through the soil.
+      </p>
+      <ul className="list-disc pl-6 space-y-1 mt-1">
+        <li>
+          <span className="font-semibold">Advantages:</span> fast, broad-spectrum control.
+        </li>
+        <li>
+          <span className="font-semibold">Disadvantages:</span> hazardous, costly, require careful soil preparation and sealing, and reduce beneficial soil organisms.
+        </li>
       </ul>
+    </li>
+
+    <li>
+      <div className="font-semibold">Non-fumigants</div>
+      <p className="text-sm italic">
+        (e.g., fluensulphone <span className="not-italic">(Nimitz®)</span>, fluopyram <span className="not-italic">(Indemnify®)</span>, fluazaindolizine <span className="not-italic">(Salibro®)</span>)
+      </p>
+      <p className="mt-1">
+        Relatively safer, easier to handle, and with less impact on beneficial soil organisms.
+        They reduce nematode reproduction and mobility but generally act more slowly.
+      </p>
+    </li>
+  </ol>
+
+  <ul className="list-disc pl-6 space-y-1">
+    <li>Use nematicides only when necessary, following label instructions and safety guidelines.</li>
+    <li>Be aware of environmental risks and potential development of resistance.</li>
+    <li>Chemical control can provide immediate relief but is less sustainable long-term, particularly in tropical soils.</li>
+    <li>Always combine chemical control with cultural and biological strategies for sustainable management.</li>
+    <li>Many fumigants may be phased out in the future; integrated management programs are essential for long-term control.</li>
+  </ul>
+
+  {/* Further Information */}
+  <div className="mt-3">
+    <div className="font-semibold text-slate-900 mb-1">Further Information</div>
+    <ul className="list-disc pl-6 space-y-1">
+      <li>
+        Desaeger JA, Wram C, Zasada I (2020). <span className="italic">New reduced-risk agricultural nematicides: Rationale and review.</span> <span className="italic">Journal of Nematology</span> 52, 1–16.
+      </li>
+      <li>
+        Norris CE, Congreves KA (2018). <span className="italic">Alternative management practices improve soil health indices in intensive vegetable cropping systems.</span> <span className="italic">Frontiers in Environmental Science</span> 8, Article 50, 1–18.
+      </li>
+      <li>
+        Stirling GR (2023). <span className="italic">Nematode management.</span> In: Stirling GR (ed) <span className="italic">Plant and soil nematodes: friend and foe.</span> APPsNet.{" "}
+        <a href="https://www.appsnet.org/nematodes" target="_blank" rel="noreferrer" className="text-blue-700 underline">
+          https://www.appsnet.org/nematodes
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
 
       {/* Two images: equal baseline and responsive */}
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1076,78 +1155,253 @@ This section highlights the main PPNs affecting crops in Northern Australia, the
 
           </section>
           <section
-            id="services"
-            className="bg-white rounded-2xl shadow p-5 md:p-7 mt-6"
-          >
-            <h2 className="text-xl md:text-2xl font-semibold text-slate-800 mb-2">
-              5. Services for Growers
-            </h2>
-            <p className="text-slate-700 leading-relaxed mb-4">
-              Effective nematode management begins with accurate diagnosis and
-              tailored strategies. The following services and resources are
-              available to support growers:
-            </p>
+  id="services"
+  className="bg-white rounded-2xl shadow p-5 md:p-7 mt-6"
+>
+  <h2 className="text-xl md:text-2xl font-semibold text-slate-800 mb-2">
+    5. Diagnostic Services
+  </h2>
+  <p className="text-slate-700 leading-relaxed mb-4">
+    Effective nematode management and research depend on accurate diagnosis.
+    Correct sampling, handling, and submission of soil and plant material are
+    critical to obtain reliable results.
+  </p>
 
-            {/* 5.1 Sampling Methods */}
-            <div className="mt-4" id="sampling">
-              <button
-                onClick={() => toggle("sampling")}
-                className="flex items-center justify-between w-full text-left
-                        bg-slate-50 hover:bg-slate-100 border border-slate-200
-                        rounded-lg shadow-sm p-4 transition
-                        text-lg md:text-xl font-semibold text-[#038764]"
-              >
-                <span>5.1 Sampling Methods</span>
-                {open.sampling ? (
-                  <ChevronDown className="w-5 h-5 text-slate-600" />
-                ) : (
-                  <ChevronRight className="w-5 h-5 text-slate-600" />
-                )}
-              </button>
-              {open.sampling && (
-                <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
-                  <li>
-                    Correct soil and root sampling is essential for reliable
-                    nematode detection.
-                  </li>
-                  <li>
-                    Follow recommended guidelines (e.g. sample from the root
-                    zone, include fine roots, keep samples cool, and submit
-                    promptly).
-                  </li>
-                  <li>
-                    Early detection allows for timely and cost-effective
-                    management.
-                  </li>
-                </ul>
-              )}
-            </div>
+  {/* 5.1 Where to Send Samples */}
+  <div className="mt-4" id="where">
+    <button
+      onClick={() => toggle("where")}
+      className="flex items-center justify-between w-full text-left
+                 bg-slate-50 hover:bg-slate-100 border border-slate-200
+                 rounded-lg shadow-sm p-4 transition
+                 text-lg md:text-xl font-semibold text-[#038764]"
+    >
+      <span>5.1 Where to Send Samples</span>
+      {open.where ? (
+        <ChevronDown className="w-5 h-5 text-slate-600" />
+      ) : (
+        <ChevronRight className="w-5 h-5 text-slate-600" />
+      )}
+    </button>
 
-            {/* 5.2 State Government Diagnostic Laboratories */}
-            <div className="mt-4" id="labs">
-              <button
-                onClick={() => toggle("labs")}
-                className="flex items-center justify-between w-full text-left
-                        bg-slate-50 hover:bg-slate-100 border border-slate-200
-                        rounded-lg shadow-sm p-4 transition
-                        text-lg md:text-xl font-semibold text-[#038764]"
+    {open.where && (
+      <div className="mt-2 space-y-4 text-slate-700">
+        {/* NT */}
+        <div>
+          <div className="font-semibold text-slate-900">Northern Territory (NT)</div>
+          <ul className="list-disc pl-6 space-y-1">
+            <li>Northern Territory Department of Agriculture and Fisheries</li>
+            <li>Combined Science Services Building, 29 Makagon Road, Berrimah NT</li>
+            <li>Plant Pathology Diagnostic Laboratory</li>
+            <li>
+              Email:{" "}
+              <a
+                href="mailto:Plant.Pathology@nt.gov.au"
+                className="text-blue-700 underline"
               >
-                <span>5.2 State Government Diagnostic Laboratories</span>
-                {open.labs ? (
-                  <ChevronDown className="w-5 h-5 text-slate-600" />
-                ) : (
-                  <ChevronRight className="w-5 h-5 text-slate-600" />
-                )}
-              </button>
-              {open.labs && (
-                <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
-                  <li>Northern Territory (NT):</li>
-                  <li>Queensland (QLD):</li>
-                  <li>Western Australia (WA):</li>
-                </ul>
-              )}
-            </div>
-          </section>
+                Plant.Pathology@nt.gov.au
+              </a>
+            </li>
+            <li>Phone: (08) 8999 2218</li>
+          </ul>
+        </div>
+
+        {/* QLD */}
+        <div>
+          <div className="font-semibold text-slate-900">Queensland (QLD)</div>
+          <ul className="list-disc pl-6 space-y-1">
+            <li>
+              Nematology, Department of Primary Industries, Ecosciences Precinct,
+              B3 Joe Baker Street, Dutton Park, QLD 4102
+            </li>
+            <li>
+              or Grow Help &mdash; Attn: Grow Help Australia, Department of Primary
+              Industries, Ecosciences Precinct, B3 Joe Baker Street, Dutton Park QLD 4102
+            </li>
+            <li>
+              Website:{" "}
+              <a
+                href="https://www.business.qld.gov.au/industries/farms-fishing-forestry/agriculture/crops/test/grow-help-australia"
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-700 underline"
+              >
+                business.qld.gov.au &rsaquo; Grow Help Australia
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        {/* WA */}
+        <div>
+          <div className="font-semibold text-slate-900">Western Australia (WA)</div>
+          <ul className="list-disc pl-6 space-y-1">
+            <li>
+              Department of Primary Industries and Regional Development (DPIRD)
+            </li>
+            <li>
+              Diagnostics and Laboratory Services (DDLS), 3 Baron-Hay Court, South Perth WA 6151
+            </li>
+            <li>
+              Email:{" "}
+              <a href="mailto:DDLS@dpird.wa.gov.au" className="text-blue-700 underline">
+                DDLS@dpird.wa.gov.au
+              </a>
+            </li>
+            <li>
+              Website:{" "}
+              <a
+                href="https://www.dpird.wa.gov.au/businesses/biosecurity/diagnostics-and-laboratory-services/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-700 underline"
+              >
+                dpird.wa.gov.au &rsaquo; Diagnostics and Laboratory Services
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <p className="text-sm text-slate-600">
+          Some interstate or commercial laboratories may provide nematode testing as well.
+          Always confirm the laboratory has qualified nematologists and check any specific
+          sampling requirements or submission forms before sending.
+        </p>
+      </div>
+    )}
+  </div>
+
+  {/* 5.2 When to Collect Samples */}
+  <div className="mt-4" id="when">
+    <button
+      onClick={() => toggle("when")}
+      className="flex items-center justify-between w-full text-left
+                 bg-slate-50 hover:bg-slate-100 border border-slate-200
+                 rounded-lg shadow-sm p-4 transition
+                 text-lg md:text-xl font-semibold text-[#038764]"
+    >
+      <span>5.2 When to Collect Samples</span>
+      {open.when ? (
+        <ChevronDown className="w-5 h-5 text-slate-600" />
+      ) : (
+        <ChevronRight className="w-5 h-5 text-slate-600" />
+      )}
+    </button>
+    {open.when && (
+      <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
+        <li>When plants show patchy stunting, yellowing, poor growth, or reduced yields.</li>
+        <li>When roots show lesions, galls, or other abnormal symptoms.</li>
+        <li>At the end of a crop (preferred timing for estimating risk for the next crop).</li>
+        <li>Before planting a new crop, if necessary (to assess nematode risk).</li>
+      </ul>
+    )}
+  </div>
+
+  {/* 5.3 How to Collect Samples */}
+  <div className="mt-4" id="how">
+    <button
+      onClick={() => toggle("how")}
+      className="flex items-center justify-between w-full text-left
+                 bg-slate-50 hover:bg-slate-100 border border-slate-200
+                 rounded-lg shadow-sm p-4 transition
+                 text-lg md:text-xl font-semibold text-[#038764]"
+    >
+      <span>5.3 How to Collect Samples</span>
+      {open.how ? (
+        <ChevronDown className="w-5 h-5 text-slate-600" />
+      ) : (
+        <ChevronRight className="w-5 h-5 text-slate-600" />
+      )}
+    </button>
+    {open.how && (
+      <div className="mt-2 space-y-3 text-slate-700">
+        <div>
+          <div className="font-semibold text-slate-900">From affected crops</div>
+          <ul className="list-disc pl-6 space-y-1 mt-1">
+            <li>Dig up several plants with roots intact.</li>
+            <li>Collect ~500 g soil around roots and ~100 g roots.</li>
+            <li>Sample both poor and healthy patches for comparison.</li>
+          </ul>
+        </div>
+
+        <div>
+          <div className="font-semibold text-slate-900">Before planting</div>
+          <ul className="list-disc pl-6 space-y-1 mt-1">
+            <li>Prefer sampling at crop removal/end of the previous crop to assess build-up.</li>
+            <li>For pre-plant testing, take multiple cores (20–40 per field) across representative areas.</li>
+            <li>
+              For low densities, a glasshouse bioassay with a susceptible host can detect nematodes not recovered by soil extraction.
+            </li>
+            <li>Mix gently and keep ~500 g for testing.</li>
+            <li>Sample different soil types or cropping histories separately.</li>
+          </ul>
+        </div>
+      </div>
+    )}
+  </div>
+
+  {/* 5.4 Handling and Sending Samples */}
+  <div className="mt-4" id="handling">
+    <button
+      onClick={() => toggle("handling")}
+      className="flex items-center justify-between w-full text-left
+                 bg-slate-50 hover:bg-slate-100 border border-slate-200
+                 rounded-lg shadow-sm p-4 transition
+                 text-lg md:text-xl font-semibold text-[#038764]"
+    >
+      <span>5.4 Handling and Sending Samples</span>
+      {open.handling ? (
+        <ChevronDown className="w-5 h-5 text-slate-600" />
+      ) : (
+        <ChevronRight className="w-5 h-5 text-slate-600" />
+      )}
+    </button>
+    {open.handling && (
+      <ul className="list-disc pl-6 text-slate-700 space-y-1 mt-2">
+        <li>Place soil and roots in clearly labelled plastic bags (include site and date).</li>
+        <li>Keep samples cool (not in direct sun or hot environments).</li>
+        <li>Send promptly by express courier to the diagnostic laboratory.</li>
+      </ul>
+    )}
+  </div>
+
+  {/* 5.5 Information to Include with Samples */}
+  <div className="mt-4" id="include">
+    <button
+      onClick={() => toggle("include")}
+      className="flex items-center justify-between w-full text-left
+                 bg-slate-50 hover:bg-slate-100 border border-slate-200
+                 rounded-lg shadow-sm p-4 transition
+                 text-lg md:text-xl font-semibold text-[#038764]"
+    >
+      <span>5.5 Information to Include with Samples</span>
+      {open.include ? (
+        <ChevronDown className="w-5 h-5 text-slate-600" />
+      ) : (
+        <ChevronRight className="w-5 h-5 text-slate-600" />
+      )}
+    </button>
+    {open.include && (
+      <div className="mt-2 space-y-3 text-slate-700">
+        <ul className="list-disc pl-6 space-y-1">
+          <li>Crop/cultivar sampled and observed symptoms.</li>
+          <li>Field history (last two years of crops, rotations, chemical/fertilizer practices).</li>
+        </ul>
+
+        <div>
+          <div className="font-semibold text-slate-900 mb-1">Further information</div>
+          <ul className="list-disc pl-6 space-y-1">
+            <li>
+              Stirling GR, Nicol JM, Reay F (2002) Advisory services for nematode pests.
+              Rural Industries Research and Development Corporation (RIRDC).
+            </li>
+          </ul>
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
         </main>
       </div>
     </FadeIn>

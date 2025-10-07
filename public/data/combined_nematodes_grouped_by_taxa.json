@@ -8,11 +8,11 @@
       "Common Name": "Achlysiella nematodes",
       "Scientific Name": "Achlysiella spp.",
       "Host Range": "Sugarcane",
-      "Symptoms": {
-        "General": "Often hard to spot and may look like nutrient or water stress."
-      },
+      "Symptoms": [
+        "Often hard to spot and may look like nutrient or water stress."
+      ],
       "Life Cycle": "Adult females swollen, sausage-shaped. Full life cycle not well understood.",
-      "Why They Matter": "Rare but potentially a biosecurity concern. Monitoring and identification are important to detect any outbreaks early.",
+      "Why They Matter": "Rare and not known to cause significant problems in local crops. Awareness and monitoring can help detect any unusual occurrences early.",
       "Management Options": [
         "Keep an eye on sugarcane health in Nth QLD",
         "Send suspicious samples for identification",
@@ -1131,7 +1131,18 @@
         "Monitor susceptible crops, especially in newly detected regions"
       ],
       "Further Information": [
-        "Bridge J, Starr JL (2007). Plant Nematodes of Agricultural Importance. Manson Publishing Ltd., London."
+        "Bridge J, Starr JL (2007). Plant Nematodes of Agricultural Importance. Manson Publishing Ltd., London.",
+        "Singh SK (2013) Prioritisation of pest species for biosecurity risk assessments: using plant-parasitic nematodes and Australia as examples. PhD Thesis, Charles Sturt University."
+      ],
+      "Reported Species in Northern Australia": [
+        "D. anchilospomosus"
+      ],
+      "Other Key Species in Australia": [
+        "D. dipsaci infects many crops including cereals, legumes, bulbs (onion, garlic), potato, carrot, pea, and strawberry.",
+        "D. destructor infects iris, tulip, and other ornamental bulbs, as well as sweetpotato, sugar beet, carrot, potato, and peanut."  
+      ],
+      "Potential Threat Species (Not Detected in Australia)": [
+        "D. angustus (rice stem nematode) reported in Indonesia, India, Egypt, Madagascar."
       ]
     },
     "Entries": {
@@ -1215,15 +1226,22 @@
       },
       "Life Cycle": "5–-8 weeks. Cysts protect eggs for years ",
       "Why They Matter": "Cause significant yield losses up to 70%. Long-lasting cysts make control difficult.",
+      "Reported Species in Northern Australia": "Globodera spp. & Heterodera spp. (no species formally identified)",
+      "Other Key Species in Australia": ["G. rostochiensis (Golden potato cyst nematode) only in Victoria where it is under quarantine control.", 
+        "H. australis (cereal cyst nematode) – found in South Australia and Victoria, mainly affecting wheat and barley."],
+      "Potential Threat Species (Not Detected in Australia)": ["G. pallida (white potato cyst nematode) – infects potato, tomato, and some weeds; reported in >50 countries, including Indonesia, China, and Japan.",
+        "H. glycines (soybean cyst nematode) – hosts include soybean, dry bean, lupine, sweet clover, and chickweed; reported in Japan, China, Korea, Indonesia, South America, former Soviet Union, and Canada.",
+        "H. zeae (corn cyst nematode) – hosts include corn, barley, teosinte, millet, oat, rice, sorghum, sugarcane, wheat, and several weeds; reported in Indonesia, India, Pakistan, Egypt, and the United States."],
       "Management Options": [
-        "Prevent introduction and spread.",
-        "Use resistant varieties and rotate with non-host crops.",
-        "Avoid moving soil, plants, or equipment from infested areas.",
-        "Monitor crops regularly for symptoms."
+        "Management follows the same general principles as for root-knot nematodes (Section 2.1.1). Key additional points are:",
+        "Rotate with non-host crops; longer rotations are often needed as cysts can survive in soil for many years.",
+        "Soil testing before planting is important to detect infestations early.",
+        "Resistant varieties are available for some crops (e.g. potato, cereals)."
       ],
       "Further Information": [
         "Blacket MJ, Agarwal A, Wainer J, Triska MD, Renton M, Edwards J (2019). Molecular assessment of the introduction and spread of potato cyst nematode, Globodera rostochiensis, in Victoria. Phytopathology 109, 659-669.",
-        "Vanstone VA, Hollaway GJ, Stirling GR (2008). Managing nematode pests in the southern and western regions of the Australian cereal industry: continuing progress in a challenging environment. Australasian Plant Pathology 37, 220-234."
+        "Vanstone VA, Hollaway GJ, Stirling GR (2008). Managing nematode pests in the southern and western regions of the Australian cereal industry: continuing progress in a challenging environment. Australasian Plant Pathology 37, 220-234.",
+        "Singh SK (2013) Prioritisation of pest species for biosecurity risk assessments: using plant-parasitic nematodes and Australia as examples. PhD Thesis, Charles Sturt University."
       ]
     },
     "Entries": {
@@ -5506,27 +5524,44 @@
       "Meloidogyne thamesi"
     ],
     "data": {
-      "Section": "2.1.1",
-      "Title": "Root-knot Nematodes (Meloidogyne spp.)",
-      "Common Name": "Root-knot nematodes",
-      "Scientific Name": "Meloidogyne spp.",
-      "Distribution": "Five species confirmed in the region: M. arenaria, M. incognita, M. javanica, M. thamesi, and M. enterolobii.",
-      "Host Range": "5,000 plant species, including melons, tomatoes, capsicum, cucumber, sweet potato, eggplant, ornamental and pasture plants.",
-      "Crops at Risk": "Tomato, capsicum, watermelon, peanut, mungbean, cucumber, sweetpotato, eggplant, cotton, etc.",
-      "Symptoms": {
-        "Roots": "Galled and stunted.",
-        "Aboveground": "Stunted growth, wilting, uneven crop performance, especially under heat or drought stress."
-      },
-      "Life Cycle": "4-6 weeks at 24-28°C; faster in tropical conditions; female lay up to 1,000 eggs.",
-      "Why They Matter": "Cause 5–20% yield loss or more. M. enterolobii can overcome resistance genes in many crops.",
-      "Management Options": [
-        "Major plant-parasitic nematodes in Northern Australia and worldwide.",
-        "Can reduce yields by more than half and cost billions globally.",
-        "Thrive in light soils and warm climates, multiplying year-round in northern regions.",
-        "M. enterolobii can bypass resistance genes in many crops."
-      ],
-      "Further Information": "Hay F, Stirling GR (2014). Management of root-knot nematode in vegetable crops. Horticulture Innovation Australia."
+    "Section": "2.1.1",
+    "Title": "Root-knot Nematodes (Meloidogyne spp.)",
+    "Common Name": "Root-knot nematodes",
+    "Scientific Name": "Meloidogyne spp.",
+    "Distribution": "Five species confirmed in the region: M. arenaria, M. incognita, M. javanica, M. thamesi, and M. enterolobii.",
+    "Host Range": "5,000 plant species, including melons, tomatoes, capsicum, cucumber, sweet potato, eggplant, ornamental and pasture plants.",
+    "Crops at Risk": "Tomato, capsicum, watermelon, peanut, mungbean, cucumber, sweetpotato, eggplant, cotton, etc.",
+    "Symptoms": {
+      "Roots": "Galled and stunted.",
+      "Aboveground": "Stunted growth, wilting, uneven crop performance, especially under heat or drought stress."
     },
+    "Life Cycle": "4-6 weeks at 24-28°C; faster in tropical conditions; female lay up to 1,000 eggs.",
+    "Why They Matter": "Cause 5–20% yield loss or more. M. enterolobii can overcome resistance genes in many crops.",
+    "Management Options": {
+      "Cultural Practices": [
+        "Use resistant or tolerant crop varieties where available.",
+        "Rotate crops with non-host.",
+        "Avoid moving soil, plants, or equipment from infested areas.",
+        "Monitor crops regularly for root damage or poor growth.",
+        "Manage weeds and cover crops that can host nematodes."
+      ],
+      "Biological Approaches": [
+        "Maintain healthy soils with compost, organic matter, and good soil structure.",
+        "Avoid practices that harm beneficial soil organisms, such as excessive tillage or unnecessary chemicals.",
+        "Commercial biological products can be used; check efficacy and follow local advice."
+      ],
+      "Chemical Control": [
+        "Use nematicides only when necessary.",
+        "Confirm registered crops and safety via the APVMA website (apvma.gov.au) or local agronomists."
+      ]
+    },
+    "Further Information": [
+      "Hay F, Stirling GR (2014). Management of root-knot nematode in vegetable crops. Horticulture Innovation Australia.",
+      "MeloRisk Australasia: Reducing the risk of exotic root-knot nematodes in Australasia. Queensland Department of Agriculture and Fisheries / ACIAR, 2024. Available at: https://www.aciar.gov.au/projects/search/melorisk-australasia"
+    ],
+    "Reported Species in Northern Australia": "M. arenaria, M. enterolobii, M. incognita, M. javanica, M. thamesi",
+    "Potential Threat Species (Not Detected in Australia)": "M graminicola – can infect rice, cereals (wheat, sorghum, soybean), vegetables (potato, tomato, onion), and grasses; reported in Indonesia, Thailand, Bangladesh, India, Laos, and Brazil."
+  },
     "Entries": {
       "Meloidogyne arenaria": [
         {
@@ -8319,11 +8354,16 @@
         "Test soil and roots regularly, as they can be present without obvious symptoms.",
         "Rotate with poor-host crops to lower nematode numbers.",
         "Use resistant or tolerant cultivars or rootstocks where available.",
-        "Reduce stress by maintaining good nutrition, organic amendments, and adequate moisture."
+        "Maintain soil health with good nutrition, organic amendments, and adequate moisture.",
+        "Manage weeds that may host nematodes.",
+        "Seek local advice before using chemical or biological control products."
       ],
       "Further Information": [
         "Thompson JP, Owen KJ, Stirling GR, Bell MJ (2008). Root lesion nematodes (Pratylenchus thornei and P. neglectus): a review of recent progress in managing a significant pest of grain crops in northern Australia. Australasian Plant Pathology 37, 2325-242.",
         "Vanstone VA, Hollaway GJ, Stirling GR (2008). Managing nematode pests in the southern and western regions of the Australian cereal industry: continuing progress in a challenging environment. Australasian Plant Pathology 37, 220-234."
+      ],
+      "Reported Species in Northern Australia": [
+        "P. brachyurus, P. coffeae, P. jordanensis, P. zeae"
       ]
     },
     "Entries": {
@@ -8839,14 +8879,24 @@
       "Life Cycle": "20–25 days at 24–32°C.",
       "Why They Matter": "R. similis is the most damaging species, especially to bananas. Severe yield losses reported: 40–70% in oranges, 50–80% in grapefruits, up to 95% over 10 years in bananas.",
       "Management Options": [
-        "Clean planting material and enforce quarantine measures",
-        "Monitor susceptible crops regularly to reduce losses",
-        "Implement crop rotation and maintain strict field sanitation",
-        "Retain crop residues and apply organic amendments to improve soil health"
+        "Use clean, nematode-free planting material and enforce quarantine measures",
+        "Monitor susceptible crops regularly to detect damage early",
+        "Rotate crops with non-host or poor-host species to reduce populations",
+        "Maintain strict field sanitation and avoid moving infested soil",
+        "Retain crop residues and apply organic amendments to improve soil health",
+        "Seek local advice before using chemical or biological control products"
       ],
       "Further Information": [
-        "Pattison AB, Cobon JA, Araya-Vargas M, Chabrier C (2024). Towards sustainable management of nematodes in banana. In Drenth A, Kema G (eds.) Achieving sustainable cultivation of bananas Volume 3: Diseases and pests. Burleigh Dodds Science Publishing, p. 419-450.",
-        "Stirling GR, Pattison AB (2008). Beyond chemical dependency for managing plant-parasitic nematodes: examples from the banana, pineapple and vegetable industries of tropical and subtropical Australia. Australasian Plant Pathology 37, 254-267."
+        "Cobon JA, Pattison AB, Penrose LDJ, Chandra KA, O’Neill WT, Smith MK (2019) Comparison of the reproduction and pathogenicity of isolates of Radopholus similis (burrowing nematode) from Australia and Fiji on ginger (Zingiber officinale) and banana (Musa spp.). Australasian Plant Pathology 48, 529-539.",
+        "Pattison AB, Cobon JA, Araya-Vargas M, Chabrier C (2024) Towards sustainable management of nematodes in banana. In Drenth A, Kema G (eds.) Achieving sustainable cultivation of bananas Volume 3: Diseases and pests. Burleigh Dodds Science Publishing p 419-450.",
+        "Plant Health Australia Ltd (2025) Biosecurity Plan for the Australian Citrus Industry (Version 4.1). Plant Health Australia, Canberra, ACT."
+      ],
+      "Reported Species in Northern Australia": [
+        "R. capitatus, R. nativus, R. nigeriensis, R. rectus, R. similis"
+      ],
+      "Potential Threat Species (Not Detected in Australia)": [
+        "R. citri, - infect citrus; reported in Indonesia",
+        "R. similis - exotic strains, such as those in Fiji, cause severe damage to ginger"
       ]
     },
     "Entries": {
@@ -9291,23 +9341,29 @@
       "Title": "Reniform Nematodes (Rotylenchulus spp.)",
       "Common Name": "Reniform nematodes",
       "Scientific Name": "Rotylenchulus spp.",
-      "Host Range": ">300 plant species including cotton, cowpea, soybean, tobacco, pineapple, sweetpotato, okra, tomato, beans, various vegetables and weeds.",
+      "Host Range": "Over 300 plant species including cotton, cowpea, soybean, tobacco, pineapple, sweetpotato, okra, tomato, beans, various vegetables and weeds.",
       "Symptoms": {
         "Roots": "Destruction of feeder roots, reduced root volume.",
         "Aboveground": "Stunted growth, yellowing, wilting, delayed flowering, fewer and smaller fruits, and overall yield decline."
       },
-      "Life Cycle": "≤3 weeks Females embeds their heads in roots; each lays 40–100 eggs.",
-      "Why They Matter": "Rotylenchulus reniformis is the dominant species in northern Australia and a major pest of cotton, vegetables and pineapple. Can cut cotton yields by 10-25% (over 50% in bad seasons). Worsens root diseases and often goes unnoticed due to subtle symptoms.",
+      "Life Cycle": "<3 weeks. A female lays 40-100 eggs.",
+      "Why They Matter": "Can cut cotton yields by 10-25% (over 50% in bad seasons). Forms disease complexes that intensify root diseases and often go unnoticed due to symptom confusion.",
       "Management Options": [
         "Rotate with non-host crops and manage weeds",
         "Use resistant or tolerant varieties where available",
         "Optimise soil health and drainage to discourage build-up",
-        "Avoid spreading infested soil on equipment, tools, or footwear"
+        "Control weeds and volunteer plants that can host nematodes",
+        "Avoid spreading infested soil on equipment, tools, or footwear",
+        "Test soil before planting to detect infestations early.",
+        "Seek local advice for safe and effective chemical or biological products."
       ],
       "Further Information": [
         "Lawrence KS (2022). Reniform nematode (Rotylenchulus reniformis) and its interactions with cotton (Gossypium hirsutum). In Integrated Nematode Management: State-of-the-art and visions for the future (Eds. RA Sikora et al.) CAB International, Wallingford, Chapter 14, 94-99.",
         "Smith LJ, Scheikowski L, Kafle D (2024). The distribution of reniform nematode (Rotylenchulus reniformis) in cotton fields in central QLD and population dynamics in response to cropping regime. Pathogens 13, 888.",
         "Stirling GR (2023). PSN 031. Reniform nematode (Rotylenchulus reniformis), a damaging pest of many crops in tropical and subtropical regions of Australia. In: Stirling GR (ed) Plant and soil nematodes: friend and foe. APPsNet. https://www.appsnet.org/nematodes"
+      ],
+      "Reported Species in Northern Australia": [
+        "R. reniformis"
       ]
     },
     "Entries": {
@@ -11321,13 +11377,16 @@
         "Roots": "Stunting and general deterioration of roots.",
         "Aboveground": "Poor growth and delayed production, known as the citrus replant problem."
       },
-      "Life Cycle": "6–8 weeks at 24–26°C: female lays several hundred eggs.",
+      "Life Cycle": "6–8 weeks at 24–26°C. A female lays several hundred eggs.",
       "Why They Matter": "Causes crop losses ranging from 10 to 50%. Serious economic impact due to reduced tree growth and delayed production, especially in replant situations.",
       "Management Options": [
+        "Test soil and roots before planting or if trees show poor growth",
         "Use nematode-free planting material",
         "Avoid replanting citrus in heavily infested soils or apply soil treatments before planting",
-        "Manage soil salinity and maintain organic matter to reduce nematode reproduction",
-        "Regular monitoring of nematode populations in orchards"
+        "Use nematode-resistant or tolerant rootstocks",
+        "Maintain healthy soil with good drainage and organic matter.",
+        "Prevent movement of infested soil through equipment, tools, or water runoff.",
+        "Regularly monitor nematode populations; apply postplant nematicides only when soil tests indicate medium to high populations."
       ],
       "Further Information": [
         "Duncan LW (2005). Nematode parasites of citrus. In: Luc M, Sikora RA, Bridge J (eds) Plant parasitic nematodes in subtropical and tropical agriculture, 2nd ed. CAB International, Wallingford, UK, pp. 437-466.",
@@ -11450,7 +11509,7 @@
         "Roots": "Stunted, tips damaged.",
         "Aboveground": "Poor vigour and yield."
       },
-      "Life Cycle": "1 year; prefers mild soils (~20°C) with moderate moisture (25–80%).",
+      "Life Cycle": "~1 year; prefers mild soils (~20°C) with moderate moisture (25–80%).",
       "Why They Matter": "Damage to root tips limits water and nutrient uptake, lowering yields. Some species transmit plant viruses, increasing biosecurity risks.",
       "Management Options": [
         "Use clean planting material and avoid moving infested soil",
@@ -11459,6 +11518,12 @@
       ],
       "Further Information": [
         "Jenkins WR, Taylor DP (1967). Plant Nematology. Reinhold Publishing Corporation, New York, USA."
+      ],
+      "Reported Species in Northern Australia": [
+        "X. americanum, X. elongatum, X. insigne, X. monohysterum, X. radicicola, X. setariae, X. truncatum, X. vulgare"
+      ],
+      "Other Key Species in Australia":[
+        "X. index, vector of Grapevine Fanleaf Virus (GFLV); reported in the Rutherglen district, north-eastern Victoria."
       ]
     },
     "Entries": {

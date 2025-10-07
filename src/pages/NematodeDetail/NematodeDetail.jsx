@@ -40,6 +40,9 @@ const OVERVIEW_ORDER = [
   "Scientific Name",
   "Host Range",
   "Life Cycle",
+  "Reported Species in Northern Australia",
+  "Other Key Species in Australia",
+  "Potential Threat Species (Not Detected in Australia)",
   "Why They Matter",
   "Symptoms",
   "Management Options",
@@ -148,6 +151,9 @@ export default function NematodeDetail({
     Symptoms: true,
     "Management Options": true,
     "Further Information": true,
+    "Reported Species in Northern Australia": true,
+    "Potential Threat Species (Not Detected in Australia)": true,
+    "Other Key Species in Australia": true
   }); // track which sections are open
 
   const toggle = (key) => {
@@ -179,6 +185,40 @@ export default function NematodeDetail({
       .split(/\. (?=[A-Z])/)
       .map((s, idx, arr) => (idx < arr.length - 1 ? s.trim() + "." : s.trim()));
   };
+
+  function ManagementOptions({ value }) {
+  // Array of strings → simple bullet list
+  if (Array.isArray(value)) {
+    return (
+      <ul className="list-disc pl-5 space-y-1">
+        {value.map((it, i) => (
+          <li key={i}>{String(it)}</li>
+        ))}
+      </ul>
+    );
+  }
+
+  // Keyed object (e.g., Cultural Practices → [...])
+  if (value && typeof value === "object") {
+    return (
+      <div className="space-y-3">
+        {Object.entries(value).map(([category, items]) => (
+          <div key={category}>
+            <div className="text-xs font-semibold uppercase tracking-wide text-sky-700/90">{category}</div>
+            <ul className="list-disc pl-5 space-y-1">
+              {toArray(items).map((it, i) => (
+                <li key={i}>{String(it)}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // Fallback: single string
+  return <p>{String(value ?? "")}</p>;
+}
 
   const imageDetails = getImagesForNematode(commonName);
 
@@ -412,13 +452,33 @@ export default function NematodeDetail({
                             );
                           })()
                         ) : k === "Management Options" ? (
-                          <ul className="list-disc pl-5 space-y-1">
-                            {(Array.isArray(aboutData[k]) ? aboutData[k] : toArray(aboutData[k])).map((it, i) => (
-                              <li key={i}>{it}</li>
-                            ))}
-                          </ul>
+                          <ManagementOptions value={aboutData[k]} />
                         ) : k === "Further Information" ? (
                           <ol className="list-decimal pl-5 space-y-2">
+                            {(Array.isArray(aboutData[k]) ? aboutData[k] : [String(aboutData[k])]).map((it, i) => (
+                              <li key={i} className="leading-relaxed">
+                                {String(it)}
+                              </li>
+                            ))}
+                          </ol>
+                        ) : k === "Reported Species in Northern Australia" ? (
+                          <ol className="list-disc pl-5 space-y-2">
+                            {(Array.isArray(aboutData[k]) ? aboutData[k] : [String(aboutData[k])]).map((it, i) => (
+                              <li key={i} className="leading-relaxed">
+                                {String(it)}
+                              </li>
+                            ))}
+                          </ol>
+                        ) : k === "Other Key Species in Australia" ? (
+                          <ol className="list-disc pl-5 space-y-2">
+                            {(Array.isArray(aboutData[k]) ? aboutData[k] : [String(aboutData[k])]).map((it, i) => (
+                              <li key={i} className="leading-relaxed">
+                                {String(it)}
+                              </li>
+                            ))}
+                          </ol>
+                        ) : k === "Potential Threat Species (Not Detected in Australia)" ? (
+                          <ol className="list-disc pl-5 space-y-2">
                             {(Array.isArray(aboutData[k]) ? aboutData[k] : [String(aboutData[k])]).map((it, i) => (
                               <li key={i} className="leading-relaxed">
                                 {String(it)}
@@ -439,7 +499,6 @@ export default function NematodeDetail({
               </div>
             </section>
           )}
-
           {/* Removed standalone bottom Images section */}
           {/* <ImageGallery imageDetails={imageDetails} /> */}
 
@@ -468,7 +527,7 @@ export default function NematodeDetail({
                     title={`${t.name} (${t.count})`}
                   >
                     <span className="font-medium">{t.name}</span>
-                    <span className="ml-2 text-slate-600">({t.count})</span>
+                    {/* <span className="ml-2 text-slate-600">({t.count})</span> */}
                   </span>
                 ))}
               </div>
