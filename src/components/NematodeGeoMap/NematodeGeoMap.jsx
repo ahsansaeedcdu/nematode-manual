@@ -15,7 +15,7 @@ import {
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import FadeIn from "../FadeIn/FadeIn";
-import CommonNameMap from "../CommonNameMap/CommonNameMap"; // <-- add this import
+import CommonNameMap, { ALL_SENTINEL } from "../CommonNameMap/CommonNameMap";
 
 // import './NematodeGeoMap.css';
 import L from "leaflet";
@@ -296,7 +296,6 @@ const GeoJSONLayerWithInteractions = ({
 const HistoricalMap = () => {
   const [geoData, setGeoData] = useState(null);
   const [nematodeMap, setNematodeMap] = useState({});
-
   useEffect(() => {
     // Using Promise.all is cleaner, but the core issue is rendering too soon.
     fetch("/data/LGA_2024_context.json")
@@ -422,6 +421,11 @@ const NematodeGeoMap = () => {
   // search / filter text for the checkbox grid
   const [groupQuery, setGroupQuery] = useState("");
   const mapShotRef = useRef(null);
+  const [commonGeoData, setCommonGeoData] = useState(null);
+  const [commonCombined, setCommonCombined] = useState({});
+  const [allCommonNames, setAllCommonNames] = useState([]);
+  const [selectedCommon, setSelectedCommon] = useState(null);
+  const [commonLoading, setCommonLoading] = useState(false);
 
   const handleDownloadSnapshot = async () => {
     const node = mapShotRef.current;
@@ -489,6 +493,51 @@ const NematodeGeoMap = () => {
       setNewMapIsLoading(false);
     }
   }, [showHistoricalMap]);
+
+   useEffect(() => {
+  const loadCommonData = async () => {
+    setCommonLoading(true);
+    try {
+      const [geo, combinedData] = await Promise.all([
+        fetch("/data/LGA_2024_context.json").then((r) => r.json()),
+        fetch("/data/combined_nematodes_with_coords.json").then((r) => r.json()),
+      ]);
+
+      setCommonGeoData(geo);
+      setCommonCombined(combinedData);
+
+      const names = Object.values(combinedData)
+        .map((g) => g["Common name"])
+        .filter(Boolean);
+      const sortedUniqueNames = [...new Set(names)].sort();
+      setAllCommonNames(sortedUniqueNames);
+      if (sortedUniqueNames.length > 0) {
+        setSelectedCommon(sortedUniqueNames[0]);
+      } else {
+        setSelectedCommon(null);
+      }
+    } catch (e) {
+      console.error("Error loading common-name data:", e);
+      setCommonGeoData(null);
+      setCommonCombined({});
+      setAllCommonNames([]);
+      setSelectedCommon(null);
+    } finally {
+      setCommonLoading(false);
+    }
+  };
+
+  if (showHistoricalMap === "common") {
+    loadCommonData();
+  } else {
+    // clear when leaving this tab
+    setCommonGeoData(null);
+    setCommonCombined({});
+    setAllCommonNames([]);
+    setSelectedCommon(null);
+    setCommonLoading(false);
+  }
+}, [showHistoricalMap]);
 
   const handleNewMapCheckboxChange = useCallback((event) => {
     const { value, checked } = event.target;
@@ -721,13 +770,66 @@ const NematodeGeoMap = () => {
             )}
 
             {showHistoricalMap === "common" && (
-              <div className="bg-white rounded-2xl shadow p-4 sticky top-[84px]">
-                <h2 className="text-lg font-semibold">Common Name</h2>
-                <p className="text-sm text-slate-600">
-                  Rendering Common Name map…
-                </p>
+            <div className="bg-white rounded-2xl shadow p-4 sticky top-[84px] max-h-[calc(100vh-120px)] flex flex-col">
+              <h2 className="text-lg font-semibold mb-3">Common Name</h2>
+
+              <div className="flex-1 overflow-y-auto rounded-xl border border-[#E3E5E7] p-2">
+                {commonLoading ? (
+                  <p className="text-slate-500 text-sm p-2">Loading…</p>
+                ) : (
+                  <>
+                    {/* Select all */}
+                    <label
+                      className="flex items-center justify-between gap-3 p-2 mb-2 rounded-lg border border-[#E3E5E7] hover:border-slate-300 cursor-pointer"
+                      title="All common names"
+                    >
+                      <span className="text-sm truncate">All common names</span>
+                      <input
+                        type="radio"
+                        name="commonName"
+                        value={ALL_SENTINEL}
+                        checked={selectedCommon === ALL_SENTINEL}
+                        onChange={() => setSelectedCommon(ALL_SENTINEL)}
+                        className="h-4 w-4 accent-blue-600"
+                      />
+                    </label>
+
+                    {allCommonNames.length > 0 ? (
+                      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-1 gap-2">
+                        {allCommonNames.map((name) => (
+                          <label
+                            key={name}
+                            className="flex items-center justify-between gap-3 p-2 rounded-lg border border-[#E3E5E7] hover:border-slate-300 cursor-pointer"
+                            title={name}
+                          >
+                            <span className="text-sm truncate">{name}</span>
+                            <input
+                              type="radio"
+                              name="commonName"
+                              value={name}
+                              checked={selectedCommon === name}
+                              onChange={() => setSelectedCommon(name)}
+                              className="h-4 w-4 accent-blue-600"
+                            />
+                          </label>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-slate-500 text-sm p-2">No names found.</p>
+                    )}
+                  </>
+                )}
               </div>
-            )}
+
+              <div className="mt-3 text-xs text-slate-600">
+                {selectedCommon === ALL_SENTINEL
+                  ? "LGAs in blue contain records for any common name."
+                  : "LGAs in blue contain records for the selected common name."}
+              </div>
+            </div>
+          )}
+
+
           </aside>
 
           {/* Map Panel */}
@@ -763,7 +865,13 @@ const NematodeGeoMap = () => {
                   </MapContainer>
                 )}
 
-                {showHistoricalMap === "common" && <CommonNameMap />}
+                {showHistoricalMap === "common" && (
+                  <CommonNameMap
+                    geoData={commonGeoData}
+                    combined={commonCombined}
+                    selectedCommon={selectedCommon}
+                  />
+                )}
               </div>
             </div>
           </section>

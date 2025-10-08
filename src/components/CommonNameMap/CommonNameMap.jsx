@@ -1,62 +1,93 @@
-import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import { MapContainer, TileLayer, GeoJSON, useMap } from "react-leaflet";
+import React, { useMemo, useCallback, useEffect, useRef, useState } from "react";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { point } from "@turf/helpers";
 
-const CommonNameMap = () => {
-  const [geoData, setGeoData] = useState(null);
-  const [combined, setCombined] = useState({});
-  const [allCommonNames, setAllCommonNames] = useState([]);
-  const [selectedCommon, setSelectedCommon] = useState(null);
+export const ALL_SENTINEL = "__ALL__";
+
+/** Ensures Leaflet gets a proper size/layout AFTER the map mounts and when inputs change. */
+function MapReadyFix({ deps = [] }) {
+  const map = useMap();
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    Promise.all([
-      fetch("/data/LGA_2024_context.json").then((r) => r.json()),
-      fetch(
-        "/data/combined_nematodes_with_coords.json"
-      ).then((r) => r.json()),
-    ]).then(([geo, combinedData]) => {
-      setGeoData(geo);
-      setCombined(combinedData);
-      const names = Object.values(combinedData)
-        .map((g) => g["Common name"])
-        .filter(Boolean);
-      const sortedUniqueNames = [...new Set(names)].sort();
-      setAllCommonNames(sortedUniqueNames);
-      if (sortedUniqueNames.length > 0) {
-        setSelectedCommon(sortedUniqueNames[0]);
-      }
+    // When the map signals ready, invalidate size twice (layout often stabilizes over 2 frames).
+    map.whenReady(() => {
+      requestAnimationFrame(() => {
+        map.invalidateSize(false);
+        requestAnimationFrame(() => {
+          map.invalidateSize(false);
+          setReady(true);
+        });
+      });
     });
-  }, []);
+  }, [map]);
 
+  useEffect(() => {
+    if (!ready) return;
+    // Also invalidate on dependent changes (e.g., switching to ALL, new data, tab switch)
+    requestAnimationFrame(() => {
+      map.invalidateSize(false);
+    });
+  }, [ready, map, ...deps]);
+
+  // Force one more slight pan-by-zero to trigger a paint if the browser is stubborn.
+  useEffect(() => {
+    if (!ready) return;
+    const t = setTimeout(() => {
+      try { map.panBy([0, 0]); } catch {}
+    }, 0);
+    return () => clearTimeout(t);
+  }, [ready, map, ...deps]);
+
+  return null;
+}
+
+const CommonNameMap = ({ geoData, combined, selectedCommon }) => {
+  /** Build LGA -> entries[] map for the selection (or ALL). */
   const lgaEntryMap = useMemo(() => {
-    if (!geoData || !selectedCommon) return {};
+    if (!geoData || !combined) return {};
     const map = {};
-    const group = Object.values(combined).find(
-      (g) => g["Common name"] === selectedCommon
-    );
-    if (!group) return {};
-    (group.Entries || []).forEach((entry) => {
+
+    const attachEntryToLGAs = (entry, label) => {
       const { ["Latitude (°S)"]: lat, ["Longitude (°E)"]: lng } = entry;
       if (lat == null || lng == null) return;
       const pt = point([lng, lat]);
-      geoData.features.forEach((f) => {
+      for (const f of geoData.features) {
         if (f.geometry && booleanPointInPolygon(pt, f.geometry)) {
           const lga = f.properties?.LGA_NAME24;
+          if (!lga) continue;
           if (!map[lga]) map[lga] = [];
-          map[lga].push(entry["Nematode Taxa"] || selectedCommon);
+          map[lga].push(label);
         }
+      }
+    };
+
+    if (selectedCommon === ALL_SENTINEL) {
+      Object.values(combined).forEach((group) => {
+        const label = group["Common name"];
+        (group.Entries || []).forEach((e) => attachEntryToLGAs(e, label));
       });
-    });
+      return map;
+    }
+
+    const group = Object.values(combined).find(
+      (g) => g["Common name"] === selectedCommon
+    );
+    if (!group) return map;
+    (group.Entries || []).forEach((e) =>
+      attachEntryToLGAs(e, group["Common name"])
+    );
     return map;
   }, [geoData, combined, selectedCommon]);
 
+  /** Stable style function; mouseout uses this to reliably reset. */
   const styleFn = useCallback(
     (feature) => {
       const lgaName = feature.properties?.LGA_NAME24;
       const entries = lgaEntryMap[lgaName] || [];
       return {
-        fillColor: entries.length ? "#60a5fa" : "#e5e7eb",
+        fillColor: entries.length ? "#f87171" : "#e5e7eb",
         color: "#ffffff",
         weight: 0.6,
         opacity: 1,
@@ -66,19 +97,28 @@ const CommonNameMap = () => {
     [lgaEntryMap]
   );
 
+  /** Hover handlers (rely on styleFn so reset works even on first hover). */
   const onEachFeature = (feature, layer) => {
     const lgaName = feature.properties?.LGA_NAME24;
     const entries = lgaEntryMap[lgaName] || [];
     if (!lgaName) return;
+
+    const unique = [...new Set(entries)];
+    const list =
+      selectedCommon === ALL_SENTINEL
+        ? unique.slice(0, 8).join(", ") + (unique.length > 8 ? "…" : "")
+        : unique.join(", ");
+
     const tooltip = `
       <strong>${lgaName}</strong><br/>
       ${
         entries.length
-          ? `${entries.length} records<br/>${[...new Set(entries)].join(", ")}`
+          ? `${entries.length} records<br/>${list || ""}`
           : "No records"
       }
     `;
     layer.bindTooltip(tooltip, { sticky: true, opacity: 0.95 });
+
     layer.on({
       mouseover: (e) => {
         const base = styleFn(feature);
@@ -89,83 +129,51 @@ const CommonNameMap = () => {
           fillOpacity: 0.9,
         });
         if (e.target.bringToFront) e.target.bringToFront();
+        const el = e.target.getElement?.();
+        if (el) el.style.cursor = "pointer";
       },
       mouseout: (e) => {
+        // Reset using the CURRENT base style (not the initial one)
         e.target.setStyle(styleFn(feature));
       },
     });
   };
 
+  /** Key trick:
+   * Force a clean unmount/remount of the GeoJSON whenever selection OR lgaEntryMap changes.
+   * This avoids stale event handlers/styles on first render & when toggling ALL.
+   */
+  const geoJsonKey = useMemo(() => {
+    // Incorporate a cheap hash of lgaEntryMap size so the layer remounts when ALL toggles.
+    const sz = Object.keys(lgaEntryMap).length;
+    return `${selectedCommon ?? "none"}-${sz}`;
+  }, [selectedCommon, lgaEntryMap]);
+
   return (
-    // IMPORTANT: this grid mirrors your NematodeGeoMap layout.
-    // Put this component inside a wrapper with fixed height (you already use h-[80vh]).
-    <div className="h-full grid grid-cols-1 md:grid-cols-4 gap-4">
-      {/* Sidebar — same look/width/feel as the taxa sidebar */}
-      <aside className="md:col-span-1">
-        <div className="bg-white rounded-2xl shadow p-4 sticky top-[84px] max-h-[calc(100vh-120px)] flex flex-col">
-          <h2 className="text-lg font-semibold mb-3">Nematodes</h2>
+    <MapContainer
+      center={[-20, 135]}
+      zoom={5}
+      style={{ height: "100%", width: "100%" }}
+      doubleClickZoom={false}
+      className="rounded-xl"
+    >
+      {/* Force invalidateSize after mount and when selection / data changes */}
+      <MapReadyFix deps={[selectedCommon, geoData]} />
 
-          {/* Scrollable list box with border like taxa panel */}
-          <div className="flex-1 overflow-y-auto rounded-xl border border-[#E3E5E7] p-2">
-            {allCommonNames.length > 0 ? (
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-1 gap-2">
-                {allCommonNames.map((name) => (
-                  <label
-                    key={name}
-                    className="flex items-center justify-between gap-3 p-2 rounded-lg border border-[#E3E5E7] hover:border-slate-300 cursor-pointer"
-                    title={name}
-                  >
-                    <span className="text-sm truncate">{name}</span>
-                    <input
-                      type="radio"
-                      name="commonName"
-                      value={name}
-                      checked={selectedCommon === name}
-                      onChange={() => setSelectedCommon(name)}
-                      className="h-4 w-4 accent-blue-600"
-                    />
-                  </label>
-                ))}
-              </div>
-            ) : (
-              <p className="text-slate-500 text-sm p-2">Loading…</p>
-            )}
-          </div>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution="© OpenStreetMap contributors"
+      />
 
-          <div className="mt-3 text-xs text-slate-600">
-            LGAs in blue contain records for the selected Common name.
-          </div>
-        </div>
-      </aside>
-
-      {/* Map Panel — same card + height behavior as taxa map */}
-      <section className="md:col-span-3">
-        <div className="bg-white rounded-2xl shadow overflow-hidden h-full">
-          <div className="h-full">
-            <MapContainer
-              center={[-20, 135]}
-              zoom={5}
-              style={{ height: "100%", width: "100%" }}
-              doubleClickZoom={false}
-              className="rounded-xl"
-            >
-              <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution="© OpenStreetMap contributors"
-              />
-              {geoData && selectedCommon && (
-                <GeoJSON
-                  key={selectedCommon}
-                  data={geoData}
-                  style={styleFn}
-                  onEachFeature={onEachFeature}
-                />
-              )}
-            </MapContainer>
-          </div>
-        </div>
-      </section>
-    </div>
+      {geoData && (
+        <GeoJSON
+          key={geoJsonKey}
+          data={geoData}
+          style={styleFn}
+          onEachFeature={onEachFeature}
+        />
+      )}
+    </MapContainer>
   );
 };
 
