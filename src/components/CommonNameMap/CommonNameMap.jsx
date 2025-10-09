@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, GeoJSON, useMap } from "react-leaflet";
-import React, { useMemo, useCallback, useEffect, useRef, useState } from "react";
+import React, { useMemo, useCallback, useEffect, useState } from "react";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { point } from "@turf/helpers";
 
@@ -11,7 +11,6 @@ function MapReadyFix({ deps = [] }) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    // When the map signals ready, invalidate size twice (layout often stabilizes over 2 frames).
     map.whenReady(() => {
       requestAnimationFrame(() => {
         map.invalidateSize(false);
@@ -25,17 +24,17 @@ function MapReadyFix({ deps = [] }) {
 
   useEffect(() => {
     if (!ready) return;
-    // Also invalidate on dependent changes (e.g., switching to ALL, new data, tab switch)
     requestAnimationFrame(() => {
       map.invalidateSize(false);
     });
   }, [ready, map, ...deps]);
 
-  // Force one more slight pan-by-zero to trigger a paint if the browser is stubborn.
   useEffect(() => {
     if (!ready) return;
     const t = setTimeout(() => {
-      try { map.panBy([0, 0]); } catch {}
+      try {
+        map.panBy([0, 0]);
+      } catch {}
     }, 0);
     return () => clearTimeout(t);
   }, [ready, map, ...deps]);
@@ -43,11 +42,47 @@ function MapReadyFix({ deps = [] }) {
   return null;
 }
 
-const CommonNameMap = ({ geoData, combined, selectedCommon }) => {
-  /** Build LGA -> entries[] map for the selection (or ALL). */
+/**
+ * Props:
+ *  - geoData: GeoJSON of LGAs
+ *  - combined: combined_nematodes_with_coords.json object
+ *  - selectedCommon: string | ALL_SENTINEL (legacy single-select)
+ *  - selectedCommonList: string[] (multi-select from parent)
+ *
+ * Behavior:
+ *  - If selectedCommonList is provided:
+ *      - If it contains ALL_SENTINEL -> shade LGAs for ALL common names
+ *      - Else shade LGAs that contain ANY of the selected names
+ *  - Else fall back to legacy `selectedCommon` behavior (single or ALL_SENTINEL)
+ *  - If nothing selected and not ALL -> shade nothing (no preload)
+ */
+const CommonNameMap = ({
+  geoData,
+  combined,
+  selectedCommon,
+  selectedCommonList = undefined,
+}) => {
+  /** Normalize selection input */
+  const { useAll, selectedSet } = useMemo(() => {
+    if (Array.isArray(selectedCommonList)) {
+      const hasAll = selectedCommonList.includes(ALL_SENTINEL);
+      return { useAll: hasAll, selectedSet: new Set(hasAll ? [] : selectedCommonList) };
+    }
+    if (selectedCommon === ALL_SENTINEL) return { useAll: true, selectedSet: new Set() };
+    return {
+      useAll: false,
+      selectedSet: selectedCommon ? new Set([selectedCommon]) : new Set(),
+    };
+  }, [selectedCommon, selectedCommonList]);
+
+  /** Build LGA -> entries[] map for ONLY the selected names (or ALL if explicitly requested). */
   const lgaEntryMap = useMemo(() => {
     if (!geoData || !combined) return {};
-    const map = {};
+
+    // ✅ If user hasn't selected anything and hasn't chosen ALL, shade nothing.
+    if (!useAll && selectedSet.size === 0) return {};
+
+    const lgaMap = {};
 
     const attachEntryToLGAs = (entry, label) => {
       const { ["Latitude (°S)"]: lat, ["Longitude (°E)"]: lng } = entry;
@@ -57,29 +92,21 @@ const CommonNameMap = ({ geoData, combined, selectedCommon }) => {
         if (f.geometry && booleanPointInPolygon(pt, f.geometry)) {
           const lga = f.properties?.LGA_NAME24;
           if (!lga) continue;
-          if (!map[lga]) map[lga] = [];
-          map[lga].push(label);
+          if (!lgaMap[lga]) lgaMap[lga] = [];
+          lgaMap[lga].push(label);
         }
       }
     };
 
-    if (selectedCommon === ALL_SENTINEL) {
-      Object.values(combined).forEach((group) => {
-        const label = group["Common name"];
-        (group.Entries || []).forEach((e) => attachEntryToLGAs(e, label));
-      });
-      return map;
-    }
+    Object.values(combined).forEach((group) => {
+      const label = group["Common name"];
+      if (!label) return;
+      if (!useAll && !selectedSet.has(label)) return;
+      (group.Entries || []).forEach((e) => attachEntryToLGAs(e, label));
+    });
 
-    const group = Object.values(combined).find(
-      (g) => g["Common name"] === selectedCommon
-    );
-    if (!group) return map;
-    (group.Entries || []).forEach((e) =>
-      attachEntryToLGAs(e, group["Common name"])
-    );
-    return map;
-  }, [geoData, combined, selectedCommon]);
+    return lgaMap;
+  }, [geoData, combined, useAll, selectedSet]);
 
   /** Stable style function; mouseout uses this to reliably reset. */
   const styleFn = useCallback(
@@ -104,10 +131,9 @@ const CommonNameMap = ({ geoData, combined, selectedCommon }) => {
     if (!lgaName) return;
 
     const unique = [...new Set(entries)];
-    const list =
-      selectedCommon === ALL_SENTINEL
-        ? unique.slice(0, 8).join(", ") + (unique.length > 8 ? "…" : "")
-        : unique.join(", ");
+    const list = useAll
+      ? unique.slice(0, 8).join(", ") + (unique.length > 8 ? "…" : "")
+      : unique.join(", ");
 
     const tooltip = `
       <strong>${lgaName}</strong><br/>
@@ -133,21 +159,18 @@ const CommonNameMap = ({ geoData, combined, selectedCommon }) => {
         if (el) el.style.cursor = "pointer";
       },
       mouseout: (e) => {
-        // Reset using the CURRENT base style (not the initial one)
         e.target.setStyle(styleFn(feature));
       },
     });
   };
 
-  /** Key trick:
-   * Force a clean unmount/remount of the GeoJSON whenever selection OR lgaEntryMap changes.
-   * This avoids stale event handlers/styles on first render & when toggling ALL.
-   */
+  /** Force a clean remount of GeoJSON when selection or data changes. */
   const geoJsonKey = useMemo(() => {
-    // Incorporate a cheap hash of lgaEntryMap size so the layer remounts when ALL toggles.
     const sz = Object.keys(lgaEntryMap).length;
-    return `${selectedCommon ?? "none"}-${sz}`;
-  }, [selectedCommon, lgaEntryMap]);
+    const sig =
+      useAll ? "ALL" : `SEL:${Array.from(selectedSet).sort().join("|") || "none"}`;
+    return `${sig}-${sz}`;
+  }, [lgaEntryMap, useAll, selectedSet]);
 
   return (
     <MapContainer
@@ -158,7 +181,7 @@ const CommonNameMap = ({ geoData, combined, selectedCommon }) => {
       className="rounded-xl"
     >
       {/* Force invalidateSize after mount and when selection / data changes */}
-      <MapReadyFix deps={[selectedCommon, geoData]} />
+      <MapReadyFix deps={[useAll, Array.from(selectedSet).join("|"), geoData]} />
 
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
