@@ -9,8 +9,8 @@ import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import Footer from "./components/Footer/Footer";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import AboutUs from "./pages/about/AboutUs";
-
-// NEW pages
+import Acknowledgments from "./pages/acknowledgement/Acknowledgments";
+import Contributors from "./pages/contributors/Contributors";
 import FootnotesPage from "./pages/footnotes/FootnotesPage";
 import DisclaimerPage from "./pages/disclaimer/DisclaimerPage";
 
@@ -100,6 +100,28 @@ function App() {
             <>
               <Navbar />
               <FootnotesPage />
+              <Footer />
+            </>
+          }
+        />
+
+        <Route
+          path="/acknowledgments"
+          element={
+            <>
+              <Navbar />
+              <Acknowledgments />
+              <Footer />
+            </>
+          }
+        />
+
+        <Route
+          path="/contributors"
+          element={
+            <>
+              <Navbar />
+              <Contributors />
               <Footer />
             </>
           }
