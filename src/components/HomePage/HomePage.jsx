@@ -483,21 +483,21 @@ export default function NematodeOverview({
                       className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
                                         text-xs px-2 py-1 rounded-md transition"
                     >
-                      5.3 Where to Send Samples
+                      5.3 How to Collect Samples
                     </a>
                     <a
                       href="#handling"
                       className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
                                         text-xs px-2 py-1 rounded-md transition"
                     >
-                      5.4 When to Collect Samples
+                      5.4 Handling and Sending Samples
                     </a>
                     <a
                       href="#include"
                       className="block text-[#292929] hover:text-blue-700 hover:bg-blue-50 
                                         text-xs px-2 py-1 rounded-md transition"
                     >
-                      5.5 Where to Send Samples
+                      5.5 Information to Include with Samples
                     </a>
                   </div>
                 )}
