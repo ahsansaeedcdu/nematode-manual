@@ -8,7 +8,7 @@ import pineappleMulchImg from "../../assets/images2/additional/Mulching pineappl
 import pasteuriaImg from "../../assets/images2/additional/Pasteuria bacteria killing root-lesion nematode in the field (collected by Yujuan Jady Li).png";
 import fumigantImg from "../../assets/images2/additional/Applying fumigants before planting (collected by Yujuan Jady Li).jpg";
 import sweetpotatoNematicideImg from "../../assets/images2/additional/Nematicide application in sweetpotato field (collected by Yujuan Jady Li).jpg";
-
+const apiKeyNematodesTaxa = import.meta.env.VITE_NEMATODES_TAXA;
 /* --------------------------- Static category model --------------------------- */
 const CATEGORIES = [
   {
@@ -148,7 +148,7 @@ const slugify = (str) =>
 
 /* --------------------------- Component --------------------------- */
 export default function NematodeOverview({
-  datasetUrl = "/data/combined_nematodes_grouped_by_taxa.json",
+  datasetUrl = apiKeyNematodesTaxa,
 }) {
   const [data, setData] = useState(null);
   const [err, setErr] = useState(null);

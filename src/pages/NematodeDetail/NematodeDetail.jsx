@@ -7,7 +7,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import DetailPDF from "../../components/DetailPDF/DetailPDF";
 import { getImagesForNematode } from "../../lib/getNematodeImages";
 import ImageGallery from "../../components/ImageGallery/ImageGallery";
-
+const apiKeyNematodesTaxa = import.meta.env.VITE_NEMATODES_TAXA;
 // import MapPreviewModal from "../../components/MapPreviewModal/MapPreviewModal"; // optional
 
 /** --- helpers --- */
@@ -67,7 +67,7 @@ const splitToBullets = (text) =>
     .filter(Boolean);
 
 export default function NematodeDetail({
-  datasetUrl = "/data/combined_nematodes_grouped_by_taxa.json",
+  datasetUrl = apiKeyNematodesTaxa,
 }) {
   const { commonName: paramCommonName } = useParams();
   const commonName = decodeURIComponent(paramCommonName || "").trim();

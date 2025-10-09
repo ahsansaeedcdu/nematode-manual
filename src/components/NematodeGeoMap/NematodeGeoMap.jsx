@@ -20,8 +20,8 @@ import L from "leaflet";
 import * as htmlToImage from "html-to-image";
 
 // Optional envs you already had:
-const NEMATODES_COMBINED = import.meta.env.NEMATODES_COMBINED;
-const NEMATODES_MAP = import.meta.env.NEMATODES_MAP;
+const NEMATODES_COMBINED = import.meta.env.VITE_NEMATODES_COMBINED;
+const NEMATODES_MAP = import.meta.env.VITE_NEMATODES_MAP;
 
 /* -------------------- Leaflet marker fix -------------------- */
 delete L.Icon.Default.prototype._getIconUrl;
@@ -243,7 +243,7 @@ const HistoricalMap = () => {
   const [nematodeMap, setNematodeMap] = useState({});
   useEffect(() => {
     fetch("/data/LGA_2024_context.json").then((r) => r.json()).then(setGeoData);
-    fetch("/data/lga_nematode_map.json").then((r) => r.json()).then(setNematodeMap);
+    fetch(NEMATODES_MAP).then((r) => r.json()).then(setNematodeMap);
   }, []);
 
   const styleFn = useCallback(
@@ -363,7 +363,7 @@ const NematodeGeoMap = () => {
     const fetchNewMapData = async () => {
       setNewMapIsLoading(true);
       try {
-        const res = await fetch("/data/combined_nematodes_with_coords.json");
+        const res = await fetch(NEMATODES_COMBINED);
         const combined = await res.json();
         const groupNames = Object.values(combined)
           .map((g) => g["Common name"])
@@ -399,7 +399,7 @@ const NematodeGeoMap = () => {
       try {
         const [geo, combinedData] = await Promise.all([
           fetch("/data/LGA_2024_context.json").then((r) => r.json()),
-          fetch("/data/combined_nematodes_with_coords.json").then((r) => r.json()),
+          fetch(NEMATODES_COMBINED).then((r) => r.json()),
         ]);
         setCommonGeoData(geo);
         setCommonCombined(combinedData);
