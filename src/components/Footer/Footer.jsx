@@ -33,6 +33,9 @@ export default function Footer() {
                 <li><Link to="/nematodes/map" className="hover:underline underline-offset-4">Map</Link></li>
                 <li><a href="/#introduction" className="hover:underline underline-offset-4">Introduction</a></li>
                 <li><a href="/#key-ppn" className="hover:underline underline-offset-4">Key plant-parasitic nematodes</a></li>
+                {/* NEW: Acknowledgments & Contributors */}
+                <li><Link to="/acknowledgments" className="hover:underline underline-offset-4">Acknowledgments</Link></li>
+                <li><Link to="/contributors" className="hover:underline underline-offset-4">Contributors</Link></li>
               </ul>
             </nav>
 
@@ -50,7 +53,6 @@ export default function Footer() {
                 </li>
                 <li><Link to="/image-gallery" className="hover:underline underline-offset-4">Image gallery</Link></li>
                 <li><a href="/#references" className="hover:underline underline-offset-4">References</a></li>
-                
               </ul>
             </nav>
 
@@ -63,7 +65,7 @@ export default function Footer() {
                     <path d="M3 5h18v14H3zM3 5l9 7 9-7" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                   <a href="mailto:Yujuan.li@cdu.edu.au" className="hover:underline underline-offset-4">
-                    Yujuan.li@cdu.edu.au
+                    rina@cdu.edu.au
                   </a>
                 </li>
                 <li className="flex items-start gap-2">
@@ -117,6 +119,9 @@ export default function Footer() {
               </button>
               <Link to="/disclaimer" className="hover:underline underline-offset-4">Disclaimer</Link>
               <Link to="/footnotes" className="hover:underline underline-offset-4">Footnotes</Link>
+              {/* NEW: Acknowledgments & Contributors */}
+              <Link to="/acknowledgments" className="hover:underline underline-offset-4">Acknowledgments</Link>
+              <Link to="/contributors" className="hover:underline underline-offset-4">Contributors</Link>
             </div>
           </div>
         </div>
