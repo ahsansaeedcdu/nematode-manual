@@ -29,10 +29,10 @@ export default function Footer() {
             <nav aria-label="Quick links" className="space-y-3">
               <p className="text-base font-semibold">Quick links</p>
               <ul className="space-y-2 text-sm">
-                <li><Link to="/" className="hover:underline underline-offset-4">Home</Link></li>
+                {/* <li><Link to="/" className="hover:underline underline-offset-4">Home</Link></li>
                 <li><Link to="/nematodes/map" className="hover:underline underline-offset-4">Map</Link></li>
-                <li><a href="/#introduction" className="hover:underline underline-offset-4">Introduction</a></li>
-                <li><a href="/#key-ppn" className="hover:underline underline-offset-4">Key plant-parasitic nematodes</a></li>
+                <li><a href="/#introduction" className="hover:underline underline-offset-4">Introduction</a></li> */}
+                <li><a href="/#key-ppn" className="hover:underline underline-offset-4">Key plant-parasitic nematodes</a></li> 
                 {/* NEW: Acknowledgments & Contributors */}
                 <li><Link to="/acknowledgments" className="hover:underline underline-offset-4">Acknowledgments</Link></li>
                 <li><Link to="/contributors" className="hover:underline underline-offset-4">Contributors</Link></li>
@@ -119,9 +119,8 @@ export default function Footer() {
               </button>
               <Link to="/disclaimer" className="hover:underline underline-offset-4">Disclaimer</Link>
               <Link to="/footnotes" className="hover:underline underline-offset-4">Footnotes</Link>
-              {/* NEW: Acknowledgments & Contributors */}
-              <Link to="/acknowledgments" className="hover:underline underline-offset-4">Acknowledgments</Link>
-              <Link to="/contributors" className="hover:underline underline-offset-4">Contributors</Link>
+              {/* <Link to="/acknowledgments" className="hover:underline underline-offset-4">Acknowledgments</Link>
+              <Link to="/contributors" className="hover:underline underline-offset-4">Contributors</Link> */}
             </div>
           </div>
         </div>

@@ -30,7 +30,7 @@ export default function AboutUs({
               <p>
                 Our aim is to provide growers, agronomists, and biosecurity stakeholders with accessible information on plant-parasitic nematodes, their management, and the importance of preventing their spread in Northern Australia.
               </p>
-              <p>For enquiries, please contact:</p>
+              
             </div>
           </div>
 
