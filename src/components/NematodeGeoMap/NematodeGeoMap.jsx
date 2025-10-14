@@ -729,7 +729,7 @@ const NematodeGeoMap = () => {
                 </div>
 
                 <div className="mt-3 text-xs text-slate-600">
-                  LGAs shade only after you select one or more nematodes.
+                Maps were generated in QGIS 3.36 and RStudio, highlighting confirmed and unverified key PPN groups across northern regions.
                 </div>
               </div>
             )}
