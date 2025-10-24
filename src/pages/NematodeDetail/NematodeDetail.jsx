@@ -535,7 +535,6 @@ export default function NematodeDetail({
           </section>
         </main>
 
-        {/* Optional modal (kept but not wired above) */}
         {/* <MapPreviewModal
           isOpen={mapModalOpen}
           onClose={() => setMapModalOpen(false)}

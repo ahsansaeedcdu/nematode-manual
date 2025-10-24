@@ -541,8 +541,8 @@ export default function NematodeOverview({
               </button>
               {open.what && (
                 <ul className="list-disc pl-6 text-[#292929] space-y-1 mt-2">
-                  <li>Nematodes are tiny, worm-like creatures that live in soil and water.</li>
-                  <li>Most are harmless or beneficia, helping to break down organic matter.</li>
+                  <li>Nematodes are tiny, worm-like animals that live in soil and water.</li>
+                  <li>Most are harmless or beneficial, helping to break down organic matter.</li>
                   <li>
                   Plant-parasitic nematodes (PPNs) feed on plant roots, reducing water and nutrient uptake.
                    Damage often looks like nutrient or water stress, but unlike those problems, plants won’t recover after fertilising or watering.
@@ -1023,7 +1023,7 @@ This section highlights the main PPNs affecting crops in Northern Australia, the
                   />
                 </div>
                 <figcaption className="text-xs text-slate-500 mt-2 text-center min-h-[28px] md:min-h-[32px]">
-                  Pasteuria bacteria killing root-lesion nematode in the field (Photo: Yujuan Jady Li).
+                  Pasteuria bacteria killing root-lesion nematode in the field (Collected by Yujuan Jady Li).
                 </figcaption>
               </figure>
             </>
@@ -1130,7 +1130,7 @@ This section highlights the main PPNs affecting crops in Northern Australia, the
             />
           </div>
           <figcaption className="text-xs text-slate-500 mt-2 text-center min-h-[28px] md:min-h-[32px]">
-            Applying fumigants before planting (Photo: Yujuan Jady Li).
+            Applying fumigants before planting (Collected by Yujuan Jady Li).
           </figcaption>
         </figure>
 
@@ -1145,7 +1145,7 @@ This section highlights the main PPNs affecting crops in Northern Australia, the
             />
           </div>
           <figcaption className="text-xs text-slate-500 mt-2 text-center min-h-[28px] md:min-h-[32px]">
-            Nematicide application in sweetpotato field (Photo: Yujuan Jady Li).
+            Nematicide application in sweetpotato field (Collected by Yujuan Jady Li).
           </figcaption>
         </figure>
       </div>
