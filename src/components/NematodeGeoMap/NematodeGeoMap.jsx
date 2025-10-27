@@ -728,9 +728,9 @@ const NematodeGeoMap = () => {
                   )}
                 </div>
 
-                <div className="mt-3 text-xs text-slate-600">
+                {/* <div className="mt-3 text-xs text-slate-600">
                 Maps were generated in QGIS 3.36 and RStudio, highlighting confirmed and unverified key PPN groups across northern regions.
-                </div>
+                </div> */}
               </div>
             )}
           </aside>
