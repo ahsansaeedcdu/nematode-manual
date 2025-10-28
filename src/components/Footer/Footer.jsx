@@ -21,7 +21,7 @@ export default function Footer() {
                 Plant-parasitic Nematodes in Northern Australia
               </p>
               <p className="text-sm opacity-90">
-                A practical reference for growers, students, and biosecurity in the NT &amp; northern Australia.
+                A practical reference for growers, researchers, and biosecurity in the NT &amp; northern Australia.
               </p>
             </div>
 
