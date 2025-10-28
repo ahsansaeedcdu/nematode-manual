@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Footnotes from "./Footnotes";
 import Disclaimer from "./Disclaimer";
-
+const BOOKLET = import.meta.env.VITE_BOOKLET;
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -44,15 +44,15 @@ export default function Footer() {
               <p className="text-base font-semibold">Resources</p>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="/assets/guide.pdf" className="inline-flex items-center gap-2 hover:underline underline-offset-4">
+                  <a href={BOOKLET} className="inline-flex items-center gap-2 hover:underline underline-offset-4">
                     Field guide (PDF)
                     <svg viewBox="0 0 24 24" className="h-4 w-4 text-black" aria-hidden="true">
                       <path d="M7 17L17 7M17 7H9m8 0v8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
                     </svg>
                   </a>
                 </li>
-                <li><Link to="/image-gallery" className="hover:underline underline-offset-4">Image gallery</Link></li>
-                <li><a href="/#references" className="hover:underline underline-offset-4">References</a></li>
+                {/* <li><Link to="/image-gallery" className="hover:underline underline-offset-4">Image gallery</Link></li> */}
+                {/* <li><a href="/#references" className="hover:underline underline-offset-4">References</a></li> */}
               </ul>
             </nav>
 

@@ -221,7 +221,10 @@ export default function NematodeDetail({
 }
 
   const imageDetails = getImagesForNematode(commonName);
-
+const imageDetailsForPDF = getImagesForNematode(commonName).map((img) => ({
+  ...img,
+  path: `${window.location.origin}${img.path}`
+}));
   return (
     <FadeIn>
       <div className="min-h-screen w-screen bg-white">
@@ -248,7 +251,7 @@ export default function NematodeDetail({
 
           <div className="flex gap-3 mb-6">
             <PDFDownloadLink
-              document={<DetailPDF aboutData={aboutData} imageDetails={imageDetails} />}
+              document={<DetailPDF aboutData={aboutData} imageDetails={imageDetailsForPDF} />}
               fileName={`${
                 aboutData?.Title ||
                 aboutData?.["Common Name"] ||

@@ -316,7 +316,7 @@ const NematodeGeoMap = () => {
   const [newMapIsLoading, setNewMapIsLoading] = useState(false);
 
   // tabs: "overview" | "taxa" | "common"
-  const [showHistoricalMap, setShowHistoricalMap] = useState("overview");
+  const [showHistoricalMap, setShowHistoricalMap] = useState("taxa");
 
   // search (markers)
   const [groupQuery, setGroupQuery] = useState("");
@@ -488,7 +488,7 @@ const NematodeGeoMap = () => {
               Distribution of Plant-parasitic Nematodes in Northern Australia
             </h2>
             <div className="flex items-center gap-2">
-              <button
+              {/* <button
                 onClick={() => setShowHistoricalMap("overview")}
                 className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${
                   showHistoricalMap === "overview"
@@ -497,7 +497,7 @@ const NematodeGeoMap = () => {
                 }`}
               >
                 Overview
-              </button>
+              </button> */}
               <button
                 onClick={() => setShowHistoricalMap("taxa")}
                 className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${
