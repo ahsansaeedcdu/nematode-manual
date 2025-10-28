@@ -1190,7 +1190,7 @@ This section highlights the main PPNs affecting crops in Northern Australia, the
         <div>
           <div className="font-semibold text-slate-900">Northern Territory (NT)</div>
           <ul className="list-disc pl-6 space-y-1">
-            <li>Northern Territory Department of Agriculture and Fisheries</li>
+            <li>Department of Agriculture and Fisheries</li>
             <li>Combined Science Services Building, 29 Makagon Road, Berrimah NT</li>
             <li>Plant Pathology Diagnostic Laboratory</li>
             <li>
@@ -1292,7 +1292,7 @@ This section highlights the main PPNs affecting crops in Northern Australia, the
         <li>When plants show patchy stunting, yellowing, poor growth, or reduced yields.</li>
         <li>When roots show lesions, galls, or other abnormal symptoms.</li>
         <li>At the end of a crop (preferred timing for estimating risk for the next crop).</li>
-        <li>Before planting a new crop, if necessary (to assess nematode risk).</li>
+        {/* <li>Before planting a new crop, if necessary (to assess nematode risk).</li> */}
       </ul>
     )}
   </div>
