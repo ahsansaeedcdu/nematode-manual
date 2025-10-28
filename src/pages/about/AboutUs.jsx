@@ -4,7 +4,7 @@ import FadeIn from "../../components/FadeIn/FadeIn";
 // import aboutImg from "../../assets/NA PPN website photos/Root-lesion nematodes/Above-ground symptoms of wheat caused by RLN (collecty by Kirsty Owen).jpg";
 //import aboutImg from "../../assets/images2/Root-lesion nematodes/Above-ground symptoms of wheat caused by RLN (collecty by Kirsty Owen).jpg"
 // import aboutImg from '../../assets/images2/Root-kno'
-import aboutImg from '../../assets/images/Root-knot nematodes/Aboveground symptoms of root-knot nematode damage on pawpaw (collected by Yujuan Jady Li).JPG'
+import aboutImg from '../../assets/images2Aboveground symptoms of root-knot nematode damage on pawpaw (collected by Yujuan Jady Li).jpg'
 export default function AboutUs({
   // optional override; prefer leaving this empty so we use the hashed asset
   imageUrl,
