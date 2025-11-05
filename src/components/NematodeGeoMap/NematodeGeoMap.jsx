@@ -19,7 +19,7 @@ import CommonNameMap from "../CommonNameMap/CommonNameMap";
 import L from "leaflet";
 import * as htmlToImage from "html-to-image";
 
-// Optional envs you already had:
+// Optional envs 
 const NEMATODES_COMBINED = import.meta.env.VITE_NEMATODES_COMBINED;
 const NEMATODES_MAP = import.meta.env.VITE_NEMATODES_MAP;
 
@@ -410,7 +410,7 @@ const NematodeGeoMap = () => {
         const sortedUniqueNames = [...new Set(names)].sort();
         setAllCommonNames(sortedUniqueNames);
 
-        // ✅ start with NONE selected to avoid preloading shaded regions
+        //start with NONE selected to avoid preloading shaded regions
         setSelectedCommonNames([]);
         setCommonQuery("");
       } catch (e) {
@@ -483,51 +483,57 @@ const NematodeGeoMap = () => {
       <div className="min-h-screen w-screen bg-slate-50 text-slate-800 flex flex-col">
         {/* Header */}
         <header className="w-full border-b bg-white/90 backdrop-blur-sm sticky top-0 z-10">
-          <div className="max-w-[1400px] mx-auto px-4 py-3 flex items-center justify-between">
-            <h2 className="text-xl md:text-2xl font-semibold tracking-tight !text-[#027fb8]">
-              Distribution of Plant-parasitic Nematodes in Northern Australia
-            </h2>
-            <div className="flex items-center gap-2">
-              {/* <button
-                onClick={() => setShowHistoricalMap("overview")}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${
-                  showHistoricalMap === "overview"
-                    ? "bg-blue-400 text-black shadow"
-                    : "bg-slate-100 hover:bg-slate-200"
-                }`}
-              >
-                Overview
-              </button> */}
-              <button
-                onClick={() => setShowHistoricalMap("taxa")}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${
-                  showHistoricalMap === "taxa"
-                    ? "bg-blue-400 text-black shadow"
-                    : "bg-slate-100 hover:bg-slate-200"
-                }`}
-              >
-                By taxa (Markers)
-              </button>
-              <button
-                onClick={() => setShowHistoricalMap("common")}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition ${
-                  showHistoricalMap === "common"
-                    ? "bg-blue-400 text-black shadow"
-                    : "bg-slate-100 hover:bg-slate-200"
-                }`}
-              >
-                By taxa (Shaded)
-              </button>
-              <button
-                onClick={handleDownloadSnapshot}
-                className="px-3 py-1.5 rounded-lg text-sm font-medium text-black shadow bg-slate-100 hover:bg-slate-200"
-                title="Save current map as PNG"
-              >
-                Download / Snapshot
-              </button>
-            </div>
-          </div>
-        </header>
+  <div className="max-w-[1400px] mx-auto px-3 py-2
+                  flex flex-col gap-2
+                  sm:flex-row sm:items-center sm:justify-between">
+    <h2
+      className="text-sm sm:text-lg md:text-2xl
+                 font-semibold leading-snug tracking-tight
+                 !text-[#027fb8]"
+    >
+      Distribution of Plant-parasitic Nematodes in Northern Australia
+    </h2>
+
+    <div className="flex flex-wrap gap-2 w-full sm:w-auto sm:justify-end">
+      <button
+        onClick={() => setShowHistoricalMap("taxa")}
+        className={`px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition
+                    flex-1 sm:flex-none
+                    ${
+                      showHistoricalMap === "taxa"
+                        ? "bg-blue-400 text-black shadow"
+                        : "bg-slate-100 hover:bg-slate-200"
+                    }`}
+      >
+        By taxa (Markers)
+      </button>
+
+      <button
+        onClick={() => setShowHistoricalMap("common")}
+        className={`px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition
+                    flex-1 sm:flex-none
+                    ${
+                      showHistoricalMap === "common"
+                        ? "bg-blue-400 text-black shadow"
+                        : "bg-slate-100 hover:bg-slate-200"
+                    }`}
+      >
+        By taxa (Shaded)
+      </button>
+
+      <button
+        onClick={handleDownloadSnapshot}
+        className="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium
+                   text-black shadow bg-slate-100 hover:bg-slate-200
+                   flex-1 sm:flex-none"
+        title="Save current map as PNG"
+      >
+        Download / Snapshot
+      </button>
+    </div>
+  </div>
+</header>
+
 
         <main className="flex-1 max-w-[1400px] mx-auto w-full px-3 md:px-4 py-4 grid grid-cols-1 md:grid-cols-4 gap-4">
           {/* Left Sidebar */}
