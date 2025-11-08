@@ -13,7 +13,9 @@ import Acknowledgments from "./pages/acknowledgement/Acknowledgments";
 import Contributors from "./pages/contributors/Contributors";
 import FootnotesPage from "./pages/footnotes/FootnotesPage";
 import DisclaimerPage from "./pages/disclaimer/DisclaimerPage";
-
+import { Import } from "lucide-react";
+import References from "./components/Footer/References";
+import Images from "./components/Footer/Images";
 
 function App() {
   return (
@@ -66,14 +68,27 @@ function App() {
         />
 
         {/* NEW: Image Gallery page (since it's imported) */}
-        <Route
-          path="/image-gallery"
+
+
+<Route
+          path="/images"
+          element={
+            <>
+              <Navbar />
+              <Images/>
+              <Footer />
+            </>
+          }
+        />
+
+<Route
+          path="/references"
           element={
             <>
               <Navbar />
               <main className="min-h-[60vh] bg-white">
                 <div className="max-w-7xl mx-auto px-6 md:px-8 py-8">
-                  <ImageGallery />
+                  <References/>
                 </div>
               </main>
               <Footer />

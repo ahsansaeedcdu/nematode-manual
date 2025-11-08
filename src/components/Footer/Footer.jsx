@@ -51,8 +51,8 @@ export default function Footer() {
                     </svg>
                   </a>
                 </li>
-                {/* <li><Link to="/image-gallery" className="hover:underline underline-offset-4">Image gallery</Link></li> */}
-                {/* <li><a href="/#references" className="hover:underline underline-offset-4">References</a></li> */}
+                <li><Link to="/images" className="hover:underline underline-offset-4">Image gallery</Link></li>
+                <li><a href="/references" className="hover:underline underline-offset-4">References</a></li>
               </ul>
             </nav>
 
