@@ -518,7 +518,7 @@ const NematodeGeoMap = () => {
                         : "bg-slate-100 hover:bg-slate-200"
                     }`}
       >
-        By taxa (Shaded)
+        By taxa (Regions)
       </button>
 
       <button
