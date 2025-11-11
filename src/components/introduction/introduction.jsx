@@ -1,5 +1,5 @@
 import React from "react";
-import "./introduction.css"; // optional for styling
+import "./introduction.css"; 
 
 export default function introduction() {
   return (
@@ -10,6 +10,7 @@ export default function introduction() {
       </h1>
 
       <section>
+        
         <h2>1. Introduction</h2>
 
         <h3>1.1 What are nematodes </h3>

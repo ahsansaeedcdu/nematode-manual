@@ -519,6 +519,18 @@ export default function NematodeOverview({
             id="intro"
             className="bg-white rounded-2xl shadow p-5 md:p-7"
           >
+            <h1
+              className="
+                text-xl sm:text-2xl md:text-2xl
+                font-semibold
+                text-[#026097]      /* slightly different blue than h2 */
+                text-center
+                mb-4
+                px-4               /* keeps it nice on small screens */
+              "
+            >
+              Plant-Parasitic Nematodes – Biosecurity and Management in Northern Australia
+            </h1>
             <h2 className="text-xl md:text-2xl font-semibold text-[#027fb8] mb-2">
               1. Introduction
             </h2>
