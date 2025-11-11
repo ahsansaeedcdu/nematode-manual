@@ -90,10 +90,10 @@ export default function Images() {
     <main className="relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-slate-50 px-4 py-8 md:px-8 lg:px-16">
       <header className="mb-6">
         <h1 className="text-2xl md:text-3xl font-semibold text-[#027fb8]">
-          Images
+         List of Images
         </h1>
         <p className="mt-2 text-sm md:text-base text-slate-600">
-          List of figures and images: Tap or click any image to view it larger.
+           Tap or click any image to view it larger.
         </p>
         
       </header>
