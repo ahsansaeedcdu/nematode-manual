@@ -93,8 +93,7 @@ export default function Images() {
           Images
         </h1>
         <p className="mt-2 text-sm md:text-base text-slate-600">
-          All images from the Plant-parasitic Nematodes manual, arranged in a
-          single gallery. Tap or click any image to view it larger.
+          List of figures and images: Tap or click any image to view it larger.
         </p>
         
       </header>

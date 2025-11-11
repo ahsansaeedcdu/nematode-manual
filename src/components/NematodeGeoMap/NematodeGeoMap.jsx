@@ -664,8 +664,8 @@ const NematodeGeoMap = () => {
                 </div>
 
                 <div className="mt-3 text-xs text-slate-600">
-                  Markers are colored by Common name. Multiple points at the
-                  same location are gently offset so each remains clickable.
+                  
+                  Note: Nematode distribution locations shown on this map are approximate and do not represent exact sampling sites, in order to respect the privacy of landholders.
                 </div>
               </div>
             )}
