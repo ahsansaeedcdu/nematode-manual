@@ -24,3 +24,15 @@ h2 {
 color: #027fb8;
 }
 
+.wrapping-tooltip {
+  /* Set a maximum width for the tooltip */
+  max-width: 700px !important; /* Adjust this value as needed */
+
+  /* This is the magic part: */
+  /* 1. Allows text to wrap normally */
+  white-space: normal !important; 
+  
+  /* 2. Breaks even very long, single words if they overflow */
+  word-wrap: break-word; 
+  /* (or overflow-wrap: break-word;) */
+}

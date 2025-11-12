@@ -7,7 +7,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import DetailPDF from "../../components/DetailPDF/DetailPDF";
 import { getImagesForNematode } from "../../lib/getNematodeImages";
 import ImageGallery from "../../components/ImageGallery/ImageGallery";
-const apiKeyNematodesTaxa = import.meta.env.VITE_NEMATODES_TAXA;
+const apiKeyNematodesTaxa = "/data/combined_nematodes_grouped_by_taxa.json";
 // import MapPreviewModal from "../../components/MapPreviewModal/MapPreviewModal"; // optional
 
 /** --- helpers --- */

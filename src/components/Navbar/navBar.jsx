@@ -14,7 +14,7 @@ export default function Navbar() {
     ].join(" ");
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-[#DDEDFF] border-b border-zinc-200 shadow-sm">
+    <nav className="sticky top-0 z-[1001] w-full bg-[#DDEDFF] border-b border-zinc-200 shadow-sm">
       {/* Desktop / tablet */}
       <div className="hidden md:flex h-16 items-center justify-between">
         {/* Left: Brand */}

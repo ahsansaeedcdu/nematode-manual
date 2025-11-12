@@ -14,12 +14,12 @@ function Home() {
   const [selectedLetter, setSelectedLetter] = useState(null);
   const [nematodeData, setNematodeData] = useState({});
 
-  useEffect(() => {
-    fetch("/data/nematode_data_grouped_by_letter.json")
-      .then((res) => res.json())
-      .then((data) => setNematodeData(data))
-      .catch((err) => console.error("Failed to load nematode data:", err));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/data/nematode_data_grouped_by_letter.json")
+  //     .then((res) => res.json())
+  //     .then((data) => setNematodeData(data))
+  //     .catch((err) => console.error("Failed to load nematode data:", err));
+  // }, []);
 
   return (
     <main className="main">

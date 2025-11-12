@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Footnotes from "./Footnotes";
 import Disclaimer from "./Disclaimer";
-const BOOKLET = import.meta.env.VITE_BOOKLET;
+const BOOKLET = "docs/84671 PPN A5 English_WEB_fin.pdf";
 export default function Footer() {
   const year = new Date().getFullYear();
 

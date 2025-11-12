@@ -4,7 +4,12 @@ import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { point } from "@turf/helpers";
 
 export const ALL_SENTINEL = "__ALL__";
-
+const MAP_ATTRIBUTION = `
+  © OpenStreetMap contributors | LGA data: 
+  <a href="https://digital.atlas.gov.au/maps/741d20ab9853496daf90963e7978d393/about" target="_blank" rel="noopener noreferrer">
+    Digital Atlas of Australia
+  </a>
+`;
 /** Ensures Leaflet gets a proper size/layout AFTER the map mounts and when inputs change. */
 function MapReadyFix({ deps = [] }) {
   const map = useMap();
@@ -123,17 +128,27 @@ const CommonNameMap = ({
     },
     [lgaEntryMap]
   );
+  function chunkArray(arr, size) {
+    const chunks = [];
+    for (let i = 0; i < arr.length; i += size) {
+      chunks.push(arr.slice(i, i + size));
+    }
+    return chunks;
+  }
 
-  /** Hover handlers (rely on styleFn so reset works even on first hover). */
   const onEachFeature = (feature, layer) => {
     const lgaName = feature.properties?.LGA_NAME24;
     const entries = lgaEntryMap[lgaName] || [];
     if (!lgaName) return;
 
     const unique = [...new Set(entries)];
-    const list = useAll
-      ? unique.slice(0, 8).join(", ") + (unique.length > 8 ? "…" : "")
-      : unique.join(", ");
+    const ITEMS_PER_LINE = 5;
+
+  const list = useAll
+  ? unique.slice(0, 8).join(", ") + (unique.length > 8 ? "…" : "")
+  : chunkArray(unique, ITEMS_PER_LINE)
+      .map(chunk => chunk.join(", "))
+      .join(",<br/>");
 
     const tooltip = `
       <strong>${lgaName}</strong><br/>
@@ -185,7 +200,7 @@ const CommonNameMap = ({
 
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution="© OpenStreetMap contributors"
+        attribution={MAP_ATTRIBUTION}
       />
 
       {geoData && (

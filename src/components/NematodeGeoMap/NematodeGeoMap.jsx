@@ -20,8 +20,8 @@ import L from "leaflet";
 import * as htmlToImage from "html-to-image";
 
 // Optional envs 
-const NEMATODES_COMBINED = import.meta.env.VITE_NEMATODES_COMBINED;
-const NEMATODES_MAP = import.meta.env.VITE_NEMATODES_MAP;
+const NEMATODES_COMBINED = "/data/combined_nematodes_with_coords.json";
+const NEMATODES_MAP = "/data/lga_nematode_map.json";
 
 /* -------------------- Leaflet marker fix -------------------- */
 delete L.Icon.Default.prototype._getIconUrl;
@@ -482,7 +482,7 @@ const NematodeGeoMap = () => {
     <FadeIn>
       <div className="min-h-screen w-screen bg-slate-50 text-slate-800 flex flex-col">
         {/* Header */}
-        <header className="w-full border-b bg-white/90 backdrop-blur-sm sticky top-0 z-10">
+        <header className="w-full border-b bg-white/90 backdrop-blur-sm top-0 z-10">
   <div className="max-w-[1400px] mx-auto px-3 py-2
                   flex flex-col gap-2
                   sm:flex-row sm:items-center sm:justify-between">
@@ -567,7 +567,7 @@ const NematodeGeoMap = () => {
             )}
 
             {showHistoricalMap === "taxa" && (
-              <div className="bg-white rounded-2xl shadow p-4 sticky top-[84px] max-h-[calc(100vh-120px)] flex flex-col">
+              <div className="bg-white rounded-2xl shadow p-4 top-[84px] max-h-[calc(100vh-120px)] flex flex-col">
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-lg font-semibold">Nematodes</h2>
                   <div className="flex gap-2">
@@ -671,7 +671,7 @@ const NematodeGeoMap = () => {
             )}
 
             {showHistoricalMap === "common" && (
-              <div className="bg-white rounded-2xl shadow p-4 sticky top-[84px] max-h-[calc(100vh-120px)] flex flex-col">
+              <div className="bg-white rounded-2xl shadow p-4 top-[84px] max-h-[calc(100vh-120px)] flex flex-col">
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-lg font-semibold">Nematodes</h2>
                   <div className="flex gap-2">
