@@ -1,0 +1,4 @@
+.custom-tooltip {
+    max-width: 500px;      /* tweak as you like */
+    white-space: normal;   /* allow text to wrap */
+  }

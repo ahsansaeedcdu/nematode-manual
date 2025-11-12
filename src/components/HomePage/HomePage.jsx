@@ -224,9 +224,9 @@ export default function NematodeOverview({
         {/* Sidebar (packed rectangular card, wider so items stay one line) */}
         <aside className="hidden md:block w-100 p-3 sticky top-0 h-screen">
           <div className="h-full rounded-xl bg-white shadow-md border border-slate-200 p-5 overflow-y-auto">
-            <h2 className="text-lg font-bold text-slate-700 mb-4">
-              On this page
-            </h2>
+          <h2 className="text-sm sm:text-l md:text-xl font-semibold 
+               leading-snug tracking-tight !text-[#027fb8]">Plant-Parasitic Nematodes – Biosecurity and Management in Northern Australia</h2>
+
             <nav className="space-y-3">
               {/* 1. Introduction */}
               {/* Section 1 */}

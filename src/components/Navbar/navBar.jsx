@@ -52,9 +52,10 @@ export default function Navbar() {
               fill="none"
             />
           </svg>
-          <span className="text-[#84786D] text-lg font-semibold tracking-tight">
-            Plant-parasitic Nematodes in Northern Australia
-          </span>
+          <span className="text-[#84786D] text-2xl md:text-lg font-semibold tracking-tight">
+  Plant-parasitic Nematodes in Northern Australia
+</span>
+
         </Link>
 
         {/* Center: Nav links */}
