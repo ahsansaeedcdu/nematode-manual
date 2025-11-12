@@ -128,13 +128,13 @@ const CommonNameMap = ({
     },
     [lgaEntryMap]
   );
-  function chunkArray(arr, size) {
-    const chunks = [];
-    for (let i = 0; i < arr.length; i += size) {
-      chunks.push(arr.slice(i, i + size));
-    }
-    return chunks;
-  }
+  // function chunkArray(arr, size) {
+  //   const chunks = [];
+  //   for (let i = 0; i < arr.length; i += size) {
+  //     chunks.push(arr.slice(i, i + size));
+  //   }
+  //   return chunks;
+  // }
 
   const onEachFeature = (feature, layer) => {
     const lgaName = feature.properties?.LGA_NAME24;
@@ -142,13 +142,9 @@ const CommonNameMap = ({
     if (!lgaName) return;
 
     const unique = [...new Set(entries)];
-    const ITEMS_PER_LINE = 5;
-
-  const list = useAll
-  ? unique.slice(0, 8).join(", ") + (unique.length > 8 ? "…" : "")
-  : chunkArray(unique, ITEMS_PER_LINE)
-      .map(chunk => chunk.join(", "))
-      .join(",<br/>");
+    const list = useAll
+    ? unique.slice(0, 8).join(", ") + (unique.length > 8 ? "…" : "")
+    : unique.join(", ");
 
     const tooltip = `
       <strong>${lgaName}</strong><br/>
@@ -158,7 +154,7 @@ const CommonNameMap = ({
           : "No records"
       }
     `;
-    layer.bindTooltip(tooltip, { sticky: true, opacity: 0.95 });
+    layer.bindTooltip(tooltip, { sticky: true, opacity: 0.95, className: "leaflet-tooltip_common" });
 
     layer.on({
       mouseover: (e) => {
